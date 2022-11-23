@@ -6,7 +6,7 @@
 /*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/23 18:01:53 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:52:18 by znogueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,37 +68,44 @@ char	*ft_stradd_char(char *str, char c)
 	return (new_str);
 }
 
-char	*big_expand(t_data *data, char *new_word, char *str)
+char	small_expand(t_data *data, char **new_word, char *str, int *i)
 {
-	int		i;
-	int		ck_pt;
 	char	end;
 
-	i = 0;
-	ck_pt = 0;
-	if (!str)
-		return (NULL);
-	while (str[i])
+	end = 0;
+	while (str[*i])
 	{
-		if (str[i] == '$' && is_alphanum(str[i + 1]))
+		if (str[*i] == '$' && is_alphanum(str[*i + 1]))
 		{
-			i++;
-			new_word = replace_var(data, new_word, str + i);
-			while (is_alphanum(str[i]))
-				i++;
+			(*i)++;
+			*new_word = replace_var(data, *new_word, str + *i);
+			while (is_alphanum(str[*i]))
+				(*i)++;
 		}
-		else if (str[i] == 34 || str[i] == 39)
+		else if (str[*i] == 34 || str[*i] == 39)
 		{
-			end = str[i];
-			i++;
+			end = str[*i];
+			(*i)++;
 			break ;
 		}
 		else
 		{
-			new_word = ft_stradd_char(new_word, str[i]);
-			i++;
+			*new_word = ft_stradd_char(*new_word, str[*i]);
+			(*i)++;
 		}
 	}
+	return (end);
+}
+
+char	*big_expand(t_data *data, char *new_word, char *str)
+{
+	int		i;
+	char	end;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	end = small_expand(data, &new_word, str, &i);
 	while (str[i] && str[i] != end)
 	{
 		if (str[i] == '$' && end == 34)
@@ -119,16 +126,6 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	return (big_expand(data, new_word, str + i + 1));
 }
 
-char	*call_expand(t_data *data, char *str)
-{
-	char	*new_word;
-
-	new_word = NULL;
-	new_word = big_expand(data, new_word, str);
-	free(str);
-	return (new_word);
-}
-
 int	ft_expander(t_data *data)
 {
 	char		*new_word;
@@ -136,12 +133,14 @@ int	ft_expander(t_data *data)
 
 	new_word = NULL;
 	p_cmd = data->cmd;
-	ft_printf("--------------expand-------------\n");
 	while (p_cmd)
 	{
 		if (p_cmd->type == WORD)
 		{
-			p_cmd->content = call_expand(data, p_cmd->content);
+			new_word = NULL;
+			new_word = big_expand(data, new_word, p_cmd->content);
+			free(p_cmd->content);
+			p_cmd->content = new_word;
 		}
 		p_cmd = p_cmd->next;
 	}
