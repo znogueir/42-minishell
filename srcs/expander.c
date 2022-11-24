@@ -12,24 +12,6 @@
 
 #include "../includes/minishell.h"
 
-char	*mini_join(char *new_word, char *str, int start, int len)
-{
-	char	*tmp;
-
-	tmp = ft_substr(str, start, len);
-	new_word = ft_strjoin(new_word, tmp);
-	free(tmp);
-	return (new_word);
-}
-
-int	is_alphanum(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || \
-	(c >= '0' && c <= '9'))
-		return (1);
-	return (0);
-}
-
 char	*replace_var(t_data *data, char *new_word, char *str)
 {
 	int		size;
@@ -39,7 +21,7 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	p_env = data->loc_env;
 	while (is_alphanum(str[size]))
 		size++;
-	while (p_env && ft_strncmp(p_env->name, str, size))
+	while (p_env && better_strncmp(p_env->name, str, size))
 	{
 		p_env = p_env->next;
 	}
@@ -131,7 +113,6 @@ int	ft_expander(t_data *data)
 	char		*new_word;
 	t_cmdline	*p_cmd;
 
-	new_word = NULL;
 	p_cmd = data->cmd;
 	while (p_cmd)
 	{

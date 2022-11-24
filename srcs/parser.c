@@ -14,8 +14,7 @@
 
 int	is_redir(int type)
 {
-	if (type == LESS || type == GREAT || type == H_DOC \
-	|| type == APPEND || type == LESSGREAT)
+	if (type >= LESS && type <= LESSGREAT)
 		return (1);
 	return (0);
 }

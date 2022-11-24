@@ -52,7 +52,6 @@ void	free_env(t_env *loc_env)
 	{
 		prev = loc_env;
 		loc_env = loc_env->next;
-		//ft_printf("NAME ==> %s\n", loc_env->name);
 		free(prev->name);
 		free(prev->content);
 		free(prev);

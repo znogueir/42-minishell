@@ -48,21 +48,21 @@ t_env	*ft_envnew(char *name, char *content)
 	return (cell);
 }
 
-t_cmdtable	*ft_tablenew(void)
-{
-	t_cmdtable	*cell;
+// t_cmdtable	*ft_tablenew(void)
+// {
+// 	t_cmdtable	*cell;
 
-	cell = malloc(sizeof(*cell));
-	if (!cell)
-		return (NULL);
-	cell->cmd = NULL;
-	cell->options = NULL;
-	cell->args = NULL;
-	cell->input = NULL;
-	cell->output = NULL;
-	cell->next = NULL;
-	return (cell);
-}
+// 	cell = malloc(sizeof(*cell));
+// 	if (!cell)
+// 		return (NULL);
+// 	cell->cmd = NULL;
+// 	cell->options = NULL;
+// 	cell->args = NULL;
+// 	cell->input = NULL;
+// 	cell->output = NULL;
+// 	cell->next = NULL;
+// 	return (cell);
+// }
 
 void	ft_envadd_back(t_env **lst, t_env *new)
 {

@@ -142,6 +142,10 @@ int			ft_unset(t_data *data, char *name);
 //	builtin utils
 void		set_env(char **env, t_data *data);
 
+// utils
+int	is_alphanum(char c);
+int	better_strncmp(char *s1, char *s2, int size);
+
 // miscellaneous
 void		check_builtins(t_data *data);
 void		print_colors(void);

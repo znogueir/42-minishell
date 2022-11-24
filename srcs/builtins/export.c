@@ -14,9 +14,7 @@
 
 int	ft_export(t_data *data, char *name, char *content)
 {
-	(void)data;
-	(void)content;
-	// ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
 	ft_printf("test cmd : export $%s\n", name);
+	ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
 	return (0);
 }

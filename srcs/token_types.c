@@ -14,19 +14,19 @@
 
 int	find_token_type(char *token)
 {
-	if (!ft_strncmp(token, "|", 1))
+	if (!better_strncmp(token, "|", 1))
 		return (PIPE);
-	else if (!ft_strncmp(token, "\n", 1))
+	else if (!better_strncmp(token, "\n", 1))
 		return (NEWLINE);
-	else if (!ft_strncmp(token, ">>", 2))
+	else if (!better_strncmp(token, ">>", 2))
 		return (APPEND);
-	else if (!ft_strncmp(token, "<<", 2))
+	else if (!better_strncmp(token, "<<", 2))
 		return (H_DOC);
-	else if (!ft_strncmp(token, "<>", 2))
+	else if (!better_strncmp(token, "<>", 2))
 		return (LESSGREAT);
-	else if (!ft_strncmp(token, "<", 1))
+	else if (!better_strncmp(token, "<", 1))
 		return (LESS);
-	else if (!ft_strncmp(token, ">", 1))
+	else if (!better_strncmp(token, ">", 1))
 		return (GREAT);
 	return (0);
 }

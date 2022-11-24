@@ -48,9 +48,9 @@ t_data	*ft_init(char **env)
 	data->loc_env = NULL;
 	data->cmd = NULL;
 	set_env(env, data);
-	ft_envadd_back(&(data->loc_env), ft_envnew(ft_strdup("truc"), ft_strdup("machin")));
-	ft_envadd_back(&(data->loc_env), ft_envnew(ft_strdup("abc"), ft_strdup("abracadabra")));
-	ft_envadd_back(&(data->loc_env), ft_envnew(ft_strdup("blabla"), ft_strdup("banana")));
+	ft_export(data, ft_strdup("tru"), ft_strdup("machin"));
+	ft_export(data, ft_strdup("trucs"), ft_strdup("abracadabra"));
+	ft_export(data, ft_strdup("truc"), ft_strdup("banana"));
 	return (data);
 }
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
-	//check_builtins(data);
+	check_builtins(data);
 	write_prompt();
 	data->line = get_next_line(0);
 	while (ft_check_exit(data->line))
