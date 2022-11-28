@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h" 
+#include "../../includes/minishell.h" 
 
 char	*malloc_token(char *str, int size)
 {

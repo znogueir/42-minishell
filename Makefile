@@ -2,16 +2,21 @@ CC		= gcc
 FLAGS	= -g3 #-Wall -Wextra -Werror
 NAME	= minishell
 
-LIBFT_PATH= libft/
-LIBFT	= $(LIBFT_PATH)libft.a
+LIBFT_PATH	= libft/
+LIBFT		= $(LIBFT_PATH)libft.a
 
-OBJ_PATH= objs/
-BUILT_OBJ_PATH= objs/builtins/
-SRC_PATH= srcs/
-BUILT_PATH= srcs/builtins/
-INC_PATH= includes/
+OBJ_PATH		= objs/
+PARSE_OBJ_PATH	= objs/parsing/
+BUILT_OBJ_PATH	= objs/builtins/
+EXEC_OBJ_PATH	= objs/execution/
 
-SRC		= check_init.c \
+SRC_PATH		= srcs/
+BUILT_PATH		= $(SRC_PATH)builtins/
+EXEC_PATH		= $(SRC_PATH)execution/
+PARSE_PATH		= $(SRC_PATH)parsing/
+INC_PATH		= includes/
+
+PARSE	= check_init.c \
 		expander.c \
 		free.c \
 		lexer.c \
@@ -28,14 +33,21 @@ BUILTIN	= cd.c \
 		export.c \
 		pwd.c \
 		unset.c \
-		
 
-SRCS	= $(addprefix $(SRC_PATH), $(SRC))
-BUILTINS= $(addprefix $(BUILT_PATH), $(BUILTIN))
-OBJ		= $(SRC:.c=.o)
-BUILT_OBJ= $(BUILTIN:.c=.o)
-OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
-BUILT_OBJS= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
+EXEC	= banana.c
+
+PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
+BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
+EXECS		= $(addprefix $(EXEC_PATH), $(EXEC))
+PARSE_OBJ	= $(PARSE:.c=.o)
+BUILT_OBJ	= $(BUILTIN:.c=.o)
+EXEC_OBJ	= $(EXEC:.c=.o)
+PARSE_OBJS	= $(addprefix $(PARSE_OBJ_PATH), $(PARSE_OBJ))
+BUILT_OBJS	= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
+EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC_OBJ))
+
+OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS)
+OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) 
 
 # ---------------- progress bar ------------------ #
 
@@ -48,22 +60,22 @@ BUILT_OBJS= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
 
 all: $(NAME)
 
-$(OBJ_PATH):
-	mkdir $(OBJ_PATH)
+$(OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(PARSE_OBJ_PATH):
+	mkdir $(OBJ_PATH) $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH)
 
-$(BUILT_OBJ_PATH):
-	mkdir $(BUILT_OBJ_PATH)
-
-$(OBJ_PATH)%.o:$(SRC_PATH)%.c ./includes/minishell.h #$(INC_PATH)
+$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/minishell.h
 	$(CC) $(FLAGS) -c $< -o $@
 
-$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c -I ./includes/
+$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c ./includes/minishell.h
+	$(CC) $(FLAGS) -c $< -o $@
+
+$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c ./includes/minishell.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 # -I $(INC_PATH)
 
-$(NAME): $(LIBFT) $(OBJ_PATH) $(BUILT_OBJ_PATH) $(OBJS) $(BUILT_OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(BUILT_OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
+	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
