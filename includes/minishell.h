@@ -83,11 +83,8 @@ typedef struct s_env
 
 typedef struct s_cmdtable
 {
-	char				*cmd;
-	char				*options;
-	char				*args;
-	char				*input;
-	char				*output;
+	char				**cmd;
+	char				*operator;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -127,8 +124,10 @@ int			ft_expander(t_data *data);
 void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
 t_env		*ft_envnew(char	*name, char *content);
+t_cmdtable	*ft_tablenew(char **cmd, char *operator);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
+void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
 
 //	builtins
 int			ft_cd(char *path);
@@ -153,5 +152,8 @@ void		print_colors(void);
 //	token types
 int			find_token_type(char *token);
 char		*convert_type(int type);
+
+// executor
+int	ft_executor(t_data *data);
 
 #endif

@@ -34,7 +34,7 @@ BUILTIN	= cd.c \
 		pwd.c \
 		unset.c \
 
-EXEC	= banana.c
+EXEC	= ft_executor.c
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))

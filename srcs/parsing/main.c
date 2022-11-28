@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **env)
 				ft_expander(data);
 				ft_printf("---------------expand---------------\n");
 				print_list(data->cmd);
+				ft_executor(data);
 				//ft_env(data->loc_env);
 			}
 			reset_cmd(data);

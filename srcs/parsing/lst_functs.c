@@ -48,18 +48,28 @@ t_env	*ft_envnew(char *name, char *content)
 	return (cell);
 }
 
-// t_cmdtable	*ft_tablenew(void)
+t_cmdtable	*ft_tablenew(char **cmd, char *operator)
+{
+	t_cmdtable	*cell;
+
+	cell = malloc(sizeof(*cell));
+	if (!cell)
+		return (NULL);
+	cell->cmd = cmd;
+	cell->operator = operator;
+	cell->next = NULL;
+	return (cell);
+}
+
+// t_cmdtable	*ft_tablenew(char **cmd, char *operator)
 // {
 // 	t_cmdtable	*cell;
 
 // 	cell = malloc(sizeof(*cell));
 // 	if (!cell)
 // 		return (NULL);
-// 	cell->cmd = NULL;
-// 	cell->options = NULL;
-// 	cell->args = NULL;
-// 	cell->input = NULL;
-// 	cell->output = NULL;
+// 	cell->cmd = cmd;
+// 	cell->operator = operator;
 // 	cell->next = NULL;
 // 	return (cell);
 // }
@@ -82,6 +92,21 @@ void	ft_envadd_back(t_env **lst, t_env *new)
 void	ft_cmdadd_back(t_cmdline **lst, t_cmdline *new)
 {
 	t_cmdline	*p;
+
+	if (lst && *lst)
+	{
+		p = *lst;
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
+	else if (lst)
+		*lst = new;
+}
+
+void	ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new)
+{
+	t_cmdtable	*p;
 
 	if (lst && *lst)
 	{
