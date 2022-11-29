@@ -1,5 +1,5 @@
 CC		= gcc
-FLAGS	= -g3 #-Wall -Wextra -Werror
+FLAGS	= -g3 -Wall -Wextra -Werror
 NAME	= minishell
 
 LIBFT_PATH	= libft/
@@ -63,19 +63,19 @@ all: $(NAME)
 $(OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(PARSE_OBJ_PATH):
 	mkdir $(OBJ_PATH) $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH)
 
-$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -o $@
+$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c #./includes/minishell.h
+	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
 
-$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -o $@
+$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c #./includes/minishell.h
+	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
 
-$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -o $@
+$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c #./includes/minishell.h
+	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
 
 # -I $(INC_PATH)
 
 $(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INC_PATH)minishell.h -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)

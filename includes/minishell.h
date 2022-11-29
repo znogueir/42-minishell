@@ -14,6 +14,11 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <errno.h>
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 
@@ -85,8 +90,16 @@ typedef struct s_cmdtable
 {
 	char				**cmd;
 	char				*operator;
+	int					type;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
+
+typedef struct s_filelist
+{
+	int					fd;
+	char				*filename;
+	struct s_filelist	*next;
+}						t_filelist;
 
 typedef struct s_data
 {
@@ -95,6 +108,7 @@ typedef struct s_data
 	t_env		*loc_env;
 	t_cmdline	*cmd;
 	t_cmdtable	*cmdtable;
+	t_filelist	*filelist;
 }				t_data;
 
 /*--------------------------------------------------*/
@@ -105,7 +119,9 @@ void		free_split(char **tab);
 void		reset_cmd(t_data *data);
 void		free_cmd(t_cmdline *cmd);
 void		free_env(t_env *loc_env);
+void		free_table(t_cmdtable *table);
 void		free_all(t_data *data);
+void		free_files(t_filelist *filelist);
 
 // pre_lex
 int			check_errors(char *line);
@@ -124,10 +140,12 @@ int			ft_expander(t_data *data);
 void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
 t_env		*ft_envnew(char	*name, char *content);
-t_cmdtable	*ft_tablenew(char **cmd, char *operator);
+t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type);
+t_filelist	*ft_filenew(int	fd, char *filename);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
+void		ft_fileadd_back(t_filelist **lst, t_filelist *new);
 
 //	builtins
 int			ft_cd(char *path);

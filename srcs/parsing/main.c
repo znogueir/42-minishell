@@ -47,6 +47,8 @@ t_data	*ft_init(char **env)
 	data->line = NULL;
 	data->loc_env = NULL;
 	data->cmd = NULL;
+	data->cmdtable = NULL;
+	data->filelist = NULL;
 	set_env(env, data);
 	ft_export(data, ft_strdup("tru"), ft_strdup("machin"));
 	ft_export(data, ft_strdup("trucs"), ft_strdup("abracadabra"));

@@ -17,7 +17,7 @@ void	free_split(char	**tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		free(tab[i]);
 		i++;
@@ -58,10 +58,39 @@ void	free_env(t_env *loc_env)
 	}
 }
 
+void	free_files(t_filelist *filelist)
+{
+	t_filelist	*prev;
+
+	while (filelist)
+	{
+		prev = filelist;
+		filelist = filelist->next;
+		free(prev->filename);
+		free(prev);
+	}
+}
+
+void	free_table(t_cmdtable *table)
+{
+	t_cmdtable	*prev;
+
+	while (table)
+	{
+		prev = table;
+		table = table->next;
+		free(prev->operator);
+		free_split(prev->cmd);
+		free(prev);
+	}
+}
+
 void	free_all(t_data *data)
 {
 	free(data->line);
 	free_cmd(data->cmd);
 	free_env(data->loc_env);
+	free_table(data->cmdtable);
+	free_files(data->filelist);
 	free(data);
 }

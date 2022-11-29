@@ -17,7 +17,7 @@ int	better_strncmp(char *s1, char *s2, int size)
 	int	i;
 
 	i = 0;
-	if (ft_strlen(s1) != size || ft_strlen(s2) != size ||\
+	if (ft_strlen(s1) != (size_t)size || ft_strlen(s2) != (size_t)size ||\
 	 !s1 || !s2)
 		return (1);
 	while (s1[i] && s2[i] && i < size)

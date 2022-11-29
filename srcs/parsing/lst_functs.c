@@ -48,7 +48,7 @@ t_env	*ft_envnew(char *name, char *content)
 	return (cell);
 }
 
-t_cmdtable	*ft_tablenew(char **cmd, char *operator)
+t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type)
 {
 	t_cmdtable	*cell;
 
@@ -57,22 +57,23 @@ t_cmdtable	*ft_tablenew(char **cmd, char *operator)
 		return (NULL);
 	cell->cmd = cmd;
 	cell->operator = operator;
+	cell->type = type;
 	cell->next = NULL;
 	return (cell);
 }
 
-// t_cmdtable	*ft_tablenew(char **cmd, char *operator)
-// {
-// 	t_cmdtable	*cell;
+t_filelist	*ft_filenew(int	fd, char *filename)
+{
+	t_filelist	*cell;
 
-// 	cell = malloc(sizeof(*cell));
-// 	if (!cell)
-// 		return (NULL);
-// 	cell->cmd = cmd;
-// 	cell->operator = operator;
-// 	cell->next = NULL;
-// 	return (cell);
-// }
+	cell = malloc(sizeof(*cell));
+	if (!cell)
+		return (NULL);
+	cell->fd = fd;
+	cell->filename = filename;
+	cell->next = NULL;
+	return (cell);
+}
 
 void	ft_envadd_back(t_env **lst, t_env *new)
 {
@@ -107,6 +108,21 @@ void	ft_cmdadd_back(t_cmdline **lst, t_cmdline *new)
 void	ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new)
 {
 	t_cmdtable	*p;
+
+	if (lst && *lst)
+	{
+		p = *lst;
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
+	else if (lst)
+		*lst = new;
+}
+
+void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
+{
+	t_filelist	*p;
 
 	if (lst && *lst)
 	{
