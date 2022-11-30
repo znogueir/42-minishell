@@ -174,4 +174,11 @@ char		*convert_type(int type);
 // executor
 int	ft_executor(t_data *data);
 
+//exec parsing
+void	display_cmdtable(t_cmdtable *table);
+void	make_cmdtable(t_data *data);
+
+//open / close
+void	open_redir_files(t_data *data, t_cmdtable *table);
+
 #endif
