@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../includes/minishell.h"
 
 void	ft_free_arr(char **cmd)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		free(cmd[i]);
 		i++;

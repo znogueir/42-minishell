@@ -25,7 +25,7 @@ void	write_error(char *error_msg)
 
 int	ft_check_exit(char *line)
 {
-	while (*line == ' ' || (*line >= 9 && *line <= 13))
+	while ((*line == ' ' || (*line >= 9 && *line <= 13)))
 		line++;
 	if (!ft_strncmp(line, "exit", 4) && (*(line + 4) == ' ' || \
 	(*(line + 4) >= 9 && *(line + 4) <= 13)))
@@ -47,7 +47,7 @@ t_data	*ft_init(char **env)
 	data->line = NULL;
 	data->loc_env = NULL;
 	data->cmd = NULL;
-	data->cmdtable = NULL;
+	//data->cmdtable = NULL;
 	data->filelist = NULL;
 	set_env(env, data);
 	ft_export(data, ft_strdup("tru"), ft_strdup("machin"));
@@ -63,7 +63,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
-	check_builtins(data);
+	//check_builtins(data);
 	write_prompt();
 	data->line = get_next_line(0);
 	while (ft_check_exit(data->line))
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **env)
 				ft_expander(data);
 				ft_printf("---------------expand---------------\n");
 				print_list(data->cmd);
-				ft_executor(data);
+				ft_executor(data, env);
 				//ft_env(data->loc_env);
 			}
 			reset_cmd(data);

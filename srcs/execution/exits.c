@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../includes/minishell.h"
 
 int	ft_permission_denied(char *prog)
 {

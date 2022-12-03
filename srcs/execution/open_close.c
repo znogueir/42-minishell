@@ -32,10 +32,10 @@ void	open_redir_files(t_data *data, t_cmdtable *table)
 		if (table->type == GREAT)
 			ft_fileadd_back(&data->filelist,
 				ft_filenew(open(table->operator + 1, O_RDWR | O_CREAT | O_TRUNC, 0644),
-					ft_strdup(table->operator + 1)));
+					ft_strdup(table->operator + 1), table->type));
 		else if (table->type == LESS)
 			ft_fileadd_back(&data->filelist, ft_filenew(open(table->operator + 1, O_RDONLY),
-				ft_strdup(table->operator + 1)));
+				ft_strdup(table->operator + 1), table->type));
 		table = table->next;
 	}
 	filelist = data->filelist;

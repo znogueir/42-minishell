@@ -30,8 +30,8 @@ int	check_pipes(t_cmdline *cmd)
 	{
 		if (p_cmd->type == PIPE && p_cmd->next->type == PIPE)
 			return (1);
-		if (p_cmd->type == PIPE && is_redir(p_cmd->next->type))
-			return (1);
+		// if (p_cmd->type == PIPE && is_redir(p_cmd->next->type))
+		// 	return (1);
 		if (p_cmd->type == PIPE && p_cmd->next->type == NEWLINE)
 			return (1);
 		if (is_redir(p_cmd->type) && p_cmd->next->type == PIPE)

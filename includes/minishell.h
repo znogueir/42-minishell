@@ -14,13 +14,10 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include <errno.h>
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
+# include "../libft/libft.h"
+# include "pipex.h"
 
 /*--------------------------------------------------*/
 /*				   	   Operators				   	*/
@@ -89,8 +86,10 @@ typedef struct s_env
 typedef struct s_cmdtable
 {
 	char				**cmd;
-	char				*operator;
-	int					type;
+	char				*infile;
+	char				*outfile;
+	int					infd;
+	int					outfd;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -98,6 +97,7 @@ typedef struct s_filelist
 {
 	int					fd;
 	char				*filename;
+	int					type;
 	struct s_filelist	*next;
 }						t_filelist;
 
@@ -141,7 +141,7 @@ void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
 t_env		*ft_envnew(char	*name, char *content);
 t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type);
-t_filelist	*ft_filenew(int	fd, char *filename);
+t_filelist	*ft_filenew(int	fd, char *filename, int type);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
@@ -160,8 +160,9 @@ int			ft_unset(t_data *data, char *name);
 void		set_env(char **env, t_data *data);
 
 // utils
-int	is_alphanum(char c);
-int	better_strncmp(char *s1, char *s2, int size);
+int			is_alphanum(char c);
+int			is_redir(int type);
+int			better_strncmp(char *s1, char *s2, int size);
 
 // miscellaneous
 void		check_builtins(t_data *data);
@@ -172,13 +173,12 @@ int			find_token_type(char *token);
 char		*convert_type(int type);
 
 // executor
-int	ft_executor(t_data *data);
-
+int			ft_executor(t_data *data, char **env);
 //exec parsing
-void	display_cmdtable(t_cmdtable *table);
-void	make_cmdtable(t_data *data);
-
+void		display_cmdtable(t_cmdtable *table);
+void		make_cmdtable(t_data *data);
 //open / close
-void	open_redir_files(t_data *data, t_cmdtable *table);
+void		open_redir_files(t_data *data, t_cmdtable *table);
+//children
 
 #endif

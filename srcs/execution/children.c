@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../includes/minishell.h"
 
 char	*get_valid_cmd(char **command, char **env, int *ext)
 {
@@ -31,14 +31,12 @@ char	*get_valid_cmd(char **command, char **env, int *ext)
 	return (validcmd);
 }
 
-void	ft_execute(char *cmd, char **env)
+void	ft_execute(char **command, char **env)
 {
-	char	**command;
 	char	*validcmd;
 	int		ext;
 
 	ext = 1;
-	command = ft_split(cmd, " ");
 	validcmd = get_valid_cmd(command, env, &ext);
 	if (validcmd == NULL)
 	{
@@ -55,7 +53,7 @@ void	ft_execute(char *cmd, char **env)
 	}
 }
 
-void	ft_child(char *cmd, char **env)
+void	ft_child(char **cmd, char **env)
 {
 	int		fd[2];
 	pid_t	pid;

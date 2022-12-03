@@ -35,8 +35,11 @@ BUILTIN	= cd.c \
 		unset.c \
 
 EXEC	= ft_executor.c \
-		open_close.c \
 		exec_parsing.c \
+		children.c \
+		exits.c \
+		finish.c \
+		paths.c \
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
@@ -65,14 +68,14 @@ all: $(NAME)
 $(OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(PARSE_OBJ_PATH):
 	mkdir $(OBJ_PATH) $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH)
 
-$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
+$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/*
+	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
+$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) ./includes/*
+	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c ./includes/minishell.h
-	$(CC) $(FLAGS) -c $< -I$(INC_PATH) -o $@
+$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) ./includes/*
+	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
 # -I $(INC_PATH)
 

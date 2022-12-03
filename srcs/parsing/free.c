@@ -79,7 +79,8 @@ void	free_table(t_cmdtable *table)
 	{
 		prev = table;
 		table = table->next;
-		free(prev->operator);
+		free(prev->infile);
+		free(prev->outfile);
 		free_split(prev->cmd);
 		free(prev);
 	}
@@ -90,7 +91,7 @@ void	free_all(t_data *data)
 	free(data->line);
 	free_cmd(data->cmd);
 	free_env(data->loc_env);
-	free_table(data->cmdtable);
+	//free_table(data->cmdtable);
 	free_files(data->filelist);
 	free(data);
 }

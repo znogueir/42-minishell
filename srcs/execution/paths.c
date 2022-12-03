@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../includes/minishell.h"
 
 char	**ft_get_paths(char **env)
 {

@@ -48,21 +48,21 @@ t_env	*ft_envnew(char *name, char *content)
 	return (cell);
 }
 
-t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type)
-{
-	t_cmdtable	*cell;
+// t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type)
+// {
+// 	t_cmdtable	*cell;
 
-	cell = malloc(sizeof(*cell));
-	if (!cell)
-		return (NULL);
-	cell->cmd = cmd;
-	cell->operator = operator;
-	cell->type = type;
-	cell->next = NULL;
-	return (cell);
-}
+// 	cell = malloc(sizeof(*cell));
+// 	if (!cell)
+// 		return (NULL);
+// 	cell->cmd = cmd;
+// 	cell->operator = operator;
+// 	cell->type = type;
+// 	cell->next = NULL;
+// 	return (cell);
+// }
 
-t_filelist	*ft_filenew(int	fd, char *filename)
+t_filelist	*ft_filenew(int	fd, char *filename, int type)
 {
 	t_filelist	*cell;
 
@@ -71,6 +71,7 @@ t_filelist	*ft_filenew(int	fd, char *filename)
 		return (NULL);
 	cell->fd = fd;
 	cell->filename = filename;
+	cell->type = type;
 	cell->next = NULL;
 	return (cell);
 }
