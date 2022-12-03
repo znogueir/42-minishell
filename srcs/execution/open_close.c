@@ -12,38 +12,31 @@
 
 # include "../../includes/minishell.h"
 
-void	ft_error_opening(t_filelist **filelist, char *filename)
+void	ft_error_opening(t_cmdtable *table, char *filename)
 {
 	perror(filename);
-	while (*filelist)
+	while (table)
 	{
-		if ((*filelist)->fd != -1)
-			close((*filelist)->fd);
-		*filelist = (*filelist)->next;
+		if (table->infd > 2)
+			close(table->infd);
+		if (table->outfd > 2)
+			close(table->outfd);
+		table = table->next;
 	}
 }
 
-void	open_redir_files(t_data *data, t_cmdtable *table)
+void	close_files(t_cmdtable *table)
 {
-	t_filelist *filelist;
+	t_cmdtable	*beg;
 
+	beg = table;
 	while (table)
 	{
-		if (table->type == GREAT)
-			ft_fileadd_back(&data->filelist,
-				ft_filenew(open(table->operator + 1, O_RDWR | O_CREAT | O_TRUNC, 0644),
-					ft_strdup(table->operator + 1), table->type));
-		else if (table->type == LESS)
-			ft_fileadd_back(&data->filelist, ft_filenew(open(table->operator + 1, O_RDONLY),
-				ft_strdup(table->operator + 1), table->type));
-		table = table->next;
-	}
-	filelist = data->filelist;
-	while (filelist)
-	{
-		if (filelist->fd < 0)
-			ft_error_opening(&filelist, filelist->filename);
+		if (table->infd < 0)
+			return (ft_error_opening(beg, table->infile));
+		else if (table->outfd < 0)
+			return (ft_error_opening(beg, table->outfile));
 		else
-			filelist = filelist->next;
+			table = table->next;
 	}
 }

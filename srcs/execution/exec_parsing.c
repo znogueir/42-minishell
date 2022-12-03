@@ -58,12 +58,16 @@ void	ft_fill_files_v2(t_cmdtable *table, t_cmdline **line)
 		free(table->infile);
 		table->infile = ft_strdup((*line)->next->content);
 		table->infd = open((*line)->next->content, O_RDONLY);
+		if (table->infd == -1)
+			return (-1);
 	}
 	if ((*line)->type == GREAT)
 	{
 		free(table->outfile);
 		table->outfile = ft_strdup((*line)->next->content);
 		table->outfd = open((*line)->next->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		if (table->outfd == -1)
+			return (-1);
 	}
 	*line = (*line)->next;
 }
@@ -82,8 +86,8 @@ t_cmdtable	*new_table(void)
 	t_cmdtable	*table;
 
 	table = malloc(sizeof(t_cmdtable));
-	table->infd = -1;
-	table->outfd = -1;
+	table->infd = 0;
+	table->outfd = 1;
 	table->infile = NULL;
 	table->outfile = NULL;
 	table->cmd = NULL;

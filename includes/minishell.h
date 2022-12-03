@@ -88,8 +88,8 @@ typedef struct s_cmdtable
 	char				**cmd;
 	char				*infile;
 	char				*outfile;
-	int					infd;
-	int					outfd;
+	int					*infd;
+	int					*outfd;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -178,7 +178,7 @@ int			ft_executor(t_data *data, char **env);
 void		display_cmdtable(t_cmdtable *table);
 void		make_cmdtable(t_data *data);
 //open / close
-void		open_redir_files(t_data *data, t_cmdtable *table);
+void	close_files(t_cmdtable *table);
 //children
 
 #endif

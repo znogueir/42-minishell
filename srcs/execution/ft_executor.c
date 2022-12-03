@@ -70,9 +70,9 @@ int	ft_executor(t_data *data, char **env)
 	make_cmdtable(data);
 	//display_cmdtable(data->cmdtable);
 	display_cmdtable(data->cmdtable);
-	//open_redir_files(data, data->cmdtable);
+	//ft_pipex(data, env);
+	close_files(data->cmdtable);
 	//display_cmdtable(data->cmdtable);
-//	ft_pipex(data, env);
 	free_table(data->cmdtable);
 	// while(data->filelist)
 	// {

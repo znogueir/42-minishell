@@ -35,6 +35,7 @@ BUILTIN	= cd.c \
 		unset.c \
 
 EXEC	= ft_executor.c \
+		open_close.c \
 		exec_parsing.c \
 		children.c \
 		exits.c \
