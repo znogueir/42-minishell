@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 21:57:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/05 00:19:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ void	display_cmdtable(t_cmdtable *table)
 		printf("infile: ");
 		while (table && infile) // && table->infile->next)
 		{
-			printf("[%d] %s, ", \
-			infile->fd, infile->filename);
+			printf("[%d] %s, ", infile->fd, infile->filename);
 			infile = infile->next;
 		}
 		printf("\noutfile: ");
 		while (table && outfile) // && table->outfile->next)
 		{
-			printf("[%d] %s, ", \
-			outfile->fd, outfile->filename);
+			printf("[%d] %s, ", outfile->fd, outfile->filename);
 			outfile = outfile->next;
 		}
 		printf("\ncmd: ");
@@ -67,27 +65,54 @@ char	**ft_arr_dup(char **arr)
 	return (copy);
 }
 
-// void	ft_pipex(t_data *data, char **env)
-// {
-// 	int	i;
+int	ft_check_fds(t_filelist *outfile, t_filelist *infile)
+{
+	if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
+		return (1);
+	else if (outfile->fd == -1 && infile->fd == -1)
+	{
+		if (outfile->order < infile->order)
+			perror(outfile->filename);
+		else
+			perror(infile->filename);
+	}
+	else if (outfile->fd == -1)
+		perror(outfile->filename);
+	else
+		perror(infile->filename);
+	return (0);
+}
 
-// 	i = -1;
-// 	while (++i < 2)
-// 	{
-// 		//write(2, "what\n", 5);
-// 		dup2(ft_infd(data, i), 0);
-// 		//display_cmdtable(data->cmdtable);
-// 		ft_child(ft_arr_dup(data->cmdtable->cmd), env);
-// 		//dup2(4, 1);
-// 	}
-// }
+int	ft_pipex(t_data *data, char **env)
+{
+	t_cmdtable	*table;
+	t_filelist	*outfile;
+	t_filelist	*infile;
+
+	table = data->cmdtable;
+	while (table)
+	{
+		//write(2, "what\n", 5);
+		infile = file_get_last(table->infile);
+		outfile = file_get_last(table->outfile);
+		if (ft_check_fds(outfile, infile))
+		{
+			dup2(infile->fd, 0);
+			//display_cmdtable(data->cmdtable);
+			ft_child(ft_arr_dup(table->cmd), env);
+			//dup2(4, 1);
+		}
+		table = table->next;
+	}
+	return (1);
+}
 
 int	ft_executor(t_data *data, char **env)
 {
 	(void)env;
 	data->cmdtable = NULL;
 	make_cmdtable(data);
-	//ft_pipex(data, env);
+	ft_pipex(data, env);
 	//close_files(data->cmdtable);
 	display_cmdtable(data->cmdtable);
 	free_table(data->cmdtable);
@@ -95,3 +120,4 @@ int	ft_executor(t_data *data, char **env)
 }
 
 //echo banana < in | ls < bingf | < bing
+//<< EOF << banana >out1(nopermissions) ls -la <in <<yo <jfksj

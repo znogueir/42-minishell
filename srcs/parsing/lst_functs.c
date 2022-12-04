@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 22:45:49 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:42:04 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_cmdtable	*ft_tablenew(void)
 	return (cell);
 }
 
-t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type)
+t_filelist	*ft_filenew(int fd, char *filename, int type, int order)
 {
 	t_filelist	*cell;
 
@@ -71,8 +71,8 @@ t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type)
 		return (NULL);
 	cell->fd = fd;
 	cell->filename = filename;
-	cell->limiter = limiter;
 	cell->type = type;
+	cell->order = order;
 	cell->next = NULL;
 	return (cell);
 }
@@ -144,4 +144,13 @@ t_cmdtable	*get_last(t_cmdtable *table)
 		table = table->next;
 	}
 	return (table);
+}
+
+t_filelist	*file_get_last(t_filelist *filelist)
+{
+	while (filelist && filelist->next)
+	{
+		filelist = filelist->next;
+	}
+	return (filelist);
 }

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 23:05:43 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/05 00:02:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@
 # define PROMPT	"\e[38;5;46;1mminishell$>\e[0m "
 
 /*--------------------------------------------------*/
+/*					   Execution			   		*/
+/*--------------------------------------------------*/
+# define IN "/dev/stdin"
+# define OUT "/dev/stdout"
+
+/*--------------------------------------------------*/
 /*					   Structs				   		*/
 /*--------------------------------------------------*/
 typedef struct s_cmdline
@@ -89,8 +95,8 @@ typedef struct s_filelist
 {
 	int					fd;
 	char				*filename;
-	char				*limiter;
 	int					type;
+	int					order;
 	struct s_filelist	*next;
 }						t_filelist;
 
@@ -143,12 +149,13 @@ void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
 t_env		*ft_envnew(char *name, char *content);
 t_cmdtable	*ft_tablenew(void);
-t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type);
+t_filelist	*ft_filenew(int fd, char *filename, int type, int order);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
 void		ft_fileadd_back(t_filelist **lst, t_filelist *new);
 t_cmdtable	*get_last(t_cmdtable *table);
+t_filelist	*file_get_last(t_filelist *filelist);
 
 //	builtins
 int			ft_cd(char *path);
@@ -181,9 +188,10 @@ void		display_cmdtable(t_cmdtable *table);
 void		make_cmdtable(t_data *data);
 void		close_files(t_cmdtable *table);
 //open_close
-int			ft_infile_open(t_cmdtable *table, t_cmdline *line);
-int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings);
-int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line);
+int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);
+int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \
+			int order);
+int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order);
 int			ft_here_doc_write(char *limiter);
 int			ft_append_open(t_cmdtable *table, t_cmdline *line);
 

@@ -42,7 +42,7 @@ EXEC	= ft_executor.c \
 		exits.c \
 		finish.c \
 		paths.c \
-		open_close.c \
+		open.c \
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))

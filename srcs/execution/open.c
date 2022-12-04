@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_close.c                                       :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 23:02:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:27:07 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,50 +69,38 @@ int	ft_here_doc_write(char *limiter)
 	return (1);
 }
 
-int	ft_infile_open(t_cmdtable *table, t_cmdline *line)
+int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
 {
 	int	fd;
 
 	fd = open(line->next->content, O_RDONLY);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(fd, ft_strdup(line->next->content), NULL, LESS));
+	ft_filenew(fd, ft_strdup(line->next->content), LESS, order));
 	if (fd == -1)
 		return (0);
 	return (1);
 }
 
-int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings)
+int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
 {
 	int	fd;
 
 	fd = open(line->next->content, settings, 0644);
 	ft_fileadd_back(&table->outfile, \
-	ft_filenew(fd, ft_strdup(line->next->content), NULL, line->type));
+	ft_filenew(fd, ft_strdup(line->next->content), line->type, order));
 	if (fd == -1)
 		return (0);
 	return (1);
 }
 
-int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line)
+int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order)
 {
 	int	fd;
 
 	fd = open(".temp_heredoc", O_RDONLY);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(fd, ft_strdup(line->next->content), NULL, H_DOC));
+	ft_filenew(fd, ft_strdup(line->next->content), H_DOC, order));
 	if (fd == -1)
 		return (0);
 	return (1);
 }
-
-// int	ft_append_open(t_cmdtable *table, t_cmdline *line)
-// {
-// 	int	fd;
-
-// 	fd = open(line->next->content, O_RDWR | O_CREAT | O_APPEND, 0644);
-// 	ft_fileadd_back(&table->outfile, 
-// 	ft_filenew(fd, ft_strdup(line->next->content), NULL, APPEND));
-// 	if (fd == -1)
-// 		return (0);
-// 	return (1);
-// }

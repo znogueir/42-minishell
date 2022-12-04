@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 21:28:31 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:28:43 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	free_files(t_filelist *filelist)
 		prev = filelist;
 		filelist = filelist->next;
 		free(prev->filename);
-		free(prev->limiter);
 		free(prev);
 	}
 }
