@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_types.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:16:09 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/18 19:16:11 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:39:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_token_type(char *token)
 	if (!better_strncmp(token, "|", 1))
 		return (PIPE);
 	else if (!better_strncmp(token, "\n", 1))
-		return (NEWLINE);
+		return (NEWLINES);
 	else if (!better_strncmp(token, ">>", 2))
 		return (APPEND);
 	else if (!better_strncmp(token, "<<", 2))
@@ -48,6 +48,6 @@ char	*convert_type(int type)
 	else if (type == 6)
 		return (ORANGE"LESSGREAT"RES_COL);
 	else if (type == 7)
-		return (GREEN"NEWLINE"RES_COL);
+		return (GREEN"NEWLINES"RES_COL);
 	return ("NDEF");
 }

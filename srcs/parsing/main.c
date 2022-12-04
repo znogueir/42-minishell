@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 17:04:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:15:22 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_data	*ft_init(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
+	// char		*str;
 
 	(void)ac;
 	(void)av;
@@ -85,6 +86,9 @@ int	main(int ac, char **av, char **env)
 		free(data->line);
 		write_prompt();
 		data->line = get_next_line(0);
+		// data->line = readline("minishell~ ");
+		// str = ft_strdup(data->line);
+		// add_history(str);
 	}
 	free_all(data);
 	return (0);

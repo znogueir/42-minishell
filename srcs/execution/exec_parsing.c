@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 17:03:57 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:39:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	linecpy = cmdline;
 	i = 0;
 	count = 0;
-	while (linecpy && linecpy->type != NEWLINE)
+	while (linecpy && linecpy->type != NEWLINES)
 	{
 		if (is_redir(linecpy->type))
 			linecpy = linecpy->next;
@@ -112,7 +112,7 @@ void	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 	line = cmdline;
 	infd = 0;
 	outfd = 0;
-	while (line && line->type != NEWLINE)
+	while (line && line->type != NEWLINES)
 	{
 		if (infd != -1 && line->type == LESS)
 		{
@@ -162,7 +162,7 @@ void	make_cmdtable(t_data *data)
 	int			count;
 
 	line = data->cmd;
-	while (line && line->type != NEWLINE)
+	while (line && line->type != NEWLINES)
 	{
 		ft_tableadd_back(&data->cmdtable, new_table());
 		cur_tab = get_last(data->cmdtable);
@@ -184,7 +184,7 @@ void	make_cmdtable(t_data *data)
 // 	int			count;
 
 // 	line = data->cmd;
-// 	while (line && line->type != NEWLINE)
+// 	while (line && line->type != NEWLINES)
 // 	{
 // 		ft_tableadd_back(&data->cmdtable, new_table());
 // 		cur_tab = get_last(data->cmdtable);

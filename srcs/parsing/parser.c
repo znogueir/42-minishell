@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:06:26 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 15:10:38 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:39:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_pipes(t_cmdline *cmd)
 			return (1);
 		// if (p_cmd->type == PIPE && is_redir(p_cmd->next->type))
 		// 	return (1);
-		if (p_cmd->type == PIPE && p_cmd->next->type == NEWLINE)
+		if (p_cmd->type == PIPE && p_cmd->next->type == NEWLINES)
 			return (1);
 		if (is_redir(p_cmd->type) && p_cmd->next->type == PIPE)
 			return (1);
@@ -50,7 +50,7 @@ int	check_redirs(t_cmdline *cmd)
 	{
 		if (is_redir(p_cmd->type) && is_redir(p_cmd->next->type))
 			return (1);
-		if (is_redir(p_cmd->type) && p_cmd->next->type == NEWLINE)
+		if (is_redir(p_cmd->type) && p_cmd->next->type == NEWLINES)
 			return (1);
 		p_cmd = p_cmd->next;
 	}

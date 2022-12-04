@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 17:07:16 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:16:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/libft.h"
@@ -45,7 +47,7 @@
 # define H_DOC 4/* << */
 # define APPEND 5/* >> */
 # define LESSGREAT 6/* <> */
-# define NEWLINE 7/* \n */
+# define NEWLINES 7/* \n */
 
 /*--------------------------------------------------*/
 /*				   	    Colors				   		*/

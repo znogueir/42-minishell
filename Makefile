@@ -1,5 +1,6 @@
 CC		= gcc
 FLAGS	= -g3 -Wall -Wextra -Werror
+INCFLAGS= -lreadline
 NAME	= minishell
 
 LIBFT_PATH	= libft/
@@ -81,7 +82,7 @@ $(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) ./includes/*
 # -I $(INC_PATH)
 
 $(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INC_PATH)minishell.h -o $(NAME)
+	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INCFLAGS) $(INC_PATH)minishell.h -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
