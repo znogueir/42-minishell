@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 21:23:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:47:45 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,4 +179,7 @@ int			ft_executor(t_data *data, char **env);
 void		display_cmdtable(t_cmdtable *table);
 void		make_cmdtable(t_data *data);
 void		close_files(t_cmdtable *table);
+int			ft_infile_open(t_cmdtable *table, t_cmdline *line);
+int			ft_outfile_open(t_cmdtable *table, t_cmdline *line);
+
 #endif

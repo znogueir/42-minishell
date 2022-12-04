@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 21:32:24 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:56:40 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,32 +84,24 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	table->cmd[i] = NULL;
 }
 
-void	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
+int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 {
 	t_cmdline	*line;
-	int			infd;
-	int			outfd;
+	int			fd;
 
 	line = cmdline;
-	infd = 0;
-	outfd = 0;
-	while (line && line->type != NEWLINES && line->type != PIPE)
+	fd = 0;
+	while (fd != -1 && line && line->type != NEWLINES && line->type != PIPE)
 	{
-		if (infd != -1 && line->type == LESS)
-		{
-			infd = open(line->next->content, O_RDONLY);
-			ft_fileadd_back(&table->infile, \
-			ft_filenew(infd, ft_strdup(line->next->content), NULL, LESS));
-		}
-		if (outfd != -1 && line->type == GREAT)
-		{
-			outfd = open(line->next->content, O_RDWR | O_CREAT | \
-			O_TRUNC, 0644);
-			ft_fileadd_back(&table->outfile, \
-			ft_filenew(outfd, ft_strdup(line->next->content), NULL, LESS));
-		}
+		if (fd != -1 && line->type == LESS)
+			fd = ft_infile_open(table, line);
+		if (fd != -1 && line->type == GREAT)
+			fd = ft_outfile_open(table, line);
 		line = line->next;
 	}
+	if (fd == -1)
+		return (0);
+	return (1);
 }
 
 t_cmdtable	*get_last(t_cmdtable *table)
@@ -145,7 +137,7 @@ void	make_cmdtable(t_data *data)
 		ft_tableadd_back(&data->cmdtable, new_table());
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
-		ft_fill_files(cur_tab, line);
+		cur_tab->status = ft_fill_files(cur_tab, line);
 		ft_make_cmd_array(cur_tab, temp);
 		while (line && line->type != PIPE)
 			line = line->next;

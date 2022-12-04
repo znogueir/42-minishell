@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 21:38:16 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:57:30 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	display_cmdtable(t_cmdtable *table)
 		printf("\ncmd: ");
 		while (table->cmd[i])
 			printf("%s ", table->cmd[i++]);
-		printf("\n");
+		printf("\nstatus: %d\n", table->status);
 		table = table->next;
 	}
 	printf("---------------------------------------------\n");
@@ -87,18 +87,10 @@ int	ft_executor(t_data *data, char **env)
 	(void)env;
 	data->cmdtable = NULL;
 	make_cmdtable(data);
-	//display_cmdtable(data->cmdtable);
-	//display_cmdtable(data->cmdtable);
 	//ft_pipex(data, env);
 	//close_files(data->cmdtable);
 	display_cmdtable(data->cmdtable);
 	free_table(data->cmdtable);
-	// while(data->filelist)
-	// {
-	// 	ft_putstr_fd(data->filelist->filename, 2);
-	// 	write(2, "\n", 1);
-	// 	data->filelist = data->filelist->next;
-	// }
 	return (0);
 }
 
