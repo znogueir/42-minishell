@@ -6,30 +6,11 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 17:39:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:32:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	display_cmdtable(t_cmdtable *table)
-{
-	int	i;
-
-	while (table)
-	{
-		i = 0;
-		printf("__________________________________________\n");
-		printf("infile: %s\n", table->infile);
-		printf("outfile: %s\n", table->outfile);
-		printf("outfd: %d\n", table->outfd);
-		printf("infd: %d\n", table->infd);
-		while (table->cmd[i])
-			printf("%s ", table->cmd[i++]);
-		printf("\n");
-		table = table->next;
-	}
-}
 
 // void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline, int count)
 // {
@@ -81,7 +62,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	linecpy = cmdline;
 	i = 0;
 	count = 0;
-	while (linecpy && linecpy->type != NEWLINES)
+	while (linecpy && linecpy->type != NEWLINES && linecpy->type != PIPE)
 	{
 		if (is_redir(linecpy->type))
 			linecpy = linecpy->next;
@@ -112,7 +93,7 @@ void	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 	line = cmdline;
 	infd = 0;
 	outfd = 0;
-	while (line && line->type != NEWLINES)
+	while (line && line->type != NEWLINES && line->type != PIPE)
 	{
 		if (infd != -1 && line->type == LESS)
 		{
@@ -145,8 +126,6 @@ t_cmdtable	*new_table(void)
 	t_cmdtable	*table;
 
 	table = malloc(sizeof(t_cmdtable));
-	table->infd = 0;
-	table->outfd = 1;
 	table->infile = NULL;
 	table->outfile = NULL;
 	table->cmd = NULL;
@@ -159,7 +138,6 @@ void	make_cmdtable(t_data *data)
 	t_cmdline	*line;
 	t_cmdline	*temp;
 	t_cmdtable	*cur_tab;
-	int			count;
 
 	line = data->cmd;
 	while (line && line->type != NEWLINES)

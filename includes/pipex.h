@@ -6,20 +6,21 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 16:47:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:56:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-//# include <sys/stat.h>
-//# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
 # include <unistd.h>
 # include <string.h>
+//# include "minishell.h"
 
 typedef struct s_pipex
 {
@@ -57,13 +58,4 @@ int		check_path(char *prog, char *cmdpath);
 char	*ft_join_path(char *path, char *prog);
 char	*get_valid_path(char **env, char **prog);
 
-// executor
-int		ft_executor(t_data *data, char **env);
-
-//exec parsing
-void	display_cmdtable(t_cmdtable *table);
-void	make_cmdtable(t_data *data);
-
-//open / close
-void	close_files(t_cmdtable *table);
 #endif

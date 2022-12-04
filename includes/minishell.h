@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 18:16:24 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:23:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/libft.h"
-//# include "pipex.h"
+# include "pipex.h"
 
 /*--------------------------------------------------*/
 /*				   	   Operators				   	*/
@@ -99,6 +99,7 @@ typedef struct s_cmdtable
 	char				**cmd;
 	t_filelist			*infile;
 	t_filelist			*outfile;
+	int					status;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -173,4 +174,9 @@ void		print_colors(void);
 int			find_token_type(char *token);
 char		*convert_type(int type);
 
+// executor
+int			ft_executor(t_data *data, char **env);
+void		display_cmdtable(t_cmdtable *table);
+void		make_cmdtable(t_data *data);
+void		close_files(t_cmdtable *table);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 18:50:53 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:00:45 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_data	*ft_init(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
-	//char		*str;
 
 	(void)ac;
 	(void)av;
@@ -83,6 +82,7 @@ int	main(int ac, char **av, char **env)
 	//write_prompt();
 	//data->line = get_next_line(0);
 	data->line = readline(PROMPT);
+	add_history(data->line);
 	while (ft_check_exit(data->line))
 	{
 		if (!check_errors(data->line))
@@ -91,10 +91,10 @@ int	main(int ac, char **av, char **env)
 			print_list(data->cmd);
 			if (!ft_parser(data))
 			{
-				ft_expander(data);
-				ft_printf("---------------expand---------------\n");
+				//ft_expander(data);
+				//ft_printf("---------------expand---------------\n");
 				print_list(data->cmd);
-				//ft_executor(data, env);
+				ft_executor(data, env);
 				//ft_env(data->loc_env);
 			}
 			reset_cmd(data);
@@ -103,7 +103,6 @@ int	main(int ac, char **av, char **env)
 		//write_prompt();
 		//data->line = get_next_line(0);
 		data->line = readline(PROMPT);
-		//str = ft_strdup(data->line);
 		add_history(data->line);
 	}
 	//free(str);

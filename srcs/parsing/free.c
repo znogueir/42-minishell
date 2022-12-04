@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/23 19:26:24 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:28:31 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	free_files(t_filelist *filelist)
 		prev = filelist;
 		filelist = filelist->next;
 		free(prev->filename);
+		free(prev->limiter);
 		free(prev);
 	}
 }
@@ -79,8 +80,8 @@ void	free_table(t_cmdtable *table)
 	{
 		prev = table;
 		table = table->next;
-		free(prev->infile);
-		free(prev->outfile);
+		free_files(prev->infile);
+		free_files(prev->outfile);
 		free_split(prev->cmd);
 		free(prev);
 	}
@@ -91,7 +92,5 @@ void	free_all(t_data *data)
 	free(data->line);
 	free_cmd(data->cmd);
 	free_env(data->loc_env);
-	//free_table(data->cmdtable);
-	free_files(data->filelist);
 	free(data);
 }

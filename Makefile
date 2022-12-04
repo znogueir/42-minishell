@@ -1,5 +1,3 @@
-# valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all -s ./minishell
-
 CC		= gcc
 FLAGS	= -g3 -Wall -Wextra -Werror
 INCFLAGS= -lreadline
@@ -18,6 +16,7 @@ BUILT_PATH		= $(SRC_PATH)builtins/
 EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
 INC_PATH		= includes/
+INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h
 
 PARSE	= check_init.c \
 		expander.c \
@@ -38,7 +37,6 @@ BUILTIN	= cd.c \
 		unset.c \
 
 EXEC	= ft_executor.c \
-		open_close.c \
 		exec_parsing.c \
 		children.c \
 		exits.c \
@@ -55,8 +53,8 @@ PARSE_OBJS	= $(addprefix $(PARSE_OBJ_PATH), $(PARSE_OBJ))
 BUILT_OBJS	= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
 EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC_OBJ))
 
-OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) #$(EXEC_OBJS)
-OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) #$(EXEC_OBJ_PATH) 
+OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS)
+OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) 
 
 # ---------------- progress bar ------------------ #
 
@@ -72,16 +70,14 @@ all: $(NAME)
 $(OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(PARSE_OBJ_PATH):
 	mkdir $(OBJ_PATH) $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH)
 
-$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/*
+$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) ./includes/*
+$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-#$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) ./includes/*
-#	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
-
-# -I $(INC_PATH)
+$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) $(INC_FILES)
+	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
 $(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
 	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INCFLAGS) $(INC_PATH)minishell.h -o $(NAME)
@@ -97,6 +93,10 @@ fclean:clean
 	make -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
 
+run: $(NAME)
+	clear
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all -s ./minishell
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run
