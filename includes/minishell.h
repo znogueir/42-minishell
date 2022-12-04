@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/21 19:52:19 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:04:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ int			ft_expander(t_data *data);
 //	list functs
 void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
-t_env		*ft_envnew(char	*name, char *content);
+t_env		*ft_envnew(char *name, char *content);
 t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type);
-t_filelist	*ft_filenew(int	fd, char *filename, int type);
+t_filelist	*ft_filenew(int fd, char *filename, int type);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
@@ -178,7 +178,7 @@ int			ft_executor(t_data *data, char **env);
 void		display_cmdtable(t_cmdtable *table);
 void		make_cmdtable(t_data *data);
 //open / close
-void	close_files(t_cmdtable *table);
+void		close_files(t_cmdtable *table);
 //children
 
 #endif

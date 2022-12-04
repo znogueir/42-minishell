@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/19 17:53:30 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:10:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	better_strncmp(char *s1, char *s2, int size)
 	int	i;
 
 	i = 0;
-	if (ft_strlen(s1) != (size_t)size || ft_strlen(s2) != (size_t)size ||\
-	 !s1 || !s2)
+	if (ft_strlen(s1) != (size_t)size || ft_strlen(s2) != (size_t)size || \
+	!s1 || !s2)
 		return (1);
 	while (s1[i] && s2[i] && i < size)
 	{

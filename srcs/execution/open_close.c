@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   open_close.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2022/11/30 16:53:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:08:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_error_opening(t_cmdtable *table, char *filename)
 {

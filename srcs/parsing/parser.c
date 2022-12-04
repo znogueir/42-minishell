@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:06:26 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/19 17:06:27 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:10:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_redir(int type)
 
 int	check_pipes(t_cmdline *cmd)
 {
-	t_cmdline *p_cmd;
+	t_cmdline	*p_cmd;
 
 	p_cmd = cmd;
 	if (p_cmd->type == PIPE)
@@ -43,7 +43,7 @@ int	check_pipes(t_cmdline *cmd)
 
 int	check_redirs(t_cmdline *cmd)
 {
-	t_cmdline *p_cmd;
+	t_cmdline	*p_cmd;
 
 	p_cmd = cmd;
 	while (p_cmd)

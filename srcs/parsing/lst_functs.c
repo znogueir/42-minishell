@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/13 14:29:40 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:08:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_list(t_cmdline *cmd)
 	while (cmd)
 	{
 		ft_printf("{%s%s%s}", ORANGE, cmd->content, RES_COL);
-		ft_printf(" - type : %s\n"RES_COL, convert_type(cmd->type));
+		ft_printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
 		cmd = cmd->next;
 	}
 }
@@ -62,7 +62,7 @@ t_env	*ft_envnew(char *name, char *content)
 // 	return (cell);
 // }
 
-t_filelist	*ft_filenew(int	fd, char *filename, int type)
+t_filelist	*ft_filenew(int fd, char *filename, int type)
 {
 	t_filelist	*cell;
 

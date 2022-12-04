@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/11/30 16:50:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:05:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	display_cmdtable(t_cmdtable *table)
 {
@@ -33,11 +33,10 @@ void	display_cmdtable(t_cmdtable *table)
 
 void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline, int count)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	
-	table->cmd = malloc(sizeof (char *) * (count + 1));
+	table->cmd = malloc(sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		if (is_redir(cmdline->type))
@@ -48,7 +47,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline, int count)
 			cmdline = cmdline->next;
 		}
 	}
-	table->cmd[i] = NULL;;
+	table->cmd[i] = NULL;
 }
 
 void	ft_fill_files_v2(t_cmdtable *table, t_cmdline **line)
@@ -65,7 +64,8 @@ void	ft_fill_files_v2(t_cmdtable *table, t_cmdline **line)
 	{
 		free(table->outfile);
 		table->outfile = ft_strdup((*line)->next->content);
-		table->outfd = open((*line)->next->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		table->outfd = open((*line)->next->content, O_RDWR | O_CREAT | O_TRUNC,
+				0644);
 		if (table->outfd == -1)
 			return (-1);
 	}
