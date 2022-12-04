@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 15:08:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:54:41 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_env	*ft_envnew(char *name, char *content)
 // 	return (cell);
 // }
 
-t_filelist	*ft_filenew(int fd, char *filename, int type)
+t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type)
 {
 	t_filelist	*cell;
 
@@ -71,6 +71,7 @@ t_filelist	*ft_filenew(int fd, char *filename, int type)
 		return (NULL);
 	cell->fd = fd;
 	cell->filename = filename;
+	cell->limiter = limiter;
 	cell->type = type;
 	cell->next = NULL;
 	return (cell);

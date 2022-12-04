@@ -52,8 +52,8 @@ PARSE_OBJS	= $(addprefix $(PARSE_OBJ_PATH), $(PARSE_OBJ))
 BUILT_OBJS	= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
 EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC_OBJ))
 
-OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS)
-OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) 
+OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) #$(EXEC_OBJS)
+OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) #$(EXEC_OBJ_PATH) 
 
 # ---------------- progress bar ------------------ #
 
@@ -75,8 +75,8 @@ $(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c ./includes/*
 $(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) ./includes/*
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) ./includes/*
-	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
+#$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) ./includes/*
+#	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
 # -I $(INC_PATH)
 

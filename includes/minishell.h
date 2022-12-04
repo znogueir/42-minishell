@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 15:04:55 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:07:16 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/libft.h"
-# include "pipex.h"
+//# include "pipex.h"
 
 /*--------------------------------------------------*/
 /*				   	   Operators				   	*/
@@ -83,23 +83,22 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct s_cmdtable
-{
-	char				**cmd;
-	char				*infile;
-	char				*outfile;
-	int					*infd;
-	int					*outfd;
-	struct s_cmdtable	*next;
-}						t_cmdtable;
-
 typedef struct s_filelist
 {
 	int					fd;
 	char				*filename;
+	char				*limiter;
 	int					type;
 	struct s_filelist	*next;
 }						t_filelist;
+
+typedef struct s_cmdtable
+{
+	char				**cmd;
+	t_filelist			*infile;
+	t_filelist			*outfile;
+	struct s_cmdtable	*next;
+}						t_cmdtable;
 
 typedef struct s_data
 {
@@ -141,7 +140,7 @@ void		print_list(t_cmdline *cmd);
 t_cmdline	*ft_cmdnew(void *content);
 t_env		*ft_envnew(char *name, char *content);
 t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type);
-t_filelist	*ft_filenew(int fd, char *filename, int type);
+t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
@@ -171,14 +170,5 @@ void		print_colors(void);
 //	token types
 int			find_token_type(char *token);
 char		*convert_type(int type);
-
-// executor
-int			ft_executor(t_data *data, char **env);
-//exec parsing
-void		display_cmdtable(t_cmdtable *table);
-void		make_cmdtable(t_data *data);
-//open / close
-void		close_files(t_cmdtable *table);
-//children
 
 #endif

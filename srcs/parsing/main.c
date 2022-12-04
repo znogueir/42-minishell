@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/23 19:52:50 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:04:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **env)
 				ft_expander(data);
 				ft_printf("---------------expand---------------\n");
 				print_list(data->cmd);
-				ft_executor(data, env);
+				//ft_executor(data, env);
 				//ft_env(data->loc_env);
 			}
 			reset_cmd(data);
