@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 16:54:41 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:45:49 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ t_env	*ft_envnew(char *name, char *content)
 	return (cell);
 }
 
-// t_cmdtable	*ft_tablenew(char **cmd, char *operator, int type)
-// {
-// 	t_cmdtable	*cell;
+t_cmdtable	*ft_tablenew(void)
+{
+	t_cmdtable	*cell;
 
-// 	cell = malloc(sizeof(*cell));
-// 	if (!cell)
-// 		return (NULL);
-// 	cell->cmd = cmd;
-// 	cell->operator = operator;
-// 	cell->type = type;
-// 	cell->next = NULL;
-// 	return (cell);
-// }
+	cell = malloc(sizeof(*cell));
+	if (!cell)
+		return (NULL);
+	cell->infile = NULL;
+	cell->outfile = NULL;
+	cell->cmd = NULL;
+	cell->next = NULL;
+	return (cell);
+}
 
 t_filelist	*ft_filenew(int fd, char *filename, char *limiter, int type)
 {
@@ -135,4 +135,13 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 	}
 	else if (lst)
 		*lst = new;
+}
+
+t_cmdtable	*get_last(t_cmdtable *table)
+{
+	while (table->next)
+	{
+		table = table->next;
+	}
+	return (table);
 }
