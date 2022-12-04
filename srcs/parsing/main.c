@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 18:15:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:50:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,30 @@ void	write_error(char *error_msg)
 	write(2, error_msg, ft_strlen(error_msg));
 }
 
+// int	ft_check_exit(char *line)
+// {
+// 	while ((*line == ' ' || (*line >= 9 && *line <= 13)))
+// 		line++;
+// 	if (!ft_strncmp(line, "exit", 4) && (*(line + 4) == ' ' || 
+// 	(*(line + 4) >= 9 && *(line + 4) <= 13)))
+// 	{
+// 		write(1, "bye! 👋\n", 11);
+// 		return (0);
+// 	}
+// 	return (1);
+// }
+
 int	ft_check_exit(char *line)
 {
-	while ((*line == ' ' || (*line >= 9 && *line <= 13)))
-		line++;
-	if (!ft_strncmp(line, "exit", 4) && (*(line + 4) == ' ' || \
-	(*(line + 4) >= 9 && *(line + 4) <= 13)))
+	if (!ft_strncmp(line, "exit", 4))
 	{
-		write(1, "bye! 👋\n", 11);
-		return (0);
+		if (line[4] > 32)
+			return (1);
+		else
+		{
+			write(1, "bye! 👋\n", 11);
+			return (0);
+		}
 	}
 	return (1);
 }
@@ -59,14 +74,15 @@ t_data	*ft_init(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
-	// char		*str;
+	//char		*str;
 
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
 	//check_builtins(data);
-	write_prompt();
-	data->line = get_next_line(0);
+	//write_prompt();
+	//data->line = get_next_line(0);
+	data->line = readline(PROMPT);
 	while (ft_check_exit(data->line))
 	{
 		if (!check_errors(data->line))
@@ -84,12 +100,13 @@ int	main(int ac, char **av, char **env)
 			reset_cmd(data);
 		}
 		free(data->line);
-		write_prompt();
-		data->line = get_next_line(0);
-		// data->line = readline("minishell~ ");
-		// str = ft_strdup(data->line);
-		// add_history(str);
+		//write_prompt();
+		//data->line = get_next_line(0);
+		data->line = readline(PROMPT);
+		//str = ft_strdup(data->line);
+		add_history(data->line);
 	}
+	//free(str);
 	free_all(data);
 	return (0);
 }

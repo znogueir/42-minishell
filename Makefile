@@ -1,3 +1,5 @@
+# valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all -s ./minishell
+
 CC		= gcc
 FLAGS	= -g3 -Wall -Wextra -Werror
 INCFLAGS= -lreadline
