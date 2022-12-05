@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 19:49:49 by znogueir          #+#    #+#             */
-/*   Updated: 2022/05/17 18:20:06 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/05 00:45:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	ft_print_ptr(unsigned long long ptr)
 
 	if (!ptr)
 	{
-		ft_putstr_fd("(nil)", 1);
+		ft_putstr_fd("(nil)", 2); //write to stderr
 		return (5);
 	}
-	ft_putstr_fd("0x", 1);
+	ft_putstr_fd("0x", 2); //write to stderr
 	output = ft_ptrtohex(ptr);
-	ft_putstr_fd(output, 1);
+	ft_putstr_fd(output, 2); //write to stderr
 	char_count = ft_strlen(output);
 	free(output);
 	return (char_count + 2);

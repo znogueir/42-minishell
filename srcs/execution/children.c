@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/11/10 22:43:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/05 01:36:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	ft_execute(char **command, char **env)
 		ext = ft_command_not_found(validcmd);
 		exit(ext);
 	}
+	// ft_putstr_fd("\n\n", 2);
+	// ft_putstr_fd(validcmd, 2);
+	// ft_putstr_fd("\n\n", 2);
+	// ft_putstr_fd(command[0], 2);
+	// ft_putstr_fd("\n\n", 2);
 	if (execve(validcmd, command, env) == -1)
 	{
 		free(validcmd);

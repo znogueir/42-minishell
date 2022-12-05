@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/04 20:56:47 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/05 00:25:30 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ char	**ft_get_paths(char **env);
 int		check_path(char *prog, char *cmdpath);
 char	*ft_join_path(char *path, char *prog);
 char	*get_valid_path(char **env, char **prog);
+
+//utils
+char	*ft_strjoin_2(char *s1, char *s2);
 
 #endif

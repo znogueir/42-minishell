@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 21:00:45 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/05 01:30:20 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,17 @@ int	main(int ac, char **av, char **env)
 	//data->line = get_next_line(0);
 	data->line = readline(PROMPT);
 	add_history(data->line);
-	while (ft_check_exit(data->line))
+	if (ft_check_exit(data->line))
 	{
 		if (!check_errors(data->line))
 		{
 			ft_lexer(data);
-			print_list(data->cmd);
+			//print_list(data->cmd);
 			if (!ft_parser(data))
 			{
 				//ft_expander(data);
 				//ft_printf("---------------expand---------------\n");
-				print_list(data->cmd);
+				//print_list(data->cmd);
 				ft_executor(data, env);
 				//ft_env(data->loc_env);
 			}
