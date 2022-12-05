@@ -91,5 +91,6 @@ void	free_all(t_data *data)
 	free(data->line);
 	free_cmd(data->cmd);
 	free_env(data->loc_env);
+	//free_table(data->cmdtable);
 	free(data);
 }

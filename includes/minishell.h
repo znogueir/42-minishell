@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/libft.h"
@@ -162,7 +163,7 @@ int			ft_cd(char *path);
 int			ft_echo(char *str, int newline);
 int			ft_env(t_env *loc_env);
 int			ft_exit(void);
-int			ft_export(t_data *data, char *name, char *content);
+int			ft_export(t_data *data, char *name, char *content, int append);
 int			ft_pwd(void);
 int			ft_unset(t_data *data, char *name);
 
@@ -173,6 +174,9 @@ void		set_env(char **env, t_data *data);
 int			is_alphanum(char c);
 int			is_redir(int type);
 int			better_strncmp(char *s1, char *s2, int size);
+
+//	signals
+void		signal_handler(void);
 
 // miscellaneous
 void		check_builtins(t_data *data);

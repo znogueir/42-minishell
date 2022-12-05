@@ -27,6 +27,7 @@ PARSE	= check_init.c \
 		misc.c \
 		parser.c \
 		token_types.c \
+		signals.c
 
 BUILTIN	= cd.c \
 		echo.c \
@@ -34,7 +35,7 @@ BUILTIN	= cd.c \
 		exit.c \
 		export.c \
 		pwd.c \
-		unset.c \
+		unset.c
 
 EXEC	= ft_executor.c \
 		exec_parsing.c \
@@ -42,7 +43,7 @@ EXEC	= ft_executor.c \
 		exits.c \
 		finish.c \
 		paths.c \
-		open.c \
+		open.c
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))

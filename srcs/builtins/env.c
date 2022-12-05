@@ -45,6 +45,7 @@ void	set_env(char **env, t_data *data)
 	int		i;
 	char	*name;
 	char	*content;
+	char	*tmp;
 
 	i = 0;
 	name = NULL;
@@ -52,6 +53,13 @@ void	set_env(char **env, t_data *data)
 	while (env[i])
 	{
 		split_env(&name, &content, env);
+		if (!better_strncmp(name, "SHLVL", ft_strlen("SHLVL")))
+		{
+			//ft_printf("SHLVL : %d\n", ft_atoi(content));
+			tmp = ft_itoa(ft_atoi(content) + 1);
+			free(content);
+			content = tmp;
+		}
 		ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
 		i++;
 	}

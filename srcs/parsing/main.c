@@ -65,10 +65,21 @@ t_data	*ft_init(char **env)
 	//data->cmdtable = NULL;
 	data->filelist = NULL;
 	set_env(env, data);
-	ft_export(data, ft_strdup("tru"), ft_strdup("machin"));
-	ft_export(data, ft_strdup("trucs"), ft_strdup("abracadabra"));
-	ft_export(data, ft_strdup("truc"), ft_strdup("banana"));
+	// ft_export(data, ft_strdup("tru"), ft_strdup("machin"));
+	// ft_export(data, ft_strdup("trucs"), ft_strdup("abracadabra"));
+	// ft_export(data, ft_strdup("truc"), ft_strdup("banana"));
 	return (data);
+}
+
+void	check_env(t_data *data)
+{
+	ft_export(data, ft_strdup("TEST1"), ft_strdup("machin"), 0);
+	ft_export(data, ft_strdup("TEST2"), ft_strdup("abra"), 1);
+	ft_env(data->loc_env);
+	ft_printf("--------TEST CONTRAIRE--------\n");
+	ft_export(data, ft_strdup("TEST1"), ft_strdup("+truc"), 1);
+	ft_export(data, ft_strdup("TEST2"), ft_strdup("{blabla}"), 0);
+	ft_env(data->loc_env);
 }
 
 int	main(int ac, char **av, char **env)
@@ -78,30 +89,28 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
-	//check_builtins(data);
-	//write_prompt();
-	//data->line = get_next_line(0);
+	// check_env(data);
+	signal_handler();
+	// check_builtins(data);
 	data->line = readline(PROMPT);
 	add_history(data->line);
-	if (ft_check_exit(data->line))
+	while (ft_check_exit(data->line))
 	{
 		if (!check_errors(data->line))
 		{
 			ft_lexer(data);
-			//print_list(data->cmd);
+			print_list(data->cmd);
 			if (!ft_parser(data))
 			{
-				//ft_expander(data);
-				//ft_printf("---------------expand---------------\n");
-				//print_list(data->cmd);
+				ft_expander(data);
+				ft_printf("---------------expand---------------\n");
+				print_list(data->cmd);
 				ft_executor(data, env);
-				//ft_env(data->loc_env);
+				// ft_env(data->loc_env);
 			}
 			reset_cmd(data);
 		}
 		free(data->line);
-		//write_prompt();
-		//data->line = get_next_line(0);
 		data->line = readline(PROMPT);
 		add_history(data->line);
 	}

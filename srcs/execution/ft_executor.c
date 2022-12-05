@@ -122,10 +122,10 @@ int	ft_executor(t_data *data, char **env)
 	(void)env;
 	data->cmdtable = NULL;
 	make_cmdtable(data);
-	ft_putstr_fd("------pipex------", 2);
-	ft_pipex(data, env);
+	//ft_putstr_fd("------pipex------", 2);
+	// ft_pipex(data, env);
 	//close_files(data->cmdtable);
-	//display_cmdtable(data->cmdtable);
+	display_cmdtable(data->cmdtable);
 	free_table(data->cmdtable);
 	return (0);
 }
