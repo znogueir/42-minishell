@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/07 19:50:47 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:22:06 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,17 @@ void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 		ft_exit_msg("problem with fork()");
 	if (pid == 0)
 	{
-		dup2(infile->fd, 0);
-		//if (are_outfiles(data))
-		dup2(outfile->fd, 1);
-		// else
-		// {
-		// 	close(fd[0]);
-		// 	dup2(fd[1], 1);
-		// }
+		if (1 || infile->fd != 1)
+			dup2(infile->fd, 0);
+		if (1 || outfile->fd != 1)
+			dup2(outfile->fd, 1);
+		else
+		{
+			close(fd[0]);
+			dup2(fd[1], 1);
+		}
 		ft_execute(cmd, env);
 	}
-	//close(fd[1]);
-	//dup2(fd[0], 0);
+	close(fd[1]);
+	dup2(fd[0], 0);
 }

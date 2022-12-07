@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/07 19:50:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:39:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ void	display_cmdtable(t_cmdtable *table)
 
 	while (table)
 	{
+		ft_printf("\n");
 		infile = table->infile;
 		outfile = table->outfile;
 		i = 0;
-		printf("---------------------------------------------\n");
-		printf("infile: ");
+		printf("\tinfile: ");
 		while (table && infile) // && table->infile->next)
 		{
 			printf("[%d] %s, ", infile->fd, infile->filename);
 			infile = infile->next;
 		}
-		printf("\noutfile: ");
+		printf("\n\toutfile: ");
 		while (table && outfile) // && table->outfile->next)
 		{
 			printf("[%d] %s, ", outfile->fd, outfile->filename);
 			outfile = outfile->next;
 		}
-		printf("\ncmd: ");
+		printf("\n\tcmd: ");
 		while (table->cmd[i])
 			printf("%s ", table->cmd[i++]);
-		printf("\nstatus: %d\n", table->status);
+		printf("\n\tstatus: %d\n", table->status);
 		table = table->next;
+		ft_printf("\n");
 	}
-	printf("---------------------------------------------\n");
 }
 
 char	**ft_arr_dup(char **arr)
@@ -102,21 +102,11 @@ int	ft_pipex(t_data *data, char **env)
 		outfile = file_get_last(table->outfile);
 		if (ft_check_fds(outfile, infile))
 		{
-			// ft_putstr_fd("\n\n\n\n", 2);
-			// ft_putnbr_fd(outfile->fd, 2);
-			// ft_putstr_fd(outfile->filename, 2);
-			// ft_putstr_fd("\n\n\n\n", 2);
-			//dup2(infile->fd, 0);
-			//display_cmdtable(data->cmdtable);
 			ft_pipe(table, ft_arr_dup(table->cmd), env);
-			//dup2(outfile->fd, 1);
-			//close(outfile->fd);
-			//close(infile->fd);
-			//dup2(4, 1);
 		}
 		table = table->next;
 	}
-	dup2(0, insave);
+	dup2(insave, 0);
 	return (1);
 }
 
@@ -128,7 +118,8 @@ int	ft_executor(t_data *data, char **env)
 	//ft_putstr_fd("------pipex------", 2);
 	ft_pipex(data, env);
 	//close_files(data->cmdtable);
-	display_cmdtable(data->cmdtable);
+	if (data->cmdtable)
+		display_cmdtable(data->cmdtable);
 	free_table(data->cmdtable);
 	return (0);
 }

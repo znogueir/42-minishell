@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 23:42:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:40:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	print_list(t_cmdline *cmd)
 {
+	if (cmd)
+		ft_printf("\n");
 	while (cmd)
 	{
-		ft_printf("{%s%s%s}", ORANGE, cmd->content, RES_COL);
+		ft_printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
 		ft_printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
 		cmd = cmd->next;
 	}
+	if (cmd)
+		ft_printf("\n");
 }
 
 t_cmdline	*ft_cmdnew(void *content)
