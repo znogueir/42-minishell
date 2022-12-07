@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/05 00:25:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:50:09 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <string.h>
-//# include "minishell.h"
+# include "minishell.h"
 
 typedef struct s_pipex
 {
@@ -44,7 +44,7 @@ void	ft_end(t_pipex *pipex);
 void	free_things(char **one, char **two, char *three);
 
 //children
-void	ft_child(char **cmd, char **env);
+void	ft_pipe(t_cmdtable *table, char **cmd, char **env);
 void	ft_execute(char **cmd, char **env);
 
 //exits

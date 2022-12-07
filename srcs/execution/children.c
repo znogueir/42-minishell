@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/05 01:36:24 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:50:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ void	ft_execute(char **command, char **env)
 		ext = ft_command_not_found(validcmd);
 		exit(ext);
 	}
-	// ft_putstr_fd("\n\n", 2);
-	// ft_putstr_fd(validcmd, 2);
-	// ft_putstr_fd("\n\n", 2);
-	// ft_putstr_fd(command[0], 2);
-	// ft_putstr_fd("\n\n", 2);
 	if (execve(validcmd, command, env) == -1)
 	{
 		free(validcmd);
@@ -58,11 +53,15 @@ void	ft_execute(char **command, char **env)
 	}
 }
 
-void	ft_child(char **cmd, char **env)
+void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 {
-	int		fd[2];
-	pid_t	pid;
+	int			fd[2];
+	pid_t		pid;
+	t_filelist	*infile;
+	t_filelist	*outfile;
 
+	infile = file_get_last(table->infile);
+	outfile = file_get_last(table->outfile);
 	if (pipe(fd) == -1)
 		ft_exit_msg("problem with pipe()");
 	pid = fork();
@@ -70,13 +69,16 @@ void	ft_child(char **cmd, char **env)
 		ft_exit_msg("problem with fork()");
 	if (pid == 0)
 	{
-		close(fd[0]);
-		dup2(fd[1], 1);
+		dup2(infile->fd, 0);
+		//if (are_outfiles(data))
+		dup2(outfile->fd, 1);
+		// else
+		// {
+		// 	close(fd[0]);
+		// 	dup2(fd[1], 1);
+		// }
 		ft_execute(cmd, env);
 	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], 0);
-	}
+	//close(fd[1]);
+	//dup2(fd[0], 0);
 }

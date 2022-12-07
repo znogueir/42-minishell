@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:51:08 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/21 20:02:56 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:39:20 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_quote(char *str)
 
 	i = 0;
 	if (!str)
-		return (1);
+		return (0);
 	while (str[i] && str[i] != 39 && str[i] != 34)
 		i++;
 	if (str[i] == 39 || str[i] == 34)

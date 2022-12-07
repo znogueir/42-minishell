@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/05 00:02:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:58:40 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/libft.h"
+# include "structures.h"
 # include "pipex.h"
 
 /*--------------------------------------------------*/
@@ -67,7 +68,9 @@
 /*					   Prompts				   		*/
 /*--------------------------------------------------*/
 # define ERR_PRE "\e[38;5;1;1mx\e[0m minishell: "
-# define PROMPT	"\e[38;5;46;1mminishell$>\e[0m "
+//# define PROMPT	"\001\e[38;5;46;1m$>\e[0m\002 "
+# define PROMPT	"minishell$> "
+
 
 /*--------------------------------------------------*/
 /*					   Execution			   		*/
@@ -78,47 +81,7 @@
 /*--------------------------------------------------*/
 /*					   Structs				   		*/
 /*--------------------------------------------------*/
-typedef struct s_cmdline
-{
-	char				*content;
-	int					type;
-	struct s_cmdline	*next;
-}						t_cmdline;
 
-typedef struct s_env
-{
-	char			*name;
-	char			*content;
-	struct s_env	*next;
-}					t_env;
-
-typedef struct s_filelist
-{
-	int					fd;
-	char				*filename;
-	int					type;
-	int					order;
-	struct s_filelist	*next;
-}						t_filelist;
-
-typedef struct s_cmdtable
-{
-	char				**cmd;
-	t_filelist			*infile;
-	t_filelist			*outfile;
-	int					status;
-	struct s_cmdtable	*next;
-}						t_cmdtable;
-
-typedef struct s_data
-{
-	int			quote;
-	char		*line;
-	t_env		*loc_env;
-	t_cmdline	*cmd;
-	t_cmdtable	*cmdtable;
-	t_filelist	*filelist;
-}				t_data;
 
 /*--------------------------------------------------*/
 /*				   	  Functions		   				*/

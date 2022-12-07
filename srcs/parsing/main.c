@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/05 01:30:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:59:23 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data = ft_init(env);
 	// check_env(data);
-	signal_handler();
+	//signal_handler();
 	// check_builtins(data);
 	data->line = readline(PROMPT);
 	add_history(data->line);
 	while (ft_check_exit(data->line))
 	{
+		printf("blabla\n");
 		if (!check_errors(data->line))
 		{
 			ft_lexer(data);

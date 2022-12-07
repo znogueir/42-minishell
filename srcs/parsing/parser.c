@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:06:26 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 17:39:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:32:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_pipes(t_cmdline *cmd)
 	t_cmdline	*p_cmd;
 
 	p_cmd = cmd;
-	if (p_cmd->type == PIPE)
+	if (p_cmd && p_cmd->type == PIPE)
 		return (1);
 	while (p_cmd)
 	{

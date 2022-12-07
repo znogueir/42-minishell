@@ -1,5 +1,5 @@
 CC		= gcc
-FLAGS	= -g3 -Wall -Wextra -Werror
+FLAGS	= -g3 #-Wall -Wextra -Werror
 INCFLAGS= -lreadline
 NAME	= minishell
 
@@ -82,7 +82,7 @@ $(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
 $(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INCFLAGS) $(INC_PATH)minishell.h -o $(NAME)
+	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INCFLAGS) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)

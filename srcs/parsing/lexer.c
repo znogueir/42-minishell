@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:27:54 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/12 16:29:08 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:42:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	ft_lexer(t_data *data)
 
 	i = 0;
 	ck_pt = 0;
-	while (data->line[i])
+	while (data->line && data->line[i])
 	{
 		while (data->line[i] && ft_strchr(" \t", data->line[i]) && \
 		!(data->quote))
