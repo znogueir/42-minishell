@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/07 20:41:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:37:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	main(int ac, char **av, char **env)
 			if (!ft_parser(data))
 			{
 				ft_expander(data);
-				print_list(data->cmd);
+				//print_list(data->cmd);
 				ft_executor(data, env);
 				// ft_env(data->loc_env);
 			}

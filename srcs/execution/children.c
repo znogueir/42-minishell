@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/07 20:22:06 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:43:07 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_execute(char **command, char **env)
 	int		ext;
 
 	ext = 1;
+	// if (ft_check_builtins(command))
+	// 	ft_execute_builtin(command, env);
 	validcmd = get_valid_cmd(command, env, &ext);
 	if (validcmd == NULL)
 	{
@@ -69,17 +71,22 @@ void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 		ft_exit_msg("problem with fork()");
 	if (pid == 0)
 	{
-		if (1 || infile->fd != 1)
+		if (infile->fd != 0)
 			dup2(infile->fd, 0);
-		if (1 || outfile->fd != 1)
+		if (outfile->fd != 1)
 			dup2(outfile->fd, 1);
-		else
+		else if (infile->fd == 0)
 		{
 			close(fd[0]);
-			dup2(fd[1], 1);
+			if (table->next)
+				dup2(fd[1], 1);
 		}
 		ft_execute(cmd, env);
 	}
-	close(fd[1]);
-	dup2(fd[0], 0);
+	waitpid(0, NULL, 0);
+	if (outfile->fd == 1 && infile->fd == 0)
+	{
+		close(fd[1]);
+		dup2(fd[0], 0);
+	}
 }

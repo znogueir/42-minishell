@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/07 20:39:47 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:37:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int	ft_executor(t_data *data, char **env)
 	//ft_putstr_fd("------pipex------", 2);
 	ft_pipex(data, env);
 	//close_files(data->cmdtable);
-	if (data->cmdtable)
-		display_cmdtable(data->cmdtable);
+	//if (data->cmdtable)
+	//	display_cmdtable(data->cmdtable);
 	free_table(data->cmdtable);
 	return (0);
 }
