@@ -49,6 +49,7 @@ typedef struct s_data
 {
 	int			quote;
 	char		*line;
+	char		**paths;
 	t_env		*loc_env;
 	t_cmdline	*cmd;
 	t_cmdtable	*cmdtable;

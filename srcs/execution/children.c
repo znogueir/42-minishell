@@ -37,8 +37,8 @@ void	ft_execute(char **command, char **env)
 	int		ext;
 
 	ext = 1;
-	// if (ft_check_builtins(command))
-	// 	ft_execute_builtin(command, env);
+	// if (is_builtin(command))
+	// 	execute_builtins(command);
 	validcmd = get_valid_cmd(command, env, &ext);
 	if (validcmd == NULL)
 	{
@@ -89,4 +89,5 @@ void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 		close(fd[1]);
 		dup2(fd[0], 0);
 	}
+	ft_free_arr(cmd);
 }

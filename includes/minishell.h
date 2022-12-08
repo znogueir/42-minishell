@@ -129,6 +129,8 @@ int			ft_exit(void);
 int			ft_export(t_data *data, char *name, char *content, int append);
 int			ft_pwd(void);
 int			ft_unset(t_data *data, char *name);
+int			is_builtin(char **command);
+void		execute_builtins(char **command);
 
 //	builtin utils
 void		set_env(char **env, t_data *data);

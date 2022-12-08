@@ -35,7 +35,8 @@ BUILTIN	= cd.c \
 		exit.c \
 		export.c \
 		pwd.c \
-		unset.c
+		unset.c \
+		exec_builtins.c \
 
 EXEC	= ft_executor.c \
 		exec_parsing.c \

@@ -24,7 +24,7 @@ void	free_split(char	**tab)
 	}
 	free(tab);
 }
-
+//delete free arr
 void	reset_cmd(t_data *data)
 {
 	free_cmd(data->cmd);
@@ -91,6 +91,7 @@ void	free_all(t_data *data)
 	free(data->line);
 	free_cmd(data->cmd);
 	free_env(data->loc_env);
+	free_split(data->paths);
 	//free_table(data->cmdtable);
 	free(data);
 }

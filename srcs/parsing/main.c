@@ -82,6 +82,8 @@ void	check_env(t_data *data)
 	ft_env(data->loc_env);
 }
 
+void	print_tab(char **tab);
+
 int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
@@ -103,6 +105,7 @@ int	main(int ac, char **av, char **env)
 			if (!ft_parser(data))
 			{
 				ft_expander(data);
+				print_tab(data->paths);
 				//print_list(data->cmd);
 				ft_executor(data, env);
 				// ft_env(data->loc_env);
