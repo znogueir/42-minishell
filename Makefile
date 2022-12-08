@@ -16,7 +16,7 @@ BUILT_PATH		= $(SRC_PATH)builtins/
 EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
 INC_PATH		= includes/
-INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h
+INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
 PARSE	= check_init.c \
 		expander.c \
@@ -98,7 +98,7 @@ fclean:clean
 
 run: $(NAME)
 	clear
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all -s ./minishell
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --quiet -s ./minishell
 
 re: fclean all
 

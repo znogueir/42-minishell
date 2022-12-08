@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 19:37:39 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:45:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_check_fds(t_filelist *outfile, t_filelist *infile)
 	return (0);
 }
 
-int	ft_pipex(t_data *data, char **env)
+int	ft_pipex(t_data *data)
 {
 	t_cmdtable	*table;
 	t_filelist	*outfile;
@@ -102,7 +102,7 @@ int	ft_pipex(t_data *data, char **env)
 		outfile = file_get_last(table->outfile);
 		if (ft_check_fds(outfile, infile))
 		{
-			ft_pipe(table, ft_arr_dup(table->cmd), env);
+			ft_pipe(data, table, ft_arr_dup(table->cmd));
 		}
 		table = table->next;
 	}
@@ -116,7 +116,7 @@ int	ft_executor(t_data *data, char **env)
 	data->cmdtable = NULL;
 	make_cmdtable(data);
 	//ft_putstr_fd("------pipex------", 2);
-	ft_pipex(data, env);
+	ft_pipex(data);
 	//close_files(data->cmdtable);
 	//if (data->cmdtable)
 	//	display_cmdtable(data->cmdtable);

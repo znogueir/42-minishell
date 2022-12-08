@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   finish.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:38:18 by yridgway          #+#    #+#             */
-/*   Updated: 2022/11/10 22:26:49 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:43:57 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_free_arr(char **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd && cmd[i])
-	{
-		free(cmd[i]);
-		i++;
-	}
-	free(cmd);
-}
 
 void	ft_error(char *extra)
 {
@@ -44,11 +31,4 @@ void	ft_exit_msg(char *msg)
 	write(2, "\n", 1);
 	unlink(".temp_heredoc");
 	exit(1);
-}
-
-void	free_things(char **one, char **two, char *three)
-{
-	ft_free_arr(one);
-	ft_free_arr(two);
-	free(three);
 }

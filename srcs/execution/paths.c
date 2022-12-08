@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/05 00:27:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:44:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,31 @@ char	*ft_join_path(char *path, char *prog)
 	return (cmdpath);
 }	
 
-char	*get_valid_path(char **env, char **prog)
+char	*get_valid_path(t_data *data, char **prog)
 {
-	char	**paths;
+	//char	**paths;
 	char	*cmdpath;
 	int		i;
 	int		ext;
 
 	i = 0;
 	ext = 1;
-	paths = ft_get_paths(env);
-	if (!paths)
+	//paths = ft_get_paths(env);
+	if (!data->paths)
 		return (NULL);
-	cmdpath = ft_join_path(paths[0], prog[0]);
-	while (paths[i] && ext == 1)
+	cmdpath = ft_join_path(data->paths[0], prog[0]);
+	while (data->paths[i] && ext == 1)
 	{
 		free(cmdpath);
-		cmdpath = ft_join_path(paths[i++], prog[0]);
+		cmdpath = ft_join_path(data->paths[i++], prog[0]);
 		ext = check_path(prog[0], cmdpath);
 	}
-	if (!paths[i] && ext == 1)
+	if (!data->paths[i] && ext == 1)
 		ext = ft_command_not_found(prog[0]);
 	if (ext == 0 && cmdpath)
 		return (cmdpath);
-	free_things(paths, prog, cmdpath);
+	//free_things(paths, prog, cmdpath);
+	free_split(prog);
+	free(cmdpath);
 	exit(ext);
 }

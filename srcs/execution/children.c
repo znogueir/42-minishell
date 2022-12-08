@@ -6,13 +6,36 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 19:43:07 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/08 22:00:31 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_valid_cmd(char **command, char **env, int *ext)
+void	convert_env(t_data *data, t_env *loc_env)
+{
+	t_env	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = loc_env;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	data->char_env = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (loc_env)
+	{
+		data->char_env[i++] = ft_strjoin(ft_strjoin(ft_strdup(loc_env->name), \
+		"="), loc_env->content);
+		loc_env = loc_env->next;
+	}
+	data->char_env[i] = NULL;
+}
+
+char	*get_valid_cmd(t_data *data, char **command, int *ext)
 {
 	char	*validcmd;
 
@@ -27,35 +50,36 @@ char	*get_valid_cmd(char **command, char **env, int *ext)
 			*ext = ft_no_such_file(validcmd);
 	}
 	else
-		validcmd = get_valid_path(env, command);
+		validcmd = get_valid_path(data, command);
 	return (validcmd);
 }
 
-void	ft_execute(char **command, char **env)
+void	ft_execute(t_data *data, char **command)
 {
 	char	*validcmd;
 	int		ext;
 
 	ext = 1;
-	// if (is_builtin(command))
-	// 	execute_builtins(command);
-	validcmd = get_valid_cmd(command, env, &ext);
+	if (is_builtin(command))
+		execute_builtins(command);
+	convert_env(data, data->loc_env);
+	validcmd = get_valid_cmd(data, command, &ext);
 	if (validcmd == NULL)
 	{
-		ft_free_arr(command);
+		free_split(command);
 		ext = ft_command_not_found(validcmd);
 		exit(ext);
 	}
-	if (execve(validcmd, command, env) == -1)
+	if (execve(validcmd, command, data->char_env) == -1)
 	{
 		free(validcmd);
 		unlink(".temp_heredoc");
-		ft_free_arr(command);
+		free_split(command);
 		exit(ext);
 	}
 }
 
-void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
+void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
 	int			fd[2];
 	pid_t		pid;
@@ -81,7 +105,7 @@ void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 			if (table->next)
 				dup2(fd[1], 1);
 		}
-		ft_execute(cmd, env);
+		ft_execute(data, cmd);
 	}
 	waitpid(0, NULL, 0);
 	if (outfile->fd == 1 && infile->fd == 0)
@@ -89,5 +113,5 @@ void	ft_pipe(t_cmdtable *table, char **cmd, char **env)
 		close(fd[1]);
 		dup2(fd[0], 0);
 	}
-	ft_free_arr(cmd);
+	free_split(cmd);
 }
