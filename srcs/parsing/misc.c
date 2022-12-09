@@ -52,20 +52,20 @@ void	print_colors(void)
 	PINK, PURPLE, BLUE, CYAN, GREEN, YELLOW, ORANGE, RED, RES_COL);
 }
 
-void	check_builtins(t_data *data)
-{
-	ft_cd("test");
-	ft_echo("test", 1);
-	ft_pwd();
-	ft_env(data->loc_env);
-	// ft_export(data, ft_strdup("name"), ft_strdup("content"));
-	// ft_env(data->loc_env);
-	// ft_unset(data, "nam");
-	// ft_env(data->loc_env);
-	// ft_unset(data, "namez");
-	// ft_env(data->loc_env);
-	// ft_unset(data, "name");
-	// ft_env(data->loc_env);
-	ft_exit();
-	print_colors();
-}
+// void	check_builtins(t_data *data)
+// {
+// 	ft_cd("test");
+// 	ft_echo("test", 1);
+// 	ft_pwd();
+// 	ft_env(data->loc_env);
+// 	// ft_export(data, ft_strdup("name"), ft_strdup("content"));
+// 	// ft_env(data->loc_env);
+// 	// ft_unset(data, "nam");
+// 	// ft_env(data->loc_env);
+// 	// ft_unset(data, "namez");
+// 	// ft_env(data->loc_env);
+// 	// ft_unset(data, "name");
+// 	// ft_env(data->loc_env);
+// 	ft_exit();
+// 	print_colors();
+// }

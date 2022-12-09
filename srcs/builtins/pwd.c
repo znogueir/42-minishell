@@ -19,8 +19,8 @@ int	ft_pwd(void)
 	cd = NULL;
 	cd = getcwd(cd, 100);
 	if (cd == NULL)
-		return (1);
-	ft_printf("test cmd : pwd -> %s\n", cd);
+		return (perror("pwd"),1);
+	ft_printf("test cmd : pwd -> [%s]\n", cd);
 	free(cd);
 	return (0);
 }

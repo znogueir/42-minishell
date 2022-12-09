@@ -12,6 +12,26 @@
 
 #include "../../includes/minishell.h"
 
+int	parse_export(char *str, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (is_alphanum(str[i]))
+		i++;
+	if (!str[i])
+		return (0);
+	if (str[i] == '=')
+	{
+		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 1), 0));
+	}
+	if (str[i] == '+' && str[i + 1] == '=')
+	{
+		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 2), 0));
+	}
+	return (0);
+}
+
 int	ft_export(t_data *data, char *name, char *content, int append)
 {
 	t_env	*p_env;

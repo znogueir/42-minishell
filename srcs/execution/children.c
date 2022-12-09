@@ -60,8 +60,11 @@ void	ft_execute(t_data *data, char **command)
 	int		ext;
 
 	ext = 1;
-	if (is_builtin(command))
-		execute_builtins(command);
+	if (exec_builtin(command, data))
+	{
+		//free_split(command);
+		//exit(0);
+	}
 	convert_env(data, data->loc_env);
 	validcmd = get_valid_cmd(data, command, &ext);
 	if (validcmd == NULL)

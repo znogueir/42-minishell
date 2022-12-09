@@ -12,8 +12,10 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_exit(void)
+void	ft_exit(t_data *data)
 {
-	ft_printf("test cmd : exit\n");
-	return (0);
+	(void)data;
+	//ft_printf("test cmd : exit\n");
+	ft_printf("bye! 👋\n");
+	//exit(0);
 }

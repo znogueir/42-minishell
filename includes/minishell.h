@@ -123,20 +123,22 @@ t_filelist	*file_get_last(t_filelist *filelist);
 
 //	builtins
 int			ft_cd(char *path);
-int			ft_echo(char *str, int newline);
+int			ft_echo(char **cmd, int newline);
 int			ft_env(t_env *loc_env);
-int			ft_exit(void);
+void		ft_exit(t_data *data);
 int			ft_export(t_data *data, char *name, char *content, int append);
 int			ft_pwd(void);
 int			ft_unset(t_data *data, char *name);
-int			is_builtin(char **command);
-void		execute_builtins(char **command);
 
 //	builtin utils
+int			parse_export(char *str, t_data *data);
 void		set_env(char **env, t_data *data);
+int			exec_builtin(char **command, t_data *data);
 
 // utils
 int			is_alphanum(char c);
+void		print_tab(char **tab);
+void		print_echo(char	**cmd);
 int			is_redir(int type);
 int			better_strncmp(char *s1, char *s2, int size);
 
