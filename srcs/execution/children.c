@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 22:00:31 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:13:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ char	*get_valid_cmd(t_data *data, char **command, int *ext)
 	return (validcmd);
 }
 
+void	ft_free_close(t_data *data, char **command)
+{
+	ft_close_fds(data, data->cmdtable);
+	close(data->insave);
+	free_table(data->cmdtable);
+	free_all(data);
+	free_split(command);
+}
+
 void	ft_execute(t_data *data, char **command)
 {
 	char	*validcmd;
@@ -62,9 +71,7 @@ void	ft_execute(t_data *data, char **command)
 	ext = 1;
 	if (exec_builtin(command, data))
 	{
-		free_table(data->cmdtable);
-		free_all(data);
-		free_split(command);
+		ft_free_close(data, command);
 		exit(0);
 	}
 	convert_env(data, data->loc_env);
@@ -75,48 +82,43 @@ void	ft_execute(t_data *data, char **command)
 		ext = ft_command_not_found(validcmd);
 		exit(ext);
 	}
-	if (execve(validcmd, command, data->char_env) == -1)
-	{
-		free(validcmd);
-		unlink(".temp_heredoc");
-		free_split(command);
-		exit(ext);
-	}
+	execve(validcmd, command, data->char_env);
+	free(validcmd);
+	ft_free_close(data, command);
+	// free_split(command);
+	exit(ext);
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
-	int			fd[2];
 	pid_t		pid;
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
 	infile = file_get_last(table->infile);
 	outfile = file_get_last(table->outfile);
-	if (pipe(fd) == -1)
+	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
 	pid = fork();
 	if (pid == -1)
 		ft_exit_msg("problem with fork()");
 	if (pid == 0)
 	{
+		close(data->pipe[0]);
 		if (infile->fd != 0)
 			dup2(infile->fd, 0);
 		if (outfile->fd != 1)
 			dup2(outfile->fd, 1);
 		else if (infile->fd == 0)
 		{
-			close(fd[0]);
 			if (table->next)
-				dup2(fd[1], 1);
+				dup2(data->pipe[1], 1);
 		}
 		ft_execute(data, cmd);
 	}
 	waitpid(0, NULL, 0);
+	close(data->pipe[1]);
 	if (outfile->fd == 1 && infile->fd == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], 0);
-	}
+		dup2(data->pipe[0], 0);
 	free_split(cmd);
 }

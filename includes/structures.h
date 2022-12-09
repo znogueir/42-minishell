@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 22:01:50 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:55:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_data
 	t_cmdline	*cmd;
 	t_cmdtable	*cmdtable;
 	t_filelist	*filelist;
+	int			pipe[2];
+	int			insave;
 }				t_data;
 
 #endif

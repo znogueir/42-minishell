@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 20:44:11 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:58:20 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,13 @@
 # include <string.h>
 # include "minishell.h"
 
-typedef struct s_pipex
-{
-	char	**cmd1;
-	char	**cmd2;
-	char	*validcmd1;
-	char	*validcmd2;
-	int		pipefd[2];
-	int		infd;
-	int		outfd;
-	pid_t	pid1;
-	pid_t	pid2;
-}	t_pipex;
-
 //finish
 void	ft_error(char *extra);
 void	ft_exit_msg(char *msg);
-void	close_free(t_pipex *pipex);
+//void	close_free(t_pipex *pipex);
+void	ft_close_fds(t_data *data, t_cmdtable *cmdtable);
 //void	ft_free_arr(char **cmd);
-void	ft_end(t_pipex *pipex);
+//void	ft_end(t_pipex *pipex);
 //void	free_things(char **one, char **two, char *three);
 
 //children
