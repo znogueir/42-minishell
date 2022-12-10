@@ -17,9 +17,10 @@ void	print_echo(char **cmd)
 	int	i;
 
 	i = 0;
+	ft_printf("my echo :\n");
 	while (cmd[i])
 	{
-		ft_printf("[%s]", cmd[i]);
+		ft_printf("%s", cmd[i]);
 		if (cmd[i + 1])
 			ft_printf(" ");
 		i++;

@@ -71,6 +71,7 @@ void	ft_execute(t_data *data, char **command)
 	ext = 1;
 	if (exec_builtin(command, data))
 	{
+		//ft_env(data->loc_env);
 		ft_free_close(data, command);
 		exit(0);
 	}

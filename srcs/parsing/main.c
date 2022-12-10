@@ -71,16 +71,16 @@ t_data	*ft_init(char **env)
 	return (data);
 }
 
-void	check_env(t_data *data)
-{
-	ft_export(data, ft_strdup("TEST1"), ft_strdup("machin"), 0);
-	ft_export(data, ft_strdup("TEST2"), ft_strdup("abra"), 1);
-	ft_env(data->loc_env);
-	ft_printf("--------TEST CONTRAIRE--------\n");
-	ft_export(data, ft_strdup("TEST1"), ft_strdup("+truc"), 1);
-	ft_export(data, ft_strdup("TEST2"), ft_strdup("{blabla}"), 0);
-	ft_env(data->loc_env);
-}
+// void	check_env(t_data *data)
+// {
+// 	ft_export(data, ft_strdup("TEST1"), ft_strdup("machin"), 0);
+// 	ft_export(data, ft_strdup("TEST2"), ft_strdup("abra"), 1);
+// 	ft_env(data->loc_env);
+// 	ft_printf("--------TEST CONTRAIRE--------\n");
+// 	ft_export(data, ft_strdup("TEST1"), ft_strdup("+truc"), 1);
+// 	ft_export(data, ft_strdup("TEST2"), ft_strdup("{blabla}"), 0);
+// 	ft_env(data->loc_env);
+// }
 
 void	print_tab(char **tab);
 
@@ -92,8 +92,9 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data = ft_init(env);
 	// check_env(data);
-	//signal_handler();
+	signal_handler();
 	// check_builtins(data);
+	ft_printf("%d\n", chdir("./test/"));
 	data->line = readline(PROMPT);
 	add_history(data->line);
 	while (ft_check_exit(data->line))

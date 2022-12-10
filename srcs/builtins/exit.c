@@ -16,6 +16,7 @@ void	ft_exit(t_data *data)
 {
 	(void)data;
 	//ft_printf("test cmd : exit\n");
+	ft_printf("my exit :\n");
 	ft_printf("bye! 👋\n");
 	//exit(0);
 }
