@@ -94,7 +94,7 @@ int	main(int ac, char **av, char **env)
 	// check_env(data);
 	signal_handler();
 	// check_builtins(data);
-	ft_printf("%d\n", chdir("./test/"));
+	// ft_printf("%d\n", chdir("./test/"));
 	data->line = readline(PROMPT);
 	add_history(data->line);
 	while (ft_check_exit(data->line))
