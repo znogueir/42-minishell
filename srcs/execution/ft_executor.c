@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/09 18:58:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 00:04:49 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	ft_pipex(t_data *data)
 
 	table = data->cmdtable;
 	data->insave = dup(0);
+	//data->outsave = dup(1);
 	while (table)
 	{
 		//write(2, "what\n", 5);
@@ -130,6 +131,8 @@ int	ft_pipex(t_data *data)
 		table = table->next;
 	}
 	dup2(data->insave, 0);
+	//dup2(data->outsave, 1);
+	//close(data->outsave);
 	close(data->insave);
 	return (1);
 }

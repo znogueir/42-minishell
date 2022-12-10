@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 23:28:43 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 00:07:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_split(char	**tab)
 	}
 	free(tab);
 }
-//delete free arr
+
 void	reset_cmd(t_data *data)
 {
 	free_cmd(data->cmd);
@@ -94,4 +94,14 @@ void	free_all(t_data *data)
 	free_split(data->paths);
 	//free_table(data->cmdtable);
 	free(data);
+}
+
+void	ft_exit_fork(t_data *data, char **command, int ext)
+{
+	ft_close_fds(data, data->cmdtable);
+	close(data->insave);
+	free_table(data->cmdtable);
+	free_all(data);
+	free_split(command);
+	exit(ext);
 }

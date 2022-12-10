@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2022/11/15 17:23:17 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/10 23:12:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	parse_export(char *str, t_data *data)
 	int	i;
 
 	i = 0;
-	ft_printf("my export :\n");
+	//ft_printf("my export :\n");
 	while (is_alphanum(str[i]))
 		i++;
 	if (!str[i])
 		return (0);
 	if (str[i] == '=')
 	{
-		ft_printf("%s=%s\n", ft_substr(str, 0, i), ft_strdup(str + i + 1));
+		//ft_printf("%s=%s\n", ft_substr(str, 0, i), ft_strdup(str + i + 1));
 		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 1), 0));
 	}
 	if (str[i] == '+' && str[i + 1] == '=')

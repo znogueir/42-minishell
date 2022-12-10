@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/10 20:10:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 00:10:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ void	convert_env(t_data *data, t_env *loc_env)
 		loc_env = loc_env->next;
 	}
 	data->char_env[i] = NULL;
-}
-
-void	ft_exit_fork(t_data *data, char **command, int ext)
-{
-	ft_close_fds(data, data->cmdtable);
-	close(data->insave);
-	free_table(data->cmdtable);
-	free_all(data);
-	free_split(command);
-	exit(ext);
 }
 
 void	ft_execute(t_data *data, char **command)
@@ -85,9 +75,45 @@ void	ft_open_redirs(t_data *data, t_cmdtable *table)
 	}
 }
 
+void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
+{
+	data->pid = fork();
+	if (data->pid == -1)
+		ft_exit_msg("problem with fork()");
+	if (data->pid == 0)
+	{
+		close(data->pipe[0]);
+		ft_open_redirs(data, table);
+		ft_execute(data, cmd);
+	}
+	waitpid(0, NULL, 0);
+}
+
+void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
+{
+	int			insave;
+	int			outsave;
+	t_filelist	*infile;
+	t_filelist	*outfile;
+
+	exit(1);
+	infile = file_get_last(table->infile);
+	outfile = file_get_last(table->outfile);
+	insave = dup(0);
+	outsave = dup(1);
+	if (infile->fd != 0)
+		dup2(infile->fd, 0);
+	if (outfile->fd != 1)
+		dup2(outfile->fd, 1);
+	exec_builtin(cmd, data);
+	dup2(insave, 0);
+	dup2(outsave, 1);
+	close(insave);
+	close(outsave);
+}
+
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
-	pid_t		pid;
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
@@ -95,17 +121,10 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
-	//ft_open_redirs(data, table);
-	pid = fork();
-	if (pid == -1)
-		ft_exit_msg("problem with fork()");
-	if (pid == 0)
-	{
-		close(data->pipe[0]);
-		ft_open_redirs(data, table);
-		ft_execute(data, cmd);
-	}
-	waitpid(0, NULL, 0);
+	if (is_builtin(cmd) && !data->cmdtable->next)
+		ft_execute_alone(data, table, cmd);
+	else
+		ft_execute_pipes(data, table, cmd);
 	close(data->pipe[1]);
 	if (outfile->fd == 1 && infile->fd == 0)
 		dup2(data->pipe[0], 0);

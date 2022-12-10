@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/07 19:58:40 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 00:02:54 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,9 @@
 # define OUT "/dev/stdout"
 
 /*--------------------------------------------------*/
-/*					   Structs				   		*/
-/*--------------------------------------------------*/
-
-
-/*--------------------------------------------------*/
 /*				   	  Functions		   				*/
 /*--------------------------------------------------*/
+
 //	free
 void		free_split(char **tab);
 void		reset_cmd(t_data *data);
@@ -94,6 +90,7 @@ void		free_env(t_env *loc_env);
 void		free_table(t_cmdtable *table);
 void		free_all(t_data *data);
 void		free_files(t_filelist *filelist);
+void		ft_exit_fork(t_data *data, char **command, int ext);
 
 // pre_lex
 int			check_errors(char *line);
@@ -134,6 +131,7 @@ int			ft_unset(t_data *data, char **cmd);
 int			parse_export(char *str, t_data *data);
 void		set_env(char **env, t_data *data);
 int			exec_builtin(char **command, t_data *data);
+int			is_builtin(char **command);
 
 // utils
 int			is_alphanum(char c);
@@ -158,6 +156,7 @@ int			ft_executor(t_data *data, char **env);
 void		display_cmdtable(t_cmdtable *table);
 void		make_cmdtable(t_data *data);
 void		close_files(t_cmdtable *table);
+
 //open_close
 int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);
 int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/05 23:33:04 by znogueir         ###   ########.fr       */
+/*   Updated: 2022/12/10 20:42:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_signals(int sig, siginfo_t *info, void *context)
 {
-	int	fd;
+	//int	fd;
 
 	(void)context;
 	if (sig == SIGINT)
