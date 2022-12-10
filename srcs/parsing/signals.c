@@ -14,21 +14,26 @@
 
 void	handle_signals(int sig, siginfo_t *info, void *context)
 {
+	int	fd;
+
 	(void)context;
 	if (sig == SIGINT)
 	{
 		if (info->si_pid)
 		{
-			write(1, "\n", 1);
+			ft_printf("\nparent\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
-			// ft_printf("^C parent\n");
+			//ft_printf("parent\n");
 			//do smth;
 		}
 		else
 		{
-			ft_printf("^C child\n");
+			ft_printf("\nchild\n");
+			// fd = open("dev/null", O_RDONLY);
+			// dup2(fd, 0);
+			// close(fd);
 			//do smth;
 		}
 	}

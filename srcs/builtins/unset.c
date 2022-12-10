@@ -12,14 +12,16 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_unset(t_data *data, char *name)
+int	ft_unset(t_data *data, char **cmd)
 {
 	t_env	*cur;
 	t_env	*prev;
 
 	cur = data->loc_env;
-	ft_printf("test cmd : unset $%s\n", name);
-	while (cur && better_strncmp(cur->name, name, ft_strlen(name)))
+	ft_printf("my unset :\n");
+	if (!cmd[1])
+		return (0);
+	while (cur && better_strncmp(cur->name, cmd[1], ft_strlen(cmd[1])))
 	{
 		prev = cur;
 		cur = cur->next;

@@ -17,17 +17,19 @@ int	parse_export(char *str, t_data *data)
 	int	i;
 
 	i = 0;
+	ft_printf("my export :\n");
 	while (is_alphanum(str[i]))
 		i++;
 	if (!str[i])
 		return (0);
 	if (str[i] == '=')
 	{
+		ft_printf("%s=%s\n", ft_substr(str, 0, i), ft_strdup(str + i + 1));
 		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 1), 0));
 	}
 	if (str[i] == '+' && str[i + 1] == '=')
 	{
-		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 2), 0));
+		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 2), 1));
 	}
 	return (0);
 }
@@ -54,5 +56,6 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		return (0);
 	}
 	ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
+	//ft_env(data->loc_env);
 	return (0);
 }
