@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/09 18:58:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:35:56 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 //finish
 void	ft_error(char *extra);
 void	ft_exit_msg(char *msg);
+void	ft_exit_fork(t_data *data, char **command, int ext);
 //void	close_free(t_pipex *pipex);
 void	ft_close_fds(t_data *data, t_cmdtable *cmdtable);
 //void	ft_free_arr(char **cmd);
 //void	ft_end(t_pipex *pipex);
-//void	free_things(char **one, char **two, char *three);
 
 //children
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd);
@@ -45,6 +45,7 @@ char	**ft_get_paths(char **env);
 int		check_path(char *prog, char *cmdpath);
 char	*ft_join_path(char *path, char *prog);
 char	*get_valid_path(t_data *data, char **prog);
+char	*get_valid_cmd(t_data *data, char **command, int *ext);
 
 //utils
 char	*ft_strjoin_2(char *s1, char *s2);

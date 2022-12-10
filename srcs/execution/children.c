@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/09 19:13:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:44:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,14 @@ void	convert_env(t_data *data, t_env *loc_env)
 	data->char_env[i] = NULL;
 }
 
-char	*get_valid_cmd(t_data *data, char **command, int *ext)
-{
-	char	*validcmd;
-
-	if (!command || !command[0])
-		validcmd = NULL;
-	else if (command[0][0] == '.' || command[0][0] == '/'
-		|| command[0][1] == '/')
-	{
-		validcmd = ft_strdup(command[0]);
-		*ext = check_path(validcmd, validcmd);
-		if (*ext == 1)
-			*ext = ft_no_such_file(validcmd);
-	}
-	else
-		validcmd = get_valid_path(data, command);
-	return (validcmd);
-}
-
-void	ft_free_close(t_data *data, char **command)
+void	ft_exit_fork(t_data *data, char **command, int ext)
 {
 	ft_close_fds(data, data->cmdtable);
 	close(data->insave);
 	free_table(data->cmdtable);
 	free_all(data);
 	free_split(command);
+	exit(ext);
 }
 
 void	ft_execute(t_data *data, char **command)
@@ -71,22 +53,36 @@ void	ft_execute(t_data *data, char **command)
 	ext = 1;
 	if (exec_builtin(command, data))
 	{
-		ft_free_close(data, command);
-		exit(0);
+		ft_exit_fork(data, command, 1);
 	}
 	convert_env(data, data->loc_env);
 	validcmd = get_valid_cmd(data, command, &ext);
 	if (validcmd == NULL)
 	{
-		free_split(command);
 		ext = ft_command_not_found(validcmd);
-		exit(ext);
+		ft_exit_fork(data, command, 1);
 	}
 	execve(validcmd, command, data->char_env);
 	free(validcmd);
-	ft_free_close(data, command);
-	// free_split(command);
-	exit(ext);
+	ft_exit_fork(data, command, 1);
+}
+
+void	ft_open_redirs(t_data *data, t_cmdtable *table)
+{
+	t_filelist	*infile;
+	t_filelist	*outfile;
+
+	infile = file_get_last(table->infile);
+	outfile = file_get_last(table->outfile);
+	if (infile->fd != 0)
+		dup2(infile->fd, 0);
+	if (outfile->fd != 1)
+		dup2(outfile->fd, 1);
+	else if (infile->fd == 0)
+	{
+		if (table->next)
+			dup2(data->pipe[1], 1);
+	}
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
@@ -99,21 +95,14 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
+	//ft_open_redirs(data, table);
 	pid = fork();
 	if (pid == -1)
 		ft_exit_msg("problem with fork()");
 	if (pid == 0)
 	{
 		close(data->pipe[0]);
-		if (infile->fd != 0)
-			dup2(infile->fd, 0);
-		if (outfile->fd != 1)
-			dup2(outfile->fd, 1);
-		else if (infile->fd == 0)
-		{
-			if (table->next)
-				dup2(data->pipe[1], 1);
-		}
+		ft_open_redirs(data, table);
 		ft_execute(data, cmd);
 	}
 	waitpid(0, NULL, 0);

@@ -6,37 +6,11 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/08 20:44:39 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:38:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	*ft_strjoin_2(char *s1, char *s2)
-{
-	char	*str;
-	size_t	j;
-	size_t	i;
-
-	i = 0;
-	j = 0;
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof (char));
-	if (!str)
-		return (NULL);
-	while (s1 && s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2 && s2[j])
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
-}
 
 char	**ft_get_paths(char **env)
 {
@@ -69,22 +43,20 @@ char	*ft_join_path(char *path, char *prog)
 	char	*cmd;
 	char	*cmdpath;
 
-	cmd = ft_strjoin_2("/", prog);
-	cmdpath = ft_strjoin_2(path, cmd);
+	cmd = ft_strjoin(ft_strdup("/"), prog);
+	cmdpath = ft_strjoin(ft_strdup(path), cmd);
 	free(cmd);
 	return (cmdpath);
 }	
 
 char	*get_valid_path(t_data *data, char **prog)
 {
-	//char	**paths;
 	char	*cmdpath;
 	int		i;
 	int		ext;
 
 	i = 0;
 	ext = 1;
-	//paths = ft_get_paths(env);
 	if (!data->paths)
 		return (NULL);
 	cmdpath = ft_join_path(data->paths[0], prog[0]);
@@ -98,8 +70,26 @@ char	*get_valid_path(t_data *data, char **prog)
 		ext = ft_command_not_found(prog[0]);
 	if (ext == 0 && cmdpath)
 		return (cmdpath);
-	//free_things(paths, prog, cmdpath);
-	free_split(prog);
 	free(cmdpath);
-	exit(ext);
+	ft_exit_fork(data, prog, ext);
+	exit(1);
+}
+
+char	*get_valid_cmd(t_data *data, char **command, int *ext)
+{
+	char	*validcmd;
+
+	if (!command || !command[0])
+		validcmd = NULL;
+	else if (command[0][0] == '.' || command[0][0] == '/'
+		|| command[0][1] == '/')
+	{
+		validcmd = ft_strdup(command[0]);
+		*ext = check_path(validcmd, validcmd);
+		if (*ext == 1)
+			*ext = ft_no_such_file(validcmd);
+	}
+	else
+		validcmd = get_valid_path(data, command);
+	return (validcmd);
 }
