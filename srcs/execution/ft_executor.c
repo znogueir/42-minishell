@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 02:24:53 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 02:34:43 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	**ft_arr_dup(char **arr)
 		i++;
 	}
 	copy[i] = NULL;
-	//ft_putstr_fd(copy[0], 2);
 	return (copy);
 }
 
@@ -86,7 +85,7 @@ int	ft_check_fds(t_filelist *outfile, t_filelist *infile)
 	return (0);
 }
 
-void	ft_close_fds(t_data *data, t_cmdtable *table)
+void	ft_close_fds(t_cmdtable *table)
 {
 	t_filelist	*in;
 	t_filelist	*out;
@@ -105,8 +104,8 @@ void	ft_close_fds(t_data *data, t_cmdtable *table)
 			close(out->fd);
 		out = out->next;
 	}
-	close(data->pipe[0]);
-	close(data->pipe[1]);
+	// close(data->pipe[0]);
+	// close(data->pipe[1]);
 }
 
 int	ft_pipex(t_data *data)
@@ -123,7 +122,7 @@ int	ft_pipex(t_data *data)
 		outfile = file_get_last(table->outfile);
 		if (ft_check_fds(outfile, infile))
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
-		ft_close_fds(data, table);
+		ft_close_fds(table);
 		table = table->next;
 	}
 	dup2(data->insave, 0);

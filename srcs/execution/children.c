@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 02:23:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 02:31:20 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	ft_execute(t_data *data, char **command)
 	{
 		// close(data->pipe[1]);
 		// close(data->pipe[0]);
-		ft_putstr_fd(command[0], 2);
-		ft_putstr_fd(data->cmdtable->cmd[0], 2);
-		write(2, "\nwhat?execbuoltin\n", 19);
 		ft_exit_fork(data, command, 1);
 	}
 	convert_env(data, data->loc_env);
@@ -112,7 +109,7 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
 	exec_builtin(cmd, data);
-	ft_close_fds(data, table);
+	ft_close_fds(table);
 	dup2(insave, 0);
 	dup2(outsave, 1);
 	close(insave);
