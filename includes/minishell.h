@@ -160,8 +160,9 @@ void		make_cmdtable(t_data *data);
 int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);
 int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \
 			int order);
-int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order);
-int			ft_here_doc_write(char *limiter);
+int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, \
+			int count);
+int			ft_here_doc_write(char *limiter, int count);
 int			ft_append_open(t_cmdtable *table, t_cmdline *line);
 
 #endif

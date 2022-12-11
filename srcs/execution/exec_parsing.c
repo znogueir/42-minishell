@@ -53,13 +53,15 @@ int	ft_here_doc(t_cmdline *cmdline)
 {
 	int	h_doc;
 	int	open;
+	int	count;
 
 	h_doc = 1;
 	open = 1;
+	count = 0;
 	while (cmdline && cmdline->type != NEWLINES && cmdline->type != PIPE)
 	{
 		if (cmdline->type == H_DOC)
-			h_doc = ft_here_doc_write(cmdline->next->content);
+			h_doc = ft_here_doc_write(cmdline->next->content, count++);
 		if (!h_doc)
 			open = h_doc;
 		cmdline = cmdline->next;
@@ -72,7 +74,9 @@ int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 	t_cmdline	*line;
 	int			open;
 	int			i;
+	int			count;
 
+	count = 0;
 	line = cmdline;
 	open = ft_here_doc(cmdline);
 	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
@@ -86,7 +90,7 @@ int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 			open = ft_outfile_open(table, line, \
 			O_RDWR | O_CREAT | O_TRUNC, i++);
 		if (open && line->type == H_DOC)
-			open = ft_here_doc_open(table, line, i++);
+			open = ft_here_doc_open(table, line, i++, count++);
 		if (open && line->type == APPEND)
 			open = ft_outfile_open(table, line, \
 			O_RDWR | O_CREAT | O_APPEND, i++);

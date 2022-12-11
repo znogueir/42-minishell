@@ -12,14 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_here_doc_write(char *limiter)
+int	ft_here_doc_write(char *limiter, int count)
 {
 	char	*str;
 	int		fd;
 	char	*limit;
+	char	*temp;
+	char	*filename;
 
+	temp = ft_itoa(count);
+	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), temp);
 	limit = ft_strjoin(ft_strdup(limiter), "\n");
-	fd = open(".temp_heredoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	free(temp);
+	free(filename);
 	if (!fd)
 	{
 		free(limit);
@@ -64,13 +70,19 @@ int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
 	return (1);
 }
 
-int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order)
+int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, int count)
 {
-	int	fd;
+	int		fd;
+	char	*tmp;
+	char	*filename;
 
-	fd = open(".temp_heredoc", O_RDONLY);
+	(void)line;
+	tmp = ft_itoa(count);
+	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), tmp);
+	fd = open(filename, O_RDONLY);
+	free(tmp);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(fd, ft_strdup(line->next->content), H_DOC, order));
+	ft_filenew(fd, filename, H_DOC, order));
 	if (fd == -1)
 		return (0);
 	return (1);
