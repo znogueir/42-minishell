@@ -43,8 +43,8 @@ void	ft_execute(t_data *data, char **command)
 	ext = 1;
 	if (exec_builtin(command, data))
 	{
-		// close(data->pipe[1]);
-		// close(data->pipe[0]);
+	// 	close(data->pipe[1]);
+	// 	close(data->pipe[0]);
 		ft_exit_fork(data, command, 1);
 	}
 	convert_env(data, data->loc_env);
@@ -109,7 +109,7 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
 	exec_builtin(cmd, data);
-	ft_close_fds(table);
+	ft_close_fds(data);
 	dup2(insave, 0);
 	dup2(outsave, 1);
 	close(insave);
@@ -125,7 +125,7 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
-	if (is_builtin(cmd) && data->cmdtable->next != NULL)
+	if (is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);
 	else
 		ft_execute_pipes(data, table, cmd);

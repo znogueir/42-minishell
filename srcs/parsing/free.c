@@ -90,6 +90,8 @@ void	free_all(t_data *data)
 {
 	free(data->line);
 	free_cmd(data->cmd);
+	//if (data->char_env)
+	free_split(data->char_env);
 	free_env(data->loc_env);
 	free_split(data->paths);
 	//free_table(data->cmdtable);
@@ -98,7 +100,7 @@ void	free_all(t_data *data)
 
 void	ft_exit_fork(t_data *data, char **command, int ext)
 {
-	ft_close_fds(data->cmdtable);
+	ft_close_fds(data);
 	close(data->insave);
 	free_table(data->cmdtable);
 	free_all(data);

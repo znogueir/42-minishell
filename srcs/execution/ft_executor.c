@@ -85,27 +85,34 @@ int	ft_check_fds(t_filelist *outfile, t_filelist *infile)
 	return (0);
 }
 
-void	ft_close_fds(t_cmdtable *table)
+void	ft_close_fds(t_data *data)
 {
 	t_filelist	*in;
 	t_filelist	*out;
+	t_cmdtable	*tab;
 
-	in = table->infile;
-	out = table->outfile;
-	while (in)
+	tab = data->cmdtable;
+	while (tab)
 	{
-		if (in->fd > 2)
-			close(in->fd);
-		in = in->next;
+		in = tab->infile;
+		out = tab->outfile;
+		while (in)
+		{
+			if (in->fd > 2)
+				close(in->fd);
+			in = in->next;
+		}
+		while (out)
+		{
+			//printf("out: %s\n", out->filename);
+			if (out->fd > 2)
+				close(out->fd);
+			out = out->next;
+		}
+		tab = tab->next;
 	}
-	while (out)
-	{
-		if (out->fd > 2)
-			close(out->fd);
-		out = out->next;
-	}
-	// close(data->pipe[0]);
-	// close(data->pipe[1]);
+	close(data->pipe[0]);
+	close(data->pipe[1]);
 }
 
 int	ft_pipex(t_data *data)
@@ -120,13 +127,14 @@ int	ft_pipex(t_data *data)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
-		if (ft_check_fds(outfile, infile))
+		if (table->status && ft_check_fds(outfile, infile))
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
-		ft_close_fds(table);
 		table = table->next;
+		close(data->pipe[0]);
+		close(data->pipe[1]);
 	}
+	ft_close_fds(data);
 	dup2(data->insave, 0);
-
 	close(data->insave);
 	return (1);
 }
