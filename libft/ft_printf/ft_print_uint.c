@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:41:30 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/05 00:46:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 01:35:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_print_uint(unsigned int un)
 
 	char_count = 0;
 	output = ft_utoa(un);
-	ft_putstr_fd(output, 2); //write to stderr
+	ft_putstr_fd(output, 1); //write to stderr
 	char_count = ft_strlen(output);
 	free(output);
 	return (char_count);

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 00:10:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 02:23:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	ft_execute(t_data *data, char **command)
 	ext = 1;
 	if (exec_builtin(command, data))
 	{
+		// close(data->pipe[1]);
+		// close(data->pipe[0]);
+		ft_putstr_fd(command[0], 2);
+		ft_putstr_fd(data->cmdtable->cmd[0], 2);
+		write(2, "\nwhat?execbuoltin\n", 19);
 		ft_exit_fork(data, command, 1);
 	}
 	convert_env(data, data->loc_env);
@@ -96,16 +101,18 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
-	exit(1);
 	infile = file_get_last(table->infile);
 	outfile = file_get_last(table->outfile);
 	insave = dup(0);
 	outsave = dup(1);
+	// close(data->pipe[1]);
+	// close(data->pipe[0]);
 	if (infile->fd != 0)
 		dup2(infile->fd, 0);
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
 	exec_builtin(cmd, data);
+	ft_close_fds(data, table);
 	dup2(insave, 0);
 	dup2(outsave, 1);
 	close(insave);
@@ -121,7 +128,7 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
-	if (is_builtin(cmd) && !data->cmdtable->next)
+	if (is_builtin(cmd) && data->cmdtable->next != NULL)
 		ft_execute_alone(data, table, cmd);
 	else
 		ft_execute_pipes(data, table, cmd);

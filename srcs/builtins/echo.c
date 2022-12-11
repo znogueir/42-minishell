@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:21:35 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/04 17:40:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 01:43:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_echo(char **cmd)
 	int	i;
 
 	i = 0;
-	ft_printf("my echo :\n");
+	//ft_printf("my echo :\n");
 	while (cmd[i])
 	{
 		ft_printf("%s", cmd[i]);
@@ -38,7 +38,7 @@ int	ft_echo(char **cmd, int newline)
 	while (cmd[j] && cmd[j][0] == '-')
 	{
 		i = 1;
-		while(cmd[j][i] == 'n')
+		while (cmd[j][i] == 'n')
 			i++;
 		if (cmd[j][i])
 			break ;

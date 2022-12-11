@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/07 20:40:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/11 01:32:43 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,12 @@ t_cmdtable	*get_last(t_cmdtable *table)
 
 t_filelist	*file_get_last(t_filelist *filelist)
 {
-	while (filelist && filelist->next)
+	t_filelist	*file;
+
+	file = filelist;
+	while (file && file->next)
 	{
-		filelist = filelist->next;
+		file = file->next;
 	}
-	return (filelist);
+	return (file);
 }
