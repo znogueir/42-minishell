@@ -67,22 +67,35 @@ char	**ft_arr_dup(char **arr)
 	return (copy);
 }
 
-int	ft_check_fds(t_filelist *outfile, t_filelist *infile)
+void	ft_check_fds(t_cmdtable *table)
 {
-	if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
-		return (1);
-	else if (outfile->fd == -1 && infile->fd == -1)
+	t_filelist	*infile;
+	t_filelist	*outfile;
+
+	while (table)
 	{
-		if (outfile->order < infile->order)
+		infile = file_get_last(table->infile);
+		outfile = file_get_last(table->outfile);
+		if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
+		{
+			table->status = 1;
+			table = table->next;
+			continue ;
+		}
+		else if (outfile->fd == -1 && infile->fd == -1)
+		{
+			if (outfile->order < infile->order)
+				perror(outfile->filename);
+			else
+				perror(infile->filename);
+		}
+		else if (outfile->fd == -1)
 			perror(outfile->filename);
 		else
 			perror(infile->filename);
+		table->status = 0;
+		table = table->next;
 	}
-	else if (outfile->fd == -1)
-		perror(outfile->filename);
-	else
-		perror(infile->filename);
-	return (0);
 }
 
 void	ft_close_fds(t_data *data)
@@ -118,16 +131,16 @@ void	ft_close_fds(t_data *data)
 int	ft_pipex(t_data *data)
 {
 	t_cmdtable	*table;
-	t_filelist	*outfile;
-	t_filelist	*infile;
 
 	table = data->cmdtable;
+	if (!table)
+		return (0);
+	ft_check_fds(table);
 	data->insave = dup(0);
 	while (table)
 	{
-		infile = file_get_last(table->infile);
-		outfile = file_get_last(table->outfile);
-		if (table->status && ft_check_fds(outfile, infile))
+
+		if (table->status)
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
 		table = table->next;
 		close(data->pipe[0]);

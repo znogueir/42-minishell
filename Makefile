@@ -98,7 +98,7 @@ fclean:clean
 
 run: $(NAME)
 	clear
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes -s --quiet ./minishell
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
 
 re: fclean all
 
