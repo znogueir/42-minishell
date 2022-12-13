@@ -119,7 +119,7 @@ t_cmdtable	*get_last(t_cmdtable *table);
 t_filelist	*file_get_last(t_filelist *filelist);
 
 //	builtins
-int			ft_cd(t_data *data, char *path);
+int			ft_cd(t_data *data, char **cmd);
 int			ft_echo(char **cmd, int newline);
 int			ft_env(t_env *loc_env);
 void		ft_exit(t_data *data);
@@ -128,7 +128,7 @@ int			ft_pwd(void);
 int			ft_unset(t_data *data, char **cmd);
 
 //	builtin utils
-int			parse_export(char *str, t_data *data);
+int			parse_export(char **cmd, t_data *data);
 void		set_env(char **env, t_data *data);
 int			exec_builtin(char **command, t_data *data);
 int			is_builtin(char **command);

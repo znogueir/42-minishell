@@ -12,24 +12,48 @@
 
 #include "../../includes/minishell.h"
 
-int	parse_export(char *str, t_data *data)
+int	check_identifier(char *cmd)
 {
 	int	i;
 
 	i = 0;
-	//ft_printf("my export :\n");
-	while (is_alphanum(str[i]))
+	if (!((cmd[0] >= 'a' && cmd[0] <= 'z') || \
+	(cmd[0] >= 'A' && cmd[0] <= 'Z')))
+		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
+	{
+		if (!is_alphanum(cmd[i]))
+			return (write(2, "minishell: export: invalid identifier\n", 39), 1);
 		i++;
-	if (!str[i])
-		return (0);
-	if (str[i] == '=')
-	{
-		//ft_printf("%s=%s\n", ft_substr(str, 0, i), ft_strdup(str + i + 1));
-		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 1), 0));
 	}
-	if (str[i] == '+' && str[i + 1] == '=')
+	if (cmd[i] == '+' && cmd[i + 1] != '=')
+		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+	return (0);
+}
+
+int	parse_export(char **cmd, t_data *data)
+{
+	int	i;
+	int	j;
+
+	j = 1;
+	while (cmd[j])
 	{
-		return (ft_export(data, ft_substr(str, 0, i), ft_strdup(str + i + 2), 1));
+		i = 0;
+		if (check_identifier(cmd[j]))
+		{
+			j++;
+			continue ;
+		}
+		while (cmd[j][i] && cmd[j][i] != '=' && cmd[j][i] != '+')
+			i++;
+		if (cmd[j][i] && cmd[j][i] == '=')
+			ft_export(data, ft_substr(cmd[j], 0, i), \
+			ft_strdup(cmd[j] + i + 1), 0);
+		else if (cmd[j][i] && cmd[j][i] == '+' && cmd[j][i + 1] == '=')
+			ft_export(data, ft_substr(cmd[j], 0, i), \
+			ft_strdup(cmd[j] + i + 2), 1);
+		j++;
 	}
 	return (0);
 }
@@ -56,6 +80,5 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		return (0);
 	}
 	ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
-	//ft_env(data->loc_env);
 	return (0);
 }
