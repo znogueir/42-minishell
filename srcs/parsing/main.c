@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/08 21:56:27 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/13 21:06:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int ac, char **av, char **env)
 	// ft_printf("%d\n", chdir("./test/"));
 	data->line = readline(PROMPT);
 	add_history(data->line);
-	while (ft_check_exit(data->line))
+	while (data->line && ft_check_exit(data->line))
 	{
 		if (!check_errors(data->line))
 		{
