@@ -55,6 +55,23 @@ int	parse_cd(t_data *data, char **cmd)
 	return (free(path), 0);
 }
 
+t_env	*get_pointer_env(t_data *data, char *name)
+{
+	t_env	*env;
+
+	env = data->loc_env;
+	while (env && better_strncmp(env->name, name, ft_strlen(name)))
+		env = env->next;
+	if (!env)
+	{
+		ft_export(data, ft_strdup(name), NULL, 0);
+		env = data->loc_env;
+		while (env && better_strncmp(env->name, name, ft_strlen(name)))
+			env = env->next;
+	}
+	return (env);
+}
+
 int	ft_cd(t_data *data, char **cmd)
 {
 	t_env	*env_pwd;
@@ -70,11 +87,9 @@ int	ft_cd(t_data *data, char **cmd)
 	cd = getcwd(cd, 100);
 	if (cd == NULL)
 		return (1);
-	while (env_pwd && better_strncmp(env_pwd->name, "PWD", 3))
-		env_pwd = env_pwd->next;
+	env_pwd = get_pointer_env(data, "PWD");
+	env_oldpwd = get_pointer_env(data, "OLDPWD");
 	save_pwd = ft_strdup(env_pwd->content);
-	while (env_oldpwd && better_strncmp(env_oldpwd->name, "OLDPWD", 6))
-		env_oldpwd = env_oldpwd->next;
 	free(env_pwd->content);
 	free(env_oldpwd->content);
 	env_pwd->content = cd;
