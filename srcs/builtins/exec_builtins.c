@@ -21,7 +21,7 @@ int	exec_builtin(char **command, t_data *data)
 	else if (!better_strncmp(command[0], "env", 3))
 		return (ft_env(data->loc_env), 1);
 	else if (!better_strncmp(command[0], "exit", 4))
-		return (ft_exit(data), 1);
+		return (ft_exit(data), 2);
 	else if (!better_strncmp(command[0], "export", 6))
 		return (parse_export(command, data), 1);
 	else if (!better_strncmp(command[0], "pwd", 3))

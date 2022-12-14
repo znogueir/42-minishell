@@ -98,7 +98,8 @@ int	main(int ac, char **av, char **env)
 	// ft_printf("%d\n", chdir("./test/"));
 	data->line = readline(PROMPT);
 	add_history(data->line);
-	while (ft_check_exit(data->line))
+	// while (ft_check_exit(data->line))
+	while (1)
 	{
 		if (!check_errors(data->line))
 		{

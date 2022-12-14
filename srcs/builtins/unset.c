@@ -16,22 +16,25 @@ int	ft_unset(t_data *data, char **cmd)
 {
 	t_env	*cur;
 	t_env	*prev;
+	int		i;
 
-	cur = data->loc_env;
-	ft_printf("my unset :\n");
-	if (!cmd[1])
-		return (0);
-	while (cur && better_strncmp(cur->name, cmd[1], ft_strlen(cmd[1])))
+	i = 1;
+	while (cmd[i])
 	{
-		prev = cur;
-		cur = cur->next;
-	}
-	if (cur)
-	{
-		prev->next = cur->next;
-		free(cur->name);
-		free(cur->content);
-		free(cur);
+		cur = data->loc_env;
+		while (cur && better_strncmp(cur->name, cmd[i], ft_strlen(cmd[i])))
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+		if (cur)
+		{
+			prev->next = cur->next;
+			free(cur->name);
+			free(cur->content);
+			free(cur);
+		}
+		i++;
 	}
 	return (0);
 }

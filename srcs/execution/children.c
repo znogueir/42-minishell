@@ -95,6 +95,7 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 {
 	int			insave;
 	int			outsave;
+	int			builtin_ret;
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
@@ -108,12 +109,16 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 		dup2(infile->fd, 0);
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
-	exec_builtin(cmd, data);
+	builtin_ret = exec_builtin(cmd, data);
 	ft_close_fds(data);
 	dup2(insave, 0);
 	dup2(outsave, 1);
 	close(insave);
 	close(outsave);
+	if (builtin_ret == 2)
+	{
+		ft_exit_fork(data, cmd, 0);
+	}
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
