@@ -51,7 +51,7 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 	{
 		if (ft_strchr(" \t", data->line[*i - 1]))
 		{
-			while (data->line[*i] != '\n') //go to nl
+			while (data->line[*i] != '\n')
 				(*i)++;
 		}
 		else

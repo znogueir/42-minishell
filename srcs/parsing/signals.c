@@ -14,9 +14,10 @@
 
 void	handle_signals(int sig, siginfo_t *info, void *context)
 {
-	//int	fd;
+	// int	fd;
 
 	(void)context;
+	// (void)info;
 	if (sig == SIGINT)
 	{
 		if (info->si_pid)
@@ -25,16 +26,20 @@ void	handle_signals(int sig, siginfo_t *info, void *context)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
-			//ft_printf("parent\n");
 			//do smth;
 		}
 		else
 		{
 			ft_printf("\nchild\n");
-			// fd = open("dev/null", O_RDONLY);
+			// fd = open("/dev/null", O_RDONLY);
+			// write(0, "\0", 1);
 			// dup2(fd, 0);
 			// close(fd);
-			//do smth;
+			// ft_printf("\n");
+			// rl_on_new_line();
+			// rl_replace_line("", 0);
+			// rl_redisplay();
+			// do smth;
 		}
 	}
 	else if (sig == SIGQUIT)

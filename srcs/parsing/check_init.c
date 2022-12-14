@@ -38,7 +38,7 @@ int	check_errors(char *line)
 {
 	if (check_quote(line))
 	{
-		write_error("syntax error: quote missing\n"); //change errno ?
+		write_error("syntax error: quote missing\n");
 		return (1);
 	}
 	return (0);

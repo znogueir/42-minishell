@@ -17,7 +17,6 @@ int	ft_env(t_env *loc_env)
 	t_env	*print_env;
 
 	print_env = loc_env;
-	ft_printf("my env : \n");
 	while (print_env)
 	{
 		ft_printf("%s=%s\n", print_env->name, print_env->content);

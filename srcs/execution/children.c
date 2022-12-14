@@ -116,9 +116,7 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	close(insave);
 	close(outsave);
 	if (builtin_ret == 2)
-	{
 		ft_exit_fork(data, cmd, 0);
-	}
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)

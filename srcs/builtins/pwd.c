@@ -19,8 +19,7 @@ int	ft_pwd(void)
 	cd = NULL;
 	cd = getcwd(cd, 100);
 	if (cd == NULL)
-		return (perror("pwd"),1);
-	// ft_printf("my pwd :\n");
+		return (perror("pwd"), 1);
 	ft_printf("%s\n", cd);
 	free(cd);
 	return (0);
