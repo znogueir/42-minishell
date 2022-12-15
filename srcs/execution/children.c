@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/15 00:44:01 by codespace        ###   ########.fr       */
+/*   Updated: 2022/12/15 00:53:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	{
 		close(data->pipe[0]);
 		ft_open_redirs(data, table);
-		ft_execute(data, cmd);
+		if (cmd)
+			ft_execute(data, cmd);
+		ft_exit_fork(data, cmd, 0);
 	}
 	waitpid(0, NULL, 0);
 }
@@ -128,9 +130,9 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	// outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
-	if (!cmd)
-		return ;
-	if (cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
+	// if (!cmd)
+	// 	return ;
+	if (cmd && cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);
 	else
 		ft_execute_pipes(data, table, cmd);
