@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/05 00:05:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/15 00:40:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,16 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 
 	i = 0;
 	count = ft_cmd_count(cmdline);
-	table->cmd = malloc(sizeof(char *) * (count + 1));
-	while (i < count)
+	if (count == 0)
 	{
+		table->cmd = NULL;
+		return ;
+	}
+	table->cmd = malloc(sizeof(char *) * (count + 1));
+	while (cmdline && i < count)
+	{
+		if (!cmdline->content)
+			break ;
 		if (is_redir(cmdline->type))
 			cmdline = cmdline->next->next;
 		else

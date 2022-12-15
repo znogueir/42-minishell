@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 02:31:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/15 00:44:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_execute(t_data *data, char **command)
 	int		ext;
 
 	ext = 1;
-	if (exec_builtin(command, data))
+	if (command[0] && exec_builtin(command, data))
 	{
 	// 	close(data->pipe[1]);
 	// 	close(data->pipe[0]);
@@ -70,7 +70,7 @@ void	ft_open_redirs(t_data *data, t_cmdtable *table)
 		dup2(infile->fd, 0);
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
-	else if (infile->fd == 0)
+	if (outfile->fd == 1)
 	{
 		if (table->next)
 			dup2(data->pipe[1], 1);
@@ -121,19 +121,21 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
-	t_filelist	*infile;
-	t_filelist	*outfile;
+	// t_filelist	*infile;
+	// t_filelist	*outfile;
 
-	infile = file_get_last(table->infile);
-	outfile = file_get_last(table->outfile);
+	// infile = file_get_last(table->infile);
+	// outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
-	if (is_builtin(cmd) && !data->cmdtable->next)
+	if (!cmd)
+		return ;
+	if (cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);
 	else
 		ft_execute_pipes(data, table, cmd);
 	close(data->pipe[1]);
-	if (outfile->fd == 1 && infile->fd == 0)
-		dup2(data->pipe[0], 0);
+	//if (outfile->fd == 1 && infile->fd == 0)
+	dup2(data->pipe[0], 0);
 	free_split(cmd);
 }
