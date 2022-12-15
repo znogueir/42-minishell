@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:41:31 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/15 23:24:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ int	main(int ac, char **av, char **env)
 	signal_handler();
 	while (1)
 	{
-		data->line = readline(PROMPT);
-		add_history(data->line);
-		if (!check_errors(data->line))
+		//data->line = readline("minishell$ ");
+		//add_history(data->line);
+		printf("data->line: %s\n", data->line);
+		if (!data->line || check_errors(data->line))
+			ft_exit_fork(data, NULL, 0);
+		ft_lexer(data);
+		if (!ft_parser(data))
 		{
-			ft_lexer(data);
-			if (!ft_parser(data))
-			{
-				ft_expander(data);
-				ft_executor(data, env);
-			}
-			reset_cmd(data);
+			ft_expander(data);
+			ft_executor(data, env);
 		}
+		reset_cmd(data);
 		free(data->line);
 	}
 	free_all(data);
