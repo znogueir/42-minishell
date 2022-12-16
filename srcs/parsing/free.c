@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:02:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 	ft_close_fds(data);
 	close(data->insave);
 	free_table(data->cmdtable);
+	// if ((char *)data->line != NULL)
 	free_all(data);
 	free_split(command);
 	exit(ext);

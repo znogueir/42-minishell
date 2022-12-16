@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:04:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,12 @@ void	ft_close_fds(t_data *data)
 	t_cmdtable	*tab;
 
 	tab = data->cmdtable;
-	while (tab)
+	while (tab)//) && tab->infile && tab->outfile)
 	{
+		// printf("tab: %p\n", tab);
+		// printf("tab->next: %p\n", tab->next);
+		if (!tab || !tab->infile || !tab->outfile)
+			break ;
 		in = tab->infile;
 		out = tab->outfile;
 		while (in)
@@ -117,12 +121,12 @@ void	ft_close_fds(t_data *data)
 		}
 		while (out)
 		{
-			//printf("out: %s\n", out->filename);
 			if (out->fd > 2)
 				close(out->fd);
 			out = out->next;
 		}
-		tab = tab->next;
+		if (tab)
+			tab = tab->next;
 	}
 	close(data->pipe[0]);
 	close(data->pipe[1]);

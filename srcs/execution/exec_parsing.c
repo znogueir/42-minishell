@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:04:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void	make_cmdtable(t_data *data)
 	while (line && line->type != NEWLINES)
 	{
 		ft_tableadd_back(&data->cmdtable, ft_tablenew());
+		// printf("cmdtable: %p\n", data->cmdtable);
+		// printf("cmdtable->next: %p\n", data->cmdtable->next);
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
 		cur_tab->status = ft_fill_files(cur_tab, line);

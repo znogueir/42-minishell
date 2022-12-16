@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 23:24:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:16:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,24 @@ t_data	*ft_init(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
+	// char		*temp;
 
 	(void)ac;
 	(void)av;
+	// printf("av: %s\n", av[1]);
 	data = ft_init(env);
 	signal_handler();
 	while (1)
 	{
-		//data->line = readline("minishell$ ");
-		//add_history(data->line);
-		printf("data->line: %s\n", data->line);
-		if (!data->line || check_errors(data->line))
+		// temp = readline(NULL);
+		// if (temp && temp[0] == '\0')
+		// 	exit(0);
+		data->line = readline(NULL);//"minishell$ ");
+		add_history(data->line);
+		//printf("data->line: %s\n", data->line);
+		if (!data->line)
+			exit(1);
+		if (check_errors(data->line))
 			ft_exit_fork(data, NULL, 0);
 		ft_lexer(data);
 		if (!ft_parser(data))
@@ -80,6 +87,6 @@ int	main(int ac, char **av, char **env)
 		reset_cmd(data);
 		free(data->line);
 	}
-	free_all(data);
+	// free_all(data);
 	return (0);
 }
