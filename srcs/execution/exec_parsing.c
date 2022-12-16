@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/05 00:05:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:04:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	ft_cmd_count(t_cmdline *line)
 {
@@ -35,9 +35,16 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 
 	i = 0;
 	count = ft_cmd_count(cmdline);
-	table->cmd = malloc(sizeof(char *) * (count + 1));
-	while (i < count)
+	if (count == 0)
 	{
+		table->cmd = NULL;
+		return ;
+	}
+	table->cmd = malloc(sizeof(char *) * (count + 1));
+	while (cmdline && i < count)
+	{
+		if (!cmdline->content)
+			break ;
 		if (is_redir(cmdline->type))
 			cmdline = cmdline->next->next;
 		else
@@ -109,6 +116,8 @@ void	make_cmdtable(t_data *data)
 	while (line && line->type != NEWLINES)
 	{
 		ft_tableadd_back(&data->cmdtable, ft_tablenew());
+		// printf("cmdtable: %p\n", data->cmdtable);
+		// printf("cmdtable->next: %p\n", data->cmdtable->next);
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
 		cur_tab->status = ft_fill_files(cur_tab, line);

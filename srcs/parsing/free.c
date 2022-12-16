@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/11 02:31:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:02:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	free_split(char	**tab)
 {
@@ -103,6 +103,7 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 	ft_close_fds(data);
 	close(data->insave);
 	free_table(data->cmdtable);
+	// if ((char *)data->line != NULL)
 	free_all(data);
 	free_split(command);
 	exit(ext);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:12:32 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/10 23:08:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	exec_builtin(char **command, t_data *data)
 {
