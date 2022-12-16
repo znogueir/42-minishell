@@ -24,6 +24,23 @@ char	*get_env_content(t_data *data, char *name)
 	return (NULL);
 }
 
+int	cd_home(t_data *data, char **cmd, char **path)
+{
+	if (!cmd[1])
+	{
+		*path = get_env_content(data, "HOME");
+		if (*path == NULL)
+			return (write(2, "minishell: cd: HOME not set\n", 29), 1);
+	}
+	else if (cmd[1][0] == '~')
+	{
+		if (!get_env_content(data, "HOME"))
+			return (write(2, "minishell: cd: HOME not set\n", 29), 1);
+		*path = ft_strjoin(get_env_content(data, "HOME"), cmd[1] + 1);
+	}
+	return (0);
+}
+
 int	parse_cd(t_data *data, char **cmd)
 {
 	char	*path;
@@ -33,8 +50,8 @@ int	parse_cd(t_data *data, char **cmd)
 	dash = 0;
 	if (cmd[1] && cmd[2])
 		return (write(2, "minishell: cd: too many arguments\n", 34), 1);
-	if (!cmd[1])
-		path = get_env_content(data, "HOME");
+	if (cd_home(data, cmd, &path))
+		return (1);
 	else if (cmd[1][0] == '-' && !cmd[1][1])
 	{
 		path = get_env_content(data, "OLDPWD");
@@ -44,8 +61,6 @@ int	parse_cd(t_data *data, char **cmd)
 			return (ft_printf("\n"), free(path), 0);
 		dash = 1;
 	}
-	else if (cmd[1][0] == '~')
-		path = ft_strjoin(get_env_content(data, "HOME"), cmd[1] + 1);
 	else
 		path = ft_strdup(cmd[1]);
 	if (chdir(path) != 0)
