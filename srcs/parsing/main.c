@@ -65,13 +65,13 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	// printf("av: %s\n", av[1]);
 	data = ft_init(env);
-	signal_handler();
+	//signal_handler();
 	while (1)
 	{
 		// temp = readline(NULL);
 		// if (temp && temp[0] == '\0')
 		// 	exit(0);
-		data->line = readline(NULL);//"minishell$ ");
+		data->line = readline(PROMPT);//"minishell$ ");
 		add_history(data->line);
 		//printf("data->line: %s\n", data->line);
 		if (!data->line)
