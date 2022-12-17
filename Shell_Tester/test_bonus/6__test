@@ -1,2 +1,0 @@
-(echo aa && echo bb) | (ahah || cat -e ) | cat
-echo $?

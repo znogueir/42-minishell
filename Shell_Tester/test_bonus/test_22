@@ -1,2 +1,0 @@
-pwd || ls && echo hola
-echo $?

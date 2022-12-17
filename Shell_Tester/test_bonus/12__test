@@ -1,2 +1,0 @@
-echo coucou | (cat lkdjf || cat)
-echo $?

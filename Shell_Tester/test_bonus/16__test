@@ -1,2 +1,0 @@
-(echo aa) | (cat aslkdfjaskldjf | sdfasdf || cat)
-echo $?

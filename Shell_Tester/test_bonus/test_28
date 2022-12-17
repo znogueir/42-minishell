@@ -1,2 +1,0 @@
-export """" && ls"
-echo $?

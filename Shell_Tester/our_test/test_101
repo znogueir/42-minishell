@@ -1,3 +1,0 @@
-export t="y'o"
-echo $t
-echo $?
