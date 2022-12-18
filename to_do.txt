@@ -1,4 +1,5 @@
-- expand "$?";
+- expand "$?"; [done]
+- expand "$_" ?;
 - $'thing in quotes' counts as just : 'thing in quotes' double and single
 - exit code;
 - exit() with an argument;

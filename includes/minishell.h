@@ -23,7 +23,7 @@
 # include "structures.h"
 # include "pipex.h"
 
-extern int g_exit;
+extern	int	g_exit;
 
 /*--------------------------------------------------*/
 /*				   	   Operators				   	*/
@@ -105,6 +105,8 @@ void		write_error(char *error_msg);
 int			ft_parser(t_data *data);
 
 //	expander
+char		*ft_stradd_char(char *str, char c);
+char		*ft_add_excode(char *str);
 int			ft_expander(t_data *data);
 
 //	list functs
