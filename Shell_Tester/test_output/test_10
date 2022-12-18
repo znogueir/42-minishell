@@ -1,0 +1,6 @@
+cmd: '$HOMEdskjhfkdshfsd'
+echo $?
+bash output:
+127
+minishell output:
+127

@@ -1,0 +1,6 @@
+cmd: ?$HOME
+echo $?
+bash output:
+127
+minishell output:
+127

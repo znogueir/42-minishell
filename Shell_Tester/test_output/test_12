@@ -1,0 +1,6 @@
+cmd: $LESS$VAR
+echo $?
+bash output:
+0
+minishell output:
+127
