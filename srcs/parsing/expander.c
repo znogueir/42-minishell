@@ -99,9 +99,18 @@ int	ft_expander(t_data *data)
 		if (p_cmd->type == WORD)
 		{
 			new_word = NULL;
-			new_word = big_expand(data, new_word, p_cmd->content);
-			free(p_cmd->content);
-			p_cmd->content = new_word;
+			if (!better_strncmp(p_cmd->content, "\"\"", 2) || \
+			!better_strncmp(p_cmd->content, "\'\'", 2))
+			{
+				free(p_cmd->content);
+				p_cmd->content = ft_strdup("");
+			}
+			else
+			{
+				new_word = big_expand(data, new_word, p_cmd->content);
+				free(p_cmd->content);
+				p_cmd->content = new_word;
+			}
 		}
 		p_cmd = p_cmd->next;
 	}

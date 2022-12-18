@@ -1,6 +1,0 @@
-cmd: $HOME
-echo $?
-bash output:
-126
-minishell output:
-0
