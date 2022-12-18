@@ -50,6 +50,30 @@ char	*ft_stradd_char(char *str, char c)
 	return (new_str);
 }
 
+char	*ft_add_excode(char *str)
+{
+	int		i;
+	int		j;
+	char	*new_str;
+	char	*excode;
+
+	i = 0;
+	excode = ft_itoa(g_exit);
+	new_str = malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(excode) + 1));
+	while (str && str[i])
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	j = 0;
+	while(excode[j] != '\0')
+		new_str[i++] = excode[j++];
+	new_str[i] = '\0';
+	free(str);
+	free(excode);
+	return (new_str);
+}
+
 char	small_expand(t_data *data, char **new_word, char *str, int *i)
 {
 	char	end;
@@ -63,6 +87,11 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 			*new_word = replace_var(data, *new_word, str + *i);
 			while (is_alphanum(str[*i]))
 				(*i)++;
+		}
+		else if (str[*i] == '$' && str[*i + 1] == '?')
+		{
+			*new_word = ft_add_excode(*new_word);
+			(*i) += 2;
 		}
 		else if (str[*i] == 34 || str[*i] == 39)
 		{

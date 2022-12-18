@@ -12,9 +12,27 @@
 
 #include "minishell.h"
 
+// void	handle_signals_v2(int sig)
+// {
+// 	int	fd;
+
+// 	if (sig == SIGINT)
+// 	{
+// 		ft_printf("\nv2\n");
+// 		fd = open("/dev/null", O_RDONLY);
+// 		write(0, "\0", 1);
+// 		dup2(fd, 0);
+// 		close(fd);
+// 	}
+// 	else if (sig == SIGQUIT)
+// 	{
+// 		ft_printf("sig quit");
+// 	}
+// }
+
 void	handle_signals(int sig, siginfo_t *info, void *context)
 {
-	// int	fd;
+	int	fd;
 
 	(void)context;
 	// (void)info;
@@ -26,20 +44,20 @@ void	handle_signals(int sig, siginfo_t *info, void *context)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
-			//do smth;
+		// 	//do smth;
 		}
 		else
 		{
 			ft_printf("\nchild\n");
-			// fd = open("/dev/null", O_RDONLY);
-			// write(0, "\0", 1);
-			// dup2(fd, 0);
-			// close(fd);
-			// ft_printf("\n");
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
-			// do smth;
+			fd = open("/dev/null", O_RDONLY);
+			write(0, "\0", 1);
+			dup2(fd, 0);
+			close(fd);
+		// 	// ft_printf("\n");
+		// 	// rl_on_new_line();
+		// 	// rl_replace_line("", 0);
+		// 	// rl_redisplay();
+		// 	// do smth;
 		}
 	}
 	else if (sig == SIGQUIT)

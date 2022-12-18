@@ -143,6 +143,7 @@ int			is_redir(int type);
 int			better_strncmp(char *s1, char *s2, int size);
 
 //	signals
+void		handle_signals_v2(int sig);
 void		signal_handler(void);
 
 // miscellaneous
