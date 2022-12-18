@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/16 17:16:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:36:09 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ int	main(int ac, char **av, char **env)
 		// temp = readline(NULL);
 		// if (temp && temp[0] == '\0')
 		// 	exit(0);
-		data->line = readline(PROMPT);//"minishell$ ");
+		data->line = get_next_line(0);//readline(PROMPT);//"minishell$ ");
+		if (!data->line)
+			break ;
 		add_history(data->line);
 		//printf("data->line: %s\n", data->line);
-		if (!data->line)
-			exit(1);
 		if (check_errors(data->line))
-			ft_exit_fork(data, NULL, 0);
+			break ;
+			// ft_exit_fork(data, NULL, 0);
 		ft_lexer(data);
 		if (!ft_parser(data))
 		{
@@ -87,6 +88,6 @@ int	main(int ac, char **av, char **env)
 		reset_cmd(data);
 		free(data->line);
 	}
-	// free_all(data);
+	free_all(data);
 	return (0);
 }
