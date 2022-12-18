@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/18 20:52:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/18 23:13:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	main(int ac, char **av, char **env)
 		// temp = readline(NULL);
 		// if (temp && temp[0] == '\0')
 		// 	exit(0);
-		// data->line = get_next_line(0);
-		data->line = readline(PROMPT);
+		data->line = get_next_line(0);
+		// data->line = readline(PROMPT);
 		if (!data->line)
 			break ;
 		add_history(data->line);
@@ -91,6 +91,7 @@ int	main(int ac, char **av, char **env)
 		reset_cmd(data);
 		free(data->line);
 	}
+	//ft_putstr_fd("exit", 1);
 	free_all(data);
 	return (0);
 }
