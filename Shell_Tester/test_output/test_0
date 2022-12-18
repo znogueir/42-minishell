@@ -1,6 +1,0 @@
-cmd: e'cho hola'
-echo $?
-bash output:
-127
-minishell output:
-127

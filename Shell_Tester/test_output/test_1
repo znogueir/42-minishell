@@ -1,7 +1,0 @@
-cmd: sleep 3 | exit
-echo $?
-bash output:
-0
-minishell output:
-exit
-1

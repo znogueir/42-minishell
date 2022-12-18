@@ -1,4 +1,0 @@
-cmd: $DONTEXISTCas d'un variable inexistant
-echo $?
-bash output:
-minishell output:
