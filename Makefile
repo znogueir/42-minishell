@@ -27,7 +27,8 @@ PARSE	= check_init.c \
 		misc.c \
 		parser.c \
 		token_types.c \
-		signals.c
+		signals.c \
+		str_add.c
 
 BUILTIN	= cd.c \
 		echo.c \
