@@ -1,4 +1,5 @@
 - expand "$?";
+- $'thing in quotes' counts as just : 'thing in quotes' double and single
 - exit code;
 - exit() with an argument;
 - signals (make sure they work in a minishell inside another minishell etc...);
