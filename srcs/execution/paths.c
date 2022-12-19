@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/17 14:03:36 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:02:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,12 @@ char	*get_valid_cmd(t_data *data, char **command, int *ext)
 		*ext = check_path(validcmd, validcmd);
 		if (*ext == 1)
 			*ext = ft_no_such_file(validcmd);
+		if (*ext == ft_is_directory(validcmd))
+			return (validcmd);
 	}
 	else
+	{
 		validcmd = get_valid_path(data, command);
+	}
 	return (validcmd);
 }

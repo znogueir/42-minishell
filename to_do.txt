@@ -8,3 +8,4 @@
   (problem probably in parsing, we must be deleting the string when it's empty);
 - protect every malloc;
 - bonus : add wildcards ? (only in the current working directory so should be pretty easy);
+- fix segfault in $> dollar + redirection

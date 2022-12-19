@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 02:31:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/19 01:48:05 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_execute(t_data *data, char **cmd);
 int		ft_permission_denied(char *prog);
 int		ft_command_not_found(char *prog);
 int		ft_no_such_file(char *prog);
+int	    ft_is_directory(char *prog);
 
 //paths
 char	**ft_get_paths(char **env);
