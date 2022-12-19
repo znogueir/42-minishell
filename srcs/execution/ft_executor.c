@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/18 15:30:54 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:07:29 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ void	display_cmdtable(t_cmdtable *table)
 			printf("[%d] %s, ", outfile->fd, outfile->filename);
 			outfile = outfile->next;
 		}
-		printf("\n\tcmd: ");
-		while (table->cmd[i])
+		if (table->cmd)
+			printf("\n\tcmd: ");
+		else
+			printf("\n\tcmd: NULL");
+		while (table->cmd && table->cmd[i])
 			printf("%s ", table->cmd[i++]);
 		printf("\n\tstatus: %d\n", table->status);
 		table = table->next;
@@ -145,7 +148,9 @@ int	ft_pipex(t_data *data)
 	{
 
 		if (table->status)
+		{
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
+		}
 		table = table->next;
 		close(data->pipe[0]);
 		close(data->pipe[1]);
@@ -161,9 +166,10 @@ int	ft_executor(t_data *data, char **env)
 	(void)env;
 	data->cmdtable = NULL;
 	make_cmdtable(data);
-	//ft_putstr_fd("------pipex------", 2);
+	// ft_putstr_fd("\t------pipex------\n", 2);
 	// if (data->cmdtable)
 	// 	display_cmdtable(data->cmdtable);
+	// ft_putstr_fd("\t------------------\n\n", 2);
 	ft_pipex(data);
 	//close_files(data->cmdtable);
 	// if (data->cmdtable)

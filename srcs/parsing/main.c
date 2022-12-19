@@ -85,7 +85,9 @@ int	main(int ac, char **av, char **env)
 		ft_lexer(data);
 		if (!ft_parser(data))
 		{
+			// print_list(data->cmd);
 			ft_expander(data);
+			// print_list(data->cmd);
 			ft_executor(data, env);
 		}
 		reset_cmd(data);

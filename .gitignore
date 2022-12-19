@@ -2,3 +2,7 @@
 *.a
 minishell
 .vscode/
+Shell_Tester/
+Shell_Tester
+Shell_Tester/$HOLA Shell_Tester/a Shell_Tester/expected_output Shell_Tester/hey Shell_Tester/hola Shell_Tester/HOLA Shell_Tester/hola1 Shell_Tester/hola2 Shell_Tester/inoutfile Shell_Tester/ls Shell_Tester/ls1 Shell_Tester/Makefile Shell_Tester/minishell_output Shell_Tester/our_test Shell_Tester/pwd Shell_Tester/pwd) Shell_Tester/readline_ignore.txt Shell_Tester/README.md Shell_Tester/script_cut.sh Shell_Tester/test Shell_Tester/test_698 Shell_Tester/tester.sh Shell_Tester/test_list Shell_Tester/test_list_bis Shell_Tester/test_list_bonus Shell_Tester/test_mandatory Shell_Tester/test_output
+minishell

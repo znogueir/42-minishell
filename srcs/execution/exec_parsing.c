@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/18 22:27:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/19 01:09:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_cmd_count(t_cmdline *line)
 	int	count;
 
 	count = 0;
-	while (line && line->type != NEWLINES && line->type != PIPE)
+	while (line && line->content && line->type != NEWLINES && line->type != PIPE)
 	{
 		if (is_redir(line->type))
 			line = line->next;
