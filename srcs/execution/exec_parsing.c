@@ -17,7 +17,8 @@ int	ft_cmd_count(t_cmdline *line)
 	int	count;
 
 	count = 0;
-	while (line && line->content && line->type != NEWLINES && line->type != PIPE)
+	while (line && line->content && line->type != NEWLINES \
+	&& line->type != PIPE)
 	{
 		if (is_redir(line->type))
 			line = line->next;

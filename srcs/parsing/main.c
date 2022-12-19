@@ -73,14 +73,20 @@ int	main(int ac, char **av, char **env)
 		// temp = readline(NULL);
 		// if (temp && temp[0] == '\0')
 		// 	exit(0);
-		data->line = get_next_line(0);
-		// data->line = readline(PROMPT);
+		// data->line = get_next_line(0);
+		rl_outstream = stderr;
+		data->line = readline(PROMPT);
 		if (!data->line)
 			break ;
 		add_history(data->line);
 		//printf("data->line: %s\n", data->line);
 		if (check_errors(data->line))
+		{
+			// reset_cmd(data);
+			// free(data->line);
+			// continue ;
 			break ;
+		}
 			// ft_exit_fork(data, NULL, 0);
 		ft_lexer(data);
 		if (!ft_parser(data))

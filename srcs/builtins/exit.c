@@ -28,39 +28,29 @@ int	is_num(char *str)
 
 int	ft_exit(t_data *data, char **cmd)
 {
-	// (void)data;
-	// (void)cmd;
-	//ft_printf("bye! 👋\n");
 	ft_putstr_fd("exit\n", 2);
+	if (cmd[1])
+	{
+		if (is_num(cmd[1]))
+		{
+			if (cmd[2])
+				return (ft_putstr_fd("minishell: exit: \
+too many arguments\n", 2), 1);
+			else if (ft_atoi(cmd[1]) > 255)
+				g_exit = ft_atoi(cmd[1]) % 256;
+			else
+				g_exit = ft_atoi(cmd[1]);
+		}
+		else
+		{
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(cmd[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			g_exit = 2;
+		}
+	}
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
 	ft_exit_fork(data, cmd, g_exit);
 	return (g_exit);
-	// ft_printf("exit\n");
 }
-
-/*
-if (cmd[1])
-	is_num : g_exit = atoi; -> exit;
-	is_num > 255 : g_exit = atoi % 256; -> exit;
-	!is_num : print "numeric argument required", g_exit = 2; -> exit;
-if (cmd[1] && cmd[2])
-	is_num (cmd[1]) : print "too many arguments", g_exit = 1; -> dont exit;
-	!is_num : print "numeric argument required", g_exit = 2; -> exit;
-*/
-
-/*
-if (cmd[1])
-{
-	if (is_num(cmd[1]))
-	{
-		if (cmd[2])
-			print "too many arguments", g_exit = 1; -> dont exit;
-		else if (ft_atoi(cmd[1]) > 255)
-			g_exit = atoi % 256; -> exit;
-		else
-			g_exit = atoi; -> exit;
-	}
-	else
-		print "numeric argument required", g_exit = 2; -> exit;
-}*/
