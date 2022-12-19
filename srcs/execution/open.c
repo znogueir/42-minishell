@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/17 14:56:37 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/19 03:43:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
 {
 	int	fd;
 
+	if (is_directory(line->next->content))
+	{
+		ft_is_directory(line->next->content);
+		g_exit = 1;
+		return (0);
+	}
 	fd = open(line->next->content, O_RDONLY);
 	ft_fileadd_back(&table->infile, \
 	ft_filenew(fd, ft_strdup(line->next->content), LESS, order));
@@ -62,6 +68,12 @@ int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
 {
 	int	fd;
 
+	if (is_directory(line->next->content))
+	{
+		ft_is_directory(line->next->content);
+		g_exit = 1;
+		return (0);
+	}
 	fd = open(line->next->content, settings, 0644);
 	ft_fileadd_back(&table->outfile, \
 	ft_filenew(fd, ft_strdup(line->next->content), line->type, order));
