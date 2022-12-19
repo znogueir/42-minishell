@@ -15,20 +15,19 @@
 char	*replace_var(t_data *data, char *new_word, char *str)
 {
 	int		size;
+	char	*search_for;
 	t_env	*p_env;
 
 	size = 0;
 	p_env = data->loc_env;
 	while (is_alphanum(str[size]) || str[size] == '_')
 		size++;
-	while (p_env && better_strncmp(p_env->name, str, size))
-	{
+	search_for = ft_substr(str, 0, size);
+	while (p_env && better_strncmp(p_env->name, search_for, size))
 		p_env = p_env->next;
-	}
 	if (p_env)
-	{
 		new_word = ft_strjoin(new_word, p_env->content);
-	}
+	free(search_for);
 	return (new_word);
 }
 
@@ -39,17 +38,20 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 	end = 0;
 	while (str[*i])
 	{
-		if (str[*i] == '$' && (is_alphanum(str[*i + 1]) || str[*i + 1] == '_'))
+		if (str[*i] == '$')
 		{
-			(*i)++;
-			*new_word = replace_var(data, *new_word, str + *i);
-			while (is_alphanum(str[*i]) || str[*i] == '_')
+			if (is_alphanum(str[*i + 1]) || str[*i + 1] == '_')
+			{
+				(*i)++;
+				*new_word = replace_var(data, *new_word, str + *i);
+				while (is_alphanum(str[*i]) || str[*i] == '_')
+					(*i)++;
+			}
+			else if (str[*i + 1] == '?')
+				*new_word = ft_add_excode(*new_word, i);
+			else if ((str[*i + 1] == 34 || str[*i + 1] == 39))
 				(*i)++;
 		}
-		else if (str[*i] == '$' && str[*i + 1] == '?')
-			*new_word = ft_add_excode(*new_word, i);
-		else if (str[*i] == '$' && (str[*i + 1] == 34 || str[*i + 1] == 39))
-			(*i)++;
 		else if (str[*i] == 34 || str[*i] == 39)
 			return (str[(*i)++]);
 		else
@@ -67,7 +69,6 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	if (!str)
 		return (NULL);
 	end = small_expand(data, &new_word, str, &i);
-	// ft_printf("%c", end);
 	while (str[i] && str[i] != end)
 	{
 		if (str[i] == '$' && end == 34)
