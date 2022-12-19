@@ -1,6 +1,6 @@
 - expand "$?"; [done]
-- expand "$_" ?;
-- $'thing in quotes' counts as just : 'thing in quotes' double and single
+- expand "$_"; [done]
+- $'thing in quotes' counts as just : 'thing in quotes' double and single; [done]
 - exit code;
 - exit() with an argument;
 - signals (make sure they work in a minishell inside another minishell etc...);
@@ -8,4 +8,4 @@
   (problem probably in parsing, we must be deleting the string when it's empty);
 - protect every malloc;
 - bonus : add wildcards ? (only in the current working directory so should be pretty easy);
-- fix segfault in $> dollar + redirection
+- fix segfault in $> dollar + redirection [done]
