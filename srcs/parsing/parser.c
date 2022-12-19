@@ -28,11 +28,11 @@ int	check_pipes(t_cmdline *cmd)
 		return (1);
 	while (p_cmd)
 	{
-		if (p_cmd->type == PIPE && p_cmd->next->type == PIPE)
+		if (p_cmd->type == PIPE && p_cmd->next && p_cmd->next->type == PIPE)
 			return (1);
-		if (p_cmd->type == PIPE && p_cmd->next->type == NEWLINES)
+		if (p_cmd->type == PIPE && !p_cmd->next)
 			return (1);
-		if (is_redir(p_cmd->type) && p_cmd->next->type == PIPE)
+		if (is_redir(p_cmd->type) && p_cmd->next && p_cmd->next->type == PIPE)
 			return (1);
 		p_cmd = p_cmd->next;
 	}
@@ -46,9 +46,9 @@ int	check_redirs(t_cmdline *cmd)
 	p_cmd = cmd;
 	while (p_cmd)
 	{
-		if (is_redir(p_cmd->type) && is_redir(p_cmd->next->type))
+		if (is_redir(p_cmd->type) && p_cmd->next && is_redir(p_cmd->next->type))
 			return (1);
-		if (is_redir(p_cmd->type) && p_cmd->next->type == NEWLINES)
+		if (is_redir(p_cmd->type) && !p_cmd->next)
 			return (1);
 		p_cmd = p_cmd->next;
 	}
