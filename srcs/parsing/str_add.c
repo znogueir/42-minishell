@@ -30,7 +30,7 @@ char	*ft_stradd_char(char *str, char c)
 	return (new_str);
 }
 
-char	*ft_add_excode(char *str)
+char	*ft_add_excode(char *str, int *p_i)
 {
 	int		i;
 	int		j;
@@ -52,5 +52,6 @@ char	*ft_add_excode(char *str)
 	new_str[i] = '\0';
 	free(str);
 	free(excode);
+	(*p_i) += 2;
 	return (new_str);
 }

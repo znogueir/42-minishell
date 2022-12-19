@@ -106,7 +106,7 @@ int			ft_parser(t_data *data);
 
 //	expander
 char		*ft_stradd_char(char *str, char c);
-char		*ft_add_excode(char *str);
+char		*ft_add_excode(char *str, int *p_i);
 int			ft_expander(t_data *data);
 
 //	list functs
