@@ -73,8 +73,8 @@ int	main(int ac, char **av, char **env)
 		// temp = readline(NULL);
 		// if (temp && temp[0] == '\0')
 		// 	exit(0);
-		// data->line = get_next_line(0);
-		data->line = readline(PROMPT);
+		data->line = get_next_line(0);
+		// data->line = readline(PROMPT);
 		if (!data->line)
 			break ;
 		add_history(data->line);
@@ -85,9 +85,9 @@ int	main(int ac, char **av, char **env)
 		ft_lexer(data);
 		if (!ft_parser(data))
 		{
-			print_list(data->cmd);
+			// print_list(data->cmd);
 			ft_expander(data);
-			print_list(data->cmd);
+			// print_list(data->cmd);
 			ft_executor(data, env);
 		}
 		reset_cmd(data);
