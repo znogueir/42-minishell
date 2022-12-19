@@ -144,6 +144,7 @@ int	ft_pipex(t_data *data)
 		return (0);
 	ft_check_fds(table);
 	data->insave = dup(0);
+	data->outsave = dup(1);
 	while (table)
 	{
 
@@ -157,7 +158,9 @@ int	ft_pipex(t_data *data)
 	}
 	ft_close_fds(data);
 	dup2(data->insave, 0);
+	dup2(data->outsave, 1);
 	close(data->insave);
+	close(data->outsave);
 	return (1);
 }
 

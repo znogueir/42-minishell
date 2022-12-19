@@ -102,6 +102,7 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 {
 	ft_close_fds(data);
 	close(data->insave);
+	close(data->outsave);
 	free_table(data->cmdtable);
 	// if ((char *)data->line != NULL)
 	free_all(data);

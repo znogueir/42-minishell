@@ -125,8 +125,8 @@ t_filelist	*file_get_last(t_filelist *filelist);
 //	builtins
 int			ft_cd(t_data *data, char **cmd);
 int			ft_echo(char **cmd, int newline);
-int			ft_env(t_env *loc_env);
-void		ft_exit(t_data *data);
+int			ft_env(t_env *loc_env, char **cmd);
+int			ft_exit(t_data *data, char **cmd);
 int			ft_export(t_data *data, char *name, char *content, int append);
 int			ft_pwd(void);
 int			ft_unset(t_data *data, char **cmd);

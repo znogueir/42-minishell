@@ -12,11 +12,30 @@
 
 #include "minishell.h"
 
-int	ft_env(t_env *loc_env)
+int	env_error(char *str)
+{
+	ft_putstr_fd("env: \'", 2);
+	if (str[0] == '-')
+	{
+		ft_putstr_fd("invalid option -- \'", 2);
+		ft_putstr_fd(str + 1, 2);
+		ft_putstr_fd("\'\n", 2);
+		return (125);
+	}
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\': No such file or directory\n", 2);
+	return (127);
+}
+
+int	ft_env(t_env *loc_env, char **cmd)
 {
 	t_env	*print_env;
 
 	print_env = loc_env;
+	if (cmd[1])
+	{
+		return (env_error(cmd[1]));
+	}
 	while (print_env)
 	{
 		ft_printf("%s=%s\n", print_env->name, print_env->content);

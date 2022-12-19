@@ -15,19 +15,19 @@
 int	exec_builtin(char **command, t_data *data)
 {
 	if (!better_strncmp(command[0], "cd", 2))
-		return (ft_cd(data, command), 1);
+		return (ft_cd(data, command));
 	else if (!better_strncmp(command[0], "echo", 4))
-		return (ft_echo(command, 1), 1);
+		return (ft_echo(command, 1));
 	else if (!better_strncmp(command[0], "env", 3))
-		return (ft_env(data->loc_env), 1);
+		return (ft_env(data->loc_env, command));
 	else if (!better_strncmp(command[0], "exit", 4))
-		return (ft_exit(data), 2);
+		return (ft_exit(data, command));
 	else if (!better_strncmp(command[0], "export", 6))
-		return (parse_export(command, data), 1);
+		return (parse_export(command, data));
 	else if (!better_strncmp(command[0], "pwd", 3))
-		return (ft_pwd(), 1);
+		return (ft_pwd());
 	else if (!better_strncmp(command[0], "unset", 5))
-		return (ft_unset(data, command), 1);
+		return (ft_unset(data, command));
 	return (0);
 }
 

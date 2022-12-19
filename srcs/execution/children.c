@@ -40,12 +40,10 @@ void	ft_execute(t_data *data, char **command)
 	char	*validcmd;
 
 	g_exit = 1;
-	
-	if (command[0] && exec_builtin(command, data))
+	if (command[0] && is_builtin(command))
 	{
-	// 	close(data->pipe[1]);
-	// 	close(data->pipe[0]);
-		ft_exit_fork(data, command, 0);
+		g_exit = exec_builtin(command, data);
+		ft_exit_fork(data, command, g_exit);
 	}
 	convert_env(data, data->loc_env);
 	// printf("command[0] %c\n", command[0]);
@@ -99,35 +97,22 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	}
 	waitpid(0, &status, 0);
 	if (WIFEXITED(status))
-			g_exit = WEXITSTATUS(status);
+		g_exit = WEXITSTATUS(status);
 }
 
 void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 {
-	int			insave;
-	int			outsave;
-	int			builtin_ret;
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
 	infile = file_get_last(table->infile);
 	outfile = file_get_last(table->outfile);
-	insave = dup(0);
-	outsave = dup(1);
-	// close(data->pipe[1]);
-	// close(data->pipe[0]);
 	if (infile->fd != 0)
 		dup2(infile->fd, 0);
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
-	builtin_ret = exec_builtin(cmd, data);
+	g_exit = exec_builtin(cmd, data);
 	ft_close_fds(data);
-	dup2(insave, 0);
-	dup2(outsave, 1);
-	close(insave);
-	close(outsave);
-	if (builtin_ret == 2)
-		ft_exit_fork(data, cmd, 0);
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
