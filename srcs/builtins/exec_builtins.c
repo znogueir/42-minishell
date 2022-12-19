@@ -33,6 +33,8 @@ int	exec_builtin(char **command, t_data *data)
 
 int	is_builtin(char **command)
 {
+	if (!command[0])
+		return (0);
 	if (!better_strncmp(command[0], "cd", 2))
 		return (1);
 	else if (!better_strncmp(command[0], "echo", 4))
