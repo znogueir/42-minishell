@@ -38,18 +38,15 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 	end = 0;
 	while (str[*i])
 	{
-		if (str[*i] == '$')
+		if (str[*i] == '$' && str[*i + 1] == '?')
+			*new_word = ft_add_excode(*new_word, i);
+		else if (str[*i] == '$' && (str[*i + 1] == 34 || str[*i + 1] == 39))
+			(*i)++;
+		else if (str[*i] == '$')
 		{
-			if (is_alphanum(str[*i + 1]) || str[*i + 1] == '_')
-			{
-				(*i)++;
-				*new_word = replace_var(data, *new_word, str + *i);
-				while (is_alphanum(str[*i]) || str[*i] == '_')
-					(*i)++;
-			}
-			else if (str[*i + 1] == '?')
-				*new_word = ft_add_excode(*new_word, i);
-			else if ((str[*i + 1] == 34 || str[*i + 1] == 39))
+			(*i)++;
+			*new_word = replace_var(data, *new_word, str + *i);
+			while (is_alphanum(str[*i]) || str[*i] == '_')
 				(*i)++;
 		}
 		else if (str[*i] == 34 || str[*i] == 39)
@@ -71,7 +68,9 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	end = small_expand(data, &new_word, str, &i);
 	while (str[i] && str[i] != end)
 	{
-		if (str[i] == '$' && end == 34)
+		if (str[i] == '$' && str[i + 1] == '?' && end == 34)
+			new_word = ft_add_excode(new_word, &i);
+		else if (str[i] == '$' && end == 34)
 		{
 			i++;
 			new_word = replace_var(data, new_word, str + i);

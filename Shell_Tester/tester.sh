@@ -40,8 +40,8 @@ loop_test() {
 	for file in $test_li
 	do
 		printf "test $i: $file "
-		cat $file | valgrind --log-fd=1 -q  --suppressions=readline_ignore.txt --leak-check=full  --show-leak-kinds=all $minishell_path 2>&- > ./minishell_output/minishell_output
-		# cat $file | $minishell_path 2>&- > ./minishell_output/minishell_output
+		# cat $file | valgrind --log-fd=1 -q  --suppressions=readline_ignore.txt --leak-check=full  --show-leak-kinds=all $minishell_path 2>&- > ./minishell_output/minishell_output
+		cat $file | $minishell_path 2>&- > ./minishell_output/minishell_output
 		cat $file | bash  2>&- > ./expected_output/expected_output
 		echo -n "cmd: " >> ./test_output/test_$i
 		cat $file >> ./test_output/test_$i

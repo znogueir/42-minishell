@@ -71,14 +71,14 @@ int	check_identifier(char *cmd)
 
 	i = 0;
 	if (!((cmd[0] >= 'a' && cmd[0] <= 'z') || \
-	(cmd[0] >= 'A' && cmd[0] <= 'Z')))
+	(cmd[0] >= 'A' && cmd[0] <= 'Z') || cmd[0] == '_'))
 	{
 		g_exit = 1;
 		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
 	}
 	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
 	{
-		if (!is_alphanum(cmd[i]))
+		if (!(is_alphanum(cmd[i]) || cmd[i] == '_'))
 		{
 			g_exit = 1;
 			return (write(2, "minishell: export: invalid identifier\n", 39), 1);
