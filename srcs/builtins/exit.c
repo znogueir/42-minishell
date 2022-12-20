@@ -17,6 +17,8 @@ int	is_num(char *str)
 	int	i;
 
 	i = 0;
+	if (str[0] == '+' || str[0] == '-')
+		i++;
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
@@ -36,10 +38,7 @@ int	ft_exit(t_data *data, char **cmd)
 			if (cmd[2])
 				return (ft_putstr_fd("minishell: exit: \
 too many arguments\n", 2), 1);
-			else if (ft_atoi(cmd[1]) > 255)
-				g_exit = ft_atoi(cmd[1]) % 256;
-			else
-				g_exit = ft_atoi(cmd[1]);
+			g_exit = (char)ft_atoi(cmd[1]);
 		}
 		else
 		{
@@ -54,3 +53,4 @@ too many arguments\n", 2), 1);
 	ft_exit_fork(data, cmd, g_exit);
 	return (g_exit);
 }
+// check for long long int overflows -> minishell: exit: "nbr": numeric argument required;

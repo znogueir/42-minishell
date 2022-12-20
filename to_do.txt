@@ -4,8 +4,11 @@
 - fix segfault in $> dollar + redirection [DONE]
 - exit code; [done for builtins]
 - exit() with an argument; [DONE]
+- fix heredocs;
+- maybe rewrite the execution, put the error messages outside the forks, blabla...;
 - signals (make sure they work in a minishell inside another minishell etc...);
 - fix the weird thign with cd "" : when you do 'cd ""' it acts like it's cd alone and goes to home, but it shouldn't do anything.
   (problem probably in parsing, we must be deleting the string when it's empty);
 - protect every malloc;
 - bonus : add wildcards ? (only in the current working directory so should be pretty easy);
+- fix error codes when failing to open things;

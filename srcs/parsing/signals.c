@@ -12,72 +12,41 @@
 
 #include "minishell.h"
 
-// void	handle_signals_v2(int sig)
-// {
-// 	int	fd;
-
-// 	if (sig == SIGINT)
-// 	{
-// 		ft_printf("\nv2\n");
-// 		fd = open("/dev/null", O_RDONLY);
-// 		write(0, "\0", 1);
-// 		dup2(fd, 0);
-// 		close(fd);
-// 	}
-// 	else if (sig == SIGQUIT)
-// 	{
-// 		ft_printf("sig quit");
-// 	}
-// }
-
-void	handle_signals(int sig, siginfo_t *info, void *context)
+void	sig_in_fork(int sig)
 {
-	int	fd;
+	if (sig == SIGINT)
+		g_exit = 130;
+	else if (sig == SIGQUIT)
+		g_exit = 131;
+}
 
-	(void)context;
-	// (void)info;
+void	handle_sigint(int sig)
+{
 	if (sig == SIGINT)
 	{
-		if (info->si_pid)
-		{
-			ft_printf("\nparent\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		// 	//do smth;
-		}
-		else
-		{
-			ft_printf("\nchild\n");
-			fd = open("/dev/null", O_RDONLY);
-			write(0, "\0", 1);
-			dup2(fd, 0);
-			close(fd);
-		// 	// ft_printf("\n");
-		// 	// rl_on_new_line();
-		// 	// rl_replace_line("", 0);
-		// 	// rl_redisplay();
-		// 	// do smth;
-		}
-	}
-	else if (sig == SIGQUIT)
-	{
-		//do smth;
-		ft_printf("sig quit (^\\)\n");
+		ft_putchar_fd('\n', 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_exit = 130;
 	}
 }
 
-void	signal_handler(void)
-{
-	struct sigaction	s_sig;
-
-	s_sig.sa_sigaction = handle_signals;
-	s_sig.sa_flags = SA_SIGINFO;
-	sigemptyset(&s_sig.sa_mask);
-	sigaction(SIGINT, &s_sig, 0);
-	sigaction(SIGQUIT, &s_sig, 0);
-}
-
-// fd = open("dev/null", O_RDONLY);
+// HEREDOCS
+// ft_printf("\nchild\n");
+// fd = open("/dev/null", O_RDONLY);
 // dup2(fd, 0);
 // close(fd);
+// write(0, "\0", 1);
+
+// useless :
+// void	signal_handler(void)
+// {
+// 	struct sigaction	s_sig;
+
+// 	s_sig.sa_sigaction = handle_signals;
+// 	s_sig.sa_flags = SA_SIGINFO;
+// 	sigemptyset(&s_sig.sa_mask);
+// 	sigaction(SIGINT, &s_sig, 0);
+// 	sigaction(SIGQUIT, &s_sig, 0);
+// }

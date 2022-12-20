@@ -87,6 +87,8 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	data->pid = fork();
 	if (data->pid == -1)
 		ft_exit_msg("problem with fork()");
+	signal(SIGINT, sig_in_fork);
+	signal(SIGQUIT, sig_in_fork);
 	if (data->pid == 0)
 	{
 		close(data->pipe[0]);
@@ -96,6 +98,10 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 		ft_exit_fork(data, cmd, g_exit);
 	}
 	waitpid(0, &status, 0);
+	if (WTERMSIG(status) == 2)
+		ft_putchar_fd('\n', 1);
+	else if (WTERMSIG(status) == 3)
+		ft_putstr_fd("Quit (core dumped)\n", 1);
 	if (WIFEXITED(status))
 		g_exit = WEXITSTATUS(status);
 }
