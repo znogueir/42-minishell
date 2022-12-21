@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:06:26 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:24:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_pipes(t_cmdline *cmd)
 		if (p_cmd->type == PIPE && p_cmd->next && p_cmd->next->type == PIPE)
 			return (1);
 		if (p_cmd->type == PIPE && !p_cmd->next)
-			return (1);
+			return (1); 
 		if (is_redir(p_cmd->type) && p_cmd->next && p_cmd->next->type == PIPE)
 			return (1);
 		p_cmd = p_cmd->next;
@@ -58,8 +58,8 @@ int	check_redirs(t_cmdline *cmd)
 int	ft_parser(t_data *data)
 {
 	if (check_pipes(data->cmd))
-		return (write_error("syntax error near unexpected token '|'\n"), 1);
+		return (write_error("syntax error near unexpected token '|'\n"), 2);
 	if (check_redirs(data->cmd))
-		return (write_error("syntax error near unexpected redir token\n"), 1);
+		return (write_error("syntax error near unexpected redir token\n"), 2);
 	return (0);
 }
