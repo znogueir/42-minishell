@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/19 02:07:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:14:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ int	ft_executor(t_data *data, char **env)
 	(void)env;
 	data->cmdtable = NULL;
 	make_cmdtable(data);
+	// print_list(data->cmd);
 	// ft_putstr_fd("\t------pipex------\n", 2);
 	// if (data->cmdtable)
 	// 	display_cmdtable(data->cmdtable);

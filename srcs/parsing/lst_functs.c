@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/17 14:30:24 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:09:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ void	print_list(t_cmdline *cmd)
 	}
 	if (cmd)
 		ft_printf("\n");
+}
+
+t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop)
+{
+	t_cmdline	*lst;
+	t_cmdline	*save;
+
+	lst = *cmdline;
+	save = topop;
+	while (lst->next && lst->next != topop)
+		lst = lst->next;
+	if (lst->next == topop)
+	{
+		save = lst->next->next;
+		lst->next = save;
+		free(topop->content);
+		free(topop);
+	}
+	return (save);
 }
 
 t_cmdline	*ft_cmdnew(void *content)

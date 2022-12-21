@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/18 21:14:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:08:09 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
 void		ft_fileadd_back(t_filelist **lst, t_filelist *new);
 t_cmdtable	*get_last(t_cmdtable *table);
 t_filelist	*file_get_last(t_filelist *filelist);
+t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop);
 
 //	builtins
 int			ft_cd(t_data *data, char **cmd);

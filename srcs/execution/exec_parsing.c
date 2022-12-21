@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/21 21:15:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:14:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_cmd_count(t_cmdline *line)
 			count++;
 		line = line->next;
 	}
-	ft_printf("count: %d\n", count);
+	// ft_printf("count: %d\n", count);
 	return (count);
 }
 
@@ -122,6 +122,14 @@ void	make_cmdtable(t_data *data)
 	t_cmdtable	*cur_tab;
 
 	line = data->cmd;
+	temp = data->cmd;
+	while (temp)
+	{
+		if (temp->content == NULL)
+			temp = ft_cmdpop(&data->cmd, temp);
+		else
+			temp = temp->next;
+	}
 	while (line && line->type != NEWLINES)
 	{
 		while (!line->content)

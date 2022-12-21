@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/21 20:56:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:13:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ int	launch_normal(int ac, char **av, char **env)
 		exit_status = ft_parser(data);
 		if (!exit_status)
 		{
-			print_list(data->cmd);
+			// print_list(data->cmd);
 			ft_expander(data);
-			print_list(data->cmd);
+			// print_list(data->cmd);
 			ft_executor(data, env);
 		}
 		else
