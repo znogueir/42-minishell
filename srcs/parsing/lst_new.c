@@ -66,12 +66,3 @@ t_filelist	*ft_filenew(int fd, char *filename, int type, int order)
 	cell->next = NULL;
 	return (cell);
 }
-
-t_cmdtable	*get_last(t_cmdtable *table)
-{
-	while (table->next)
-	{
-		table = table->next;
-	}
-	return (table);
-}
