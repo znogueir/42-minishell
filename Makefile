@@ -21,13 +21,13 @@ INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 PARSE	= check_init.c \
 		expander.c \
 		free.c \
+		free_2.c \
 		lexer.c \
-		lst_functs.c \
-		main.c \
+		lst_new.c \
+		lst_addback.c \
 		misc.c \
 		parser.c \
 		token_types.c \
-		signals.c \
 		str_add.c
 
 BUILTIN	= cd.c \
@@ -37,15 +37,17 @@ BUILTIN	= cd.c \
 		export.c \
 		pwd.c \
 		unset.c \
-		exec_builtins.c \
+		exec_builtins.c
 
-EXEC	= ft_executor.c \
+EXEC	= main.c \
+		ft_executor.c \
 		exec_parsing.c \
 		children.c \
 		exits.c \
 		finish.c \
 		paths.c \
-		open.c
+		open.c \
+		signals.c
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
@@ -59,15 +61,6 @@ EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC_OBJ))
 
 OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS)
 OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) 
-
-# ---------------- progress bar ------------------ #
-
-# PRINTF_SIZE = $(shell ls libft/ft_printf/ | grep "\.c" | wc -l)
-# GNL_SIZE = $(shell ls libft/gnl/ | grep "bonus.c" | wc -l)
-# LIBFT_SIZE = $(shell ls libft/ | grep "\.c" | wc -l)
-# ((TOTAL_LIBFT = $(PRINTF_SIZE) + $(GNL_SIZE) + $(LIBFT_SIZE))) <- fonctionne pas
-
-# ------------------------------------------------ #
 
 all: $(NAME)
 

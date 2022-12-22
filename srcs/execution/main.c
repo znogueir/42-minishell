@@ -12,32 +12,18 @@
 
 #include "minishell.h"
 
-int g_exit = 0;
+int	g_exit = 0;
 
-void	write_prompt(void)
+void	reset_cmd(t_data *data)
 {
-	ft_printf(PROMPT);
+	free_cmd(data->cmd);
+	data->cmd = NULL;
 }
 
 void	write_error(char *error_msg)
 {
-	write(2, ERR_PRE, ft_strlen(ERR_PRE));
-	write(2, error_msg, ft_strlen(error_msg));
-}
-
-int	ft_check_exit(char *line)
-{
-	if (!ft_strncmp(line, "exit", 4))
-	{
-		if (line[4] > 32)
-			return (1);
-		else
-		{
-			write(1, "bye! 👋\n", 11);
-			return (0);
-		}
-	}
-	return (1);
+	ft_putstr_fd(ERR_PRE, 2);
+	ft_putstr_fd(error_msg, 2);
 }
 
 t_data	*ft_init(char **env)
@@ -62,10 +48,8 @@ int	main(int ac, char **av, char **env)
 {
 	t_data		*data;
 	// char		*temp;
-
 	(void)ac;
 	(void)av;
-	// printf("av: %s\n", av[1]);
 	data = ft_init(env);
 	while (1)
 	{
@@ -80,7 +64,6 @@ int	main(int ac, char **av, char **env)
 		if (!data->line)
 			break ;
 		add_history(data->line);
-		//printf("data->line: %s\n", data->line);
 		if (check_errors(data->line))
 		{
 			// reset_cmd(data);
@@ -88,7 +71,6 @@ int	main(int ac, char **av, char **env)
 			// continue ;
 			break ;
 		}
-			// ft_exit_fork(data, NULL, 0);
 		ft_lexer(data);
 		if (!ft_parser(data))
 		{
@@ -100,7 +82,6 @@ int	main(int ac, char **av, char **env)
 		reset_cmd(data);
 		free(data->line);
 	}
-	//ft_putstr_fd("exit", 1);
 	free_all(data);
 	return (0);
 }

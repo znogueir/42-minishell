@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exits.c                                            :+:      :+:    :+:   */
@@ -40,7 +40,7 @@ int	ft_no_such_file(char *prog)
 
 int	is_directory(char *path)
 {
-	struct stat statbuf;
+	struct stat	statbuf;
 
 	if (stat(path, &statbuf) != 0)
 		return (0);
@@ -58,4 +58,3 @@ int	ft_is_directory(char *prog)
 	g_exit = 126;
 	return (126);
 }
-

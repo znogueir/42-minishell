@@ -37,6 +37,20 @@ int	is_alphanum(char c)
 	return (0);
 }
 
+void	print_list(t_cmdline *cmd)
+{
+	if (cmd)
+		ft_printf("\n");
+	while (cmd)
+	{
+		ft_printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
+		ft_printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
+		cmd = cmd->next;
+	}
+	if (cmd)
+		ft_printf("\n");
+}
+
 void	print_colors(void)
 {
 	ft_printf("----test colors :----\n");

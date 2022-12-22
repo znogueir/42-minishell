@@ -147,7 +147,6 @@ int	ft_pipex(t_data *data)
 	data->outsave = dup(1);
 	while (table)
 	{
-
 		if (table->status)
 		{
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
