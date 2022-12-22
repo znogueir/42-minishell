@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:49:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	sort_export(t_data *data)
 		}
 		// ft_printf("%s\n", next_min->name);
 		env_min = next_min;
-		ft_printf("%d export %s=\"%s\"\n", env_len, env_min->name, \
+		ft_printf("export %s=\"%s\"\n", env_min->name, \
 		env_min->content);
 		// env_len--;
 	}
@@ -105,6 +105,7 @@ int	parse_export(char **cmd, t_data *data)
 		if (check_identifier(cmd[j]))
 		{
 			j++;
+			g_exit = 1;
 			continue ;
 		}
 		while (cmd[j][i] && cmd[j][i] != '=' && cmd[j][i] != '+')
@@ -119,7 +120,7 @@ int	parse_export(char **cmd, t_data *data)
 	}
 	if (!cmd[1])
 		sort_export(data);
-	return (0);
+	return (g_exit);
 }
 
 int	ft_export(t_data *data, char *name, char *content, int append)

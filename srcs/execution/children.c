@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/19 02:26:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:35:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	// outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
+	data->open_pipe = 1;
 	// if (!cmd)
 	// 	return ;
 	if (cmd && cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
