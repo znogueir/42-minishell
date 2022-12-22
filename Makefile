@@ -25,6 +25,7 @@ PARSE	= check_init.c \
 		lexer.c \
 		lst_new.c \
 		lst_addback.c \
+		lst_utils.c \
 		misc.c \
 		parser.c \
 		token_types.c \
