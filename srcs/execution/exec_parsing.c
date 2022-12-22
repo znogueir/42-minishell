@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/21 23:14:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/22 01:11:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,28 +115,37 @@ int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 	return (open);
 }
 
-void	make_cmdtable(t_data *data)
+void	ft_pop_nulls(t_data *data)
 {
-	t_cmdline	*line;
 	t_cmdline	*temp;
-	t_cmdtable	*cur_tab;
 
-	line = data->cmd;
 	temp = data->cmd;
-	while (temp)
+	while (temp->next)
 	{
 		if (temp->content == NULL)
 			temp = ft_cmdpop(&data->cmd, temp);
 		else
 			temp = temp->next;
 	}
-	while (line && line->type != NEWLINES)
+}
+
+int	make_cmdtable(t_data *data)
+{
+	t_cmdline	*line;
+	t_cmdline	*temp;
+	t_cmdtable	*cur_tab;
+
+	line = data->cmd;
+	ft_pop_nulls(data);
+	print_list(data->cmd);
+	g_exit = ft_parser(data);
+	if (g_exit)
+		return (1);
+	while (line && line->content && line->type != NEWLINES)
 	{
-		while (!line->content)
+		while (line && !line->content)
 			line = line->next;
 		ft_tableadd_back(&data->cmdtable, ft_tablenew());
-		// printf("cmdtable: %p\n", data->cmdtable);
-		// printf("cmdtable->next: %p\n", data->cmdtable->next);
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
 		cur_tab->status = ft_fill_files(cur_tab, line);
@@ -146,4 +155,5 @@ void	make_cmdtable(t_data *data)
 		if (line)
 			line = line->next;
 	}
+	return (0);
 }

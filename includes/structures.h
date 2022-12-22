@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@42.fr>                  +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/11 00:02:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:34:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data
 	int			insave;
 	int			outsave;
 	int			pid;
+	int			open_pipe;
 }				t_data;
 
 #endif

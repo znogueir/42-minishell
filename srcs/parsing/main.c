@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/21 23:13:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/22 01:10:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_data	*ft_init(char **env)
 	data->cmdtable = NULL;
 	data->filelist = NULL;
 	data->char_env = NULL;
+	data->open_pipe = 0;
 	set_env(env, data);
 	return (data);
 }

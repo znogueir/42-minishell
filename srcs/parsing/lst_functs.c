@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/21 23:09:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/12/22 01:01:03 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop)
 	save = topop;
 	while (lst->next && lst->next != topop)
 		lst = lst->next;
+	if (lst == topop)
+	{
+		// free(topop->content);
+		// free(topop);
+		return (NULL);
+	}
 	if (lst->next == topop)
 	{
 		save = lst->next->next;
