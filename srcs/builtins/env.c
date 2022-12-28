@@ -14,14 +14,15 @@
 
 int	env_error(char *str)
 {
-	ft_putstr_fd("env: \'", 2);
-	if (str[0] == '-')
-	{
-		ft_putstr_fd("invalid option -- \'", 2);
-		ft_putstr_fd(str + 1, 2);
-		ft_putstr_fd("\'\n", 2);
-		return (125);
-	}
+	ft_putstr_fd("env: ", 2);
+	// if (str[0] == '-')
+	// {
+	// 	ft_putstr_fd("options unavailable -- \'", 2);
+	// 	ft_putstr_fd(str + 1, 2);
+	// 	ft_putstr_fd("\'\n", 2);
+	// 	return (125);
+	// }
+	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\': No such file or directory\n", 2);
 	return (127);

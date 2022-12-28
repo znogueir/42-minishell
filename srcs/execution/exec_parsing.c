@@ -137,7 +137,7 @@ int	make_cmdtable(t_data *data)
 
 	line = data->cmd;
 	ft_pop_nulls(data);
-	print_list(data->cmd);
+	// print_list(data->cmd);
 	g_exit = ft_parser(data);
 	if (g_exit)
 		return (1);

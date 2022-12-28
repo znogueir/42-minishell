@@ -94,8 +94,7 @@ void	ft_check_fds(t_cmdtable *table)
 		}
 		else if (outfile->fd == -1)
 			perror(outfile->filename);
-		else
-			perror(infile->filename);
+		perror(infile->filename);
 		table->status = 0;
 		table = table->next;
 	}
@@ -175,10 +174,10 @@ int	ft_executor(t_data *data, char **env)
 {
 	(void)env;
 	data->cmdtable = NULL;
-	print_list(data->cmd);
+	// print_list(data->cmd);
 	if (make_cmdtable(data))
 		return (1);
-	print_list(data->cmd);
+	// print_list(data->cmd);
 	// ft_putstr_fd("\t------pipex------\n", 2);
 	// if (data->cmdtable)
 	// 	display_cmdtable(data->cmdtable);

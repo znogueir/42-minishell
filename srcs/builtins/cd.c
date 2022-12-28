@@ -50,14 +50,14 @@ int	check_cd_expand(t_data *data, char **cmd, char **path)
 			return (write(2, "minishell: cd: HOME not set\n", 29), -1);
 		return (1);
 	}
-	else if (cmd[1][0] == '~')
-	{
-		*path = get_env_content(data, "HOME");
-		if (!(*path))
-			return (write(2, "minishell: cd: HOME not set\n", 29), -1);
-		*path = ft_strjoin(*path, cmd[1] + 1);
-		return (1);
-	}
+	// else if (cmd[1][0] == '~')
+	// {
+	// 	*path = get_env_content(data, "HOME");
+	// 	if (!(*path))
+	// 		return (write(2, "minishell: cd: HOME not set\n", 29), -1);
+	// 	*path = ft_strjoin(*path, cmd[1] + 1);
+	// 	return (1);
+	// }
 	else if (cmd[1][0] == '-' && !cmd[1][1])
 	{
 		*path = get_env_content(data, "OLDPWD");

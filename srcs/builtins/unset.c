@@ -21,14 +21,14 @@ int	check_unset_identifier(char *cmd)
 	(cmd[0] >= 'A' && cmd[0] <= 'Z') || cmd[0] == '_'))
 	{
 		g_exit = 1;
-		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+		return (write(2, "minishell: unset: invalid identifier\n", 38), 1);
 	}
 	while (cmd[i])
 	{
 		if (!(is_alphanum(cmd[i]) || cmd[i] == '_'))
 		{
 			g_exit = 1;
-			return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+			return (write(2, "minishell: unset: invalid identifier\n", 38), 1);
 		}
 		i++;
 	}
