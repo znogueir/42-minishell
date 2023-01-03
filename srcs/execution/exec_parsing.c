@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/22 01:11:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:11:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ int	ft_cmd_count(t_cmdline *line)
 	int	count;
 
 	count = 0;
-	while (!line->content)
-		line = line->next;
 	while (line && line->type != NEWLINES && line->type != PIPE)
 	{
-		if (!line->content || is_redir(line->type))
+		while (!line->content)
+			line = line->next;
+		if (line && (!line->content || is_redir(line->type)))
 		{
 			line = line->next;
-			while (!line->content)
+			while (line && !line->content)
 				line = line->next;
 		}
-		else
+		if (line && line->content)
 			count++;
-		line = line->next;
+		if (line)
+			line = line->next;
 	}
 	// ft_printf("count: %d\n", count);
 	return (count);
@@ -51,7 +52,10 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)
-			break ;
+		{
+			cmdline = cmdline->next;
+			continue ;
+		}
 		if (is_redir(cmdline->type))
 			cmdline = cmdline->next->next;
 		else
@@ -98,8 +102,10 @@ int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 	i = 0;
 	while (open && line && line->type != NEWLINES && line->type != PIPE)
 	{
-		while (!line->content)
+		while (line && !line->content)
 			line = line->next;
+		if (!line)
+			break ;
 		if (open && line->type == LESS)
 			open = ft_infile_open(table, line, i++);
 		if (open && line->type == GREAT)
@@ -120,7 +126,7 @@ void	ft_pop_nulls(t_data *data)
 	t_cmdline	*temp;
 
 	temp = data->cmd;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		if (temp->content == NULL)
 			temp = ft_cmdpop(&data->cmd, temp);
@@ -136,15 +142,16 @@ int	make_cmdtable(t_data *data)
 	t_cmdtable	*cur_tab;
 
 	line = data->cmd;
-	ft_pop_nulls(data);
+	// ft_pop_nulls(data);
 	// print_list(data->cmd);
-	g_exit = ft_parser(data);
-	if (g_exit)
-		return (1);
-	while (line && line->content && line->type != NEWLINES)
+	//g_exit = ft_parser(data);
+	//if (g_exit)
+	//	return (1);
+	while (line && line->type != NEWLINES)
 	{
 		while (line && !line->content)
 			line = line->next;
+		//printf("line: %s\n", line->content);
 		ft_tableadd_back(&data->cmdtable, ft_tablenew());
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
@@ -155,5 +162,6 @@ int	make_cmdtable(t_data *data)
 		if (line)
 			line = line->next;
 	}
+	// display_cmdtable(data->cmdtable);
 	return (0);
 }
