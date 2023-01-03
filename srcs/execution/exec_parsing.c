@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/03 17:11:53 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/03 20:36:51 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@ int	ft_cmd_count(t_cmdline *line)
 	count = 0;
 	while (line && line->type != NEWLINES && line->type != PIPE)
 	{
-		while (!line->content)
+		while (line && !line->content)
 			line = line->next;
 		if (line && (!line->content || is_redir(line->type)))
 		{
-			line = line->next;
+			while (line && is_redir(line->type))
+				line = line->next->next;
+			// if (line)
+			// 	line = line->next;
 			while (line && !line->content)
 				line = line->next;
 		}
-		if (line && line->content)
+		if (line && line->content && line->type == WORD)
 			count++;
 		if (line)
 			line = line->next;
 	}
-	// ft_printf("count: %d\n", count);
 	return (count);
 }
 
@@ -43,6 +45,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 
 	i = 0;
 	count = ft_cmd_count(cmdline);
+	// printf("line: %s, count: %d\n", cmdline->content, count);
 	if (count == 0)
 	{
 		table->cmd = NULL;
@@ -58,6 +61,8 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 		}
 		if (is_redir(cmdline->type))
 			cmdline = cmdline->next->next;
+		// if (cmdline->type == H_DOC || cmdline->type == APPEND)
+		// 	cmdline = cmdline->next;
 		else
 		{
 			table->cmd[i++] = ft_strdup(cmdline->content);
@@ -147,6 +152,7 @@ int	make_cmdtable(t_data *data)
 	//g_exit = ft_parser(data);
 	//if (g_exit)
 	//	return (1);
+	// w
 	while (line && line->type != NEWLINES)
 	{
 		while (line && !line->content)
