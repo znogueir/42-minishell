@@ -31,43 +31,22 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	return (new_word);
 }
 
-int	is_wildcard(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '*')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	expand_wc(t_data *data)
+void	expand_wc(t_data *data, char *str)
 {
 	DIR				*cwd;
-	t_cmdline		*p_cmd;
 	struct dirent	*dir_content;
 
-	p_cmd = data->cmd;
+	(void)str;
 	cwd = opendir(".");
-	ft_printf("%p\n", cwd);
+	ft_printf("%s\n", data->wildcards);
 	dir_content = readdir(cwd);
 	while (dir_content)
 	{
 		ft_printf("%s\n", dir_content->d_name);
 		dir_content = readdir(cwd);
 	}
-	while (p_cmd)
-	{
-		if (is_wildcard(p_cmd->content))
-		{
-			ft_printf("WC!!\n");
-		}
-		p_cmd = p_cmd->next;
-	}
+	free(data->wildcards);
+	data->wildcards = NULL;
 }
 
 char	small_expand(t_data *data, char **new_word, char *str, int *i)
@@ -86,15 +65,14 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 			while (is_alphanum(str[*i]) || str[*i] == '_')
 				(*i)++;
 		}
-		else if (str[*i] == '*')
-		{
-			ft_printf("WC!! : %s, %s\n", *new_word, str);
-			*new_word = ft_stradd_char(*new_word, str[(*i)++]);
-		}
 		else if (str[*i] == 34 || str[*i] == 39)
 			return (str[(*i)++]);
 		else
+		{
+			if (str[*i] == '*')
+				data->wildcards = ft_stradd_char(data->wildcards, '1');
 			*new_word = ft_stradd_char(*new_word, str[(*i)++]);
+		}
 	}
 	return (0);
 }
@@ -121,7 +99,11 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 				i++;
 		}
 		else
+		{
+			if (str[i] == '*')
+				data->wildcards = ft_stradd_char(data->wildcards, '0');
 			new_word = ft_stradd_char(new_word, str[i++]);
+		}
 	}
 	if (!str[i])
 		return (new_word);
@@ -150,6 +132,7 @@ int	ft_expander(t_data *data)
 				new_word = big_expand(data, new_word, p_cmd->content);
 				free(p_cmd->content);
 				p_cmd->content = new_word;
+				expand_wc(data, p_cmd->content);
 			}
 		}
 		p_cmd = p_cmd->next;

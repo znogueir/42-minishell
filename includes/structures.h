@@ -30,18 +30,18 @@ typedef struct s_env
 typedef struct s_filelist
 {
 	int					fd;
-	char				*filename;
 	int					type;
 	int					order;
+	char				*filename;
 	struct s_filelist	*next;
 }						t_filelist;
 
 typedef struct s_cmdtable
 {
 	char				**cmd;
+	int					status;
 	t_filelist			*infile;
 	t_filelist			*outfile;
-	int					status;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -49,6 +49,7 @@ typedef struct s_data
 {
 	int			quote;
 	char		*line;
+	char		*wildcards;
 	char		**paths;
 	char		**char_env;
 	t_env		*loc_env;

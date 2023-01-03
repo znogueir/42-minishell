@@ -35,6 +35,7 @@ t_data	*ft_init(char **env)
 		return (NULL);
 	data->quote = 0;
 	data->line = NULL;
+	data->wildcards = NULL;
 	data->loc_env = NULL;
 	data->cmd = NULL;
 	data->cmdtable = NULL;
