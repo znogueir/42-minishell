@@ -45,6 +45,9 @@ void	expand_wc(t_data *data, char *str)
 		ft_printf("%s\n", dir_content->d_name);
 		dir_content = readdir(cwd);
 	}
+	free(str);
+	str = NULL;
+	str = ft_strdup("bla");
 	free(data->wildcards);
 	data->wildcards = NULL;
 }
@@ -137,6 +140,7 @@ int	ft_expander(t_data *data)
 		}
 		p_cmd = p_cmd->next;
 	}
+	print_list(data->cmd);
 	return (0);
 }
 
