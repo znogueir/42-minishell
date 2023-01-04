@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/03 20:36:51 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:09:36 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,18 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	table->cmd[i] = NULL;
 }
 
-int	ft_here_doc(t_cmdline *cmdline)
+int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 {
 	int	h_doc;
 	int	open;
-	int	count;
 
 	h_doc = 1;
 	open = 1;
-	count = 0;
 	while (cmdline && cmdline->type != NEWLINES && cmdline->type != PIPE)
 	{
 		if (cmdline->type == H_DOC)
-			h_doc = ft_here_doc_write(cmdline->next->content, count++);
+			h_doc = \
+			ft_here_doc_write(cmdline->next->content, data->hdoc_write++);
 		if (!h_doc)
 			open = h_doc;
 		cmdline = cmdline->next;
@@ -92,16 +91,14 @@ int	ft_here_doc(t_cmdline *cmdline)
 	return (open);
 }
 
-int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
+int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 {
 	t_cmdline	*line;
 	int			open;
 	int			i;
-	int			count;
 
-	count = 0;
 	line = cmdline;
-	open = ft_here_doc(cmdline);
+	open = ft_here_doc(data, cmdline);
 	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
 	ft_fileadd_back(&table->outfile, ft_filenew(1, ft_strdup(OUT), GREAT, -1));
 	i = 0;
@@ -117,7 +114,7 @@ int	ft_fill_files(t_cmdtable *table, t_cmdline *cmdline)
 			open = ft_outfile_open(table, line, \
 			O_RDWR | O_CREAT | O_TRUNC, i++);
 		if (open && line->type == H_DOC)
-			open = ft_here_doc_open(table, line, i++, count++);
+			open = ft_here_doc_open(table, line, i++, data->hdoc_open++);
 		if (open && line->type == APPEND)
 			open = ft_outfile_open(table, line, \
 			O_RDWR | O_CREAT | O_APPEND, i++);
@@ -161,13 +158,15 @@ int	make_cmdtable(t_data *data)
 		ft_tableadd_back(&data->cmdtable, ft_tablenew());
 		cur_tab = get_last(data->cmdtable);
 		temp = line;
-		cur_tab->status = ft_fill_files(cur_tab, line);
+		cur_tab->status = ft_fill_files(data, cur_tab, line);
 		ft_make_cmd_array(cur_tab, temp);
 		while (line && line->type != PIPE)
 			line = line->next;
 		if (line)
 			line = line->next;
 	}
+	data->hdoc_open = 0;
+	data->hdoc_write = 0;
 	// display_cmdtable(data->cmdtable);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/22 00:34:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:27:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_data
 	int			outsave;
 	int			pid;
 	int			open_pipe;
+	int			hdoc_open;
+	int			hdoc_write;
 }				t_data;
 
 #endif

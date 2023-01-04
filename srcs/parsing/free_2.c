@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:08:28 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/22 20:08:30 by znogueir         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:02:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	free_files(t_filelist *filelist)
 	{
 		prev = filelist;
 		filelist = filelist->next;
+		if (prev->type == H_DOC)
+			unlink(prev->filename);
 		free(prev->filename);
 		free(prev);
 	}
@@ -58,6 +60,7 @@ void	free_table(t_cmdtable *table)
 
 	while (table)
 	{
+		// while (data->hdoc_write--)
 		prev = table;
 		table = table->next;
 		free_files(prev->infile);
