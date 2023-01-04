@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/03 20:36:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:13:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,26 @@ void	ft_check_fds(t_cmdtable *table)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
+		display_cmdtable(table);
 		if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
 		{
 			table->status = 1;
 			table = table->next;
 			continue ;
 		}
-		else if (outfile->fd == -1 && infile->fd == -1)
-		{
-			if (outfile->order < infile->order)
-				perror(outfile->filename);
-			else
-				perror(infile->filename);
-		}
+		// else if (outfile->fd == -1 && infile->fd == -1)
+		// {
+		// 	if (outfile->order < infile->order)
+		// 		perror(outfile->filename);
+		// 	else
+		// 		perror(infile->filename);
+		// }
 		else if (outfile->fd == -1)
 			perror(outfile->filename);
-		perror(infile->filename);
+		else
+			perror(infile->filename);
 		table->status = 0;
+		g_exit = 1;
 		table = table->next;
 	}
 }
