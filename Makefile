@@ -19,7 +19,7 @@ INC_PATH		= includes/
 INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
 PARSE	= check_init.c \
-		expander_wc_bonus.c \
+		expander.c \
 		free.c \
 		free_2.c \
 		lexer.c \

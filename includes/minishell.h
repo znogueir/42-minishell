@@ -154,6 +154,8 @@ void		handle_signals_v2(int sig);
 void		signal_handler(void);
 
 // miscellaneous
+int			ft_alphacmp(char *s1, char *s2);
+int			ft_strcmp(char *s1, char *s2);
 void		check_builtins(t_data *data);
 void		print_colors(void);
 
