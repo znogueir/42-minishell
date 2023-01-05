@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+int	ft_uppercmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] >= 'A' && s1[i] <= 'Z' && s1[i] == s2[i] - 32)
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_alphacmp(char *s1, char *s2)
 {
 	size_t			i;
@@ -30,12 +46,12 @@ int	ft_alphacmp(char *s1, char *s2)
 		if (s2[i] >= 'A' && s2[i] <= 'Z')
 			s2_f += 32;
 		if (s1_f != s2_f)
-			break ;
-		// if (s1[i] >= 'A' && s2[i] <= 'Z' && s1[i] == s2[i] - 32)
-		// 	return (1);
+			return (s2_f - s1_f);
 		i++;
 	}
-	return (s1_f - s2_f);
+	if (!s1[i] && !s2[i])
+		return (ft_uppercmp(s1, s2));
+	return (s2[i] - s1[i]);
 }
 
 int	ft_strcmp(char *s1, char *s2)

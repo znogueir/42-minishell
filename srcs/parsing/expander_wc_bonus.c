@@ -79,11 +79,11 @@ void	alpha_sort(char **str)
 		j = 0;
 		while (str[j + 1])
 		{
-			if (ft_alphacmp(str[j], str[j + 1]) > 0)
+			if (ft_alphacmp(str[j], str[j + 1]) < 0)
 				ft_strswap(&str[j], &str[j + 1]);
 			j++;
 		}
-		print_names(str);
+		// print_names(str);
 		i++;
 	}
 }
@@ -114,9 +114,8 @@ char	**get_file_names(void)
 	}
 	file_names[i] = NULL;
 	closedir(cwd);
-	print_names(file_names);
 	alpha_sort(file_names);
-	// print_names(file_names);
+	print_names(file_names);
 	return (file_names);
 }
 
