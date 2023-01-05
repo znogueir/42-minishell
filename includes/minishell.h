@@ -96,7 +96,7 @@ void		free_all(t_data *data);
 void		free_files(t_filelist *filelist);
 void		ft_exit_fork(t_data *data, char **command, int ext);
 
-// pre_lex
+//	pre_lex
 int			check_errors(char *line);
 
 //	lexer
@@ -153,7 +153,7 @@ void		handle_sigint(int sig);
 void		handle_signals_v2(int sig);
 void		signal_handler(void);
 
-// miscellaneous
+//	miscellaneous
 int			ft_alphacmp(char *s1, char *s2);
 int			ft_strcmp(char *s1, char *s2);
 void		check_builtins(t_data *data);
@@ -163,10 +163,17 @@ void		print_colors(void);
 int			find_token_type(char *token);
 char		*convert_type(int type);
 
-// executor
+//	executor
 int			ft_executor(t_data *data, char **env);
 void		display_cmdtable(t_cmdtable *table);
 int			make_cmdtable(t_data *data);
+
+//	wildcards
+int			is_dir(char *name);
+int			is_wildcard(t_data *data);
+int			check_filename(char *file_name, char *str, char *wc);
+char		**get_file_names(void);
+void		finish_wc(t_data *data, char **str, char *new_str);
 
 //open_close
 int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);

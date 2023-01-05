@@ -31,31 +31,6 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	return (new_word);
 }
 
-int	get_nbrof_files(void)
-{
-	int		count;
-	DIR		*cwd;
-
-	cwd = opendir(".");
-	if (!cwd)
-		return (0);
-	count = 0;
-	while (readdir(cwd))
-		count++;
-	closedir(cwd);
-	// ft_printf("%d\n", count);
-	return (count);
-}
-
-void	ft_strswap(char **s1, char **s2)
-{
-	char	*tmp;
-
-	tmp = *s1;
-	*s1 = *s2;
-	*s2 = tmp;
-}
-
 void	print_names(char **strs)
 {
 	int	i;
@@ -66,146 +41,6 @@ void	print_names(char **strs)
 		ft_printf("%s\n", strs[i]);
 		i++;
 	}
-}
-
-void	alpha_sort(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[j + 1])
-		{
-			if (ft_alphacmp(str[j], str[j + 1]) < 0)
-				ft_strswap(&str[j], &str[j + 1]);
-			j++;
-		}
-		// print_names(str);
-		i++;
-	}
-}
-
-char	**get_file_names(void)
-{
-	int				nbr_of_files;
-	int				i;
-	DIR				*cwd;
-	char			**file_names;
-	struct dirent	*dir_content;
-
-	nbr_of_files = get_nbrof_files();
-	if (!nbr_of_files)
-		return (NULL);
-	file_names = malloc(sizeof(char *) * (nbr_of_files + 1));
-	//protect malloc;
-	cwd = opendir(".");
-	if (!cwd)
-		return (0);
-	i = 0;
-	dir_content = readdir(cwd);
-	while (dir_content)
-	{
-		file_names[i] = ft_strdup(dir_content->d_name);
-		dir_content = readdir(cwd);
-		i++;
-	}
-	file_names[i] = NULL;
-	closedir(cwd);
-	alpha_sort(file_names);
-	print_names(file_names);
-	return (file_names);
-}
-
-int	is_wildcard(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->wildcards && data->wildcards[i])
-	{
-		if (data->wildcards[i] == '1')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_filename(char *file_name, char *str, char *wc)
-{
-	if (*str == '*' && *wc == '1')
-	{
-		while (*str == '*' && *wc == '1')
-		{
-			str++;
-			wc++;
-		}
-		if (!*str || *str == '/')
-			return (1);
-		while (*file_name && *str != *file_name)
-			file_name++;
-		if (!*file_name)
-			return (0);
-	}
-	while (*str && *str != '/' && *file_name)
-	{
-		if (*str == '*')
-		{
-			if (*wc == '1')
-				return (check_filename(file_name, str, wc));
-			else
-				wc++;
-		}
-		if (*str != *file_name)
-			return (0);
-		str++;
-		file_name++;
-	}
-	if (!*file_name)
-		return (1);
-	return (0);
-}
-
-void	finish_wc(t_data *data, char **str, char *new_str)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	if (new_str)
-	{
-		free(*str);
-		*str = NULL;
-		tmp = new_str;
-		*str = ft_strtrim(tmp, " ");
-		free(new_str);
-	}
-	free(data->wildcards);
-	data->wildcards = NULL;
-}
-
-int	is_dir(char *name)
-{
-	int				type;
-	DIR				*cwd;
-	struct dirent	*dir_content;
-
-	cwd = opendir(".");
-	if (!cwd)
-		return (-1);
-	dir_content = readdir(cwd);
-	while (dir_content)
-	{
-		if (!better_strncmp(name, dir_content->d_name, ft_strlen(name)))
-		{
-			type = dir_content->d_type;
-			return (closedir(cwd), type == 4);
-		}
-		dir_content = readdir(cwd);
-	}
-	closedir(cwd);
-	return (0);
 }
 
 void	expand_wc(t_data *data, char **str)
@@ -219,6 +54,7 @@ void	expand_wc(t_data *data, char **str)
 	i = 0;
 	new_str = NULL;
 	file_names = get_file_names();
+	// ft_printf("wc : %s\n", data->wildcards);
 	while (file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
@@ -229,10 +65,13 @@ void	expand_wc(t_data *data, char **str)
 		if (file_names[i] && check_filename(file_names[i], *str, \
 		data->wildcards))
 		{
+			if ((*str)[ft_strlen(*str) - 1] == '/')
+				file_names[i] = ft_stradd_char(file_names[i], '/');
 			file_names[i] = ft_stradd_char(file_names[i], ' ');
 			new_str = ft_strjoin(new_str, file_names[i]);
 		}
-		free(file_names[i++]);
+		if (file_names[i])
+			free(file_names[i++]);
 	}
 	free(file_names);
 	finish_wc(data, str, new_str);
@@ -328,9 +167,3 @@ int	ft_expander(t_data *data)
 	}
 	return (0);
 }
-
-// add a char* in every block that contains as many bytes as the number of '*',
-// and for each 1 -> expand the '*' and for each 0 -> treat it as a normal char.
-// 0 means it was in quotes.
-// so in small_expand for each star -> add 1;
-// and in big_expand for each star -> add 0;
