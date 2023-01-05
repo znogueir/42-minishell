@@ -56,6 +56,18 @@ void	ft_strswap(char **s1, char **s2)
 	*s2 = tmp;
 }
 
+void	print_names(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		ft_printf("%s\n", strs[i]);
+		i++;
+	}
+}
+
 void	alpha_sort(char **str)
 {
 	int	i;
@@ -71,6 +83,7 @@ void	alpha_sort(char **str)
 				ft_strswap(&str[j], &str[j + 1]);
 			j++;
 		}
+		print_names(str);
 		i++;
 	}
 }
@@ -101,7 +114,9 @@ char	**get_file_names(void)
 	}
 	file_names[i] = NULL;
 	closedir(cwd);
+	print_names(file_names);
 	alpha_sort(file_names);
+	// print_names(file_names);
 	return (file_names);
 }
 

@@ -21,20 +21,20 @@ int	ft_alphacmp(char *s1, char *s2)
 	if (!s1 || !s2)
 		return (0);
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
+	while (s1[i] && s2[i])
+	{
+		s1_f = s1[i];
+		s2_f = s2[i];
+		if (s1[i] >= 'A' && s1[i] <= 'Z')
+			s1_f += 32;
+		if (s2[i] >= 'A' && s2[i] <= 'Z')
+			s2_f += 32;
+		if (s1_f != s2_f)
+			break ;
+		// if (s1[i] >= 'A' && s2[i] <= 'Z' && s1[i] == s2[i] - 32)
+		// 	return (1);
 		i++;
-	if (s1[i] >= 'a' && s1[i] <= 'z' && s1[i] == s2[i] + 32)
-		return (-1);
-	// ft_printf("2 : %c\n", s1[i]);
-	if (s2[i] >= 'a' && s2[i] <= 'z' && s2[i] == s1[i] + 32)
-		return (1);
-	// ft_printf("1 : %c\n", s2[i]);
-	s1_f = s1[i];
-	s2_f = s2[i];
-	if (s1[i] >= 'A' && s1[i] <= 'Z')
-		s1_f += 32;
-	if (s2[i] >= 'A' && s2[i] <= 'Z')
-		s2_f += 32;
+	}
 	return (s1_f - s2_f);
 }
 

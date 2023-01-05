@@ -79,7 +79,7 @@ void	ft_check_fds(t_cmdtable *table)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
-		display_cmdtable(table);
+		// display_cmdtable(table);
 		if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
 		{
 			table->status = 1;
