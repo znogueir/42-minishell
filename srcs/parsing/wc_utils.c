@@ -68,6 +68,46 @@ int	is_wildcard(t_data *data)
 	return (0);
 }
 
+// int	check_filename2(char *file_name, char *str, char *wc)
+// {
+// 	while (*str && *str != '/' && *file_name)
+// 	{
+// 		if (*str == '*')
+// 		{
+// 			if (*wc == '1')
+// 				return (check_filename(file_name, str, wc));
+// 			else
+// 				wc++;
+// 		}
+// 		if (*str != *file_name)
+// 			return (0);
+// 		str++;
+// 		file_name++;
+// 	}
+// 	if (!*file_name)
+// 		return (1);
+// 	return (0);
+// }
+
+// int	check_filename(char *file_name, char *str, char *wc)
+// {
+// 	if (*str == '*' && *wc == '1')
+// 	{
+// 		while (*str == '*' && *wc == '1')
+// 		{
+// 			str++;
+// 			wc++;
+// 		}
+// 		if (!*str || *str == '/')
+// 			return (1);
+// 		while (*file_name && *str != *file_name)
+// 			file_name++;
+// 		if (!*file_name)
+// 			return (0);
+// 	}
+// 	return (check_filename2(file_name, str, wc));
+// }
+
 int	check_filename(char *file_name, char *str, char *wc)
 {
 	if (*str == '*' && *wc == '1')

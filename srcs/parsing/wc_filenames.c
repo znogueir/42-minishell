@@ -24,7 +24,6 @@ int	get_nbrof_files(void)
 	while (readdir(cwd))
 		count++;
 	closedir(cwd);
-	// ft_printf("%d\n", count);
 	return (count);
 }
 
@@ -37,7 +36,7 @@ void	ft_strswap(char **s1, char **s2)
 	*s2 = tmp;
 }
 
-void	alpha_sort(char **str)
+char	**alpha_sort(char **str)
 {
 	int	i;
 	int	j;
@@ -52,15 +51,31 @@ void	alpha_sort(char **str)
 				ft_strswap(&str[j], &str[j + 1]);
 			j++;
 		}
-		// print_names(str);
 		i++;
 	}
+	return (str);
+}
+
+char	**fill_names(DIR *cwd, struct dirent *dir_content, char **file_names)
+{
+	int	i;
+
+	i = 0;
+	dir_content = readdir(cwd);
+	while (dir_content)
+	{
+		file_names[i] = ft_strdup(dir_content->d_name);
+		dir_content = readdir(cwd);
+		i++;
+	}
+	file_names[i] = NULL;
+	closedir(cwd);
+	return (file_names);
 }
 
 char	**get_file_names(void)
 {
 	int				nbr_of_files;
-	int				i;
 	DIR				*cwd;
 	char			**file_names;
 	struct dirent	*dir_content;
@@ -73,17 +88,7 @@ char	**get_file_names(void)
 	cwd = opendir(".");
 	if (!cwd)
 		return (0);
-	i = 0;
-	dir_content = readdir(cwd);
-	while (dir_content)
-	{
-		file_names[i] = ft_strdup(dir_content->d_name);
-		dir_content = readdir(cwd);
-		i++;
-	}
-	file_names[i] = NULL;
-	closedir(cwd);
-	alpha_sort(file_names);
-	// print_names(file_names);
-	return (file_names);
+	dir_content = NULL;
+	file_names = fill_names(cwd, dir_content, file_names);
+	return (alpha_sort(file_names));
 }

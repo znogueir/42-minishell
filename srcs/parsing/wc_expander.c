@@ -54,7 +54,7 @@ void	expand_wc(t_data *data, char **str)
 	i = 0;
 	new_str = NULL;
 	file_names = get_file_names();
-	// ft_printf("wc : %s\n", data->wildcards);
+	ft_printf("wc : %s\n", data->wildcards);
 	while (file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
