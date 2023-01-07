@@ -31,17 +31,17 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	return (new_word);
 }
 
-void	print_names(char **strs)
-{
-	int	i;
+// void	print_names(char **strs)
+// {
+// 	int	i;
 
-	i = 0;
-	while (strs[i])
-	{
-		ft_printf("%s\n", strs[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (strs[i])
+// 	{
+// 		ft_printf("%s\n", strs[i]);
+// 		i++;
+// 	}
+// }
 
 t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 {
