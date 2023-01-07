@@ -54,7 +54,7 @@ void	expand_wc(t_data *data, char **str)
 	i = 0;
 	new_str = NULL;
 	file_names = get_file_names();
-	ft_printf("wc : %s\n", data->wildcards);
+	// ft_printf("wc : %s\n", data->wildcards);
 	while (file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
@@ -62,11 +62,12 @@ void	expand_wc(t_data *data, char **str)
 		while (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/' && \
 		!is_dir(file_names[i]))
 			free(file_names[i++]);
+		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
+			file_names[i] = ft_stradd_char(file_names[i], '/');
+		// ft_printf("check\n");
 		if (file_names[i] && check_filename(file_names[i], *str, \
-		data->wildcards))
+		data->wildcards, 1))
 		{
-			if ((*str)[ft_strlen(*str) - 1] == '/')
-				file_names[i] = ft_stradd_char(file_names[i], '/');
 			file_names[i] = ft_stradd_char(file_names[i], ' ');
 			new_str = ft_strjoin(new_str, file_names[i]);
 		}

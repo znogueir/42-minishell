@@ -68,77 +68,47 @@ int	is_wildcard(t_data *data)
 	return (0);
 }
 
-// int	check_filename2(char *file_name, char *str, char *wc)
-// {
-// 	while (*str && *str != '/' && *file_name)
-// 	{
-// 		if (*str == '*')
-// 		{
-// 			if (*wc == '1')
-// 				return (check_filename(file_name, str, wc));
-// 			else
-// 				wc++;
-// 		}
-// 		if (*str != *file_name)
-// 			return (0);
-// 		str++;
-// 		file_name++;
-// 	}
-// 	if (!*file_name)
-// 		return (1);
-// 	return (0);
-// }
-
-// int	check_filename(char *file_name, char *str, char *wc)
-// {
-// 	if (*str == '*' && *wc == '1')
-// 	{
-// 		while (*str == '*' && *wc == '1')
-// 		{
-// 			str++;
-// 			wc++;
-// 		}
-// 		if (!*str || *str == '/')
-// 			return (1);
-// 		while (*file_name && *str != *file_name)
-// 			file_name++;
-// 		if (!*file_name)
-// 			return (0);
-// 	}
-// 	return (check_filename2(file_name, str, wc));
-// }
-
-int	check_filename(char *file_name, char *str, char *wc)
+int	check_filename(char *file_name, char *pattern, char *wc, int start)
 {
-	if (*str == '*' && *wc == '1')
+	char	*save;
+
+	save = pattern;
+	while (*pattern)
 	{
-		while (*str == '*' && *wc == '1')
+		if (*pattern == '*' && *wc == '1')
 		{
-			str++;
-			wc++;
-		}
-		if (!*str || *str == '/')
-			return (1);
-		while (*file_name && *str != *file_name)
-			file_name++;
-		if (!*file_name)
-			return (0);
-	}
-	while (*str && *str != '/' && *file_name)
-	{
-		if (*str == '*')
-		{
-			if (*wc == '1')
-				return (check_filename(file_name, str, wc));
-			else
+			while (*pattern == '*' && *wc == '1')
+			{
+				pattern++;
 				wc++;
+			}
+			if (!*pattern)
+			{
+				return (1);
+			}
+			save = pattern;
 		}
-		if (*str != *file_name)
-			return (0);
-		str++;
+		else if (*pattern != *file_name)
+		{
+			if (start || !*file_name)
+				return (0);
+			start = 0;
+			file_name++;
+			pattern = save;
+			continue ;
+		}
+		if (*pattern != *file_name)
+		{
+			if (!*file_name)
+				return (0);
+			start = 0;
+			file_name++;
+			pattern = save;
+			continue ;
+		}
+		pattern++;
 		file_name++;
+		start = 0;
 	}
-	if (!*file_name)
-		return (1);
-	return (0);
+	return (!*pattern && !*file_name);
 }

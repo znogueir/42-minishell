@@ -171,7 +171,7 @@ int			make_cmdtable(t_data *data);
 //	wildcards
 int			is_dir(char *name);
 int			is_wildcard(t_data *data);
-int			check_filename(char *file_name, char *str, char *wc);
+int			check_filename(char *file_name, char *str, char *wc, int start);
 char		**get_file_names(void);
 void		finish_wc(t_data *data, char **str, char *new_str);
 
