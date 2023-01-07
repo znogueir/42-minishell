@@ -71,8 +71,10 @@ int	is_wildcard(t_data *data)
 int	check_filename(char *file_name, char *pattern, char *wc, int start)
 {
 	char	*save;
+	char	*wc_save;
 
 	save = pattern;
+	wc_save = wc;
 	while (*pattern)
 	{
 		if (*pattern == '*' && *wc == '1')
@@ -87,14 +89,18 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 				return (1);
 			}
 			save = pattern;
+			wc_save = wc;
 		}
 		else if (*pattern != *file_name)
 		{
 			if (start || !*file_name)
 				return (0);
 			start = 0;
-			file_name++;
+				file_name++;
+			if (*pattern != save[0])
+				file_name--;
 			pattern = save;
+			wc = wc_save;
 			continue ;
 		}
 		if (*pattern != *file_name)
@@ -102,13 +108,23 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 			if (!*file_name)
 				return (0);
 			start = 0;
-			file_name++;
+				file_name++;
+			if (*pattern != save[0])
+				file_name--;
 			pattern = save;
+			wc = wc_save;
 			continue ;
 		}
+		if (*pattern == '*' && *wc == '0')
+			wc++;
 		pattern++;
 		file_name++;
 		start = 0;
+		if (!*pattern && *file_name)
+		{
+			wc = wc_save;
+			pattern = save;
+		}
 	}
 	return (!*pattern && !*file_name);
 }
