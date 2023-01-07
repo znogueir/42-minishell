@@ -43,18 +43,17 @@ void	print_names(char **strs)
 	}
 }
 
-void	expand_wc(t_data *data, char **str)
+t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 {
 	int				i;
-	char			*new_str;
+	t_cmdline		*matching;
 	char			**file_names;
 
 	if (!is_wildcard(data))
-		return ;
+		return (p_cmd);
 	i = 0;
-	new_str = NULL;
+	matching = NULL;
 	file_names = get_file_names();
-	// ft_printf("wc : %s\n", data->wildcards);
 	while (file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
@@ -64,18 +63,13 @@ void	expand_wc(t_data *data, char **str)
 			free(file_names[i++]);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
 			file_names[i] = ft_stradd_char(file_names[i], '/');
-		// ft_printf("check\n");
 		if (file_names[i] && check_filename(file_names[i], *str, \
 		data->wildcards, 1))
-		{
-			file_names[i] = ft_stradd_char(file_names[i], ' ');
-			new_str = ft_strjoin(new_str, file_names[i]);
-		}
+			ft_cmdadd_back(&matching, ft_cmdnew(ft_strdup(file_names[i])));
 		if (file_names[i])
 			free(file_names[i++]);
 	}
-	free(file_names);
-	finish_wc(data, str, new_str);
+	return (free(file_names), finish_wc(data, matching, p_cmd));
 }
 
 char	small_expand(t_data *data, char **new_word, char *str, int *i)
@@ -161,7 +155,7 @@ int	ft_expander(t_data *data)
 				new_word = big_expand(data, new_word, p_cmd->content);
 				free(p_cmd->content);
 				p_cmd->content = new_word;
-				expand_wc(data, &p_cmd->content);
+				p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
 			}
 		}
 		p_cmd = p_cmd->next;

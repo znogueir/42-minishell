@@ -12,21 +12,36 @@
 
 #include "minishell.h"
 
-void	finish_wc(t_data *data, char **str, char *new_str)
+t_cmdline	*get_last_cmd(t_cmdline *cmd)
 {
-	char	*tmp;
+	while (cmd->next)
+		cmd = cmd->next;
+	return (cmd);
+}
 
-	tmp = NULL;
-	if (new_str)
+t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
+{
+	t_cmdline	*tmp;
+	t_cmdline	*ret;
+
+	ret = p_cmd;
+	if (matching)
 	{
-		free(*str);
-		*str = NULL;
-		tmp = new_str;
-		*str = ft_strtrim(tmp, " ");
-		free(new_str);
+		tmp = p_cmd->next;
+		p_cmd->next = matching->next;
+		free(p_cmd->content);
+		p_cmd->content = ft_strdup(matching->content);
+		if (matching->next)
+		{
+			ret = get_last_cmd(matching);
+			ret->next = tmp;
+		}
+		free(matching->content);
+		free(matching);
 	}
 	free(data->wildcards);
 	data->wildcards = NULL;
+	return (ret);
 }
 
 int	is_dir(char *name)

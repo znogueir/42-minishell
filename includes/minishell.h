@@ -173,7 +173,7 @@ int			is_dir(char *name);
 int			is_wildcard(t_data *data);
 int			check_filename(char *file_name, char *str, char *wc, int start);
 char		**get_file_names(void);
-void		finish_wc(t_data *data, char **str, char *new_str);
+t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);
 
 //open_close
 int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);
