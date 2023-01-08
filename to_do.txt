@@ -3,12 +3,12 @@
 - $'thing in quotes' counts as just : 'thing in quotes' double and single; [DONE]
 - fix segfault in $> dollar + redirection [DONE]
 - exit code; [done for builtins ?]
-- exit() with an argument; [DONE]
+- exit() with an argument; [DONE BUT : need to check for int OVERFLOWS !!!!]
 - fix heredocs; [DONE]
 - fix error codes when failing to open things; [DONE]
 - signals (make sure they work in a minishell inside another minishell etc...); [DONE, missing heredocs]
 - fix the weird thign with cd "" : when you do 'cd ""' it acts like it's cd alone and goes to home, but it shouldn't do anything.
-  (problem probably in parsing, we must be deleting the string when it's empty);
-- protect every malloc;
+  (problem probably in parsing, we must be deleting the string when it's empty) [DONE];
+- !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
 - maybe rewrite the execution, put the error messages outside the forks, blabla...;
-- bonus : add wildcards ? (only in the current working directory so should be pretty easy);
+- bonus : add wildcards ? (only in the current working directory so should be pretty easy EASY ? LOL) [DONE];
