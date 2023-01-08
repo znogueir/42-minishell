@@ -39,7 +39,8 @@ int	ft_env(t_env *loc_env, char **cmd)
 	}
 	while (print_env)
 	{
-		ft_printf("%s=%s\n", print_env->name, print_env->content);
+		if (print_env->content)
+			ft_printf("%s=%s\n", print_env->name, print_env->content);
 		print_env = print_env->next;
 	}
 	return (0);
@@ -79,7 +80,7 @@ void	set_env(char **env, t_data *data)
 		}
 		else if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
 			data->paths = ft_split(content, ":");
-		ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
+		ft_envadd_back(&(data->loc_env), ft_envnew(name, content, 1));
 		i++;
 	}
 }

@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+void	print_export(char *name, char *content)
+{
+	if (!content)
+		ft_printf("export %s\n", name);
+	else
+		ft_printf("export %s=\"%s\"\n", name, content);
+}
+
 void	sort_export(t_data *data)
 {
 	int		env_len;
@@ -29,8 +37,7 @@ void	sort_export(t_data *data)
 		p_env = p_env->next;
 		env_len++;
 	}
-	env_len--;
-	ft_printf("export %s=\"%s\"\n", env_min->name, env_min->content);
+	print_export(env_min->name, env_min->content);
 	while (--env_len)
 	{
 		p_env = data->loc_env;
@@ -47,8 +54,7 @@ void	sort_export(t_data *data)
 		}
 		// ft_printf("%s\n", next_min->name);
 		env_min = next_min;
-		ft_printf("export %s=\"%s\"\n", env_min->name, \
-		env_min->content);
+		print_export(env_min->name, env_min->content);
 		// env_len--;
 	}
 }
@@ -104,6 +110,8 @@ int	parse_export(char **cmd, t_data *data)
 		else if (cmd[j][i] && cmd[j][i] == '+' && cmd[j][i + 1] == '=')
 			ft_export(data, ft_substr(cmd[j], 0, i), \
 			ft_strdup(cmd[j] + i + 2), 1);
+		else
+			ft_export(data, ft_substr(cmd[j], 0, i), NULL, 0);
 		j++;
 	}
 	if (!cmd[1])
@@ -132,6 +140,8 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		p_env->content = content;
 		return (0);
 	}
-	ft_envadd_back(&(data->loc_env), ft_envnew(name, content));
-	return (0);
+	if (!content)
+		return (ft_envadd_back(&(data->loc_env), \
+		ft_envnew(name, content, 0)), 0);
+	return (ft_envadd_back(&(data->loc_env), ft_envnew(name, content, 1)), 1);
 }

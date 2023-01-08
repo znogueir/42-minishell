@@ -22,6 +22,7 @@ typedef struct s_cmdline
 
 typedef struct s_env
 {
+	int				env;
 	char			*name;
 	char			*content;
 	struct s_env	*next;

@@ -33,20 +33,36 @@ void	handle_sigint(int sig)
 }
 
 // HEREDOCS
+// void	handle_sig_heredocs(int sig)
+// {
+// 	int	fd;
+
+// 	if (sig == SIGINT)
+// 	{
+// 		fd = open("/dev/null", O_RDONLY);
+// 		dup2(fd, STDIN_FILENO);
+// 		close(fd);
+// 		ft_putstr_fd("\n", 1);
+// 		g_status = 257;
+// 	}
+// 	if (sig == SIGQUIT)
+// 		ft_putstr_fd("\b\b  \b\b", 0);
+// }
 // ft_printf("\nchild\n");
 // fd = open("/dev/null", O_RDONLY);
 // dup2(fd, 0);
 // close(fd);
 // write(0, "\0", 1);
 
-// useless :
-// void	signal_handler(void)
+// int	error_here_doc(t_exec *exec, int stdin_fd)
 // {
-// 	struct sigaction	s_sig;
-
-// 	s_sig.sa_sigaction = handle_signals;
-// 	s_sig.sa_flags = SA_SIGINFO;
-// 	sigemptyset(&s_sig.sa_mask);
-// 	sigaction(SIGINT, &s_sig, 0);
-// 	sigaction(SIGQUIT, &s_sig, 0);
+// 	if (g_status == 777)
+// 	{
+// 		heredoc_rm(exec->tok_lst);
+// 		dup2(stdin_fd, 0);
+// 		close(stdin_fd);
+// 		g_status = 130;
+// 		return (0);
+// 	}
+// 	return (1);
 // }

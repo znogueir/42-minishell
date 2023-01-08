@@ -25,13 +25,14 @@ t_cmdline	*ft_cmdnew(void *content)
 	return (cell);
 }
 
-t_env	*ft_envnew(char *name, char *content)
+t_env	*ft_envnew(char *name, char *content, int is_env)
 {
 	t_env	*cell;
 
 	cell = malloc(sizeof(*cell));
 	if (!cell)
 		return (NULL);
+	cell->env = is_env;
 	cell->name = name;
 	cell->content = content;
 	cell->next = NULL;
