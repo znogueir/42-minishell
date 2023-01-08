@@ -21,7 +21,6 @@ t_cmdtable	*get_last(t_cmdtable *table)
 	return (table);
 }
 
-
 t_filelist	*file_get_last(t_filelist *filelist)
 {
 	t_filelist	*file;

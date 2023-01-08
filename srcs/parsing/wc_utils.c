@@ -83,17 +83,35 @@ int	is_wildcard(t_data *data)
 	return (0);
 }
 
+int	consume_stars(char **pattern, char **wc)
+{
+	while (**pattern == '*' && **wc == '1')
+	{
+		(*pattern)++;
+		(*wc)++;
+	}
+	if (!**pattern)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 int	check_filename(char *file_name, char *pattern, char *wc, int start)
 {
+	int		i;
 	char	*save;
 	char	*wc_save;
 
+	i = 0;
 	save = pattern;
 	wc_save = wc;
 	while (*pattern)
 	{
 		if (*pattern == '*' && *wc == '1')
 		{
+			// if (consume_stars(&pattern, &wc))
+			// 	return (1);
 			while (*pattern == '*' && *wc == '1')
 			{
 				pattern++;
@@ -113,9 +131,10 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 			start = 0;
 				file_name++;
 			if (*pattern != save[0])
-				file_name--;
+				file_name -= i;
 			pattern = save;
 			wc = wc_save;
+			i = 0;
 			continue ;
 		}
 		if (*pattern != *file_name)
@@ -128,17 +147,21 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 				file_name--;
 			pattern = save;
 			wc = wc_save;
+			i = 0;
 			continue ;
 		}
 		if (*pattern == '*' && *wc == '0')
 			wc++;
 		pattern++;
+		i++;
+		// if (*pattern != save[0])
 		file_name++;
 		start = 0;
 		if (!*pattern && *file_name)
 		{
 			wc = wc_save;
 			pattern = save;
+			i = 0;
 		}
 	}
 	return (!*pattern && !*file_name);

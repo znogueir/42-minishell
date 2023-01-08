@@ -92,7 +92,6 @@ int	parse_cd(t_data *data, char **cmd)
 	return (free(path), 0);
 }
 
-
 int	ft_cd(t_data *data, char **cmd)
 {
 	t_env	*env_pwd;
