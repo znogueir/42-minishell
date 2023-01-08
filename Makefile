@@ -18,8 +18,7 @@ PARSE_PATH		= $(SRC_PATH)parsing/
 INC_PATH		= includes/
 INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
-PARSE	= check_init.c \
-		wc_expander.c \
+PARSE	= wc_expander.c \
 		wc_filenames.c \
 		wc_utils.c \
 		free.c \

@@ -144,7 +144,7 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 			start = 0;
 				file_name++;
 			if (*pattern != save[0])
-				file_name--;
+				file_name -= i;
 			pattern = save;
 			wc = wc_save;
 			i = 0;
@@ -154,7 +154,6 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 			wc++;
 		pattern++;
 		i++;
-		// if (*pattern != save[0])
 		file_name++;
 		start = 0;
 		if (!*pattern && *file_name)

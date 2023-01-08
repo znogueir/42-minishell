@@ -71,7 +71,7 @@ extern	int	g_exit;
 /*----------------------------------------------------------------------------*/
 /*									 Prompts								  */
 /*----------------------------------------------------------------------------*/
-# define ERR_PRE "\e[38;5;1;1mx\e[0m minishell: "
+# define ERR_PRE "\e[38;5;1;1mx\e[0m minishell: syntax error"
 //# define PROMPT	"\001\e[38;5;46;1m$>\e[0m\002 "
 # define PROMPT	"minishell$> "
 
@@ -104,7 +104,7 @@ int			ft_lexer(t_data *data);
 
 //	parser
 int			ft_parser(t_data *data);
-void		write_error(char *error_msg);
+void		write_error(char *error_msg, char *token);
 
 //	expander
 int			ft_expander(t_data *data);

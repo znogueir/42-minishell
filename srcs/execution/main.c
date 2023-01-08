@@ -20,12 +20,6 @@ void	reset_cmd(t_data *data)
 	data->cmd = NULL;
 }
 
-void	write_error(char *error_msg)
-{
-	ft_putstr_fd(ERR_PRE, 2);
-	ft_putstr_fd(error_msg, 2);
-}
-
 t_data	*ft_init(char **env)
 {
 	t_data	*data;
@@ -108,10 +102,10 @@ int	launch_normal(int ac, char **av, char **env)
 		add_history(data->line);
 		if (check_errors(data->line))
 		{
-			// reset_cmd(data);
-			// free(data->line);
-			// continue ;
-			break ;
+			reset_cmd(data);
+			free(data->line);
+			continue ;
+			// break ;
 		}
 		ft_lexer(data);
 		exit_status = ft_parser(data);
