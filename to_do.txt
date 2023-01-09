@@ -3,7 +3,7 @@
 - $'thing in quotes' counts as just : 'thing in quotes' double and single; [DONE]
 - fix segfault in $> dollar + redirection [DONE]
 - exit code; [done for builtins ?]
-- exit() with an argument; [DONE BUT : need to check for int OVERFLOWS !!!!]
+- exit() with an argument; [DONE]
 - fix heredocs; [DONE]
 - fix error codes when failing to open things; [DONE]
 - signals (make sure they work in a minishell inside another minishell etc...); [DONE, missing heredocs]
