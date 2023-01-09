@@ -83,7 +83,7 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	{
 		if (cmdline->type == H_DOC)
 			h_doc = \
-			ft_here_doc_write(cmdline->next->content, data->hdoc_write++);
+			ft_here_doc_write(data, cmdline->next->content, data->hdoc_write++);
 		if (!h_doc)
 			open = h_doc;
 		cmdline = cmdline->next;

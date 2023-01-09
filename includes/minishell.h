@@ -152,6 +152,7 @@ void		signal_handler(void);
 void		sig_in_fork(int sig);
 void		handle_sigint(int sig);
 void		handle_signals_v2(int sig);
+void		handle_sig_heredocs(int sig);
 
 //	miscellaneous
 int			ft_strcmp(char *s1, char *s2);
@@ -181,7 +182,7 @@ int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \
 			int order);
 int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, \
 			int count);
-int			ft_here_doc_write(char *limiter, int count);
+int			ft_here_doc_write(t_data *data, char *limiter, int count);
 int			ft_append_open(t_cmdtable *table, t_cmdline *line);
 
 #endif

@@ -78,13 +78,13 @@ int	parse_cd(t_data *data, char **cmd)
 	path = NULL;
 	if (cmd[1] && cmd[2])
 		return (write(2, "minishell: cd: too many arguments\n", 34), 1);
-	if (cmd[1][0] == '\0')
+	if (cmd[1] && cmd[1][0] == '\0')
 		return (1);
 	cd_expand = check_cd_expand(data, cmd, &path);
 	if (cd_expand == -1)
 		return (1);
 	if (!cd_expand)
-		path = ft_strdup(cmd[1]);
+		path = ft_strdup(cmd[1]);	
 	if (chdir(path) != 0)
 		return (free(path), perror("minishell: cd"), 1);
 	if (cd_expand == 2)

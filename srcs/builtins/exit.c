@@ -12,9 +12,27 @@
 
 #include "minishell.h"
 
-int	is_num(char *str)
+int	check_overflow(char *str)
 {
 	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[0] == '-' && str[i + (str[0] == '+' || str[0] == '-')] \
+		> "9223372036854775808"[i])
+			return (0);
+		if (str[0] != '-' && str[i + (str[0] == '+' || str[0] == '-')] \
+		> "9223372036854775807"[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_num(char *str)
+{
+	int		i;
 
 	i = 0;
 	if (str[0] == '+' || str[0] == '-')
@@ -23,9 +41,13 @@ int	is_num(char *str)
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (0);
+		if (i > 18 + (str[0] == '+' || str[0] == '-'))
+			return (0);
 		i++;
 	}
-	return (1);
+	if (ft_strlen(str + (str[0] == '+' || str[0] == '-')) < 19)
+		return (1);
+	return (check_overflow(str));
 }
 
 int	ft_exit(t_data *data, char **cmd)
