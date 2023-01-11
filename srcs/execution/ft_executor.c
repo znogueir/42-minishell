@@ -148,6 +148,29 @@ void	ft_close_fds(t_data *data)
 	ft_close_pipes(data);
 }
 
+void	ft_wait(t_data *data)
+{
+	int			status;
+	// int			i = 0;
+	// t_process	*pid;
+	t_cmdtable	*table;
+
+	// pid = data->process;
+	table = data->cmdtable;
+	while (table)
+	{
+		// printf("pid[%d]: %d\n", i++, table->pid);
+		waitpid(table->pid, &status, 0);
+		if (WTERMSIG(status) == 2)
+			ft_putchar_fd('\n', 1);
+		else if (WTERMSIG(status) == 3)
+			ft_putstr_fd("Quit (core dumped)\n", 1);
+		if (WIFEXITED(status))
+			g_exit = WEXITSTATUS(status);
+		table = table->next;
+	}
+}
+
 int	ft_pipex(t_data *data)
 {
 	t_cmdtable	*table;
@@ -165,6 +188,7 @@ int	ft_pipex(t_data *data)
 		table = table->next;
 		ft_close_pipes(data);
 	}
+	ft_wait(data);
 	ft_close_fds(data);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);

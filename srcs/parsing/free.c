@@ -33,6 +33,7 @@ void	free_all(t_data *data)
 	free_split(data->char_env);
 	free_env(data->loc_env);
 	free_split(data->paths);
+	// free_process(data->process);
 	//free_table(data->cmdtable);
 	free(data);
 }

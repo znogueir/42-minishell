@@ -38,6 +38,7 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
+	// data->process = NULL;
 	set_env(env, data);
 	return (data);
 }
