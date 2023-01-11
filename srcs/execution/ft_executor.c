@@ -151,7 +151,7 @@ void	ft_close_fds(t_data *data)
 void	ft_wait(t_data *data)
 {
 	int			status;
-	// int			i = 0;
+	int			i = 0;
 	// t_process	*pid;
 	t_cmdtable	*table;
 
@@ -159,14 +159,17 @@ void	ft_wait(t_data *data)
 	table = data->cmdtable;
 	while (table)
 	{
-		// printf("pid[%d]: %d\n", i++, table->pid);
-		waitpid(table->pid, &status, 0);
-		if (WTERMSIG(status) == 2)
-			ft_putchar_fd('\n', 1);
-		else if (WTERMSIG(status) == 3)
-			ft_putstr_fd("Quit (core dumped)\n", 1);
-		if (WIFEXITED(status))
-			g_exit = WEXITSTATUS(status);
+		printf("pid[%d]: %d\n", i++, table->pid);
+		if (table->pid > -1)
+		{
+			waitpid(table->pid, &status, 0);
+			if (WTERMSIG(status) == 2)
+				ft_putchar_fd('\n', 1);
+			else if (WTERMSIG(status) == 3)
+				ft_putstr_fd("Quit (core dumped)\n", 1);
+			if (WIFEXITED(status))
+				g_exit = WEXITSTATUS(status);
+		}
 		table = table->next;
 	}
 }
