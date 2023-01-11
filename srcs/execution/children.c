@@ -46,6 +46,15 @@ void	ft_execute(t_data *data, char **command)
 		ft_exit_fork(data, command, g_exit);
 	}
 	convert_env(data, data->loc_env);
+	// printf("--------\n");
+	// for (int i = 0; data->char_env[i]; i++)
+	// 	printf("%s\n", data->char_env[i]);
+	// printf("--------\n");
+	update_env(data->char_env, data);
+	// printf("--------\n");
+	// for (int i = 0; data->paths[i]; i++)
+	// 	printf("%s\n", data->paths[i]);
+	// printf("--------\n");
 	// printf("command[0] %c\n", command[0]);
 	if (command && command[0] && !command[0][0])
 		validcmd = NULL;

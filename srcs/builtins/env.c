@@ -46,17 +46,46 @@ int	ft_env(t_env *loc_env, char **cmd)
 	return (0);
 }
 
-void	split_env(char **name, char **content, char **env)
+void	split_env(char **name, char **content, char *env)
 {
-	static int	i = 0;
+	// static int	i = 0;
 	int			j;
 
 	j = 0;
-	while (env[i][j] != '=')
+	while (env[j] != '=')
 		j++;
-	*name = ft_substr(env[i], 0, j);
-	*content = ft_substr(env[i], j + 1, ft_strlen(env[i] + j + 1));
-	i++;
+	*name = ft_substr(env, 0, j);
+	*content = ft_substr(env, j + 1, ft_strlen(env + j + 1));
+	// i++;
+}
+
+void	update_env(char	**env, t_data *data)
+{
+	int		i;
+	char	*name;
+	char	*content;
+
+	i = 0;
+	name = NULL;
+	content = NULL;
+	free_split(data->paths);
+	// printf("\n\n\n--------\n");
+	// for (int i = 0; data->char_env[i]; i++)
+	// 	printf("%s\n", data->char_env[i]);
+	// printf("--------\n\n\n");
+	data->paths = NULL;
+	while (env && env[i])
+	{
+		split_env(&name, &content, env[i]);
+		// printf("name: %s, content: %s\n", name, content);
+		if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
+			data->paths = ft_split(content, ":");
+		i++;
+		free(name);
+		free(content);
+	}
+	// data->paths[0] = "";
+	// data->paths[1] = NULL;
 }
 
 void	set_env(char **env, t_data *data)
@@ -71,7 +100,7 @@ void	set_env(char **env, t_data *data)
 	content = NULL;
 	while (env[i])
 	{
-		split_env(&name, &content, env);
+		split_env(&name, &content, env[i]);
 		if (!better_strncmp(name, "SHLVL", ft_strlen("SHLVL")))
 		{
 			tmp = ft_itoa(ft_atoi(content) + 1);

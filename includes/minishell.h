@@ -142,6 +142,7 @@ int			is_builtin(char **command);
 int			parse_export(char **cmd, t_data *data);
 int			exec_builtin(char **command, t_data *data);
 void		set_env(char **env, t_data *data);
+void		update_env(char	**env, t_data *data);
 
 // utils
 int			is_redir(int type);
