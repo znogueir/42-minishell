@@ -14,7 +14,7 @@
 
 t_cmdline	*get_last_cmd(t_cmdline *cmd)
 {
-	while (cmd->next)
+	while (cmd && cmd->next)
 		cmd = cmd->next;
 	return (cmd);
 }
@@ -39,8 +39,10 @@ t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
 		free(matching->content);
 		free(matching);
 	}
-	free(data->wildcards);
-	data->wildcards = NULL;
+	// free(data->wildcards);
+	// data->wildcards = NULL;
+	free(data->wc->wc_bin);
+	data->wc->wc_bin = NULL;
 	return (ret);
 }
 
@@ -72,14 +74,14 @@ int	is_wildcard(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->wildcards && data->wildcards[i])
+	while (data->wc->wc_bin && data->wc->wc_bin[i])
 	{
-		if (data->wildcards[i] == '1')
+		if (data->wc->wc_bin[i] == '1')
 			return (1);
 		i++;
 	}
-	free(data->wildcards);
-	data->wildcards = NULL;
+	free(data->wc->wc_bin);
+	data->wc->wc_bin = NULL;
 	return (0);
 }
 
@@ -110,17 +112,8 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 	{
 		if (*pattern == '*' && *wc == '1')
 		{
-			// if (consume_stars(&pattern, &wc))
-			// 	return (1);
-			while (*pattern == '*' && *wc == '1')
-			{
-				pattern++;
-				wc++;
-			}
-			if (!*pattern)
-			{
+			if (consume_stars(&pattern, &wc))
 				return (1);
-			}
 			save = pattern;
 			wc_save = wc;
 		}
@@ -163,5 +156,106 @@ int	check_filename(char *file_name, char *pattern, char *wc, int start)
 			i = 0;
 		}
 	}
+	return (!*pattern && !*file_name);
+}
+
+
+// int	not_matching_1(t_data *data, char **pattern, char **wc, int *start)
+// {
+// 	if (*start || !**file_name)
+// 		return (0);
+// 	*start = 0;
+// 		(*file_name)++;
+// 	if (**pattern != save[0])
+// 		file_name -= i;
+// 	pattern = save;
+// 	wc = wc_save;
+// 	i = 0;
+// }
+
+// int	not_matching_2(t_data *data, char **pattern, char **wc, int *start)
+// {
+// 	if (*start || !data->wc->file_name)
+// 		return (0);
+// 	*start = 0;
+// 		data->wc->file_name++;
+// 	if (*pattern != save[0])
+// 		file_name -= data->wc->streak;
+// 	pattern = save;
+// 	wc = wc_save;
+// 	data->wc->streak = 0;
+// 	return (1);
+// }
+
+int	check_filename2(t_data *data, char *file_name, char *pattern, int start)
+{
+	// int		i;
+	char	*save;
+	char	*wc;
+	char	*wc_save;
+
+	data->wc->streak = 0;
+	save = pattern;
+	wc = data->wc->wc_bin;
+	wc_save = data->wc->wc_bin;
+	while (*pattern)
+	{
+		if (*pattern == '*' && *data->wc->wc_bin == '1')
+		{
+			if (consume_stars(&pattern, &data->wc->wc_bin))
+			{
+				data->wc->wc_bin = wc;
+				return (1);
+			}
+			save = pattern;
+			wc_save = data->wc->wc_bin;
+		}
+		else if (*pattern != *file_name)
+		{
+			if (start || !*file_name)
+			{
+				data->wc->wc_bin = wc;
+				return (0);
+			}
+			start = 0;
+				file_name++;
+			if (*pattern != save[0])
+				file_name -= data->wc->streak;
+			pattern = save;
+			data->wc->wc_bin = wc_save;
+			data->wc->streak = 0;
+			continue ;
+		}
+		if (*pattern != *file_name)
+		{
+			if (!*file_name)
+			{
+				data->wc->wc_bin = wc;
+				return (0);
+			}
+			start = 0;
+				file_name++;
+			if (*pattern != save[0])
+				file_name -= data->wc->streak;
+			pattern = save;
+			data->wc->wc_bin = wc_save;
+			data->wc->streak = 0;
+			continue ;
+		}
+		if (*pattern == '*' && *data->wc->wc_bin == '0')
+			data->wc->wc_bin++;
+		pattern++;
+		data->wc->streak++;
+		file_name++;
+		start = 0;
+		if (!*pattern && *file_name)
+		{
+			data->wc->wc_bin = wc_save;
+			pattern = save;
+			data->wc->streak = 0;
+		}
+	}
+	// ft_printf("check filename wc : %s\n", wc);
+	data->wc->wc_bin = wc;
 	return (!*pattern && !*file_name);
 }

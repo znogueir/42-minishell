@@ -63,12 +63,16 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 			free(file_names[i++]);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
 			file_names[i] = ft_stradd_char(file_names[i], '/');
-		if (file_names[i] && check_filename(file_names[i], *str, \
-		data->wildcards, 1))
+		if (file_names[i] && check_filename2(data, file_names[i], *str, 1))
+		{
 			ft_cmdadd_back(&matching, ft_cmdnew(ft_strdup(file_names[i])));
+		}
 		if (file_names[i])
+		{
 			free(file_names[i++]);
+		}
 	}
+	// print_list(matching);
 	return (free(file_names), finish_wc(data, matching, p_cmd));
 }
 
@@ -93,7 +97,7 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 		else
 		{
 			if (str[*i] == '*')
-				data->wildcards = ft_stradd_char(data->wildcards, '1');
+				data->wc->wc_bin = ft_stradd_char(data->wc->wc_bin, '1');
 			*new_word = ft_stradd_char(*new_word, str[(*i)++]);
 		}
 	}
@@ -124,7 +128,7 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 		else
 		{
 			if (str[i] == '*')
-				data->wildcards = ft_stradd_char(data->wildcards, '0');
+				data->wc->wc_bin = ft_stradd_char(data->wc->wc_bin, '0');
 			new_word = ft_stradd_char(new_word, str[i++]);
 		}
 	}
@@ -155,6 +159,7 @@ int	ft_expander(t_data *data)
 				new_word = big_expand(data, new_word, p_cmd->content);
 				free(p_cmd->content);
 				p_cmd->content = new_word;
+				// ft_putstr_fd(data->wc->wc_bin, 1);
 				p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
 			}
 		}

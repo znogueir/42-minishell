@@ -38,6 +38,10 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
+	data->wc = malloc(sizeof(t_wildcards));
+	memset(data->wc, 0, sizeof(t_wildcards));
+	// data->wc->wc_bin = NULL;
+	// data->wc->file_name = NULL;
 	set_env(env, data);
 	return (data);
 }

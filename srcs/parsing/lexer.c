@@ -92,7 +92,7 @@ int	ft_lexer(t_data *data)
 	ck_pt = 0;
 	while (data->line && data->line[i])
 	{
-		while (data->line[i] && ft_strchr(" \t", data->line[i]) && \
+		while (data->line[i] && ft_strchr(" \t\n", data->line[i]) && \
 		!(data->quote))
 			i++;
 		ck_pt = i;
