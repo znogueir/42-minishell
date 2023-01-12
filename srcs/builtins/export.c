@@ -64,11 +64,6 @@ int	check_identifier(char *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd && cmd[0] && cmd[0] == '-')
-	{
-		g_exit = 1;
-		return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 1);
-	}
 	if (!((cmd[0] >= 'a' && cmd[0] <= 'z') || \
 	(cmd[0] >= 'A' && cmd[0] <= 'Z') || cmd[0] == '_'))
 	{
@@ -101,6 +96,11 @@ int	parse_export(char **cmd, t_data *data)
 	while (cmd[j])
 	{
 		i = 0;
+		if (cmd[j] && cmd[j][0] && cmd[j][0] == '-')
+		{
+			g_exit = 2;
+			return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
+		}
 		if (check_identifier(cmd[j]))
 		{
 			j++;
