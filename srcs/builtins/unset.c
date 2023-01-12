@@ -40,7 +40,7 @@ int	check_unset_identifier(char *cmd)
 	if (cmd && cmd[0] && cmd[0] == '-')
 	{
 		g_exit = 2;
-		return (write(2, "minishell: unset: invalid option\n", 38), 2);
+		return (ft_putstr_fd("minishell: unset: invalid option\n", 2), 1);
 	}
 	return (0);
 }

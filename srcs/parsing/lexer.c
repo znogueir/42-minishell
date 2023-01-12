@@ -47,16 +47,16 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 		ft_cmdadd_back(&(data->cmd), \
 		ft_cmdnew(malloc_token(data->line + *ck_pt, *i - *ck_pt)));
 	}
-	else if (data->line[*i] == '#')
-	{
-		if (ft_strchr(" \t", data->line[*i - 1]))
-		{
-			while (data->line[*i] != '\n')
-				(*i)++;
-		}
-		else
-			return ;
-	}
+	// else if (data->line[*i] == '#')
+	// {
+	// 	if (ft_strchr(" \t", data->line[*i - 1]))
+	// 	{
+	// 		while (data->line[*i] != '\n')
+	// 			(*i)++;
+	// 	}
+	// 	else
+	// 		return ;
+	// }
 	else
 	{
 		(*i)++;
