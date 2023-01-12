@@ -95,6 +95,7 @@ void		free_env(t_env *loc_env);
 void		free_table(t_cmdtable *table);
 void		free_files(t_filelist *filelist);
 void		ft_exit_fork(t_data *data, char **command, int ext);
+// void		free_process(t_process *process);
 
 //	pre_lex
 int			check_errors(char *line);
@@ -117,6 +118,7 @@ void		ft_envadd_back(t_env **lst, t_env *new);
 void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_fileadd_back(t_filelist **lst, t_filelist *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
+// void		ft_pidadd_back(t_process **lst, int pid);
 t_env		*ft_envnew(char *name, char *content, int is_env);
 t_cmdline	*ft_cmdnew(void *content);
 t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop);
@@ -124,6 +126,7 @@ t_cmdtable	*ft_tablenew(void);
 t_cmdtable	*get_last(t_cmdtable *table);
 t_filelist	*file_get_last(t_filelist *filelist);
 t_filelist	*ft_filenew(int fd, char *filename, int type, int order);
+// t_process	*ft_pidnew(int pid);
 
 //	builtins
 int			ft_cd(t_data *data, char **cmd);
@@ -139,6 +142,7 @@ int			is_builtin(char **command);
 int			parse_export(char **cmd, t_data *data);
 int			exec_builtin(char **command, t_data *data);
 void		set_env(char **env, t_data *data);
+void		update_env(char	**env, t_data *data);
 
 // utils
 int			is_redir(int type);

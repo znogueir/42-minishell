@@ -38,6 +38,7 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
+	// data->process = NULL;
 	data->wc = malloc(sizeof(t_wildcards));
 	memset(data->wc, 0, sizeof(t_wildcards));
 	// data->wc->wc_bin = NULL;
@@ -117,7 +118,7 @@ int	launch_normal(int ac, char **av, char **env)
 		{
 			// print_list(data->cmd);
 			ft_expander(data);
-			// print_list(data->cmd);
+			print_list(data->cmd);
 			ft_executor(data, env);
 		}
 		else

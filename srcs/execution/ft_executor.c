@@ -75,7 +75,7 @@ void	ft_check_fds(t_cmdtable *table)
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
-	while (table)
+	while (table && table->status)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
@@ -148,6 +148,30 @@ void	ft_close_fds(t_data *data)
 	ft_close_pipes(data);
 }
 
+void	ft_wait(t_data *data)
+{
+	int			status;
+	// t_process	*pid;
+	t_cmdtable	*table;
+
+	// pid = data->process;
+	table = data->cmdtable;
+	while (table)
+	{
+		if (table->pid > -1)
+		{
+			waitpid(table->pid, &status, 0);
+			if (WTERMSIG(status) == 2)
+				ft_putchar_fd('\n', 1);
+			else if (WTERMSIG(status) == 3)
+				ft_putstr_fd("Quit (core dumped)\n", 1);
+			if (WIFEXITED(status))
+				g_exit = WEXITSTATUS(status);
+		}
+		table = table->next;
+	}
+}
+
 int	ft_pipex(t_data *data)
 {
 	t_cmdtable	*table;
@@ -160,11 +184,13 @@ int	ft_pipex(t_data *data)
 	data->outsave = dup(1);
 	while (table)
 	{
+		// printf("tablestatus %d\n", table->status);
 		if (table->status)
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
 		table = table->next;
 		ft_close_pipes(data);
 	}
+	ft_wait(data);
 	ft_close_fds(data);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);

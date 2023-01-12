@@ -69,3 +69,15 @@ void	free_table(t_cmdtable *table)
 		free(prev);
 	}
 }
+
+// void	free_process(t_process *process)
+// {
+// 	t_process	*prev;
+
+// 	while (process)
+// 	{
+// 		prev = process;
+// 		process = process->next;
+// 		free(prev);
+// 	}
+// }

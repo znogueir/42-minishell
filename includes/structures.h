@@ -43,6 +43,7 @@ typedef struct s_cmdtable
 	int					status;
 	t_filelist			*infile;
 	t_filelist			*outfile;
+	int					pid;
 	struct s_cmdtable	*next;
 }						t_cmdtable;
 
@@ -55,6 +56,12 @@ typedef struct s_wildcards
 	char	*patt_save;
 	char	*wc_bin_save;
 }			t_wildcards;
+
+// typedef struct s_process
+// {
+// 	int					pid;
+// 	struct s_process	*next;
+// }						t_process;
 
 typedef struct s_data
 {
@@ -74,6 +81,14 @@ typedef struct s_data
 	t_cmdline	*cmd;
 	t_cmdtable	*cmdtable;
 	t_filelist	*filelist;
+	int			pipe[2];
+	int			insave;
+	int			outsave;
+	// t_process	*process;
+	int			pid;
+	int			open_pipe;
+	int			hdoc_open;
+	int			hdoc_write;
 	t_wildcards	*wc;
 }				t_data;
 

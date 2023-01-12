@@ -49,6 +49,7 @@ t_cmdtable	*ft_tablenew(void)
 	cell->infile = NULL;
 	cell->outfile = NULL;
 	cell->cmd = NULL;
+	cell->pid = -1;
 	cell->next = NULL;
 	return (cell);
 }

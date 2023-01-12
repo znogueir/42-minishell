@@ -104,6 +104,7 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 	i = 0;
 	while (open && line && line->type != NEWLINES && line->type != PIPE)
 	{
+		// printf("cmdline: %s\n", line->content);
 		while (line && !line->content)
 			line = line->next;
 		if (!line)
@@ -120,6 +121,8 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 			O_RDWR | O_CREAT | O_APPEND, i++);
 		line = line->next;
 	}
+	if (open == 0)
+		g_exit = 1;
 	return (open);
 }
 

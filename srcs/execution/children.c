@@ -46,6 +46,15 @@ void	ft_execute(t_data *data, char **command)
 		ft_exit_fork(data, command, g_exit);
 	}
 	convert_env(data, data->loc_env);
+	// printf("--------\n");
+	// for (int i = 0; data->char_env[i]; i++)
+	// 	printf("%s\n", data->char_env[i]);
+	// printf("--------\n");
+	update_env(data->char_env, data);
+	// printf("--------\n");
+	// for (int i = 0; data->paths[i]; i++)
+	// 	printf("%s\n", data->paths[i]);
+	// printf("--------\n");
 	// printf("command[0] %c\n", command[0]);
 	if (command && command[0] && !command[0][0])
 		validcmd = NULL;
@@ -82,11 +91,11 @@ void	ft_open_redirs(t_data *data, t_cmdtable *table)
 
 void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 {
-	int	status;
-
 	data->pid = fork();
 	if (data->pid == -1)
 		ft_exit_msg("problem with fork()");
+	// ft_pidadd_back(&data->process, data->pid);
+	table->pid = data->pid;
 	signal(SIGINT, sig_in_fork);
 	signal(SIGQUIT, sig_in_fork);
 	if (data->pid == 0)
@@ -97,13 +106,6 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 			ft_execute(data, cmd);
 		ft_exit_fork(data, cmd, g_exit);
 	}
-	waitpid(0, &status, 0);
-	if (WTERMSIG(status) == 2)
-		ft_putchar_fd('\n', 1);
-	else if (WTERMSIG(status) == 3)
-		ft_putstr_fd("Quit (core dumped)\n", 1);
-	if (WIFEXITED(status))
-		g_exit = WEXITSTATUS(status);
 }
 
 void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)

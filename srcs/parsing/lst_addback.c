@@ -71,3 +71,24 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 	else if (lst)
 		*lst = new;
 }
+
+// void	ft_pidadd_back(t_process **lst, int pid)
+// {
+// 	t_process	*p;
+// 	t_process	*new;
+	
+// 	new = malloc(sizeof(*new));
+// 	if (!new)
+// 		return ;
+// 	new->pid = pid;
+// 	new->next = NULL;
+// 	if (lst && *lst)
+// 	{
+// 		p = *lst;
+// 		while (p->next)
+// 			p = p->next;
+// 		p->next = new;
+// 	}
+// 	else if (lst)
+// 		*lst = new;
+// }

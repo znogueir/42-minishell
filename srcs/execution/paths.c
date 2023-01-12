@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-char	**ft_get_paths(char **env)
-{
-	int	i;
+// char	**ft_get_paths(char **env)
+// {
+// 	int	i;
 
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			return (ft_split(env[i] + 5, ":"));
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	while (env[i])
+// 	{
+// 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+// 			return (ft_split(env[i] + 5, ":"));
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 int	check_path(char *prog, char *cmdpath)
 {
