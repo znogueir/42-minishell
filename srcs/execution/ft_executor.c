@@ -151,7 +151,6 @@ void	ft_close_fds(t_data *data)
 void	ft_wait(t_data *data)
 {
 	int			status;
-	int			i = 0;
 	// t_process	*pid;
 	t_cmdtable	*table;
 
@@ -159,7 +158,6 @@ void	ft_wait(t_data *data)
 	table = data->cmdtable;
 	while (table)
 	{
-		printf("pid[%d]: %d\n", i++, table->pid);
 		if (table->pid > -1)
 		{
 			waitpid(table->pid, &status, 0);
