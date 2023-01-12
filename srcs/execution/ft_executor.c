@@ -75,7 +75,7 @@ void	ft_check_fds(t_cmdtable *table)
 	t_filelist	*infile;
 	t_filelist	*outfile;
 
-	while (table)
+	while (table && table->status)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
@@ -184,6 +184,7 @@ int	ft_pipex(t_data *data)
 	data->outsave = dup(1);
 	while (table)
 	{
+		// printf("tablestatus %d\n", table->status);
 		if (table->status)
 			ft_pipe(data, table, ft_arr_dup(table->cmd));
 		table = table->next;

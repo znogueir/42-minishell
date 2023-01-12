@@ -114,7 +114,7 @@ int	launch_normal(int ac, char **av, char **env)
 		{
 			// print_list(data->cmd);
 			ft_expander(data);
-			// print_list(data->cmd);
+			print_list(data->cmd);
 			ft_executor(data, env);
 		}
 		else
