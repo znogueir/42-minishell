@@ -76,7 +76,7 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 // {
 // 	t_process	*p;
 // 	t_process	*new;
-	
+//
 // 	new = malloc(sizeof(*new));
 // 	if (!new)
 // 		return ;
