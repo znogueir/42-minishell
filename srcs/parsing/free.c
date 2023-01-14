@@ -30,6 +30,7 @@ void	free_all(t_data *data)
 	free(data->line);
 	free_cmd(data->cmd);
 	//if (data->char_env)
+	free(data->wc);
 	free_split(data->char_env);
 	free_env(data->loc_env);
 	free_split(data->paths);

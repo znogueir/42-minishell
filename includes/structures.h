@@ -68,7 +68,6 @@ typedef struct s_data
 {
 	int			quote;
 	char		*line;
-	char		*wildcards;
 	char		**paths;
 	char		**char_env;
 	t_env		*loc_env;

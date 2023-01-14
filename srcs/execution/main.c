@@ -29,7 +29,6 @@ t_data	*ft_init(char **env)
 		return (NULL);
 	data->quote = 0;
 	data->line = NULL;
-	data->wildcards = NULL;
 	data->loc_env = NULL;
 	data->cmd = NULL;
 	data->cmdtable = NULL;
@@ -41,8 +40,6 @@ t_data	*ft_init(char **env)
 	// data->process = NULL;
 	data->wc = malloc(sizeof(t_wildcards));
 	memset(data->wc, 0, sizeof(t_wildcards));
-	// data->wc->wc_bin = NULL;
-	// data->wc->file_name = NULL;
 	set_env(env, data);
 	return (data);
 }

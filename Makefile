@@ -21,6 +21,7 @@ INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 PARSE	= wc_expander.c \
 		wc_filenames.c \
 		wc_utils.c \
+		wc_matching.c \
 		free.c \
 		free_2.c \
 		lexer.c \

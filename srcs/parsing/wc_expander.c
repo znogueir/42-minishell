@@ -65,15 +65,10 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 			file_names[i] = ft_stradd_char(file_names[i], '/');
 		data->wc->file_name = file_names[i];
 		if (file_names[i] && check_filename2(data, *str, 1))
-		{
 			ft_cmdadd_back(&matching, ft_cmdnew(ft_strdup(file_names[i])));
-		}
 		if (file_names[i])
-		{
 			free(file_names[i++]);
-		}
 	}
-	// print_list(matching);
 	return (free(file_names), finish_wc(data, matching, p_cmd));
 }
 
@@ -160,7 +155,6 @@ int	ft_expander(t_data *data)
 				new_word = big_expand(data, new_word, p_cmd->content);
 				free(p_cmd->content);
 				p_cmd->content = new_word;
-				// ft_putstr_fd(data->wc->wc_bin, 1);
 				p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
 			}
 		}

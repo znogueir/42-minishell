@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+t_cmdline	*get_last_cmd(t_cmdline *cmd)
+{
+	while (cmd && cmd->next)
+		cmd = cmd->next;
+	return (cmd);
+}
+
 t_cmdtable	*get_last(t_cmdtable *table)
 {
 	while (table->next)
