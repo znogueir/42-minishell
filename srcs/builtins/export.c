@@ -68,21 +68,21 @@ int	check_identifier(char *cmd)
 	(cmd[0] >= 'A' && cmd[0] <= 'Z') || cmd[0] == '_'))
 	{
 		g_exit = 1;
-		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+		return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
 	}
 	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
 	{
 		if (!(is_alphanum(cmd[i]) || cmd[i] == '_'))
 		{
 			g_exit = 1;
-			return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+			return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
 		}
 		i++;
 	}
 	if (cmd[i] == '+' && cmd[i + 1] != '=')
 	{
 		g_exit = 1;
-		return (write(2, "minishell: export: invalid identifier\n", 39), 1);
+		return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
 	}
 	return (0);
 }
@@ -99,7 +99,7 @@ int	parse_export(char **cmd, t_data *data)
 		if (cmd[j] && cmd[j][0] && cmd[j][0] == '-')
 		{
 			g_exit = 2;
-			return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
+			return (ft_putstr_fd("minishell: export: options unavailable\n", 2), 2);
 		}
 		if (check_identifier(cmd[j]))
 		{
