@@ -51,10 +51,11 @@ typedef struct s_wildcards
 {
 	int		streak;
 	char	*wc_bin;
-	char	*file_name;
 	char	*pattern;
-	char	*patt_save;
+	char	*file_name;
+	char	*wc_bin_head;
 	char	*wc_bin_save;
+	char	*pattern_save;
 }			t_wildcards;
 
 // typedef struct s_process
@@ -66,13 +67,6 @@ typedef struct s_wildcards
 typedef struct s_data
 {
 	int			quote;
-	int			pipe[2];
-	int			insave;
-	int			outsave;
-	int			pid;
-	int			open_pipe;
-	int			hdoc_open;
-	int			hdoc_write;
 	char		*line;
 	char		*wildcards;
 	char		**paths;

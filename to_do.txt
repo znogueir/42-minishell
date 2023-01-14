@@ -12,3 +12,8 @@
 - !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
 - maybe rewrite the execution, put the error messages outside the forks, blabla...;
 - bonus : add wildcards ? (only in the current working directory so should be pretty easy EASY ? LOL) [DONE];
+
+- check : "sleep 5 | bash" or " sleep 5 | ./minishell";
+- check : "./minishell < /dev/random" (cd into trashbin before cause it creates a lot of weird files); 
+- >>> open__tmp() for heredocs <<< !!!;
+- heredoc limiter : do not expand env vars ($xxx) -> skip the node ?;

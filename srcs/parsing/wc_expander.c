@@ -63,7 +63,8 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 			free(file_names[i++]);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
 			file_names[i] = ft_stradd_char(file_names[i], '/');
-		if (file_names[i] && check_filename2(data, file_names[i], *str, 1))
+		data->wc->file_name = file_names[i];
+		if (file_names[i] && check_filename2(data, *str, 1))
 		{
 			ft_cmdadd_back(&matching, ft_cmdnew(ft_strdup(file_names[i])));
 		}

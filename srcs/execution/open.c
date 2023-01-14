@@ -37,9 +37,10 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	{
 		signal(SIGINT, handle_sig_heredocs);
 		signal(SIGQUIT, handle_sig_heredocs);
+		// signal(SIGINT, SIG_IGN);
 		write(1, "heredoc> ", 9);
 		free(str);
-		signal(SIGINT, SIG_IGN);
+		// signal(SIGINT, SIG_IGN);
 		str = get_next_line(0);
 		// if (!str)
 		// 	break ;
@@ -86,7 +87,6 @@ int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
 
 	if (!line->next->content)
 		return (ft_putstr_fd("minishell: ambiguous redirect\n", 2), 0);
-	
 	if (is_directory(line->next->content))
 		return (ft_is_directory(line->next->content), 0);
 	fd = open(line->next->content, O_RDONLY);

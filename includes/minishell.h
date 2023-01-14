@@ -177,7 +177,7 @@ void		display_cmdtable(t_cmdtable *table);
 int			is_dir(char *name);
 int			is_wildcard(t_data *data);
 int			check_filename(char *file_name, char *str, char *wc, int start);
-int			check_filename2(t_data *data, char *file_name, char *str, int start);
+int			check_filename2(t_data *data, char *str, int start);
 char		**get_file_names(void);
 t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);

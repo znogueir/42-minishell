@@ -40,15 +40,17 @@ void	handle_sig_heredocs(int sig)
 	ft_putstr_fd("sig_handling\n", 2);
 	if (sig == SIGINT)
 	{
+		// ft_putstr_fd("BANANA\n", 2);
 		fd = open("/dev/null", O_RDONLY);
 		dup2(fd, 0);
 		close(fd);
+		ft_putstr_fd("tagada", fd);
 		ft_putstr_fd("\n", 1);
 		g_exit = 257;
-		ft_printf("%d\n", g_exit);
+		// ft_printf("%d\n", g_exit);
 	}
 	if (sig == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 0);
+		ft_putstr_fd("\b\b  \b\b", 1);
 }
 
 // ft_printf("\nchild\n");

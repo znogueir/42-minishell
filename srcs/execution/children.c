@@ -106,6 +106,8 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 			ft_execute(data, cmd);
 		ft_exit_fork(data, cmd, g_exit);
 	}
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
