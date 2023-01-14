@@ -132,8 +132,18 @@ int	launch_normal(int ac, char **av, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
+	// int		i;
+	char	**cmds;
+
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
-		ft_launch_minishell(argv[2], env);
+	{
+		cmds = ft_split(argv[2], ";");
+		for (int i = 0; cmds[i];)
+		{
+			// printf("%s\n", cmds[i++]);
+			ft_launch_minishell(cmds[i++], env);
+		}
+	}
 	else
 		launch_normal(argc, argv, env);
 	exit(g_exit);
