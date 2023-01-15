@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 19:52:11 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:33:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		return (fd);
 	}
 	str = ft_strdup("urmom");
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, handle_sig_heredocs);
 	signal(SIGQUIT, handle_sig_heredocs);
 	while (str && ft_strncmp(limit, str, ft_strlen(limit)))
@@ -40,21 +42,19 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		write(1, "heredoc> ", 9);
 		free(str);
 		str = get_next_line(0);
-		if (ft_strncmp(limit, str, ft_strlen(limit)))
-		{
-			write(fd, str, ft_strlen(str));
-		}
 		if (g_exit == 257)
 		{
-			// dup2(data->insave, 0);
-			// close(data->insave);
-			// ft_putstr_fd("g_exit257\n", 2);
+			dup2(data->insave, 0);
+			close(data->insave);
 			g_exit = 130;
 			free(str);
 			close(fd);
 			free(limit);
-			ft_putstr_fd("\n", 1);
 			return (0);
+		}
+		if (ft_strncmp(limit, str, ft_strlen(limit)))
+		{
+			write(fd, str, ft_strlen(str));
 		}
 	}
 	if (!str)

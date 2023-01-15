@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:13:40 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/22 20:13:41 by znogueir         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:57:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_cmdtable	*ft_tablenew(void)
 	cell->cmd = NULL;
 	cell->pid = -1;
 	cell->next = NULL;
+	cell->status = 1;
 	return (cell);
 }
 

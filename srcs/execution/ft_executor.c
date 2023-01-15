@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 19:47:27 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:27:23 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,8 @@ void	ft_close_fds(t_data *data)
 void	ft_wait(t_data *data)
 {
 	int			status;
-	// t_process	*pid;
 	t_cmdtable	*table;
 
-	// pid = data->process;
 	table = data->cmdtable;
 	while (table)
 	{
@@ -207,10 +205,10 @@ int	ft_executor(t_data *data, char **env)
 	if (make_cmdtable(data))
 		return (free_table(data->cmdtable), 1);
 	print_list(data->cmd);
-	// ft_putstr_fd("\t------pipex------\n", 2);
-	// if (data->cmdtable)
-	// 	display_cmdtable(data->cmdtable);
-	// ft_putstr_fd("\t------------------\n\n", 2);
+	ft_putstr_fd("\t------pipex------\n", 2);
+	if (data->cmdtable)
+		display_cmdtable(data->cmdtable);
+	ft_putstr_fd("\t------------------\n\n", 2);
 	ft_pipex(data);
 	//close_files(data->cmdtable);
 	// if (data->cmdtable)
