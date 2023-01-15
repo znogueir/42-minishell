@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 17:54:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:52:11 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		{
 			// dup2(data->insave, 0);
 			// close(data->insave);
-			ft_putstr_fd("g_exit257\n", 2);
+			// ft_putstr_fd("g_exit257\n", 2);
 			g_exit = 130;
 			free(str);
 			close(fd);
 			free(limit);
-			return (1);
-			// break ;
-			// break ;
-			// return (1);
+			ft_putstr_fd("\n", 1);
+			return (0);
 		}
 	}
 	if (!str)

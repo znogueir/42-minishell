@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/15 17:53:50 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:52:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	handle_sig_heredocs(int sig)
 		// fd = open("/dev/null", O_RDONLY);
 		// dup2(fd, 0);
 		// close(fd); 
-		close(0);
-		ft_putstr_fd("tagada", 2);
-		ft_putstr_fd("\n", 1);
+		// close(0);
+		// ft_putstr_fd("tagada", 2);
+		ft_putchar_fd('\0', 1);
+		//ft_putstr_fd("\n", 1);
 		g_exit = 257;
 		// ft_printf("%d\n", g_exit);
 	}
