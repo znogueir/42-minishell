@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/21 20:49:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:09:23 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	sort_export(t_data *data)
 		while (p_env && ft_strcmp(env_min->name, p_env->name) >= 0)
 			p_env = p_env->next;
 		next_min = p_env;
-		// ft_printf("%s\n", next_min->name);
 		while (p_env)
 		{
 			if (ft_strcmp(env_min->name, p_env->name) < 0 \
@@ -52,10 +51,8 @@ void	sort_export(t_data *data)
 				next_min = p_env;
 			p_env = p_env->next;
 		}
-		// ft_printf("%s\n", next_min->name);
 		env_min = next_min;
 		print_export(env_min->name, env_min->content);
-		// env_len--;
 	}
 }
 
@@ -66,24 +63,18 @@ int	check_identifier(char *cmd)
 	i = 0;
 	if (!((cmd[0] >= 'a' && cmd[0] <= 'z') || \
 	(cmd[0] >= 'A' && cmd[0] <= 'Z') || cmd[0] == '_'))
-	{
-		g_exit = 1;
-		return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
-	}
+		return (ft_putstr_fd \
+		("minishell: export: not a valid identifier\n", 2), 2);
 	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
 	{
 		if (!(is_alphanum(cmd[i]) || cmd[i] == '_'))
-		{
-			g_exit = 1;
-			return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
-		}
+			return (ft_putstr_fd \
+			("minishell: export: not a valid identifier\n", 2), 2);
 		i++;
 	}
 	if (cmd[i] == '+' && cmd[i + 1] != '=')
-	{
-		g_exit = 1;
-		return (ft_putstr_fd("minishell: export: not a valid identifier\n", 2), 2);
-	}
+		return (ft_putstr_fd \
+		("minishell: export: not a valid identifier\n", 2), 2);
 	return (0);
 }
 
@@ -97,10 +88,8 @@ int	parse_export(char **cmd, t_data *data)
 	{
 		i = 0;
 		if (cmd[j] && cmd[j][0] && cmd[j][0] == '-')
-		{
-			g_exit = 2;
-			return (ft_putstr_fd("minishell: export: options unavailable\n", 2), 2);
-		}
+			return (ft_putstr_fd \
+			("minishell: export: options unavailable\n", 2), 2);
 		if (check_identifier(cmd[j]))
 		{
 			j++;

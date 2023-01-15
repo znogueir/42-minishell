@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/04 18:27:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:28:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ typedef struct s_wildcards
 	char	*pattern_save;
 }			t_wildcards;
 
-// typedef struct s_process
-// {
-// 	int					pid;
-// 	struct s_process	*next;
-// }						t_process;
-
 typedef struct s_data
 {
 	int			quote;
@@ -77,7 +71,6 @@ typedef struct s_data
 	int			pipe[2];
 	int			insave;
 	int			outsave;
-	// t_process	*process;
 	int			pid;
 	int			open_pipe;
 	int			hdoc_open;

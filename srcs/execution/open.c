@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/22 00:40:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:54:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,43 +32,33 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		free(limit);
 		return (fd);
 	}
-	str = NULL;
-	while (!str || ft_strncmp(limit, str, ft_strlen(limit)))
+	str = ft_strdup("urmom");
+	signal(SIGINT, handle_sig_heredocs);
+	signal(SIGQUIT, handle_sig_heredocs);
+	while (str && ft_strncmp(limit, str, ft_strlen(limit)))
 	{
-		signal(SIGINT, handle_sig_heredocs);
-		signal(SIGQUIT, handle_sig_heredocs);
-		// signal(SIGINT, SIG_IGN);
 		write(1, "heredoc> ", 9);
 		free(str);
-		// signal(SIGINT, SIG_IGN);
 		str = get_next_line(0);
-		// if (!str)
-		// 	break ;
-		ft_printf("[[%d]]\n", g_exit);
-		ft_printf("[%s]", str);
 		if (ft_strncmp(limit, str, ft_strlen(limit)))
 		{
 			write(fd, str, ft_strlen(str));
 		}
 		if (g_exit == 257)
 		{
-			// heredoc_rm(exec->tok_lst);
 			// dup2(data->insave, 0);
 			// close(data->insave);
 			ft_putstr_fd("g_exit257\n", 2);
 			g_exit = 130;
 			free(str);
-			str = ft_strdup("urmom");
-			free(str);
 			close(fd);
 			free(limit);
-			return (0);
+			return (1);
+			// break ;
 			// break ;
 			// return (1);
 		}
 	}
-	// signal(SIGINT, SIG_DFL);
-	// signal(SIGQUIT, SIG_DFL);
 	if (!str)
 	{
 		ft_putstr_fd("\nminishell: warning: here-document delimited by end-of-file (wanted \'", 2);

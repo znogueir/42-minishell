@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/04 18:27:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:30:22 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
-	// data->process = NULL;
 	data->wc = malloc(sizeof(t_wildcards));
 	memset(data->wc, 0, sizeof(t_wildcards));
 	set_env(env, data);
@@ -85,16 +84,12 @@ int	launch_normal(int ac, char **av, char **env)
 {
 	t_data		*data;
 	int			exit_status;
-	// char		*temp;
+
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
 	while (1)
 	{
-		// temp = readline(NULL);
-		// if (temp && temp[0] == '\0')
-		// 	exit(0);
-		// data->line = get_next_line(0);
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		rl_outstream = stderr;
@@ -107,13 +102,11 @@ int	launch_normal(int ac, char **av, char **env)
 			reset_cmd(data);
 			free(data->line);
 			continue ;
-			// break ;
 		}
 		ft_lexer(data);
 		exit_status = ft_parser(data);
 		if (!exit_status)
 		{
-			// print_list(data->cmd);
 			ft_expander(data);
 			// print_list(data->cmd);
 			ft_executor(data, env);

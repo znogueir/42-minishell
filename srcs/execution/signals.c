@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:53:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,17 @@ void	handle_sigint(int sig)
 // HEREDOCS
 void	handle_sig_heredocs(int sig)
 {
-	int	fd;
+	// int	fd;
 
-	ft_putstr_fd("sig_handling\n", 2);
+	// ft_putstr_fd("sig_handling\n", 2);
 	if (sig == SIGINT)
 	{
 		// ft_putstr_fd("BANANA\n", 2);
-		fd = open("/dev/null", O_RDONLY);
-		dup2(fd, 0);
-		close(fd);
-		ft_putstr_fd("tagada", fd);
+		// fd = open("/dev/null", O_RDONLY);
+		// dup2(fd, 0);
+		// close(fd); 
+		close(0);
+		ft_putstr_fd("tagada", 2);
 		ft_putstr_fd("\n", 1);
 		g_exit = 257;
 		// ft_printf("%d\n", g_exit);
