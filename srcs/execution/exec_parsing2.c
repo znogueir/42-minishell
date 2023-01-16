@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 19:32:26 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:04:04 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,15 @@ int	ft_cmd_count(t_cmdline *line)
 	{
 		while (line && !line->content)
 			line = line->next;
-		if (line && (!line->content || is_redir(line->type)))
-		{
-			while (line && is_redir(line->type))
-				line = line->next->next;
-			// if (line)
-			// 	line = line->next;
-			while (line && !line->content)
-				line = line->next;
-		}
+		while (is_redir(line->type))
+			line = line->next->next;
 		if (line && line->content && line->type == WORD)
-			count++;
-		if (line)
+		{
 			line = line->next;
+			count++;
+		}
 	}
+	printf("count: %d\n", count);
 	return (count);
 }
 
@@ -44,6 +39,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	int			count;
 
 	i = 0;
+	printf("cmdline: %s\n", cmdline->content);
 	count = ft_cmd_count(cmdline);
 	if (count == 0)
 	{
