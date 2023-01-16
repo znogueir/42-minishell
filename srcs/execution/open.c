@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 20:33:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:49:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		if (g_exit == 257)
 		{
 			dup2(data->insave, 0);
-			close(data->insave);
 			g_exit = 130;
 			free(str);
 			close(fd);
+			unlink(filename);
+			close(data->insave);
 			free(limit);
 			return (0);
 		}
@@ -59,7 +60,8 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	}
 	if (!str)
 	{
-		ft_putstr_fd("\nminishell: warning: here-document delimited by end-of-file (wanted \'", 2);
+		ft_putstr_fd("\nminishell: warning: here-document", 2); 
+		ft_putstr_fd(" delimited by end-of-file (wanted \'", 2);
 		ft_putstr_fd(limiter, 2);
 		ft_putstr_fd("\')\n", 2);
 	}

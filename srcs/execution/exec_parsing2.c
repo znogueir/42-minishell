@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/16 18:04:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:08:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_cmd_count(t_cmdline *line)
 	{
 		while (line && !line->content)
 			line = line->next;
-		while (is_redir(line->type))
+		while (line && is_redir(line->type))
 			line = line->next->next;
 		if (line && line->content && line->type == WORD)
 		{
@@ -29,7 +29,6 @@ int	ft_cmd_count(t_cmdline *line)
 			count++;
 		}
 	}
-	printf("count: %d\n", count);
 	return (count);
 }
 
@@ -39,7 +38,6 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	int			count;
 
 	i = 0;
-	printf("cmdline: %s\n", cmdline->content);
 	count = ft_cmd_count(cmdline);
 	if (count == 0)
 	{
@@ -50,11 +48,8 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)
-		{
 			cmdline = cmdline->next;
-			continue ;
-		}
-		if (is_redir(cmdline->type))
+		else if (is_redir(cmdline->type))
 			cmdline = cmdline->next->next;
 		else
 		{

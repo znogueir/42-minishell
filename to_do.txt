@@ -1,30 +1,68 @@
-- expand "$?"; [DONE]
-- expand "$_"; [DONE]
-- $'thing in quotes' counts as just : 'thing in quotes' double and single; [DONE]
-- fix segfault in $> dollar + redirection [DONE]
-- exit code; [done for builtins ?]
-- exit() with an argument; [DONE]
-- fix heredocs; [DONE]
-- fix error codes when failing to open things; [DONE]
-- signals (make sure they work in a minishell inside another minishell etc...); [DONE, missing heredocs]
-- fix the weird thign with cd "" : when you do 'cd ""' it acts like it's cd alone and goes to home, but it shouldn't do anything.
-  (problem probably in parsing, we must be deleting the string when it's empty) [DONE];
-- bonus : add wildcards ? (only in the current working directory so should be pretty easy EASY ? LOL) [DONE];
 
-- !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
+_D_O_N_E_
+- [DONE]
+  expand "$?";
 
-- maybe rewrite the execution: 
+- [DONE]
+  expand "$_";
+
+- [DONE]
+  $'thing in quotes' counts as just : 
+  'thing in quotes' double and single;
+
+- [DONE]
+  fix segfault in $> dollar + redirection
+
+- [DONE]
+  exit code;
+
+- [DONE]
+  exit() with an argument;
+
+- [DONE]
+  fix heredocs;
+
+- [DONE]
+  fix error codes when failing to open things;
+
+- [DONE]
+  signals (make sure they work in a minishell 
+  inside another minishell etc...);
+
+- [DONE]
+  fix the weird thign with cd "" : 
+  when you do 'cd ""' it acts like it's cd alone and goes to home,
+  but it shouldn't do anything.
+
+- [DONE]
+  bonus : add wildcards ? (only in the current working directory so 
+  should be pretty easy EASY ? LOL)
+
+
+_T_O_D_O_
+- [TODO]
+  !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
+
+- [TODO]
+  maybe rewrite the execution: 
   put the error messages outside the forks, blabla...;
 
-- check : 
-  "./minishell < /dev/random" 
+- [TODO]
+  check : "./minishell < /dev/random" 
   (cd into trashbin before cause it creates a lot of weird files); 
 
-- >>> open__tmp() for heredocs <<< !!!;
+- [TODO]
+  >>> open__tmp() for heredocs <<< !!!;
 
-- heredoc limiter : 
+- [TODO]
+  heredoc limiter : 
   do not expand env vars ($xxx) -> skip the node ?;
 
-- wildcards : 
+- [TODO]
+  heredoc ctrl-D exits the heredoc when pressed twice while writing a 
+  line but it shouldn't exit the heredoc;
+
+- [TODO]
+  wildcards : 
   change structure from * to not malloc'd (no init necessary) 
   + dont send data->wc, only wc;

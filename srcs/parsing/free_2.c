@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:08:28 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/04 19:02:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:52:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void	free_files(t_filelist *filelist)
 	}
 }
 
-void	free_table(t_cmdtable *table)
+void	free_table(t_data *data, t_cmdtable *table)
 {
 	t_cmdtable	*prev;
 
 	while (table)
 	{
 		// while (data->hdoc_write--)
+		close(data->insave);
 		prev = table;
 		table = table->next;
 		free_files(prev->infile);

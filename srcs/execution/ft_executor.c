@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/16 17:47:41 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:56:52 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int	ft_pipex(t_data *data)
 	if (!table)
 		return (0);
 	ft_check_fds(table);
-	data->insave = dup(0);
+	// data->insave = dup(0);
 	data->outsave = dup(1);
 	while (table)
 	{
@@ -192,7 +192,7 @@ int	ft_pipex(t_data *data)
 	ft_close_fds(data);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	close(data->insave);
+	//close(data->insave);
 	close(data->outsave);
 	return (1);
 }
@@ -203,7 +203,7 @@ int	ft_executor(t_data *data, char **env)
 	data->cmdtable = NULL;
 	// print_list(data->cmd);
 	if (make_cmdtable(data))
-		return (free_table(data->cmdtable), 1);
+		return (free_table(data, data->cmdtable), 1);
 	print_list(data->cmd);
 	ft_putstr_fd("\t------pipex------\n", 2);
 	if (data->cmdtable)
@@ -213,7 +213,7 @@ int	ft_executor(t_data *data, char **env)
 	//close_files(data->cmdtable);
 	// if (data->cmdtable)
 	// 	display_cmdtable(data->cmdtable);
-	free_table(data->cmdtable);
+	free_table(data, data->cmdtable);
 	return (0);
 }
 

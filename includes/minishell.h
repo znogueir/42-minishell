@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/22 01:09:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:55:41 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		free_split(char **tab);
 void		reset_cmd(t_data *data);
 void		free_cmd(t_cmdline *cmd);
 void		free_env(t_env *loc_env);
-void		free_table(t_cmdtable *table);
+void		free_table(t_data *data, t_cmdtable *table);
 void		free_files(t_filelist *filelist);
 void		ft_exit_fork(t_data *data, char **command, int ext);
 // void		free_process(t_process *process);
