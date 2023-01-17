@@ -13,6 +13,8 @@
 #include "minishell.h"
 
 int	g_exit = 0;
+int	break_malloc_at = 3;
+int	cur_breakpoint = 0;
 
 void	reset_cmd(t_data *data)
 {
@@ -26,7 +28,7 @@ t_data	*ft_init(char **env)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (NULL);
+		exit(1);
 	data->quote = 0;
 	data->line = NULL;
 	data->loc_env = NULL;
@@ -39,7 +41,13 @@ t_data	*ft_init(char **env)
 	data->hdoc_write = 0;
 	data->insave = dup(0);
 	data->wc = malloc(sizeof(t_wildcards));
-	memset(data->wc, 0, sizeof(t_wildcards));
+	if (!data->wc)
+	{
+		free(data);
+		exit(222);
+	}
+	data->wc->wc_bin = NULL;
+	// memset(data->wc, 0, sizeof(t_wildcards));
 	set_env(env, data);
 	return (data);
 }
@@ -123,17 +131,13 @@ int	launch_normal(int ac, char **av, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	// int		i;
 	char	**cmds;
 
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
 	{
 		cmds = ft_split(argv[2], ";");
 		for (int i = 0; cmds[i];)
-		{
-			// printf("%s\n", cmds[i++]);
 			ft_launch_minishell(cmds[i++], env);
-		}
 	}
 	else
 		launch_normal(argc, argv, env);

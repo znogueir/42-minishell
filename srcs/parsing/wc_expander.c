@@ -53,8 +53,9 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 		return (p_cmd);
 	i = 0;
 	matching = NULL;
-	file_names = get_file_names();
-	while (file_names[i])
+	printf("anything\n");
+	file_names = get_file_names(data);
+	while (file_names && file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
 			free(file_names[i++]);
@@ -62,7 +63,7 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 		!is_dir(file_names[i]))
 			free(file_names[i++]);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
-			file_names[i] = ft_stradd_char(file_names[i], '/');
+			file_names[i] = ft_stradd_char(data, file_names[i], '/');
 		data->wc->file_name = file_names[i];
 		if (file_names[i] && check_filename2(data, *str, 1))
 			ft_cmdadd_back(&matching, ft_cmdnew(ft_strdup(file_names[i])));
@@ -77,7 +78,7 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 	while (str[*i])
 	{
 		if (str[*i] == '$' && str[*i + 1] == '?')
-			*new_word = ft_add_excode(*new_word, i);
+			*new_word = ft_add_excode(data, *new_word, i);
 		else if (str[*i] == '$' && (str[*i + 1] == 34 || str[*i + 1] == 39))
 			(*i)++;
 		else if (str[*i] == '$' && (is_alphanum(str[*i + 1]) || \
@@ -93,8 +94,8 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 		else
 		{
 			if (str[*i] == '*')
-				data->wc->wc_bin = ft_stradd_char(data->wc->wc_bin, '1');
-			*new_word = ft_stradd_char(*new_word, str[(*i)++]);
+				data->wc->wc_bin = ft_stradd_char(data, data->wc->wc_bin, '1');
+			*new_word = ft_stradd_char(data, *new_word, str[(*i)++]);
 		}
 	}
 	return (0);
@@ -112,7 +113,7 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	while (str[i] && str[i] != end)
 	{
 		if (str[i] == '$' && str[i + 1] == '?' && end == 34)
-			new_word = ft_add_excode(new_word, &i);
+			new_word = ft_add_excode(data, new_word, &i);
 		else if (str[i] == '$' && (is_alphanum(str[i + 1]) || \
 		str[i + 1] == '_') && end == 34)
 		{
@@ -124,8 +125,8 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 		else
 		{
 			if (str[i] == '*')
-				data->wc->wc_bin = ft_stradd_char(data->wc->wc_bin, '0');
-			new_word = ft_stradd_char(new_word, str[i++]);
+				data->wc->wc_bin = ft_stradd_char(data, data->wc->wc_bin, '0');
+			new_word = ft_stradd_char(data, new_word, str[i++]);
 		}
 	}
 	if (!str[i])

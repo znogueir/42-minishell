@@ -77,7 +77,7 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 // 	t_process	*p;
 // 	t_process	*new;
 //
-// 	new = malloc(sizeof(*new));
+// 	new = ft_mallocator(data, sizeof(*new));
 // 	if (!new)
 // 		return ;
 // 	new->pid = pid;

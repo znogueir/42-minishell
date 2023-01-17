@@ -26,6 +26,8 @@
 # include "pipex.h"
 
 extern	int	g_exit;
+extern	int	break_malloc_at;
+extern	int	cur_breakpoint;
 
 /*----------------------------------------------------------------------------*/
 /*									Operations								  */
@@ -75,7 +77,6 @@ extern	int	g_exit;
 //# define PROMPT	"\001\e[38;5;46;1m$>\e[0m\002 "
 # define PROMPT	"minishell$> "
 
-
 /*----------------------------------------------------------------------------*/
 /*									Execution								  */
 /*----------------------------------------------------------------------------*/
@@ -87,14 +88,16 @@ extern	int	g_exit;
 /*----------------------------------------------------------------------------*/
 
 //	free
+void		ft_free(void *thingy);
 void		free_all(t_data *data);
 void		free_split(char **tab);
 void		reset_cmd(t_data *data);
 void		free_cmd(t_cmdline *cmd);
 void		free_env(t_env *loc_env);
-void		free_table(t_data *data, t_cmdtable *table);
 void		free_files(t_filelist *filelist);
+void		free_table(t_data *data, t_cmdtable *table);
 void		ft_exit_fork(t_data *data, char **command, int ext);
+void		*ft_mallocator(t_data *data, int size);
 // void		free_process(t_process *process);
 
 //	pre_lex
@@ -109,8 +112,8 @@ void		write_error(char *error_msg, char *token);
 
 //	expander
 int			ft_expander(t_data *data);
-char		*ft_stradd_char(char *str, char c);
-char		*ft_add_excode(char *str, int *p_i);
+char		*ft_stradd_char(t_data *data, char *str, char c);
+char		*ft_add_excode(t_data *data, char *str, int *p_i);
 
 //	list functs
 void		print_list(t_cmdline *cmd);
@@ -178,7 +181,7 @@ int			is_dir(char *name);
 int			is_wildcard(t_data *data);
 int			check_filename(char *file_name, char *str, char *wc, int start);
 int			check_filename2(t_data *data, char *str, int start);
-char		**get_file_names(void);
+char		**get_file_names(t_data *data);
 void		init_wildcards(t_data *data, char *pattern);
 t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);

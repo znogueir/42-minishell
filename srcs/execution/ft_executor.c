@@ -48,7 +48,7 @@ void	display_cmdtable(t_cmdtable *table)
 	}
 }
 
-char	**ft_arr_dup(char **arr)
+char	**ft_arr_dup(t_data *data, char **arr)
 {
 	int		i;
 	int		count;
@@ -60,7 +60,7 @@ char	**ft_arr_dup(char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	copy = malloc(sizeof(char *) * (count + 1));
+	copy = ft_mallocator(data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		copy[i] = ft_strdup(arr[i]);
@@ -165,6 +165,8 @@ void	ft_wait(t_data *data)
 				ft_putstr_fd("Quit (core dumped)\n", 1);
 			if (WIFEXITED(status))
 				g_exit = WEXITSTATUS(status);
+			if (g_exit == 258)
+				printf("yo mama so fat she cant be malloc'd");
 		}
 		table = table->next;
 	}
@@ -182,9 +184,8 @@ int	ft_pipex(t_data *data)
 	data->outsave = dup(1);
 	while (table)
 	{
-		// printf("tablestatus %d\n", table->status);
 		if (table->status)
-			ft_pipe(data, table, ft_arr_dup(table->cmd));
+			ft_pipe(data, table, ft_arr_dup(data, table->cmd));
 		table = table->next;
 		ft_close_pipes(data);
 	}

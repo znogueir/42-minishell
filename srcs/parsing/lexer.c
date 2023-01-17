@@ -12,13 +12,13 @@
 
 #include "minishell.h" 
 
-char	*malloc_token(char *str, int size)
+char	*malloc_token(t_data *data, char *str, int size)
 {
 	char	*token;
 	int		i;
 
 	i = 0;
-	token = malloc(sizeof(char) * (size + 1));
+	token = ft_mallocator(data, sizeof(char) * (size + 1));
 	if (!token)
 		return (NULL);
 	while (i < size)
@@ -45,7 +45,7 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 	{
 		*i += 2;
 		ft_cmdadd_back(&(data->cmd), \
-		ft_cmdnew(malloc_token(data->line + *ck_pt, *i - *ck_pt)));
+		ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 	}
 	// else if (data->line[*i] == '#')
 	// {
@@ -61,7 +61,7 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 	{
 		(*i)++;
 		ft_cmdadd_back(&(data->cmd), \
-		ft_cmdnew(malloc_token(data->line + *ck_pt, *i - *ck_pt)));
+		ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 	}
 }
 
@@ -80,7 +80,7 @@ void	lex_word(t_data *data, int *i, int *ck_pt)
 		(*i)++;
 	}
 	ft_cmdadd_back(&(data->cmd), \
-	ft_cmdnew(malloc_token(data->line + *ck_pt, *i - *ck_pt)));
+	ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 }
 
 int	ft_lexer(t_data *data)

@@ -24,7 +24,7 @@ void	convert_env(t_data *data, t_env *loc_env)
 		i++;
 		tmp = tmp->next;
 	}
-	data->char_env = malloc(sizeof(char *) * (i + 1));
+	data->char_env = ft_mallocator(data, sizeof(char *) * (i + 1));
 	i = 0;
 	while (loc_env)
 	{
@@ -46,21 +46,11 @@ void	ft_execute(t_data *data, char **command)
 		ft_exit_fork(data, command, g_exit);
 	}
 	convert_env(data, data->loc_env);
-	// printf("--------\n");
-	// for (int i = 0; data->char_env[i]; i++)
-	// 	printf("%s\n", data->char_env[i]);
-	// printf("--------\n");
 	update_env(data->char_env, data);
-	// printf("--------\n");
-	// for (int i = 0; data->paths[i]; i++)
-	// 	printf("%s\n", data->paths[i]);
-	// printf("--------\n");
-	// printf("command[0] %c\n", command[0]);
 	if (command && command[0] && !command[0][0])
 		validcmd = NULL;
 	else
 		validcmd = get_valid_cmd(data, command, &g_exit);
-	// printf("valid: %s\n", validcmd);
 	if (validcmd == NULL)
 	{
 		g_exit = ft_command_not_found(validcmd);
@@ -94,7 +84,6 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	data->pid = fork();
 	if (data->pid == -1)
 		ft_exit_msg("problem with fork()");
-	// ft_pidadd_back(&data->process, data->pid);
 	table->pid = data->pid;
 	signal(SIGINT, sig_in_fork);
 	signal(SIGQUIT, sig_in_fork);
@@ -127,11 +116,6 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
-	// t_filelist	*infile;
-	// t_filelist	*outfile;
-
-	// infile = file_get_last(table->infile);
-	// outfile = file_get_last(table->outfile);
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
 	data->open_pipe = 1;
@@ -144,7 +128,6 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 		ft_execute_pipes(data, table, cmd);
 	}
 	close(data->pipe[1]);
-	//if (outfile->fd == 1 && infile->fd == 0)
 	dup2(data->pipe[0], 0);
 	free_split(cmd);
 }

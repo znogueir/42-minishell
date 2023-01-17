@@ -26,7 +26,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	limit = ft_strjoin(ft_strdup(limiter), "\n");
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	free(temp);
-	free(filename);
+	// free(filename);
 	if (!fd)
 	{
 		free(limit);
@@ -36,12 +36,15 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, handle_sig_heredocs);
-	signal(SIGQUIT, handle_sig_heredocs);
-	while (str && ft_strncmp(limit, str, ft_strlen(limit)))
+	signal(SIGQUIT, SIG_IGN);
+	// signal(SIGQUIT, handle_sig_heredocs);
+	while (str && str[0] && ft_strncmp(limit, str, ft_strlen(limit)))
 	{
-		write(1, "heredoc> ", 9);
+		printf("str : %s\n", str);
+		// write(1, "heredoc> ", 9);
 		free(str);
-		str = get_next_line(0);
+		str = readline("heredoc>");
+		// str = get_next_line(0);
 		if (g_exit == 257)
 		{
 			dup2(data->insave, 0);
@@ -49,6 +52,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 			free(str);
 			close(fd);
 			unlink(filename);
+			free(filename);
 			close(data->insave);
 			free(limit);
 			return (0);

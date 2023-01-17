@@ -19,7 +19,7 @@ int	get_nbrof_files(void)
 
 	cwd = opendir(".");
 	if (!cwd)
-		return (0);
+		return (-1);
 	count = 0;
 	while (readdir(cwd))
 		count++;
@@ -73,7 +73,7 @@ char	**fill_names(DIR *cwd, struct dirent *dir_content, char **file_names)
 	return (file_names);
 }
 
-char	**get_file_names(void)
+char	**get_file_names(t_data *data)
 {
 	int				nbr_of_files;
 	DIR				*cwd;
@@ -81,13 +81,13 @@ char	**get_file_names(void)
 	struct dirent	*dir_content;
 
 	nbr_of_files = get_nbrof_files();
-	if (!nbr_of_files)
+	if (nbr_of_files == -1)
 		return (NULL);
-	file_names = malloc(sizeof(char *) * (nbr_of_files + 1));
+	file_names = ft_mallocator(data, sizeof(char *) * (nbr_of_files + 1));
 	//protect malloc;
 	cwd = opendir(".");
 	if (!cwd)
-		return (0);
+		return (NULL);
 	dir_content = NULL;
 	file_names = fill_names(cwd, dir_content, file_names);
 	return (alpha_sort(file_names));

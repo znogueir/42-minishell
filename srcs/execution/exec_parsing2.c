@@ -32,7 +32,7 @@ int	ft_cmd_count(t_cmdline *line)
 	return (count);
 }
 
-void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
+void	ft_make_cmd_array(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 {
 	int			i;
 	int			count;
@@ -44,7 +44,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 		table->cmd = NULL;
 		return ;
 	}
-	table->cmd = malloc(sizeof(char *) * (count + 1));
+	table->cmd = ft_mallocator(data, sizeof(char *) * (count + 1));
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)
@@ -138,7 +138,7 @@ int	make_cmdtable(t_data *data)
 	{
 		if (line && line->type == PIPE)
 			line = line->next;
-		ft_make_cmd_array(table, line);
+		ft_make_cmd_array(data, table, line);
 		table->status = ft_fill_files(data, table, line);
 		while (line && line->type != PIPE)
 			line = line->next;

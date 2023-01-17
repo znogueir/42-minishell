@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	ft_free(void *thing)
+{
+	if (thing)
+		free(thing);
+}
+
 void	free_cmd(t_cmdline *cmd)
 {
 	t_cmdline	*prev;
@@ -60,6 +66,8 @@ void	free_table(t_data *data, t_cmdtable *table)
 
 	while (table)
 	{
+		//display_cmdtable(table);
+		// printf("something %p\n", table->next);
 		// while (data->hdoc_write--)
 		close(data->insave);
 		prev = table;
@@ -69,16 +77,5 @@ void	free_table(t_data *data, t_cmdtable *table)
 		free_split(prev->cmd);
 		free(prev);
 	}
+	data->cmdtable = NULL;
 }
-
-// void	free_process(t_process *process)
-// {
-// 	t_process	*prev;
-
-// 	while (process)
-// 	{
-// 		prev = process;
-// 		process = process->next;
-// 		free(prev);
-// 	}
-// }

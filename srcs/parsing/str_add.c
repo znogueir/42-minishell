@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-char	*ft_stradd_char(char *str, char c)
+char	*ft_stradd_char(t_data *data, char *str, char c)
 {
 	int		i;
 	char	*new_str;
 
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	new_str = ft_mallocator(data, sizeof(char) * (ft_strlen(str) + 2));
 	while (str && str[i])
 	{
 		new_str[i] = str[i];
@@ -30,7 +30,7 @@ char	*ft_stradd_char(char *str, char c)
 	return (new_str);
 }
 
-char	*ft_add_excode(char *str, int *p_i)
+char	*ft_add_excode(t_data *data, char *str, int *p_i)
 {
 	int		i;
 	int		j;
@@ -39,7 +39,7 @@ char	*ft_add_excode(char *str, int *p_i)
 
 	i = 0;
 	excode = ft_itoa(g_exit);
-	new_str = malloc(sizeof(char) * \
+	new_str = ft_mallocator(data, sizeof(char) * \
 	(ft_strlen(str) + ft_strlen(excode) + 1));
 	while (str && str[i])
 	{

@@ -51,7 +51,7 @@ void	ft_make_cmd_array(t_cmdtable *table, t_cmdline *cmdline)
 		table->cmd = NULL;
 		return ;
 	}
-	table->cmd = malloc(sizeof(char *) * (count + 1));
+	table->cmd = ft_mallocator(data, sizeof(char *) * (count + 1));
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)

@@ -19,6 +19,7 @@ void	free_split(char	**tab)
 	i = 0;
 	while (tab && tab[i])
 	{
+		// printf("tab: %s\n", tab[i]);
 		free(tab[i]);
 		i++;
 	}
@@ -27,16 +28,15 @@ void	free_split(char	**tab)
 
 void	free_all(t_data *data)
 {
-	free(data->line);
+	ft_free(data->line);
 	free_cmd(data->cmd);
-	//if (data->char_env)
-	free(data->wc);
+	ft_free(data->wc);
 	free_split(data->char_env);
 	free_env(data->loc_env);
 	free_split(data->paths);
-	// free_process(data->process);
-	//free_table(data->cmdtable);
-	free(data);
+	if (data->cmdtable)
+		free_table(data, data->cmdtable);
+	ft_free(data);
 }
 
 void	ft_exit_fork(t_data *data, char **command, int ext)
@@ -45,8 +45,29 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 	close(data->insave);
 	close(data->outsave);
 	free_table(data, data->cmdtable);
-	// if ((char *)data->line != NULL)
 	free_all(data);
 	free_split(command);
 	exit(ext);
+}
+
+void	*break_malloc(int size)
+{
+	cur_breakpoint++;
+	printf("breakpoint: %d\n", cur_breakpoint);
+	if (break_malloc_at == cur_breakpoint)
+		return (ft_putstr_fd("mallocd ur mom\n", 2), NULL);
+	return (malloc(size));
+}
+
+void	*ft_mallocator(t_data *data, int size)
+{
+	void	*thing;
+
+	thing = break_malloc(size);
+	if (!thing)
+	{
+		free_all(data);
+		exit(258);
+	}
+	return (thing);
 }
