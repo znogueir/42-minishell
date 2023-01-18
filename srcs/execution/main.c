@@ -6,15 +6,15 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/16 18:10:23 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:10:49 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 3;
-int	cur_breakpoint = 0;
+int	break_malloc_at = 8;
+int	cur_breakpoint = 80;
 
 void	reset_cmd(t_data *data)
 {

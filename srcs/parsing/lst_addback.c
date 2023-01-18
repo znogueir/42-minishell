@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_functs.c                                       :+:      :+:    :+:   */
+/*   lst_addback.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/22 01:01:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:33:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 // 	t_process	*p;
 // 	t_process	*new;
 //
-// 	new = ft_mallocator(data, sizeof(*new));
+// 	new = ft_mallocator(NULL, data, sizeof(*new));
 // 	if (!new)
 // 		return ;
 // 	new->pid = pid;
