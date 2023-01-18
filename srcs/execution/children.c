@@ -6,13 +6,13 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/22 00:35:26 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:17:37 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	convert_env(t_data *data, t_env *loc_env)
+void	convert_env(t_data *data, t_env *loc_env, char **command)
 {
 	t_env	*tmp;
 	int		i;
@@ -24,7 +24,13 @@ void	convert_env(t_data *data, t_env *loc_env)
 		i++;
 		tmp = tmp->next;
 	}
-	data->char_env = ft_mallocator(data, sizeof(char *) * (i + 1));
+	data->char_env = malloc(sizeof(char *) * (i + 1));
+	if (!data->char_env)
+	{
+		ft_putstr_fd("\n\nwhat\n\n", 2);
+		free_split(command);
+		ft_malloc_exit(NULL, data);
+	}
 	i = 0;
 	while (loc_env)
 	{
@@ -45,7 +51,7 @@ void	ft_execute(t_data *data, char **command)
 		g_exit = exec_builtin(command, data);
 		ft_exit_fork(data, command, g_exit);
 	}
-	convert_env(data, data->loc_env);
+	convert_env(data, data->loc_env, command);
 	update_env(data->char_env, data);
 	if (command && command[0] && !command[0][0])
 		validcmd = NULL;

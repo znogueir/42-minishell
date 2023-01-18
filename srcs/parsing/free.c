@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/16 18:56:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:20:41 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,27 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 
 void	*break_malloc(int size)
 {
-	cur_breakpoint++;
+	//cur_breakpoint++;
 	printf("breakpoint: %d\n", cur_breakpoint);
 	if (break_malloc_at == cur_breakpoint)
-		return (ft_putstr_fd("mallocd ur mom\n", 2), NULL);
+		return (NULL);
 	return (malloc(size));
 }
 
-void	*ft_mallocator(t_data *data, int size)
+void	ft_malloc_exit(void *extra, t_data *data)
+{
+	ft_putstr_fd("\nmallocd ur mom\n\n", 2);
+	free(extra);
+	free_all(data);
+	exit(258);
+}
+
+void	*ft_mallocator(void	*extra, t_data *data, int size)
 {
 	void	*thing;
 
 	thing = break_malloc(size);
 	if (!thing)
-	{
-		free_all(data);
-		exit(258);
-	}
+		ft_malloc_exit(extra, data);
 	return (thing);
 }

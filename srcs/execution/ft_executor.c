@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/16 18:56:52 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:18:15 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char	**ft_arr_dup(t_data *data, char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	copy = ft_mallocator(data, sizeof(char *) * (count + 1));
+	//ft_putstr_fd("\n\nwhat\n\n", 2);
+	copy = ft_mallocator(NULL, data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		copy[i] = ft_strdup(arr[i]);
