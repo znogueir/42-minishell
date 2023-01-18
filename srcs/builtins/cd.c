@@ -84,7 +84,7 @@ int	parse_cd(t_data *data, char **cmd)
 	if (cd_expand == -1)
 		return (1);
 	if (!cd_expand)
-		path = ft_strdup(cmd[1]);	
+		path = ft_strdup(cmd[1]);
 	if (chdir(path) != 0)
 		return (free(path), perror("minishell: cd"), 1);
 	if (cd_expand == 2)
