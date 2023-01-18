@@ -52,11 +52,11 @@ _T_O_D_O_
   (cd into trashbin before cause it creates a lot of weird files); 
 
 - [TODO]
-  >>> open__tmp() for heredocs <<< !!!;
+  open __TMP for heredocs ???;
 
 - [TODO]
   heredoc limiter : 
-  do not expand env vars ($xxx) -> skip the node ?;
+  do not expand env vars ($xxx) -> skip the node ?; (not that important)
 
 - [TODO]
   heredoc ctrl-D exits the heredoc when pressed twice while writing a 

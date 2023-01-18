@@ -115,6 +115,7 @@ int	ft_init_cmdtable(t_data *data)
 
 	line = data->cmd;
 	ft_tableadd_back(&data->cmdtable, ft_tablenew());
+	display_cmdtable(data->cmdtable);
 	while (line && line->type != NEWLINES)
 	{
 		if (line && line->type == PIPE)

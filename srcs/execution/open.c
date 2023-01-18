@@ -26,53 +26,50 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	limit = ft_strjoin(ft_strdup(limiter), "\n");
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	free(temp);
-	// free(filename);
 	if (!fd)
 	{
 		free(limit);
+		free(filename);
 		return (fd);
 	}
-	str = ft_strdup("urmom");
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, handle_sig_heredocs);
-	signal(SIGQUIT, SIG_IGN);
-	// signal(SIGQUIT, handle_sig_heredocs);
-	while (str && str[0] && ft_strncmp(limit, str, ft_strlen(limit)))
+	while (1)
 	{
-		printf("str : %s\n", str);
-		// write(1, "heredoc> ", 9);
-		free(str);
-		str = readline("heredoc>");
+		// ft_putstr_fd("heredoc> ", 1);
 		// str = get_next_line(0);
+		str = readline("heredoc> ");
+		// printf("str : %s\n", str);
 		if (g_exit == 257)
 		{
-			dup2(data->insave, 0);
 			g_exit = 130;
 			free(str);
 			close(fd);
-			unlink(filename);
-			free(filename);
-			close(data->insave);
 			free(limit);
-			return (0);
+			free(filename);
+			// unlink(filename);
+			dup2(data->insave, 0);
+			close(data->insave);
+			// signal(SIGINT, SIG_DFL);
+			return (signal(SIGINT, handle_sigint), 0);
 		}
-		if (ft_strncmp(limit, str, ft_strlen(limit)))
-		{
-			write(fd, str, ft_strlen(str));
-		}
+		if (!str || !ft_strcmp(limiter, str))
+			break ;
+		write(fd, str, ft_strlen(str));
+		free(str);
 	}
 	if (!str)
 	{
-		ft_putstr_fd("\nminishell: warning: here-document", 2); 
-		ft_putstr_fd(" delimited by end-of-file (wanted \'", 2);
+		ft_putstr_fd("minishell: warning: here-document \
+delimited by end-of-file (wanted \'", 2);
 		ft_putstr_fd(limiter, 2);
 		ft_putstr_fd("\')\n", 2);
 	}
 	free(str);
+	free(filename);
 	close(fd);
 	free(limit);
-	return (1);
+	// signal(SIGINT, SIG_DFL);
+	return (signal(SIGINT, handle_sigint), 1);
 }
 
 int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)

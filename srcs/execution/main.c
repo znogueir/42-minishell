@@ -104,7 +104,10 @@ int	launch_normal(int ac, char **av, char **env)
 		//rl_outstream = stderr;
 		data->line = readline(PROMPT);
 		if (!data->line)
+		{
+			ft_putstr_fd("exit\n", 2);
 			break ;
+		}
 		add_history(data->line);
 		if (check_errors(data->line))
 		{

@@ -39,14 +39,14 @@ void	handle_sig_heredocs(int sig)
 
 	if (sig == SIGINT)
 	{
+		// printf("BLAH\n");
 		fd = open("/dev/null", O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
+		// close(0);
 		ft_putstr_fd("\n", 1);
 		g_exit = 257;
 	}
-	if (sig == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 1);
 }
 
 // ft_printf("\nchild\n");

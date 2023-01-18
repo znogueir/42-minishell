@@ -181,7 +181,7 @@ int	ft_pipex(t_data *data)
 	if (!table)
 		return (0);
 	ft_check_fds(table);
-	// data->insave = dup(0);
+	data->insave = dup(0);
 	data->outsave = dup(1);
 	while (table)
 	{
@@ -194,7 +194,7 @@ int	ft_pipex(t_data *data)
 	ft_close_fds(data);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	//close(data->insave);
+	close(data->insave);
 	close(data->outsave);
 	return (1);
 }
@@ -206,11 +206,11 @@ int	ft_executor(t_data *data, char **env)
 	// print_list(data->cmd);
 	if (make_cmdtable(data))
 		return (free_table(data, data->cmdtable), 1);
-	print_list(data->cmd);
-	ft_putstr_fd("\t------pipex------\n", 2);
-	if (data->cmdtable)
-		display_cmdtable(data->cmdtable);
-	ft_putstr_fd("\t------------------\n\n", 2);
+	// print_list(data->cmd);
+	// ft_putstr_fd("\t------pipex------\n", 2);
+	// if (data->cmdtable)
+	// 	display_cmdtable(data->cmdtable);
+	// ft_putstr_fd("\t------------------\n\n", 2);
 	ft_pipex(data);
 	//close_files(data->cmdtable);
 	// if (data->cmdtable)

@@ -1,5 +1,6 @@
 CC		= gcc
 FLAGS	= -g3 -Wall -Wextra -Werror
+FLAGS	= -g3
 INCFLAGS= -lreadline
 NAME	= minishell
 

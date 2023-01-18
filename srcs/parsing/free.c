@@ -53,7 +53,7 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 void	*break_malloc(int size)
 {
 	//cur_breakpoint++;
-	//printf("breakpoint: %d\n", cur_breakpoint);
+	// printf("breakpoint: %d, cur_breakpoint: %d\n", break_malloc_at, cur_breakpoint);
 	if (break_malloc_at == cur_breakpoint)
 		return (NULL);
 	return (malloc(size));
@@ -61,7 +61,7 @@ void	*break_malloc(int size)
 
 void	ft_malloc_exit(void *extra, t_data *data)
 {
-	ft_putstr_fd("\nmallocd ur mom\n\n", 2);
+	// ft_putstr_fd("\nmallocd ur mom\n\n", 2);
 	free(extra);
 	free_all(data);
 	exit(258);
