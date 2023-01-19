@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 18:59:04 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 21:33:20 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		if (!str || !ft_strcmp(limiter, str))
 			break ;
 		write(fd, str, ft_strlen(str));
+		ft_putstr_fd("\n", fd);
 		free(str);
 	}
 	if (!str)

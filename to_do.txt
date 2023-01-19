@@ -57,6 +57,7 @@ _T_O_D_O_
 - [TODO]
   heredoc limiter : 
   do not expand env vars ($xxx) -> skip the node ?; (not that important)
+  also do not expand wildcards (*, ?) or the tild
 
 - [TODO]
   heredoc ctrl-D exits the heredoc when pressed twice while writing a 
@@ -66,3 +67,6 @@ _T_O_D_O_
   wildcards : 
   change structure from * to not malloc'd (no init necessary) 
   + dont send data->wc, only wc;
+
+- [TODO]
+  expand the tild symbol (make sure it isnt included in the heredocs)
