@@ -6,70 +6,73 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 21:33:20 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:27:42 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
+{
+	(void)data;
+	while (1)
+	{
+		*str = readline("heredoc> ");
+		if (g_exit == 257)
+		{
+			g_exit = 130;
+			free(str);
+			close(fd);
+			// unlink(filename);
+			// dup2(data->insave, 0);
+			// close(data->insave);
+			// signal(SIGINT, SIG_DFL);
+			return (signal(SIGINT, handle_sigint), 0);
+		}
+		if (!*str || !ft_strcmp(limiter, *str))
+			break ;
+		write(fd, *str, ft_strlen(*str));
+		ft_putstr_fd("\n", fd);
+		free(*str);
+	}
+	return (1);
+}
+
+void	here_doc_error(char *limiter)
+{
+	ft_putstr_fd("minishell: warning: here-document \
+delimited by end-of-file (wanted \'", 2);
+	ft_putstr_fd(limiter, 2);
+	ft_putstr_fd("\')\n", 2);
+}
+
 int	ft_here_doc_write(t_data *data, char *limiter, int count)
 {
 	char	*str;
 	int		fd;
-	char	*limit;
 	char	*temp;
 	char	*filename;
 
 	(void)data;
 	temp = ft_itoa(count);
 	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), temp);
-	limit = ft_strjoin(ft_strdup(limiter), "\n");
+	// limit = ft_strjoin(ft_strdup(limiter), "\n");
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	// free(limit);
+	free(filename);
 	free(temp);
-	if (!fd)
+	if (fd < 0)
 	{
-		free(limit);
-		free(filename);
+		ft_putstr_fd("minishell: problem opening heredoc\n", 2);
 		return (fd);
 	}
 	signal(SIGINT, handle_sig_heredocs);
-	while (1)
-	{
-		// ft_putstr_fd("heredoc> ", 1);
-		// str = get_next_line(0);
-		str = readline("heredoc> ");
-		// printf("str : %s\n", str);
-		if (g_exit == 257)
-		{
-			g_exit = 130;
-			free(str);
-			close(fd);
-			free(limit);
-			free(filename);
-			// unlink(filename);
-			dup2(data->insave, 0);
-			close(data->insave);
-			// signal(SIGINT, SIG_DFL);
-			return (signal(SIGINT, handle_sigint), 0);
-		}
-		if (!str || !ft_strcmp(limiter, str))
-			break ;
-		write(fd, str, ft_strlen(str));
-		ft_putstr_fd("\n", fd);
-		free(str);
-	}
+	if (!here_doc_loop(data, fd, &str, limiter))
+		return (0);
 	if (!str)
-	{
-		ft_putstr_fd("minishell: warning: here-document \
-delimited by end-of-file (wanted \'", 2);
-		ft_putstr_fd(limiter, 2);
-		ft_putstr_fd("\')\n", 2);
-	}
+		here_doc_error(limiter);
 	free(str);
-	free(filename);
 	close(fd);
-	free(limit);
-	// signal(SIGINT, SIG_DFL);
 	return (signal(SIGINT, handle_sigint), 1);
 }
 
@@ -133,7 +136,7 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	int	h_doc;
 
 	h_doc = 1;
-	while (cmdline) // && cmdline->type != NEWLINES)
+	while (h_doc > -1 && cmdline) // && cmdline->type != NEWLINES)
 	{
 		if (cmdline->type == H_DOC)
 			h_doc = \

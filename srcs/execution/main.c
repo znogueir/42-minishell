@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 16:10:49 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:51:59 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	launch_normal(int ac, char **av, char **env)
 		data->line = readline(PROMPT);
 		if (!data->line)
 		{
-			ft_putstr_fd("exit\n", 2);
+			ft_putstr_fd("\nexit\n", 2);
 			break ;
 		}
 		add_history(data->line);
