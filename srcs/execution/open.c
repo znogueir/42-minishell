@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/16 18:49:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:59:04 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,19 @@ int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, int count)
 	if (fd == -1)
 		return (0);
 	return (1);
+}
+
+int	ft_here_doc(t_data *data, t_cmdline *cmdline)
+{
+	int	h_doc;
+
+	h_doc = 1;
+	while (cmdline) // && cmdline->type != NEWLINES)
+	{
+		if (cmdline->type == H_DOC)
+			h_doc = \
+			ft_here_doc_write(data, cmdline->next->content, data->hdoc_write++);
+		cmdline = cmdline->next;
+	}
+	return (h_doc);
 }

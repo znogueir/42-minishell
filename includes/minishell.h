@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 16:03:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:10:51 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ int			better_strncmp(char *s1, char *s2, int size);
 void		print_tab(char **tab);
 void		print_echo(char	**cmd);
 
+void		convert_env(t_data *data, t_env *loc_env, char **command);
+char		**ft_arr_dup(t_data *data, char **arr);
+void		display_cmdtable(t_cmdtable *table);
+
 //	signals
 void		signal_handler(void);
 void		sig_in_fork(int sig);
@@ -195,5 +199,10 @@ int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, \
 			int count);
 int			ft_here_doc_write(t_data *data, char *limiter, int count);
 int			ft_append_open(t_cmdtable *table, t_cmdline *line);
+int			ft_here_doc(t_data *data, t_cmdline *cmdline);
+
+// fd handling
+void		ft_check_fds(t_cmdtable *table);
+void		ft_close_pipes(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_parsing2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/18 15:33:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:06:55 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,11 @@ void	ft_make_cmd_array(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 	table->cmd[i] = NULL;
 }
 
-int	ft_here_doc(t_data *data, t_cmdline *cmdline)
+int	ft_open_loop(t_data *data, t_cmdtable *table, t_cmdline *line)
 {
-	int	h_doc;
+	int	open;
+	int	i;
 
-	h_doc = 1;
-	while (cmdline) // && cmdline->type != NEWLINES)
-	{
-		if (cmdline->type == H_DOC)
-			h_doc = \
-			ft_here_doc_write(data, cmdline->next->content, data->hdoc_write++);
-		cmdline = cmdline->next;
-	}
-	return (h_doc);
-}
-
-int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
-{
-	t_cmdline	*line;
-	int			open;
-	int			i;
-
-	line = cmdline;
-	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
-	ft_fileadd_back(&table->outfile, ft_filenew(1, ft_strdup(OUT), GREAT, -1));
 	i = 0;
 	open = 1;
 	while (open && line && line->type != PIPE)
@@ -104,6 +85,20 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 			O_RDWR | O_CREAT | O_APPEND, i++);
 		line = line->next;
 	}
+	return (open);
+}
+
+int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
+{
+	t_cmdline	*line;
+	int			open;
+	int			i;
+
+	line = cmdline;
+	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
+	ft_fileadd_back(&table->outfile, ft_filenew(1, ft_strdup(OUT), GREAT, -1));
+	i = 0;
+	open = ft_open_loop(data, table, line);
 	if (open == 0)
 		g_exit = 1;
 	return (open);
@@ -115,7 +110,7 @@ int	ft_init_cmdtable(t_data *data)
 
 	line = data->cmd;
 	ft_tableadd_back(&data->cmdtable, ft_tablenew());
-	display_cmdtable(data->cmdtable);
+	// display_cmdtable(data->cmdtable);
 	while (line && line->type != NEWLINES)
 	{
 		if (line && line->type == PIPE)

@@ -51,7 +51,9 @@ EXEC	= main.c \
 		finish.c \
 		paths.c \
 		open.c \
-		signals.c
+		signals.c \
+		fd_handling.c \
+		utils.c \
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
