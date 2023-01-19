@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 16:20:41 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:57:03 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	free_all(t_data *data)
 
 void	ft_exit_fork(t_data *data, char **command, int ext)
 {
-	ft_close_fds(data);
+	t_filelist	*in;
+	t_filelist	*out;
+
+	ft_close_fds(data, in, out);
 	close(data->insave);
 	close(data->outsave);
 	free_table(data, data->cmdtable);

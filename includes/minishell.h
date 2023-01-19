@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/19 21:10:51 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:47:52 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \
 int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, \
 			int count);
 int			ft_here_doc_write(t_data *data, char *limiter, int count);
-int			ft_append_open(t_cmdtable *table, t_cmdline *line);
 int			ft_here_doc(t_data *data, t_cmdline *cmdline);
+int			ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline);
 
 // fd handling
 void		ft_check_fds(t_cmdtable *table);

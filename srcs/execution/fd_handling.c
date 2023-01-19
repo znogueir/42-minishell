@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 21:08:13 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:51:29 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	ft_close_pipes(t_data *data)
 	data->open_pipe = 0;
 }
 
-void	ft_close_fds(t_data *data)
+void	ft_close_fds(t_data *data, t_filelist *in, t_filelist *out)
 {
-	t_filelist	*in;
-	t_filelist	*out;
 	t_cmdtable	*tab;
 
 	tab = data->cmdtable;

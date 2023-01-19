@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:31:40 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:36:15 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	(void)data;
 	temp = ft_itoa(count);
 	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), temp);
-	// limit = ft_strjoin(ft_strdup(limiter), "\n");
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	// free(limit);
 	free(filename);
 	free(temp);
 	if (fd < 0)

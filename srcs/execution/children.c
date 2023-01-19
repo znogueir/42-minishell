@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 20:56:13 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:58:51 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	if (outfile->fd != 1)
 		dup2(outfile->fd, 1);
 	g_exit = exec_builtin(cmd, data);
-	ft_close_fds(data);
+	ft_close_fds(data, infile, outfile);
 }
 
 void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)

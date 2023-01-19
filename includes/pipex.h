@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/19 03:40:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:52:25 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_error(char *extra);
 void	ft_exit_msg(char *msg);
 void	ft_exit_fork(t_data *data, char **command, int ext);
 //void	close_free(t_pipex *pipex);
-void	ft_close_fds(t_data *data);
+void	ft_close_fds(t_data *data, t_filelist *in, t_filelist *out);
 //void	ft_free_arr(char **cmd);
 //void	ft_end(t_pipex *pipex);
 

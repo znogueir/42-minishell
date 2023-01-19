@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/15 20:32:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:00:34 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,15 @@ void	handle_sigint(int sig)
 	}
 }
 
-// HEREDOCS
 void	handle_sig_heredocs(int sig)
 {
 	int	fd;
 
 	if (sig == SIGINT)
 	{
-		// printf("BLAH\n");
 		fd = open("/dev/null", O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
-		// close(0);
 		ft_putstr_fd("\n", 1);
 		g_exit = 257;
 	}

@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2022/12/19 02:02:47 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:00:06 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// char	**ft_get_paths(char **env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-// 			return (ft_split(env[i] + 5, ":"));
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
 
 int	check_path(char *prog, char *cmdpath)
 {

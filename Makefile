@@ -45,7 +45,7 @@ BUILTIN	= cd.c \
 
 EXEC	= main.c \
 		ft_executor.c \
-		exec_parsing2.c \
+		exec_parsing.c \
 		children.c \
 		exits.c \
 		finish.c \
