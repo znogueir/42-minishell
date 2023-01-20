@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/15 16:09:23 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/20 23:50:55 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ void	print_export(char *name, char *content)
 		ft_printf("export %s=\"%s\"\n", name, content);
 }
 
+int	get_env_len(t_env **p_env, t_env **env_min)
+{	
+	int	env_len;
+
+	env_len = 0;
+	while (*p_env)
+	{
+		if (ft_strcmp((*env_min)->name, (*p_env)->name) > 0)
+			*env_min = *p_env;
+		*p_env = (*p_env)->next;
+		env_len++;
+	}
+	print_export((*env_min)->name, (*env_min)->content);
+	return (env_len);
+}
+
 void	sort_export(t_data *data)
 {
 	int		env_len;
@@ -27,17 +43,9 @@ void	sort_export(t_data *data)
 	t_env	*next_min;
 	t_env	*p_env;
 
-	env_len = 0;
 	p_env = data->loc_env;
 	env_min = p_env;
-	while (p_env)
-	{
-		if (ft_strcmp(env_min->name, p_env->name) > 0)
-			env_min = p_env;
-		p_env = p_env->next;
-		env_len++;
-	}
-	print_export(env_min->name, env_min->content);
+	env_len = get_env_len(&p_env, &env_min);
 	while (--env_len)
 	{
 		p_env = data->loc_env;
@@ -78,6 +86,23 @@ int	check_identifier(char *cmd)
 	return (0);
 }
 
+void	export_word(t_data *data, char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
+		i++;
+	if (cmd[i] && cmd[i] == '=')
+		ft_export(data, ft_substr(cmd, 0, i), \
+		ft_strdup(cmd + i + 1), 0);
+	else if (cmd[i] && cmd[i] == '+' && cmd[i + 1] == '=')
+		ft_export(data, ft_substr(cmd, 0, i), \
+		ft_strdup(cmd + i + 2), 1);
+	else
+		ft_export(data, ft_substr(cmd, 0, i), NULL, 0);
+}
+
 int	parse_export(char **cmd, t_data *data)
 {
 	int	i;
@@ -86,7 +111,6 @@ int	parse_export(char **cmd, t_data *data)
 	j = 1;
 	while (cmd[j])
 	{
-		i = 0;
 		if (cmd[j] && cmd[j][0] && cmd[j][0] == '-')
 			return (ft_putstr_fd \
 			("minishell: export: options unavailable\n", 2), 2);
@@ -96,17 +120,7 @@ int	parse_export(char **cmd, t_data *data)
 			g_exit = 1;
 			continue ;
 		}
-		while (cmd[j][i] && cmd[j][i] != '=' && cmd[j][i] != '+')
-			i++;
-		if (cmd[j][i] && cmd[j][i] == '=')
-			ft_export(data, ft_substr(cmd[j], 0, i), \
-			ft_strdup(cmd[j] + i + 1), 0);
-		else if (cmd[j][i] && cmd[j][i] == '+' && cmd[j][i + 1] == '=')
-			ft_export(data, ft_substr(cmd[j], 0, i), \
-			ft_strdup(cmd[j] + i + 2), 1);
-		else
-			ft_export(data, ft_substr(cmd[j], 0, i), NULL, 0);
-		j++;
+		export_word(data, cmd[j++]);
 	}
 	if (!cmd[1])
 		sort_export(data);
