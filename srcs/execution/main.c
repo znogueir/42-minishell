@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/19 21:51:59 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/20 23:18:00 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	main(int argc, char **argv, char **env)
 	// 		ft_launch_minishell(cmds[i++], env);
 	// }
 	// else
-		launch_normal(argc, argv, env);
+	launch_normal(argc, argv, env);
 	exit(g_exit);
 }
 

@@ -55,6 +55,7 @@ EXEC	= main.c \
 		fd_handling.c \
 		utils.c \
 		here_doc.c \
+		extra.c
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))

@@ -3,12 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:07 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/19 02:50:55 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:43:34 by ionorb           ###   ########.fr       */
 /*                                                                            */
-
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -76,4 +75,5 @@ too many arguments\n", 2), 1);
 	ft_exit_fork(data, cmd, g_exit);
 	return (g_exit);
 }
-// check for long long int overflows -> minishell: exit: "nbr": numeric argument required;
+// check for long long int overflows 
+//-> minishell: exit: "nbr": numeric argument required;

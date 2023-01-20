@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/19 22:47:52 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/20 20:42:39 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,9 @@ int			ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline);
 // fd handling
 void		ft_check_fds(t_cmdtable *table);
 void		ft_close_pipes(t_data *data);
+
+// E_X_T_R_A
+void		*break_malloc(int size);
+void		print_list(t_cmdline *cmd);
 
 #endif

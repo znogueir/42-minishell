@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/19 22:57:03 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/20 20:42:18 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,6 @@ void	ft_exit_fork(t_data *data, char **command, int ext)
 	free_all(data);
 	free_split(command);
 	exit(ext);
-}
-
-void	*break_malloc(int size)
-{
-	//cur_breakpoint++;
-	// printf("breakpoint: %d, cur_breakpoint: %d\n", break_malloc_at, cur_breakpoint);
-	if (break_malloc_at == cur_breakpoint)
-		return (NULL);
-	return (malloc(size));
 }
 
 void	ft_malloc_exit(void *extra, t_data *data)

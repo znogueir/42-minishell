@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:42:28 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,4 @@ int	is_alphanum(char c)
 	(c >= '0' && c <= '9'))
 		return (1);
 	return (0);
-}
-
-void	print_list(t_cmdline *cmd)
-{
-	if (cmd)
-		ft_printf("\n");
-	while (cmd)
-	{
-		ft_printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
-		ft_printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
-		cmd = cmd->next;
-	}
-	if (cmd)
-		ft_printf("\n");
 }
