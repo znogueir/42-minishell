@@ -69,7 +69,7 @@ void	free_table(t_data *data, t_cmdtable *table)
 		//display_cmdtable(table);
 		// printf("something %p\n", table->next);
 		// while (data->hdoc_write--)
-		close(data->insave);
+		// close(data->insave);
 		prev = table;
 		table = table->next;
 		free_files(prev->infile);

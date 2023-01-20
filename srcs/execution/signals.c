@@ -14,6 +14,7 @@
 
 void	sig_in_fork(int sig)
 {
+	// printf("sig_forks\n");
 	if (sig == SIGINT)
 		g_exit = 130;
 	else if (sig == SIGQUIT)
@@ -24,6 +25,7 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
+		// printf("sig_int\n");
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -38,6 +40,7 @@ void	handle_sig_heredocs(int sig)
 
 	if (sig == SIGINT)
 	{
+		// printf("sig_heredocs\n");
 		fd = open("/dev/null", O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		close(fd);

@@ -39,7 +39,7 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
-	data->insave = dup(0);
+	// data->insave = dup(0);
 	data->wc = malloc(sizeof(t_wildcards));
 	if (!data->wc)
 	{
@@ -52,42 +52,42 @@ t_data	*ft_init(char **env)
 	return (data);
 }
 
-int	ft_launch_minishell(char *line, char **env)
-{
-	t_data		*data;
-	int			exit_status;
+// int	ft_launch_minishell(char *line, char **env)
+// {
+// 	t_data		*data;
+// 	int			exit_status;
 
-	data = ft_init(env);
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	data->line = ft_strdup(line);
-	// if (!data->line)
-	// 	break ;
-	add_history(data->line);
-	//printf("data->line: %s\n", data->line);
-	if (!check_errors(data->line))
-	{
-		// reset_cmd(data);
-		// free(data->line);
-		// continue ;
-		// ft_exit_fork(data, NULL, 0);
-		ft_lexer(data);
-		exit_status = ft_parser(data);
-		if (!exit_status)
-		{
-			// print_list(data->cmd);
-			ft_expander(data);
-			// print_list(data->cmd);
-			ft_executor(data, env);
-		}
-		else
-			g_exit = exit_status;
-	}
-	reset_cmd(data);
-	//free(data->line);
-	free_all(data);
-	return (g_exit);
-}
+// 	data = ft_init(env);
+// 	signal(SIGINT, handle_sigint);
+// 	signal(SIGQUIT, SIG_IGN);
+// 	data->line = ft_strdup(line);
+// 	// if (!data->line)
+// 	// 	break ;
+// 	add_history(data->line);
+// 	//printf("data->line: %s\n", data->line);
+// 	if (!check_errors(data->line))
+// 	{
+// 		// reset_cmd(data);
+// 		// free(data->line);
+// 		// continue ;
+// 		// ft_exit_fork(data, NULL, 0);
+// 		ft_lexer(data);
+// 		exit_status = ft_parser(data);
+// 		if (!exit_status)
+// 		{
+// 			// print_list(data->cmd);
+// 			ft_expander(data);
+// 			// print_list(data->cmd);
+// 			ft_executor(data, env);
+// 		}
+// 		else
+// 			g_exit = exit_status;
+// 	}
+// 	reset_cmd(data);
+// 	//free(data->line);
+// 	free_all(data);
+// 	return (g_exit);
+// }
 
 int	launch_normal(int ac, char **av, char **env)
 {
@@ -105,7 +105,7 @@ int	launch_normal(int ac, char **av, char **env)
 		data->line = readline(PROMPT);
 		if (!data->line)
 		{
-			ft_putstr_fd("\nexit\n", 2);
+			ft_putstr_fd("exit\n", 2);
 			break ;
 		}
 		add_history(data->line);
@@ -136,13 +136,13 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**cmds;
 
-	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		cmds = ft_split(argv[2], ";");
-		for (int i = 0; cmds[i];)
-			ft_launch_minishell(cmds[i++], env);
-	}
-	else
+	// if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
+	// {
+	// 	cmds = ft_split(argv[2], ";");
+	// 	for (int i = 0; cmds[i];)
+	// 		ft_launch_minishell(cmds[i++], env);
+	// }
+	// else
 		launch_normal(argc, argv, env);
 	exit(g_exit);
 }

@@ -14,27 +14,41 @@
 
 int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 {
+	int	insave;
+
+	insave = dup(0);
 	(void)data;
 	while (1)
 	{
+		// printf("test1\n");
 		*str = readline("heredoc> ");
 		if (g_exit == 257)
 		{
 			g_exit = 130;
-			free(str);
+			if (*str)
+			{
+				// ft_putstr_fd("\b\b", 1);
+				// ft_putstr_fd("test\n", 1);
+			}
+			free(*str);
 			close(fd);
 			// unlink(filename);
 			// dup2(data->insave, 0);
 			// close(data->insave);
+			dup2(insave, 0);
+			close(insave);
+			// ft_putstr_fd("\n", 1);
 			// signal(SIGINT, SIG_DFL);
-			return (signal(SIGINT, handle_sigint), 0);
+			return (0);
 		}
 		if (!*str || !ft_strcmp(limiter, *str))
 			break ;
+		// printf("test2\n");
 		write(fd, *str, ft_strlen(*str));
 		ft_putstr_fd("\n", fd);
 		free(*str);
 	}
+	close(insave);
 	return (1);
 }
 
@@ -64,6 +78,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		ft_putstr_fd("minishell: problem opening heredoc\n", 2);
 		return (fd);
 	}
+	// signal(SIGINT, SIG_DFL);
 	signal(SIGINT, handle_sig_heredocs);
 	if (!here_doc_loop(data, fd, &str, limiter))
 		return (0);
@@ -71,7 +86,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		here_doc_error(limiter);
 	free(str);
 	close(fd);
-	return (signal(SIGINT, handle_sigint), 1);
+	return (1);
 }
 
 int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, int count)
