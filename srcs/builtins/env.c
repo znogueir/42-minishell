@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/19 23:21:37 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:10:13 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	env_error(char *str)
 {
 	ft_putstr_fd("env: ", 2);
-	// if (str[0] == '-')
-	// {
-	// 	ft_putstr_fd("options unavailable -- \'", 2);
-	// 	ft_putstr_fd(str + 1, 2);
-	// 	ft_putstr_fd("\'\n", 2);
-	// 	return (125);
-	// }
+	if (str[0] == '-')
+	{
+		ft_putstr_fd("options unavailable -- \'", 2);
+		ft_putstr_fd(str + 1, 2);
+		ft_putstr_fd("\'\n", 2);
+		return (125);
+	}
 	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\': No such file or directory\n", 2);
@@ -55,7 +55,6 @@ void	split_env(char **name, char **content, char *env)
 		j++;
 	*name = ft_substr(env, 0, j);
 	*content = ft_substr(env, j + 1, ft_strlen(env + j + 1));
-	// i++;
 }
 
 void	update_env(char	**env, t_data *data)
@@ -68,23 +67,16 @@ void	update_env(char	**env, t_data *data)
 	name = NULL;
 	content = NULL;
 	free_split(data->paths);
-	// printf("\n\n\n--------\n");
-	// for (int i = 0; data->char_env[i]; i++)
-	// 	printf("%s\n", data->char_env[i]);
-	// printf("--------\n\n\n");
 	data->paths = NULL;
 	while (env && env[i])
 	{
 		split_env(&name, &content, env[i]);
-		// printf("name: %s, content: %s\n", name, content);
 		if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
 			data->paths = ft_split(content, ":");
 		i++;
 		free(name);
 		free(content);
 	}
-	// data->paths[0] = "";
-	// data->paths[1] = NULL;
 }
 
 void	set_env(char **env, t_data *data)

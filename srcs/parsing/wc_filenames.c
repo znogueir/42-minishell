@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wc_filenames.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:00:34 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 15:33:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:16:30 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	**get_file_names(t_data *data)
 	if (nbr_of_files == -1)
 		return (NULL);
 	file_names = ft_mallocator(NULL, data, sizeof(char *) * (nbr_of_files + 1));
-	//protect malloc;
 	cwd = opendir(".");
 	if (!cwd)
 		return (NULL);

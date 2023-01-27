@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:46:44 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:10:41 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	ft_init_cmdtable(t_data *data)
 
 	line = data->cmd;
 	ft_tableadd_back(&data->cmdtable, ft_tablenew());
-	// display_cmdtable(data->cmdtable);
 	while (line && line->type != NEWLINES)
 	{
 		if (line && line->type == PIPE)

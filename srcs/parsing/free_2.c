@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:08:28 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/16 18:52:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:05:45 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ void	free_table(t_data *data, t_cmdtable *table)
 
 	while (table)
 	{
-		//display_cmdtable(table);
-		// printf("something %p\n", table->next);
-		// while (data->hdoc_write--)
-		// close(data->insave);
 		prev = table;
 		table = table->next;
 		free_files(prev->infile);

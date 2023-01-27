@@ -6,35 +6,11 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/20 23:50:55 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:52:05 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_export(char *name, char *content)
-{
-	if (!content)
-		ft_printf("export %s\n", name);
-	else
-		ft_printf("export %s=\"%s\"\n", name, content);
-}
-
-int	get_env_len(t_env **p_env, t_env **env_min)
-{	
-	int	env_len;
-
-	env_len = 0;
-	while (*p_env)
-	{
-		if (ft_strcmp((*env_min)->name, (*p_env)->name) > 0)
-			*env_min = *p_env;
-		*p_env = (*p_env)->next;
-		env_len++;
-	}
-	print_export((*env_min)->name, (*env_min)->content);
-	return (env_len);
-}
 
 void	sort_export(t_data *data)
 {
@@ -105,7 +81,6 @@ void	export_word(t_data *data, char *cmd)
 
 int	parse_export(char **cmd, t_data *data)
 {
-	int	i;
 	int	j;
 
 	j = 1;
@@ -140,7 +115,6 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		if (append)
 		{
 			p_env->content = ft_strjoin(p_env->content, content);
-			//protect malloc -> return 1;
 			free(content);
 			return (0);
 		}

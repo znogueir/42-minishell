@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/20 20:42:18 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:52:53 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	free_all(t_data *data)
 
 void	ft_exit_fork(t_data *data, char **command, int ext)
 {
-	t_filelist	*in;
-	t_filelist	*out;
+	// t_filelist	*in;
+	// t_filelist	*out;
 
-	ft_close_fds(data, in, out);
+	// in = NULL;
+	// out = NULL;
+	ft_close_fds(data, NULL, NULL);//in, out);
 	close(data->insave);
 	close(data->outsave);
 	free_table(data, data->cmdtable);

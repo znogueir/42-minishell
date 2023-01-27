@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:36:15 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:13:46 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,18 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 	(void)data;
 	while (1)
 	{
-		// printf("test1\n");
 		*str = readline("heredoc> ");
 		if (g_exit == 257)
 		{
 			g_exit = 130;
-			if (*str)
-			{
-				// ft_putstr_fd("\b\b", 1);
-				// ft_putstr_fd("test\n", 1);
-			}
 			free(*str);
 			close(fd);
-			// unlink(filename);
-			// dup2(data->insave, 0);
-			// close(data->insave);
 			dup2(insave, 0);
 			close(insave);
-			// ft_putstr_fd("\n", 1);
-			// signal(SIGINT, SIG_DFL);
 			return (0);
 		}
 		if (!*str || !ft_strcmp(limiter, *str))
 			break ;
-		// printf("test2\n");
 		write(fd, *str, ft_strlen(*str));
 		ft_putstr_fd("\n", fd);
 		free(*str);
@@ -78,7 +66,6 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		ft_putstr_fd("minishell: problem opening heredoc\n", 2);
 		return (fd);
 	}
-	// signal(SIGINT, SIG_DFL);
 	signal(SIGINT, handle_sig_heredocs);
 	if (!here_doc_loop(data, fd, &str, limiter))
 		return (0);
@@ -112,7 +99,7 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	int	h_doc;
 
 	h_doc = 1;
-	while (h_doc > -1 && cmdline) // && cmdline->type != NEWLINES)
+	while (h_doc > -1 && cmdline)
 	{
 		if (cmdline->type == H_DOC)
 			h_doc = \

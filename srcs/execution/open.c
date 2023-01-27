@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:46:54 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:54:28 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,10 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 {
 	t_cmdline	*line;
 	int			open;
-	int			i;
 
 	line = cmdline;
 	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
 	ft_fileadd_back(&table->outfile, ft_filenew(1, ft_strdup(OUT), GREAT, -1));
-	i = 0;
 	open = ft_open_loop(data, table, line);
 	if (open == 0)
 		g_exit = 1;

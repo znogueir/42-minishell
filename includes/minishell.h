@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/20 20:42:39 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 14:44:07 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int			parse_export(char **cmd, t_data *data);
 int			exec_builtin(char **command, t_data *data);
 void		set_env(char **env, t_data *data);
 void		update_env(char	**env, t_data *data);
+void		print_export(char *name, char *content);
+int			get_env_len(t_env **p_env, t_env **env_min);
 
 // utils
 int			is_redir(int type);

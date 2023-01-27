@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by ionorb            #+#    #+#             */
-/*   Updated: 2023/01/20 23:25:22 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:18:36 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*break_malloc(int size)
 {
-	//cur_breakpoint++;
-	// printf("breakpoint: %d, cur_breakpoint:
-	//%d\n", break_malloc_at, cur_breakpoint);
+	// cur_breakpoint++;
+	// printf("breakpoint: %d, cur_breakpoint: %d\n",
+	// 	break_malloc_at, cur_breakpoint);
 	if (break_malloc_at == cur_breakpoint)
 		return (NULL);
 	return (malloc(size));

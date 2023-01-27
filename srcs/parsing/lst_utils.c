@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:33:03 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/22 20:33:04 by znogueir         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:05:13 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop)
 		lst = lst->next;
 	if (lst == topop)
 	{
-		// free(topop->content);
-		// free(topop);
 		return (NULL);
 	}
 	if (lst->next == topop)

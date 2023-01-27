@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:51:29 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:10:53 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_check_fds(t_cmdtable *table)
 	{
 		infile = file_get_last(table->infile);
 		outfile = file_get_last(table->outfile);
-		// display_cmdtable(table);
 		if (!infile || !outfile || (outfile->fd != -1 && infile->fd != -1))
 		{
 			table->status = 1;

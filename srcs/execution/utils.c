@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/20 23:17:28 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:12:23 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	display_cmdtable(t_cmdtable *table)
 		outfile = table->outfile;
 		i = 0;
 		printf("\tinfile: ");
-		while (table && infile) // && table->infile->next)
+		while (table && infile)
 		{
 			printf("[%d] %s, ", infile->fd, infile->filename);
 			infile = infile->next;
 		}
 		printf("\n\toutfile: ");
-		while (table && outfile) // && table->outfile->next)
+		while (table && outfile)
 		{
 			printf("[%d] %s, ", outfile->fd, outfile->filename);
 			outfile = outfile->next;
@@ -89,7 +89,6 @@ char	**ft_arr_dup(t_data *data, char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	//ft_putstr_fd("\n\nwhat\n\n", 2);
 	copy = ft_mallocator(NULL, data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{

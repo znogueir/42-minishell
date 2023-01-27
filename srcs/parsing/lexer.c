@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:27:54 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 15:33:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:05:34 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 		ft_cmdadd_back(&(data->cmd), \
 		ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 	}
-	// else if (data->line[*i] == '#')
-	// {
-	// 	if (ft_strchr(" \t", data->line[*i - 1]))
-	// 	{
-	// 		while (data->line[*i] != '\n')
-	// 			(*i)++;
-	// 	}
-	// 	else
-	// 		return ;
-	// }
 	else
 	{
 		(*i)++;

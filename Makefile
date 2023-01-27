@@ -1,6 +1,5 @@
 CC		= gcc
-FLAGS	= -g3 -Wall -Wextra -Werror
-FLAGS	= -g3
+FLAGS	= -Wall -Wextra -Werror -g3
 INCFLAGS= -lreadline
 NAME	= minishell
 
@@ -41,7 +40,8 @@ BUILTIN	= cd.c \
 		export.c \
 		pwd.c \
 		unset.c \
-		exec_builtins.c
+		exec_builtins.c \
+		builtin_utils.c
 
 EXEC	= main.c \
 		ft_executor.c \

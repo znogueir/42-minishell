@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:58:23 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:53:42 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ft_wait(t_data *data)
 int	ft_pipex(t_data *data)
 {
 	t_cmdtable	*table;
-	t_filelist	*in;
-	t_filelist	*out;
 
 	table = data->cmdtable;
 	if (!table)
@@ -56,7 +54,7 @@ int	ft_pipex(t_data *data)
 		ft_close_pipes(data);
 	}
 	ft_wait(data);
-	ft_close_fds(data, in, out);
+	ft_close_fds(data, NULL, NULL);//in, out);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
 	close(data->insave);
@@ -68,18 +66,9 @@ int	ft_executor(t_data *data, char **env)
 {
 	(void)env;
 	data->cmdtable = NULL;
-	// print_list(data->cmd);
 	if (make_cmdtable(data))
 		return (free_table(data, data->cmdtable), 1);
-	// print_list(data->cmd);
-	// ft_putstr_fd("\t------pipex------\n", 2);
-	// if (data->cmdtable)
-	// 	display_cmdtable(data->cmdtable);
-	// ft_putstr_fd("\t------------------\n\n", 2);
 	ft_pipex(data);
-	//close_files(data->cmdtable);
-	// if (data->cmdtable)
-	// 	display_cmdtable(data->cmdtable);
 	free_table(data, data->cmdtable);
 	return (0);
 }

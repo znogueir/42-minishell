@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 22:58:51 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:10:24 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	if (pipe(data->pipe) == -1)
 		ft_exit_msg("problem with pipe()");
 	data->open_pipe = 1;
-	// if (!cmd)
-	// 	return ;
 	if (cmd && cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);
 	else if (cmd)
