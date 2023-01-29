@@ -3,20 +3,22 @@ FLAGS	= -Wall -Wextra -Werror -g3
 INCFLAGS= -lreadline
 NAME	= minishell
 
-LIBFT_PATH	= libft/
-LIBFT		= $(LIBFT_PATH)libft.a
+# LIBFT_PATH	= libft/
+# LIBFT			= $(LIBFT_PATH)libft.a
 
 OBJ_PATH		= objs/
 PARSE_OBJ_PATH	= objs/parsing/
 BUILT_OBJ_PATH	= objs/builtins/
 EXEC_OBJ_PATH	= objs/execution/
+TOOL_OBJ_PATH	= objs/tools/
 
 SRC_PATH		= srcs/
 BUILT_PATH		= $(SRC_PATH)builtins/
 EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
+TOOLS_PATH		= $(SRC_PATH)tools/
 INC_PATH		= includes/
-INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
+INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h $(INC_PATH)ft_printf.h
 
 PARSE	= wc_expander.c \
 		wc_filenames.c \
@@ -57,45 +59,62 @@ EXEC	= main.c \
 		here_doc.c \
 		extra.c
 
+TOOL	= ft_atoi.c \
+		ft_itoa.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_split.c \
+		ft_strchr.c \
+		ft_strdup.c \
+		ft_strjoin.c \
+		ft_strlen.c \
+		ft_substr.c \
+		ft_strncmp.c \
+		ft_putnbr_fd.c \
+		ft_isalpha.c \
+		ft_toupper.c \
+		ft_printf/ft_printf.c \
+		ft_printf/ft_print_basics.c \
+		ft_printf/ft_print_ptr.c \
+		ft_printf/ft_print_uint.c \
+		ft_printf/ft_itohex.c
+
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
 EXECS		= $(addprefix $(EXEC_PATH), $(EXEC))
-PARSE_OBJ	= $(PARSE:.c=.o)
-BUILT_OBJ	= $(BUILTIN:.c=.o)
-EXEC_OBJ	= $(EXEC:.c=.o)
-PARSE_OBJS	= $(addprefix $(PARSE_OBJ_PATH), $(PARSE_OBJ))
-BUILT_OBJS	= $(addprefix $(BUILT_OBJ_PATH), $(BUILT_OBJ))
-EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC_OBJ))
+TOOLS		= $(addprefix $(TOOLS_PATH), $(TOOL))
+PARSE_OBJS	= $(addprefix $(PARSE_OBJ_PATH), $(PARSE:.c=.o))
+BUILT_OBJS	= $(addprefix $(BUILT_OBJ_PATH), $(BUILTIN:.c=.o))
+EXEC_OBJS	= $(addprefix $(EXEC_OBJ_PATH), $(EXEC:.c=.o))
+TOOLS_OBJS	= $(addprefix $(TOOL_OBJ_PATH), $(TOOL:.c=.o))
 
-OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS)
-OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) 
+OBJECTS		= $(PARSE_OBJS) $(BUILT_OBJS) $(EXEC_OBJS) $(TOOLS_OBJS)
+OBJECT_PATHS= $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(TOOL_OBJ_PATH)
 
 all: $(NAME)
 
-$(OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH) $(PARSE_OBJ_PATH):
-	mkdir $(OBJ_PATH) $(PARSE_OBJ_PATH) $(BUILT_OBJ_PATH) $(EXEC_OBJ_PATH)
+$(OBJ_PATH) $(OBJECT_PATHS) $(TOOL_OBJ_PATH)ft_printf:
+	mkdir $(OBJ_PATH) $(OBJECT_PATHS) $(TOOL_OBJ_PATH)/ft_printf
 
-$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c $(LIBFT) $(INC_FILES)
+$(PARSE_OBJ_PATH)%.o:$(PARSE_PATH)%.c $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(LIBFT) $(INC_FILES)
+$(BUILT_OBJ_PATH)%.o:$(BUILT_PATH)%.c $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(LIBFT) $(INC_FILES)
+$(EXEC_OBJ_PATH)%.o:$(EXEC_PATH)%.c $(INC_FILES)
 	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(NAME): $(LIBFT) $(OBJECT_PATHS) $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(INCFLAGS) -o $(NAME)
+$(TOOL_OBJ_PATH)%.o:$(TOOLS_PATH)%.c $(INC_FILES)
+	$(CC) $(FLAGS) -c $< $ -I$(INC_PATH) -o $@
 
-$(LIBFT):
-	make -C $(LIBFT_PATH)
+$(NAME): $(OBJECT_PATHS) $(OBJECTS)
+	$(CC) $(FLAGS) $(OBJECTS) $(INCFLAGS) -o $(NAME)
 
 clean:
-	make -C $(LIBFT_PATH) clean
 	rm -rf $(OBJ_PATH)
 
 fclean:clean
-	make -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
 
 run: $(NAME)

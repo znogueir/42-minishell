@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 14:44:07 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:17:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 # include <signal.h>
 # include <dirent.h>
 # include <sys/types.h>
+# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include "../libft/libft.h"
-# include "../libft/gnl/get_next_line.h"
-# include "../libft/ft_printf/ft_printf.h"
+# include "ft_printf.h"
 # include "structures.h"
 # include "pipex.h"
 
@@ -210,5 +209,21 @@ void		ft_close_pipes(t_data *data);
 // E_X_T_R_A
 void		*break_malloc(int size);
 void		print_list(t_cmdline *cmd);
+
+// tools
+int			ft_atoi(const char *nptr);
+char		*ft_itoa(int n);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putstr_fd(char *s, int fd);
+char		**ft_split(char const *s, char *sep);
+char		*ft_strchr(const char *s, int c);
+char		*ft_strdup(const char *s);
+char		*ft_strjoin(char const *s1, const char *s2);
+size_t		ft_strlen(const char *s);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		ft_putnbr_fd(int n, int fd);
+int			ft_toupper(int c);
+int			ft_isalpha(int c);
 
 #endif
