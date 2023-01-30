@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:10:41 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:56:17 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_make_cmd_array(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 		table->cmd = NULL;
 		return ;
 	}
-	table->cmd = ft_mallocator(NULL, data, sizeof(char *) * (count + 1));
+	table->cmd = ft_malloc(data, sizeof(char *) * (count + 1));
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)
@@ -65,11 +65,11 @@ int	ft_init_cmdtable(t_data *data)
 	t_cmdline	*line;
 
 	line = data->cmd;
-	ft_tableadd_back(&data->cmdtable, ft_tablenew());
+	ft_tableadd_back(&data->cmdtable, ft_tablenew(data));
 	while (line && line->type != NEWLINES)
 	{
 		if (line && line->type == PIPE)
-			ft_tableadd_back(&data->cmdtable, ft_tablenew());
+			ft_tableadd_back(&data->cmdtable, ft_tablenew(data));
 		line = line->next;
 	}
 	line = data->cmd;

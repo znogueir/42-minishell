@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/15 17:28:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:55:45 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_cmdline
 	char				*content;
 	int					type;
 	struct s_cmdline	*next;
-}						t_cmdline;
+}	t_cmdline;
 
 typedef struct s_env
 {
@@ -26,7 +26,7 @@ typedef struct s_env
 	char			*name;
 	char			*content;
 	struct s_env	*next;
-}					t_env;
+}	t_env;
 
 typedef struct s_filelist
 {
@@ -35,7 +35,7 @@ typedef struct s_filelist
 	int					order;
 	char				*filename;
 	struct s_filelist	*next;
-}						t_filelist;
+}	t_filelist;
 
 typedef struct s_cmdtable
 {
@@ -45,7 +45,13 @@ typedef struct s_cmdtable
 	t_filelist			*outfile;
 	int					pid;
 	struct s_cmdtable	*next;
-}						t_cmdtable;
+}	t_cmdtable;
+
+typedef struct s_mem
+{
+	void			*ptr;
+	struct s_mem	*next;
+}	t_mem;
 
 typedef struct s_wildcards
 {

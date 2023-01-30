@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 15:52:05 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:30:05 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,19 +111,19 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		p_env = p_env->next;
 	if (p_env)
 	{
-		free(name);
+		// free(name);
 		if (append)
 		{
 			p_env->content = ft_strjoin(p_env->content, content);
-			free(content);
+			// free(content);
 			return (0);
 		}
-		free(p_env->content);
+		// free(p_env->content);
 		p_env->content = content;
 		return (0);
 	}
 	if (!content)
 		return (ft_envadd_back(&(data->loc_env), \
-		ft_envnew(name, content, 0)), 0);
-	return (ft_envadd_back(&(data->loc_env), ft_envnew(name, content, 1)), 1);
+		ft_envnew(data, name, content, 0)), 0);
+	return (ft_envadd_back(&(data->loc_env), ft_envnew(data, name, content, 1)), 1);
 }

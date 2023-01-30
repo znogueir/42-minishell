@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 17:23:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:40:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	cur_breakpoint = 80;
 
 void	reset_cmd(t_data *data)
 {
-	free_cmd(data->cmd);
+	// free_cmd(data->cmd);
 	data->cmd = NULL;
 }
 
@@ -39,10 +39,10 @@ t_data	*ft_init(char **env)
 	data->open_pipe = 0;
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
-	data->wc = malloc(sizeof(t_wildcards));
+	data->wc = ft_malloc(data, sizeof(t_wildcards));
 	if (!data->wc)
 	{
-		free(data);
+		// free(data);
 		exit(222);
 	}
 	data->wc->wc_bin = NULL;
@@ -73,7 +73,7 @@ int	launch_normal(int ac, char **av, char **env)
 		if (check_errors(data->line))
 		{
 			reset_cmd(data);
-			free(data->line);
+			// free(data->line);
 			continue ;
 		}
 		ft_lexer(data);
@@ -87,7 +87,7 @@ int	launch_normal(int ac, char **av, char **env)
 		else
 			g_exit = exit_status;
 		reset_cmd(data);
-		free(data->line);
+		// free(data->line);
 	}
 	free_all(data);
 	return (g_exit);

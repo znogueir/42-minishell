@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:31:05 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 		p_env = p_env->next;
 	if (p_env)
 		new_word = ft_strjoin(new_word, p_env->content);
-	free(search_for);
+	// free(search_for);
 	return (new_word);
 }
 
@@ -101,13 +101,13 @@ int	ft_expander(t_data *data)
 			if (!better_strncmp(p_cmd->content, "\"\"", 2) || \
 			!better_strncmp(p_cmd->content, "\'\'", 2))
 			{
-				free(p_cmd->content);
+				// free(p_cmd->content);
 				p_cmd->content = ft_strdup("");
 			}
 			else
 			{
 				new_word = big_expand(data, new_word, p_cmd->content);
-				free(p_cmd->content);
+				// free(p_cmd->content);
 				p_cmd->content = new_word;
 			}
 		}

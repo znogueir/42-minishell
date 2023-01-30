@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:13:46 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:30:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 		if (g_exit == 257)
 		{
 			g_exit = 130;
-			free(*str);
+			// free(*str);
 			close(fd);
 			dup2(insave, 0);
 			close(insave);
@@ -34,7 +34,7 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 			break ;
 		write(fd, *str, ft_strlen(*str));
 		ft_putstr_fd("\n", fd);
-		free(*str);
+		// free(*str);
 	}
 	close(insave);
 	return (1);
@@ -59,8 +59,8 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	temp = ft_itoa(count);
 	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), temp);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	free(filename);
-	free(temp);
+	// free(filename);
+	// free(temp);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: problem opening heredoc\n", 2);
@@ -71,7 +71,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 		return (0);
 	if (!str)
 		here_doc_error(limiter);
-	free(str);
+	// free(str);
 	close(fd);
 	return (1);
 }
@@ -86,9 +86,10 @@ int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, int count)
 	tmp = ft_itoa(count);
 	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), tmp);
 	fd = open(filename, O_RDONLY);
-	free(tmp);
+	// free(tmp);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(fd, filename, H_DOC, order));
+	ft_filenew(NULL, fd, filename, H_DOC, order));
+	//add data to ft_filenew
 	if (fd == -1)
 		return (0);
 	return (1);

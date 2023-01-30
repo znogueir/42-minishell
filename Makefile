@@ -77,7 +77,8 @@ TOOL	= ft_atoi.c \
 		ft_printf/ft_print_basics.c \
 		ft_printf/ft_print_ptr.c \
 		ft_printf/ft_print_uint.c \
-		ft_printf/ft_itohex.c
+		ft_printf/ft_itohex.c \
+		memory.c 
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))

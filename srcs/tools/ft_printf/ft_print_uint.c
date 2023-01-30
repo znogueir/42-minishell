@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:41:30 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 22:09:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:35:36 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_utoa(unsigned int n)
 	int		nbrlen;
 
 	nbrlen = ft_unbrlen(n);
-	nbrfinal = (char *)malloc(sizeof(char) * (nbrlen + 1));
+	nbrfinal = (char *)ft_malloc(NULL, sizeof(char) * (nbrlen + 1));
 	if (!nbrfinal)
 		return (0);
 	nbrfinal[nbrlen] = '\0';
@@ -58,6 +58,6 @@ int	ft_print_uint(unsigned int un)
 	output = ft_utoa(un);
 	ft_putstr_fd(output, 1); //write to stderr
 	char_count = ft_strlen(output);
-	free(output);
+	// free(output);
 	return (char_count);
 }

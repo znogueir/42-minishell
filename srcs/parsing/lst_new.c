@@ -6,17 +6,17 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:13:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/15 19:57:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:36:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmdline	*ft_cmdnew(void *content)
+t_cmdline	*ft_cmdnew(t_data *data, void *content)
 {
 	t_cmdline	*cell;
 
-	cell = malloc(sizeof(*cell));
+	cell = ft_malloc(data, sizeof(*cell));
 	if (!cell)
 		return (NULL);
 	cell->content = content;
@@ -25,11 +25,11 @@ t_cmdline	*ft_cmdnew(void *content)
 	return (cell);
 }
 
-t_env	*ft_envnew(char *name, char *content, int is_env)
+t_env	*ft_envnew(t_data *data, char *name, char *content, int is_env)
 {
 	t_env	*cell;
 
-	cell = malloc(sizeof(*cell));
+	cell = ft_malloc(data, sizeof(*cell));
 	if (!cell)
 		return (NULL);
 	cell->env = is_env;
@@ -39,11 +39,11 @@ t_env	*ft_envnew(char *name, char *content, int is_env)
 	return (cell);
 }
 
-t_cmdtable	*ft_tablenew(void)
+t_cmdtable	*ft_tablenew(t_data *data)
 {
 	t_cmdtable	*cell;
 
-	cell = malloc(sizeof(*cell));
+	cell = ft_malloc(data, sizeof(*cell));
 	if (!cell)
 		return (NULL);
 	cell->infile = NULL;
@@ -55,11 +55,11 @@ t_cmdtable	*ft_tablenew(void)
 	return (cell);
 }
 
-t_filelist	*ft_filenew(int fd, char *filename, int type, int order)
+t_filelist	*ft_filenew(t_data *data, int fd, char *filename, int type, int order)
 {
 	t_filelist	*cell;
 
-	cell = malloc(sizeof(*cell));
+	cell = ft_malloc(data, sizeof(*cell));
 	if (!cell)
 		return (NULL);
 	cell->fd = fd;

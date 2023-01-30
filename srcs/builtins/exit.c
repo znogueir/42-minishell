@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:07 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/20 20:43:34 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:49:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ too many arguments\n", 2), 1);
 	}
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	ft_exit_fork(data, cmd, g_exit);
+	//ft_exit_fork(data, cmd, g_exit);
+	ft_malloc(data, -777);
 	return (g_exit);
 }
 // check for long long int overflows 

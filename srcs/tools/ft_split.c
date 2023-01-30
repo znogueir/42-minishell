@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 22:47:16 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 20:21:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:42:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_word(char const *substr, char *sep)
 	int		i;
 	char	*word;
 
-	word = (char *)malloc(sizeof(char) * (ft_wlen(substr, sep) + 1));
+	word = (char *)ft_malloc(NULL, sizeof(char) * (ft_wlen(substr, sep) + 1));
 	if (!word)
 		return (0);
 	i = 0;
@@ -67,7 +67,7 @@ char	**ft_split(char const *s, char *sep)
 	char	**result;
 
 	wcount = ft_wcount(s, sep);
-	result = (char **)malloc(sizeof(char *) * (wcount + 1));
+	result = (char **)ft_malloc(NULL, sizeof(char *) * (wcount + 1));
 	if (!result)
 		return (0);
 	i = 0;

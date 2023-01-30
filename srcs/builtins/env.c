@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 15:10:13 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:29:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	update_env(char	**env, t_data *data)
 		if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
 			data->paths = ft_split(content, ":");
 		i++;
-		free(name);
-		free(content);
+		// free(name);
+		// free(content);
 	}
 }
 
@@ -95,12 +95,12 @@ void	set_env(char **env, t_data *data)
 		if (!better_strncmp(name, "SHLVL", ft_strlen("SHLVL")))
 		{
 			tmp = ft_itoa(ft_atoi(content) + 1);
-			free(content);
+			// free(content);
 			content = tmp;
 		}
 		else if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
 			data->paths = ft_split(content, ":");
-		ft_envadd_back(&(data->loc_env), ft_envnew(name, content, 1));
+		ft_envadd_back(&(data->loc_env), ft_envnew(data, name, content, 1));
 		i++;
 	}
 }

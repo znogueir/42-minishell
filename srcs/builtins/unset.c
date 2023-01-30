@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:30 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:30:14 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	ft_unset(t_data *data, char **cmd)
 		if (cur)
 		{
 			prev->next = cur->next;
-			free(cur->name);
-			free(cur->content);
-			free(cur);
+			// free(cur->name);
+			// free(cur->content);
+			// free(cur);
 		}
 	}
 	return (0);

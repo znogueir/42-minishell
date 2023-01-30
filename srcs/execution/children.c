@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:10:24 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:30:17 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_execute(t_data *data, char **command)
 	if (command[0] && is_builtin(command))
 	{
 		g_exit = exec_builtin(command, data);
-		ft_exit_fork(data, command, g_exit);
+		// ft_exit_fork(data, command, g_exit);
+		ft_malloc(data, -777);
 	}
 	convert_env(data, data->loc_env, command);
 	update_env(data->char_env, data);
@@ -31,11 +32,13 @@ void	ft_execute(t_data *data, char **command)
 	if (validcmd == NULL)
 	{
 		g_exit = ft_command_not_found(validcmd);
-		ft_exit_fork(data, command, g_exit);
+		// ft_exit_fork(data, command, g_exit);
+		ft_malloc(data, -777);
 	}
 	execve(validcmd, command, data->char_env);
-	free(validcmd);
-	ft_exit_fork(data, command, g_exit);
+	// free(validcmd);
+	// ft_exit_fork(data, command, g_exit);
+	ft_malloc(data, -777);
 }
 
 void	ft_open_redirs(t_data *data, t_cmdtable *table)
@@ -70,7 +73,8 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 		ft_open_redirs(data, table);
 		if (cmd)
 			ft_execute(data, cmd);
-		ft_exit_fork(data, cmd, g_exit);
+		// ft_exit_fork(data, cmd, g_exit);
+		ft_malloc(data, -777);
 	}
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);

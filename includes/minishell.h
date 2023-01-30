@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 22:17:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:19:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,13 @@ void		ft_cmdadd_back(t_cmdline **lst, t_cmdline *new);
 void		ft_fileadd_back(t_filelist **lst, t_filelist *new);
 void		ft_tableadd_back(t_cmdtable **lst, t_cmdtable *new);
 // void		ft_pidadd_back(t_process **lst, int pid);
-t_env		*ft_envnew(char *name, char *content, int is_env);
-t_cmdline	*ft_cmdnew(void *content);
+t_env		*ft_envnew(t_data *data, char *name, char *content, int is_env);
+t_cmdline	*ft_cmdnew(t_data *data, void *content);
 t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop);
-t_cmdtable	*ft_tablenew(void);
+t_cmdtable	*ft_tablenew(t_data *data);
 t_cmdtable	*get_last(t_cmdtable *table);
 t_filelist	*file_get_last(t_filelist *filelist);
-t_filelist	*ft_filenew(int fd, char *filename, int type, int order);
+t_filelist	*ft_filenew(t_data *data, int fd, char *filename, int type, int order);
 // t_process	*ft_pidnew(int pid);
 
 //	builtins
@@ -225,5 +225,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);
+
+void		*ft_malloc(t_data *data, long long int size);
 
 #endif

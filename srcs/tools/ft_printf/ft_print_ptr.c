@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 19:49:49 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 22:09:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:35:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_ptrtohex(unsigned long long np)
 	char		*hexnbr;
 
 	xlen = ft_ptrsize(np);
-	hexnbr = malloc(sizeof(char) * (xlen + 1));
+	hexnbr = ft_malloc(NULL, sizeof(char) * (xlen + 1));
 	if (!hexnbr)
 		return (0);
 	hexnbr[xlen] = '\0';
@@ -63,6 +63,6 @@ int	ft_print_ptr(unsigned long long ptr)
 	output = ft_ptrtohex(ptr);
 	ft_putstr_fd(output, 1); //write to stderr
 	char_count = ft_strlen(output);
-	free(output);
+	// free(output);
 	return (char_count + 2);
 }

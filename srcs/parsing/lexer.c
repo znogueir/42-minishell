@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:27:54 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 15:05:34 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:56:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*malloc_token(t_data *data, char *str, int size)
 	int		i;
 
 	i = 0;
-	token = ft_mallocator(NULL, data, sizeof(char) * (size + 1));
+	token = ft_malloc(data, sizeof(char) * (size + 1));
 	if (!token)
 		return (NULL);
 	while (i < size)
@@ -45,13 +45,13 @@ void	check_operator(t_data *data, int *i, int *ck_pt)
 	{
 		*i += 2;
 		ft_cmdadd_back(&(data->cmd), \
-		ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
+		ft_cmdnew(data, malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 	}
 	else
 	{
 		(*i)++;
 		ft_cmdadd_back(&(data->cmd), \
-		ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
+		ft_cmdnew(data, malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 	}
 }
 
@@ -70,7 +70,7 @@ void	lex_word(t_data *data, int *i, int *ck_pt)
 		(*i)++;
 	}
 	ft_cmdadd_back(&(data->cmd), \
-	ft_cmdnew(malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
+	ft_cmdnew(data, malloc_token(data, data->line + *ck_pt, *i - *ck_pt)));
 }
 
 int	ft_lexer(t_data *data)

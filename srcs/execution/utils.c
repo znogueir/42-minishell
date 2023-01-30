@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:12:23 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:40:51 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ void	convert_env(t_data *data, t_env *loc_env, char **command)
 		i++;
 		tmp = tmp->next;
 	}
-	data->char_env = malloc(sizeof(char *) * (i + 1));
+	data->char_env = ft_malloc(data, sizeof(char *) * (i + 1));
 	if (!data->char_env)
 	{
 		ft_putstr_fd("\n\nwhat\n\n", 2);
 		free_split(command);
-		ft_malloc_exit(NULL, data);
+		ft_malloc(data, -777);
+		// ft_malloc_exit(NULL, data);
 	}
 	i = 0;
 	while (loc_env)
@@ -89,7 +90,7 @@ char	**ft_arr_dup(t_data *data, char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	copy = ft_mallocator(NULL, data, sizeof(char *) * (count + 1));
+	copy = ft_malloc(data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		copy[i] = ft_strdup(arr[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/19 23:00:06 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:30:54 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_path(char *prog, char *cmdpath)
 		if (access(cmdpath, X_OK) == 0)
 			return (0);
 		return (ft_permission_denied(prog));
-		free(cmdpath);
+		// free(cmdpath);
 	}
 	return (1);
 }
@@ -31,7 +31,7 @@ char	*ft_join_path(char *path, char *prog)
 
 	cmd = ft_strjoin(ft_strdup("/"), prog);
 	cmdpath = ft_strjoin(ft_strdup(path), cmd);
-	free(cmd);
+	// free(cmd);
 	return (cmdpath);
 }	
 
@@ -48,7 +48,7 @@ char	*get_valid_path(t_data *data, char **prog)
 	cmdpath = ft_join_path(data->paths[0], prog[0]);
 	while (data->paths[i] && ext == 1)
 	{
-		free(cmdpath);
+		// free(cmdpath);
 		cmdpath = ft_join_path(data->paths[i++], prog[0]);
 		ext = check_path(prog[0], cmdpath);
 	}
@@ -56,8 +56,9 @@ char	*get_valid_path(t_data *data, char **prog)
 		ext = ft_command_not_found(prog[0]);
 	if (ext == 0 && cmdpath)
 		return (cmdpath);
-	free(cmdpath);
-	ft_exit_fork(data, prog, ext);
+	// free(cmdpath);
+	// ft_exit_fork(data, prog, ext);
+	ft_malloc(data, -777);
 	exit(1);
 }
 

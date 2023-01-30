@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 20:05:42 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 22:09:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:42:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_itohex(unsigned int n, char c)
 	char		*hexnbr;
 
 	xlen = ft_nhexlen(n);
-	hexnbr = malloc(sizeof(char) * (xlen + 1));
+	hexnbr = ft_malloc(NULL, sizeof(char) * (xlen + 1));
 	if (!hexnbr)
 		return (0);
 	hexnbr[xlen] = '\0';

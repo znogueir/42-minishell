@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:33:03 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 15:05:13 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:32:30 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop)
 	{
 		save = lst->next->next;
 		lst->next = save;
-		free(topop->content);
-		free(topop);
+		// free(topop->content);
+		// free(topop);
 	}
 	return (save);
 }

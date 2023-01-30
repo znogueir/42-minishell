@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:12:43 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 20:22:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:42:16 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 	int			nbrlen;
 
 	nbrlen = ft_nbrlen(n);
-	nbrfinal = malloc(sizeof(char) * (nbrlen + 1));
+	nbrfinal = ft_malloc(NULL, sizeof(char) * (nbrlen + 1));
 	if (!nbrfinal)
 		return (0);
 	ln = n;

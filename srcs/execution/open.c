@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:54:28 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:39:57 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
 		return (ft_is_directory(line->next->content), 0);
 	fd = open(line->next->content, O_RDONLY);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(fd, ft_strdup(line->next->content), LESS, order));
+	ft_filenew(NULL, fd, ft_strdup(line->next->content), LESS, order));
+	//add data to ft_filenew
 	if (fd == -1)
 		return (perror("minishell"), 0);
 	return (1);
@@ -40,7 +41,8 @@ int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
 	{
 		fd = open(line->next->content, settings, 0644);
 		ft_fileadd_back(&table->outfile, \
-		ft_filenew(fd, ft_strdup(line->next->content), line->type, order));
+		ft_filenew(NULL, fd, ft_strdup(line->next->content), line->type, order));
+		//add data to ft_filenew
 		if (fd == -1)
 			return (0);
 	}
@@ -83,8 +85,8 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 	int			open;
 
 	line = cmdline;
-	ft_fileadd_back(&table->infile, ft_filenew(0, ft_strdup(IN), LESS, -1));
-	ft_fileadd_back(&table->outfile, ft_filenew(1, ft_strdup(OUT), GREAT, -1));
+	ft_fileadd_back(&table->infile, ft_filenew(data, 0, ft_strdup(IN), LESS, -1));
+	ft_fileadd_back(&table->outfile, ft_filenew(data, 1, ft_strdup(OUT), GREAT, -1));
 	open = ft_open_loop(data, table, line);
 	if (open == 0)
 		g_exit = 1;

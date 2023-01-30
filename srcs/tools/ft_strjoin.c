@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 21:00:52 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 20:22:07 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:35:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, const char *s2)
 	int		j;
 
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	result = malloc(sizeof(char) * len);
+	result = ft_malloc(NULL, sizeof(char) * len);
 	if (!result)
 		return (0);
 	i = 0;
@@ -37,6 +37,6 @@ char	*ft_strjoin(char const *s1, const char *s2)
 		j++;
 	}
 	result[i] = '\0';
-	free((char *)s1);
+	// free((char *)s1);
 	return (result);
 }

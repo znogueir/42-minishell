@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 14:24:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/29 22:09:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:35:30 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	ft_print_hexa(unsigned int n, char c)
 
 	hexnbr = ft_itohex(n, c);
 	ft_putstr_fd(hexnbr, 1); //write to stderr
-	free(hexnbr);
+	// free(hexnbr);
 	return (ft_nhexlen(n));
 }
