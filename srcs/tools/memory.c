@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 22:24:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:53:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_liberate(t_data *data, t_mem *mem)
 
 	if (data)
 	{
-		free_table(data, data->cmdtable);
 		ft_close_fds(data, NULL, NULL);
+		free_table(data, data->cmdtable);
 		if (data->insave && data->insave != 0 && data->insave != -1)
 			close(data->insave);
 		if (data->outsave && data->outsave != 1 && data->outsave != -1)

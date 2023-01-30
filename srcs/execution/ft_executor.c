@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_executor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:53:42 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 22:45:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	ft_pipex(t_data *data)
 	if (!table)
 		return (0);
 	ft_check_fds(table);
+	close(data->insave);
 	data->insave = dup(0);
+	close(data->outsave);
 	data->outsave = dup(1);
 	while (table)
 	{
@@ -57,8 +59,8 @@ int	ft_pipex(t_data *data)
 	ft_close_fds(data, NULL, NULL);//in, out);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	close(data->insave);
-	close(data->outsave);
+	// close(data->insave);
+	// close(data->outsave);
 	return (1);
 }
 

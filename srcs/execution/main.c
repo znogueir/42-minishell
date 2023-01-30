@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 22:25:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:47:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_data	ft_init(char **env)
 	data.open_pipe = 0;
 	data.hdoc_open = 0;
 	data.hdoc_write = 0;
+	data.insave = dup(0);
+	data.outsave = dup(1);
 	data.wc = ft_malloc(&data, sizeof(t_wildcards));
 	data.wc->wc_bin = NULL;
 	set_env(env, &data);
@@ -53,7 +55,7 @@ int	launch_normal(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	data = ft_init(env);
-	while (1)
+	while (g_exit != 256)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
