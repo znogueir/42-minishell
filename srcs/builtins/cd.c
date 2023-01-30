@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:49 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:29:45 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_env_content(t_data *data, char *name)
 	while (env && better_strncmp(env->name, name, ft_strlen(name)))
 		env = env->next;
 	if (env)
-		return (ft_strdup(env->content));
+		return (ft_strdup(data, env->content));
 	return (NULL);
 }
 
@@ -33,7 +33,7 @@ t_env	*get_pointer_env(t_data *data, char *name)
 		env = env->next;
 	if (!env)
 	{
-		ft_export(data, ft_strdup(name), NULL, 0);
+		ft_export(data, ft_strdup(data, name), NULL, 0);
 		env = data->loc_env;
 		while (env && better_strncmp(env->name, name, ft_strlen(name)))
 			env = env->next;
@@ -64,7 +64,7 @@ int	check_cd_expand(t_data *data, char **cmd, char **path)
 		if (*path == NULL)
 			return (write(2, "minishell: cd: OLDPWD not set\n", 30), -1);
 		if (*path[0] == '\0')
-			return (ft_printf("\n"), -1);//free(*path), -1);
+			return (printf("\n"), -1);//free(*path), -1);
 		return (2);
 	}
 	return (0);
@@ -84,11 +84,11 @@ int	parse_cd(t_data *data, char **cmd)
 	if (cd_expand == -1)
 		return (1);
 	if (!cd_expand)
-		path = ft_strdup(cmd[1]);
+		path = ft_strdup(data, cmd[1]);
 	if (chdir(path) != 0)
 		return (/*free(path), */perror("minishell: cd"), 1);
 	if (cd_expand == 2)
-		ft_printf("%s\n", path);
+		printf("%s\n", path);
 	return (/*free(path), */0);
 }
 
@@ -109,7 +109,7 @@ int	ft_cd(t_data *data, char **cmd)
 		return (perror("cd"), 1);
 	env_pwd = get_pointer_env(data, "PWD");
 	env_oldpwd = get_pointer_env(data, "OLDPWD");
-	save_pwd = ft_strdup(env_pwd->content);
+	save_pwd = ft_strdup(data, env_pwd->content);
 	// free(env_pwd->content);
 	// free(env_oldpwd->content);
 	env_pwd->content = cd;

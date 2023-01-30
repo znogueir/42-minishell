@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:04:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:35:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
 	{
 		tmp = p_cmd->next;
 		// free(p_cmd->content);
-		p_cmd->content = ft_strdup(matching->content);
+		p_cmd->content = ft_strdup(data, matching->content);
 		if (matching->next)
 		{
 			p_cmd->next = matching->next;

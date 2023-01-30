@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:12:32 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:16 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("%s\n", tab[i]);
+		printf("%s\n", tab[i]);
 		i++;
 	}
 }

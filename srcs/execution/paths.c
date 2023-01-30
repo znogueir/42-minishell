@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 19:13:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:28:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	check_path(char *prog, char *cmdpath)
 	return (1);
 }
 
-char	*ft_join_path(char *path, char *prog)
+char	*ft_join_path(t_data *data, char *path, char *prog)
 {
 	char	*cmd;
 	char	*cmdpath;
 
-	cmd = ft_strjoin(ft_strdup("/"), prog);
-	cmdpath = ft_strjoin(ft_strdup(path), cmd);
+	cmd = ft_strjoin(data, ft_strdup(data, "/"), prog);
+	cmdpath = ft_strjoin(data, ft_strdup(data, path), cmd);
 	// free(cmd);
 	return (cmdpath);
 }	
@@ -45,11 +45,11 @@ char	*get_valid_path(t_data *data, char **prog)
 	ext = 1;
 	if (!data->paths)
 		return (NULL);
-	cmdpath = ft_join_path(data->paths[0], prog[0]);
+	cmdpath = ft_join_path(data, data->paths[0], prog[0]);
 	while (data->paths[i] && ext == 1)
 	{
 		// free(cmdpath);
-		cmdpath = ft_join_path(data->paths[i++], prog[0]);
+		cmdpath = ft_join_path(data, data->paths[i++], prog[0]);
 		ext = check_path(prog[0], cmdpath);
 	}
 	if (!data->paths[i] && ext == 1)
@@ -72,7 +72,7 @@ char	*get_valid_cmd(t_data *data, char **command, int *ext)
 	else if (command[0][0] == '.' || command[0][0] == '/'
 		|| command[0][1] == '/')
 	{
-		validcmd = ft_strdup(command[0]);
+		validcmd = ft_strdup(data, command[0]);
 		*ext = check_path(validcmd, validcmd);
 		if (*ext == 1)
 			*ext = ft_no_such_file(validcmd);

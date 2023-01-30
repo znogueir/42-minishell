@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 18:40:51 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	display_cmdtable(t_cmdtable *table)
 
 	while (table)
 	{
-		ft_printf("\n");
+		printf("\n");
 		infile = table->infile;
 		outfile = table->outfile;
 		i = 0;
@@ -44,7 +44,7 @@ void	display_cmdtable(t_cmdtable *table)
 			printf("%s ", table->cmd[i++]);
 		printf("\n\tstatus: %d\n", table->status);
 		table = table->next;
-		ft_printf("\n");
+		printf("\n");
 	}
 }
 
@@ -71,7 +71,7 @@ void	convert_env(t_data *data, t_env *loc_env, char **command)
 	i = 0;
 	while (loc_env)
 	{
-		data->char_env[i++] = ft_strjoin(ft_strjoin(ft_strdup(loc_env->name), \
+		data->char_env[i++] = ft_strjoin(data, ft_strjoin(data, ft_strdup(data, loc_env->name), \
 		"="), loc_env->content);
 		loc_env = loc_env->next;
 	}
@@ -93,7 +93,7 @@ char	**ft_arr_dup(t_data *data, char **arr)
 	copy = ft_malloc(data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{
-		copy[i] = ft_strdup(arr[i]);
+		copy[i] = ft_strdup(data, arr[i]);
 		i++;
 	}
 	copy[i] = NULL;

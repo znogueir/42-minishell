@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 22:29:05 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:32:36 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:22:51 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_add_excode(t_data *data, char *str, int *p_i)
 	char	*excode;
 
 	i = 0;
-	excode = ft_itoa(g_exit);
+	excode = ft_itoa(data, g_exit);
 	new_str = ft_malloc(data, sizeof(char) * \
 	(ft_strlen(str) + ft_strlen(excode) + 1));
 	while (str && str[i])

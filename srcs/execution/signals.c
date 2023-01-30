@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/27 15:11:12 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	handle_sig_heredocs(int sig)
 	}
 }
 
-// ft_printf("\nchild\n");
+// printf("\nchild\n");
 // fd = open("/dev/null", O_RDONLY);
 // dup2(fd, 0);
 // close(fd);

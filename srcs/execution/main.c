@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 19:51:38 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:27:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,32 @@ void	reset_cmd(t_data *data)
 	data->cmd = NULL;
 }
 
-t_data	*ft_init(char **env)
+t_data	ft_init(char **env)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		exit(1);
-	data->quote = 0;
-	data->line = NULL;
-	data->loc_env = NULL;
-	data->cmd = NULL;
-	data->cmdtable = NULL;
-	data->filelist = NULL;
-	data->char_env = NULL;
-	data->open_pipe = 0;
-	data->hdoc_open = 0;
-	data->hdoc_write = 0;
-	data->wc = ft_malloc(data, sizeof(t_wildcards));
-	data->wc->wc_bin = NULL;
-	set_env(env, data);
+	// data = malloc(sizeof(t_data));
+	// if (!data)
+	// 	exit(1);
+	data.quote = 0;
+	data.line = NULL;
+	data.loc_env = NULL;
+	data.cmd = NULL;
+	data.cmdtable = NULL;
+	data.filelist = NULL;
+	data.char_env = NULL;
+	data.open_pipe = 0;
+	data.hdoc_open = 0;
+	data.hdoc_write = 0;
+	data.wc = ft_malloc(&data, sizeof(t_wildcards));
+	data.wc->wc_bin = NULL;
+	set_env(env, &data);
 	return (data);
 }
 
 int	launch_normal(int ac, char **av, char **env)
 {
-	t_data		*data;
+	t_data		data;
 	int			exit_status;
 
 	(void)ac;
@@ -58,61 +58,61 @@ int	launch_normal(int ac, char **av, char **env)
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		//rl_outstream = stderr;
-		data->line = readline(PROMPT);
-		if (!data->line)
+		data.line = readline(PROMPT);
+		if (!data.line)
 		{
 			ft_putstr_fd("exit\n", 2);
 			break ;
 		}
-		add_history(data->line);
-		if (check_errors(data->line))
+		add_history(data.line);
+		if (check_errors(data.line))
 		{
-			reset_cmd(data);
+			reset_cmd(&data);
 			// free(data->line);
 			continue ;
 		}
-		ft_lexer(data);
-		exit_status = ft_parser(data);
+		ft_lexer(&data);
+		exit_status = ft_parser(&data);
 		if (!exit_status)
 		{
-			ft_expander(data);
+			ft_expander(&data);
 			// print_list(data->cmd);
-			ft_executor(data, env);
+			ft_executor(&data, env);
 		}
 		else
 			g_exit = exit_status;
-		reset_cmd(data);
+		reset_cmd(&data);
 		// free(data->line);
 	}
-	free_all(data);
+	free_all(&data);
 	return (g_exit);
 }
 
 int	ft_launch_minishell(char *line, char **env)
 {
-	t_data		*data;
+	t_data		data;
 	int			exit_status;
 
 	data = ft_init(env);
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	data->line = ft_strdup(line);
-	add_history(data->line);
-	if (!check_errors(data->line))
+	data.line = ft_strdup(&data, line);
+	add_history(data.line);
+	if (!check_errors(data.line))
 	{
-		ft_lexer(data);
-		exit_status = ft_parser(data);
+		ft_lexer(&data);
+		exit_status = ft_parser(&data);
 		if (!exit_status)
 		{
-			ft_expander(data);
+			ft_expander(&data);
 			// print_list(data->cmd);
-			ft_executor(data, env);
+			ft_executor(&data, env);
 		}
 		else
 			g_exit = exit_status;
 	}
-	reset_cmd(data);
-	free_all(data);
+	reset_cmd(&data);
+	free_all(&data);
 	return (g_exit);
 }
 
@@ -124,7 +124,7 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
 	{
-		cmds = ft_split(argv[2], ";");
+		cmds = ft_split(NULL, argv[2], ";");
 		while (cmds[i])
 			ft_launch_minishell(cmds[i++], env);
 	}

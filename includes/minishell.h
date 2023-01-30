@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 19:11:57 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:36:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include "ft_printf.h"
 # include "structures.h"
 # include "pipex.h"
 
@@ -193,10 +192,10 @@ t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);
 
 //	open_close
-int			ft_infile_open(t_cmdtable *table, t_cmdline *line, int order);
-int			ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, \
+int			ft_infile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order);
+int			ft_outfile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int settings, \
 			int order);
-int			ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, \
+int			ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order, \
 			int count);
 int			ft_here_doc_write(t_data *data, char *limiter, int count);
 int			ft_here_doc(t_data *data, t_cmdline *cmdline);
@@ -212,15 +211,15 @@ void		print_list(t_cmdline *cmd);
 
 // tools
 int			ft_atoi(const char *nptr);
-char		*ft_itoa(int n);
+char		*ft_itoa(t_data *data, int n);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
-char		**ft_split(char const *s, char *sep);
+char		**ft_split(t_data *data, char const *s, char *sep);
 char		*ft_strchr(const char *s, int c);
-char		*ft_strdup(const char *s);
-char		*ft_strjoin(char const *s1, const char *s2);
+char		*ft_strdup(t_data *data, const char *s);
+char		*ft_strjoin(t_data *data, char const *s1, const char *s2);
 size_t		ft_strlen(const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(t_data *data, char const *s, unsigned int start, size_t len);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);

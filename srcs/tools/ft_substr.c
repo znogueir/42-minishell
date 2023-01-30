@@ -6,13 +6,13 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 19:30:41 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 17:42:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:19:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(t_data *data, char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	i;
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen(s) - start;
 	if (start >= ft_strlen(s))
 		len = 0;
-	substr = ft_malloc(NULL, sizeof(char) * (len + 1));
+	substr = ft_malloc(data, sizeof(char) * (len + 1));
 	if (!substr)
 		return (NULL);
 	i = 0;

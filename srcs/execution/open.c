@@ -6,13 +6,13 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 17:39:57 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:32:51 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
+int	ft_infile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order)
 {
 	int	fd;
 
@@ -22,14 +22,14 @@ int	ft_infile_open(t_cmdtable *table, t_cmdline *line, int order)
 		return (ft_is_directory(line->next->content), 0);
 	fd = open(line->next->content, O_RDONLY);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(NULL, fd, ft_strdup(line->next->content), LESS, order));
+	ft_filenew(NULL, fd, ft_strdup(data, line->next->content), LESS, order));
 	//add data to ft_filenew
 	if (fd == -1)
 		return (perror("minishell"), 0);
 	return (1);
 }
 
-int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
+int	ft_outfile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int settings, int order)
 {
 	int	fd;
 
@@ -41,7 +41,7 @@ int	ft_outfile_open(t_cmdtable *table, t_cmdline *line, int settings, int order)
 	{
 		fd = open(line->next->content, settings, 0644);
 		ft_fileadd_back(&table->outfile, \
-		ft_filenew(NULL, fd, ft_strdup(line->next->content), line->type, order));
+		ft_filenew(NULL, fd, ft_strdup(data, line->next->content), line->type, order));
 		//add data to ft_filenew
 		if (fd == -1)
 			return (0);
@@ -65,14 +65,14 @@ int	ft_open_loop(t_data *data, t_cmdtable *table, t_cmdline *line)
 		if (!line)
 			break ;
 		if (open && line->type == LESS)
-			open = ft_infile_open(table, line, i++);
+			open = ft_infile_open(data, table, line, i++);
 		if (open && line->type == GREAT)
-			open = ft_outfile_open(table, line, \
+			open = ft_outfile_open(data, table, line, \
 			O_RDWR | O_CREAT | O_TRUNC, i++);
 		if (open && line->type == H_DOC)
-			open = ft_here_doc_open(table, line, i++, data->hdoc_open++);
+			open = ft_here_doc_open(data, table, line, i++, data->hdoc_open++);
 		if (open && line->type == APPEND)
-			open = ft_outfile_open(table, line, \
+			open = ft_outfile_open(data, table, line, \
 			O_RDWR | O_CREAT | O_APPEND, i++);
 		line = line->next;
 	}
@@ -85,8 +85,8 @@ int	ft_fill_files(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 	int			open;
 
 	line = cmdline;
-	ft_fileadd_back(&table->infile, ft_filenew(data, 0, ft_strdup(IN), LESS, -1));
-	ft_fileadd_back(&table->outfile, ft_filenew(data, 1, ft_strdup(OUT), GREAT, -1));
+	ft_fileadd_back(&table->infile, ft_filenew(data, 0, ft_strdup(data, IN), LESS, -1));
+	ft_fileadd_back(&table->outfile, ft_filenew(data, 1, ft_strdup(data, OUT), GREAT, -1));
 	open = ft_open_loop(data, table, line);
 	if (open == 0)
 		g_exit = 1;

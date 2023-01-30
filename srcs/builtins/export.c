@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:30:05 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:25:41 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ void	export_word(t_data *data, char *cmd)
 	while (cmd[i] && cmd[i] != '=' && cmd[i] != '+')
 		i++;
 	if (cmd[i] && cmd[i] == '=')
-		ft_export(data, ft_substr(cmd, 0, i), \
-		ft_strdup(cmd + i + 1), 0);
+		ft_export(data, ft_substr(data, cmd, 0, i), \
+		ft_strdup(data, cmd + i + 1), 0);
 	else if (cmd[i] && cmd[i] == '+' && cmd[i + 1] == '=')
-		ft_export(data, ft_substr(cmd, 0, i), \
-		ft_strdup(cmd + i + 2), 1);
+		ft_export(data, ft_substr(data, cmd, 0, i), \
+		ft_strdup(data, cmd + i + 2), 1);
 	else
-		ft_export(data, ft_substr(cmd, 0, i), NULL, 0);
+		ft_export(data, ft_substr(data, cmd, 0, i), NULL, 0);
 }
 
 int	parse_export(char **cmd, t_data *data)
@@ -114,7 +114,7 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 		// free(name);
 		if (append)
 		{
-			p_env->content = ft_strjoin(p_env->content, content);
+			p_env->content = ft_strjoin(data, p_env->content, content);
 			// free(content);
 			return (0);
 		}

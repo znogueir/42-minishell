@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:29:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:15 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ int	ft_env(t_env *loc_env, char **cmd)
 	while (print_env)
 	{
 		if (print_env->content)
-			ft_printf("%s=%s\n", print_env->name, print_env->content);
+			printf("%s=%s\n", print_env->name, print_env->content);
 		print_env = print_env->next;
 	}
 	return (0);
 }
 
-void	split_env(char **name, char **content, char *env)
+void	split_env(t_data *data, char **name, char **content, char *env)
 {
 	int	j;
 
 	j = 0;
 	while (env[j] != '=')
 		j++;
-	*name = ft_substr(env, 0, j);
-	*content = ft_substr(env, j + 1, ft_strlen(env + j + 1));
+	*name = ft_substr(data, env, 0, j);
+	*content = ft_substr(data, env, j + 1, ft_strlen(env + j + 1));
 }
 
 void	update_env(char	**env, t_data *data)
@@ -70,9 +70,9 @@ void	update_env(char	**env, t_data *data)
 	data->paths = NULL;
 	while (env && env[i])
 	{
-		split_env(&name, &content, env[i]);
+		split_env(data, &name, &content, env[i]);
 		if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
-			data->paths = ft_split(content, ":");
+			data->paths = ft_split(data, content, ":");
 		i++;
 		// free(name);
 		// free(content);
@@ -91,15 +91,15 @@ void	set_env(char **env, t_data *data)
 	content = NULL;
 	while (env[i])
 	{
-		split_env(&name, &content, env[i]);
+		split_env(data, &name, &content, env[i]);
 		if (!better_strncmp(name, "SHLVL", ft_strlen("SHLVL")))
 		{
-			tmp = ft_itoa(ft_atoi(content) + 1);
+			tmp = ft_itoa(data, ft_atoi(content) + 1);
 			// free(content);
 			content = tmp;
 		}
 		else if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
-			data->paths = ft_split(content, ":");
+			data->paths = ft_split(data, content, ":");
 		ft_envadd_back(&(data->loc_env), ft_envnew(data, name, content, 1));
 		i++;
 	}

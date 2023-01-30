@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:00:34 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:41:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:26:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**alpha_sort(char **str)
 	return (str);
 }
 
-char	**fill_names(DIR *cwd, struct dirent *dir_content, char **file_names)
+char	**fill_names(t_data *data, DIR *cwd, struct dirent *dir_content, char **file_names)
 {
 	int	i;
 
@@ -64,7 +64,7 @@ char	**fill_names(DIR *cwd, struct dirent *dir_content, char **file_names)
 	dir_content = readdir(cwd);
 	while (dir_content)
 	{
-		file_names[i] = ft_strdup(dir_content->d_name);
+		file_names[i] = ft_strdup(data, dir_content->d_name);
 		dir_content = readdir(cwd);
 		i++;
 	}
@@ -88,6 +88,6 @@ char	**get_file_names(t_data *data)
 	if (!cwd)
 		return (NULL);
 	dir_content = NULL;
-	file_names = fill_names(cwd, dir_content, file_names);
+	file_names = fill_names(data, cwd, dir_content, file_names);
 	return (alpha_sort(file_names));
 }

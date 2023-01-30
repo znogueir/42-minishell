@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:31:05 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:25:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	p_env = data->loc_env;
 	while (is_alphanum(str[size]) || str[size] == '_')
 		size++;
-	search_for = ft_substr(str, 0, size);
+	search_for = ft_substr(data, str, 0, size);
 	while (p_env && better_strncmp(p_env->name, search_for, size))
 		p_env = p_env->next;
 	if (p_env)
-		new_word = ft_strjoin(new_word, p_env->content);
+		new_word = ft_strjoin(data, new_word, p_env->content);
 	// free(search_for);
 	return (new_word);
 }
@@ -102,7 +102,7 @@ int	ft_expander(t_data *data)
 			!better_strncmp(p_cmd->content, "\'\'", 2))
 			{
 				// free(p_cmd->content);
-				p_cmd->content = ft_strdup("");
+				p_cmd->content = ft_strdup(data, "");
 			}
 			else
 			{

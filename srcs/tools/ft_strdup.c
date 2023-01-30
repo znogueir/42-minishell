@@ -6,13 +6,13 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:48:23 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 17:42:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:18:49 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(t_data *data, const char *s)
 {
 	char	*result;
 	int		i;
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen(s) + 1;
-	result = ft_malloc(NULL, sizeof(char) * len);
+	result = ft_malloc(data, sizeof(char) * len);
 	if (!result)
 		return (0);
 	i = 0;

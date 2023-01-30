@@ -18,7 +18,7 @@ EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
 TOOLS_PATH		= $(SRC_PATH)tools/
 INC_PATH		= includes/
-INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h $(INC_PATH)ft_printf.h
+INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
 PARSE	= wc_expander.c \
 		wc_filenames.c \
@@ -73,11 +73,6 @@ TOOL	= ft_atoi.c \
 		ft_putnbr_fd.c \
 		ft_isalpha.c \
 		ft_toupper.c \
-		ft_printf/ft_printf.c \
-		ft_printf/ft_print_basics.c \
-		ft_printf/ft_print_ptr.c \
-		ft_printf/ft_print_uint.c \
-		ft_printf/ft_itohex.c \
 		memory.c 
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))

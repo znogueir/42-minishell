@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 22:47:16 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 17:42:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:21:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	ft_wcount(char const *s, char *sep)
 	return (wcount);
 }
 
-char	*ft_word(char const *substr, char *sep)
+char	*ft_word(t_data *data, char const *substr, char *sep)
 {
 	int		i;
 	char	*word;
 
-	word = (char *)ft_malloc(NULL, sizeof(char) * (ft_wlen(substr, sep) + 1));
+	word = (char *)ft_malloc(data, sizeof(char) * (ft_wlen(substr, sep) + 1));
 	if (!word)
 		return (0);
 	i = 0;
@@ -59,7 +59,7 @@ char	*ft_word(char const *substr, char *sep)
 	return (word);
 }
 
-char	**ft_split(char const *s, char *sep)
+char	**ft_split(t_data *data, char const *s, char *sep)
 {
 	int		i;
 	int		j;
@@ -67,7 +67,7 @@ char	**ft_split(char const *s, char *sep)
 	char	**result;
 
 	wcount = ft_wcount(s, sep);
-	result = (char **)ft_malloc(NULL, sizeof(char *) * (wcount + 1));
+	result = (char **)ft_malloc(data, sizeof(char *) * (wcount + 1));
 	if (!result)
 		return (0);
 	i = 0;
@@ -78,7 +78,7 @@ char	**ft_split(char const *s, char *sep)
 			i++;
 		if (s[i])
 		{
-			result[j] = ft_word((s + i), sep);
+			result[j] = ft_word(data, (s + i), sep);
 			j++;
 		}
 		while (s[i] && !ft_strchr(sep, s[i]))

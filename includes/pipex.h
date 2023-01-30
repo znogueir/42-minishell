@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 19:10:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:29:31 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_close_fds(t_data *data, t_filelist *in, t_filelist *out);
 //void	ft_end(t_pipex *pipex);
 
 //children
-int 	ft_pipe(t_data *data, t_cmdtable *table, char **cmd);
+int		ft_pipe(t_data *data, t_cmdtable *table, char **cmd);
 void	ft_execute(t_data *data, char **cmd);
 
 //exits
@@ -45,7 +45,7 @@ int		is_directory(char *path);
 //paths
 char	**ft_get_paths(char **env);
 int		check_path(char *prog, char *cmdpath);
-char	*ft_join_path(char *path, char *prog);
+char	*ft_join_path(t_data *data, char *path, char *prog);
 char	*get_valid_path(t_data *data, char **prog);
 char	*get_valid_cmd(t_data *data, char **command, int *ext);
 

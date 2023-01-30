@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:42:44 by ionorb            #+#    #+#             */
-/*   Updated: 2023/01/27 14:43:25 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:39:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	print_export(char *name, char *content)
 {
 	if (!content)
-		ft_printf("export %s\n", name);
+		printf("export %s\n", name);
 	else
-		ft_printf("export %s=\"%s\"\n", name, content);
+		printf("export %s=\"%s\"\n", name, content);
 }
 
 int	get_env_len(t_env **p_env, t_env **env_min)

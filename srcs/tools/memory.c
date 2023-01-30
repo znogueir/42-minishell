@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 19:53:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 20:00:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_liberate(t_data *data, t_mem *mem)
 		free(prev->ptr);
 		free(prev);
 	}
-	free(data);
+	// free(data);
 	printf("end\n");
 	exit(g_exit);
 }

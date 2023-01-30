@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 18:30:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:31:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	char	*filename;
 
 	(void)data;
-	temp = ft_itoa(count);
-	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), temp);
+	temp = ft_itoa(data, count);
+	filename = ft_strjoin(data, ft_strdup(data, ".temp_heredoc_"), temp);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	// free(filename);
 	// free(temp);
@@ -76,15 +76,15 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	return (1);
 }
 
-int	ft_here_doc_open(t_cmdtable *table, t_cmdline *line, int order, int count)
+int	ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order, int count)
 {
 	int		fd;
 	char	*tmp;
 	char	*filename;
 
 	(void)line;
-	tmp = ft_itoa(count);
-	filename = ft_strjoin(ft_strdup(".temp_heredoc_"), tmp);
+	tmp = ft_itoa(data, count);
+	filename = ft_strjoin(data, ft_strdup(data, ".temp_heredoc_"), tmp);
 	fd = open(filename, O_RDONLY);
 	// free(tmp);
 	ft_fileadd_back(&table->infile, \

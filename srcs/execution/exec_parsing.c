@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 17:56:17 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_make_cmd_array(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 			cmdline = cmdline->next->next;
 		else
 		{
-			table->cmd[i++] = ft_strdup(cmdline->content);
+			table->cmd[i++] = ft_strdup(data, cmdline->content);
 			cmdline = cmdline->next;
 		}
 	}
