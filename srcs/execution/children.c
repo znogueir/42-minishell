@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 18:30:17 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:08:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ void	ft_open_redirs(t_data *data, t_cmdtable *table)
 	}
 }
 
-void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
+int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 {
 	data->pid = fork();
 	if (data->pid == -1)
-		ft_exit_msg("problem with fork()");
+		return (ft_putstr_fd("problem with fork()\n", 2), \
+		ft_malloc(data, -777), 1);
 	table->pid = data->pid;
 	signal(SIGINT, sig_in_fork);
 	signal(SIGQUIT, sig_in_fork);
@@ -78,6 +79,7 @@ void	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	}
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
+	return (0);
 }
 
 void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
@@ -95,10 +97,11 @@ void	ft_execute_alone(t_data *data, t_cmdtable *table, char **cmd)
 	ft_close_fds(data, infile, outfile);
 }
 
-void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
+int	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
 	if (pipe(data->pipe) == -1)
-		ft_exit_msg("problem with pipe()");
+		return (ft_putstr_fd("problem with pipe()\n", 2), \
+		ft_malloc(data, -777), 1);
 	data->open_pipe = 1;
 	if (cmd && cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);
@@ -109,4 +112,5 @@ void	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	close(data->pipe[1]);
 	dup2(data->pipe[0], 0);
 	free_split(cmd);
+	return (0);
 }

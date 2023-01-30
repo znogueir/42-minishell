@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:40:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:29:11 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void	free_all(t_data *data)
 	// ft_free(data);
 }
 
-void	ft_exit_fork(t_data *data, char **command, int ext)
-{
-	ft_close_fds(data, NULL, NULL);
-	close(data->insave);
-	close(data->outsave);
-	free_table(data, data->cmdtable);
-	free_all(data);
-	free_split(command);
-	exit(ext);
-}
+// void	ft_exit_fork(t_data *data, char **command, int ext)
+// {
+// 	ft_close_fds(data, NULL, NULL);
+// 	close(data->insave);
+// 	close(data->outsave);
+// 	free_table(data, data->cmdtable);
+// 	free_all(data);
+// 	free_split(command);
+// 	exit(ext);
+// }
 
 // void	ft_malloc_exit(void *extra, t_data *data)
 // {

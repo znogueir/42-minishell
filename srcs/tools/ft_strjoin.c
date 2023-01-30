@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 21:00:52 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:35:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:23:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*ft_strjoin(char const *s1, const char *s2)
 		j++;
 	}
 	result[i] = '\0';
+	printf("thengs %ld\n", ft_strlen(s1));
 	// free((char *)s1);
 	return (result);
 }

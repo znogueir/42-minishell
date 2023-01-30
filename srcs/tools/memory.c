@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 18:42:16 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:53:22 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@ void	ft_liberate(t_data *data, t_mem *mem)
 {
 	t_mem	*prev;
 
-	ft_close_fds(data, NULL, NULL);
-	close(data->insave);
-	close(data->outsave);
+	if (data)
+	{
+		ft_close_fds(data, NULL, NULL);
+		close(data->insave);
+		close(data->outsave);
+	}
 	while (mem)
 	{
-		printf("free\n");
+		// printf("free\n");
 		prev = mem;
 		mem = mem->next;
 		free(prev->ptr);
 		free(prev);
 	}
 	free(data);
-	ft_putstr_fd("Error: malloc failed\n", 2);
-	exit(1);
+	printf("end\n");
+	exit(g_exit);
 }
 
 t_mem	*mem_addback(t_mem **mem, t_mem *new)
@@ -52,13 +55,18 @@ t_mem	*mem_addback(t_mem **mem, t_mem *new)
 t_mem	*mem_new(size_t size)
 {
 	t_mem	*new;
+	char	*err;
 
+	err = "Error: malloc failed\n";
 	new = malloc(sizeof(t_mem));
 	if (!new)
 		return (NULL);
-	new->ptr = malloc(size);
+	new->ptr = break_malloc(size);
 	if (!new->ptr)
+	{
+		ft_putstr_fd(err, 2);
 		return (free(new), NULL);
+	}
 	new->next = NULL;
 	return (new);
 }

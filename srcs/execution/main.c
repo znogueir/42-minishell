@@ -6,15 +6,15 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:40:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:51:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 8;
-int	cur_breakpoint = 80;
+int	break_malloc_at = 800;
+int	cur_breakpoint = 0;
 
 void	reset_cmd(t_data *data)
 {
@@ -40,11 +40,6 @@ t_data	*ft_init(char **env)
 	data->hdoc_open = 0;
 	data->hdoc_write = 0;
 	data->wc = ft_malloc(data, sizeof(t_wildcards));
-	if (!data->wc)
-	{
-		// free(data);
-		exit(222);
-	}
 	data->wc->wc_bin = NULL;
 	set_env(env, data);
 	return (data);
