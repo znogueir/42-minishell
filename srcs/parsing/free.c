@@ -6,38 +6,38 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 19:29:11 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:16:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_split(char	**tab)
-{
-	int	i;
+// void	free_split(char	**tab)
+// {
+// 	int	i;
 
-	i = 0;
-	while (tab && tab[i])
-	{
-		// printf("tab: %s\n", tab[i]);
-		// free(tab[i]);
-		i++;
-	}
-	// free(tab);
-}
+// 	i = 0;
+// 	while (tab && tab[i])
+// 	{
+// 		// printf("tab: %s\n", tab[i]);
+// 		// free(tab[i]);
+// 		i++;
+// 	}
+// 	// free(tab);
+// }
 
-void	free_all(t_data *data)
-{
-	// ft_free(data->line);
-	// free_cmd(data->cmd);
-	// ft_free(data->wc);
-	free_split(data->char_env);
-	// free_env(data->loc_env);
-	free_split(data->paths);
-	if (data->cmdtable)
-		free_table(data, data->cmdtable);
-	// ft_free(data);
-}
+// void	free_all(t_data *data)
+// {
+// 	// ft_free(data->line);
+// 	// free_cmd(data->cmd);
+// 	// ft_free(data->wc);
+// 	free_split(data->char_env);
+// 	// free_env(data->loc_env);
+// 	free_split(data->paths);
+// 	if (data->cmdtable)
+// 		free_table(data, data->cmdtable);
+// 	// ft_free(data);
+// }
 
 // void	ft_exit_fork(t_data *data, char **command, int ext)
 // {

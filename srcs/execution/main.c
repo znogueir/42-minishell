@@ -6,14 +6,14 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:27:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:25:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 800;
+int	break_malloc_at = 576;
 int	cur_breakpoint = 0;
 
 void	reset_cmd(t_data *data)
@@ -58,6 +58,8 @@ int	launch_normal(int ac, char **av, char **env)
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		//rl_outstream = stderr;
+		if (g_exit == 256)
+			break ;
 		data.line = readline(PROMPT);
 		if (!data.line)
 		{
@@ -84,7 +86,8 @@ int	launch_normal(int ac, char **av, char **env)
 		reset_cmd(&data);
 		// free(data->line);
 	}
-	free_all(&data);
+	// free_all(&data);
+	ft_malloc(&data, -777);
 	return (g_exit);
 }
 
@@ -112,7 +115,7 @@ int	ft_launch_minishell(char *line, char **env)
 			g_exit = exit_status;
 	}
 	reset_cmd(&data);
-	free_all(&data);
+	// free_all(&data);
 	return (g_exit);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 19:08:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:21:04 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_execute(t_data *data, char **command)
 		// ft_exit_fork(data, command, g_exit);
 		ft_malloc(data, -777);
 	}
-	convert_env(data, data->loc_env, command);
+	convert_env(data, data->loc_env);
 	update_env(data->char_env, data);
 	if (command && command[0] && !command[0][0])
 		validcmd = NULL;
@@ -111,6 +111,6 @@ int	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	}
 	close(data->pipe[1]);
 	dup2(data->pipe[0], 0);
-	free_split(cmd);
+	// free_split(cmd);
 	return (0);
 }

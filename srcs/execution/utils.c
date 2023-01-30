@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:19:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	display_cmdtable(t_cmdtable *table)
 	}
 }
 
-void	convert_env(t_data *data, t_env *loc_env, char **command)
+void	convert_env(t_data *data, t_env *loc_env)
 {
 	t_env	*tmp;
 	int		i;
@@ -64,9 +64,8 @@ void	convert_env(t_data *data, t_env *loc_env, char **command)
 	if (!data->char_env)
 	{
 		ft_putstr_fd("\n\nwhat\n\n", 2);
-		free_split(command);
+		// free_split(command);
 		ft_malloc(data, -777);
-		// ft_malloc_exit(NULL, data);
 	}
 	i = 0;
 	while (loc_env)

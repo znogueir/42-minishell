@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:17:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	update_env(char	**env, t_data *data)
 	i = 0;
 	name = NULL;
 	content = NULL;
-	free_split(data->paths);
+	// free_split(data->paths);
 	data->paths = NULL;
 	while (env && env[i])
 	{

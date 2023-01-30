@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:36:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:20:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int			better_strncmp(char *s1, char *s2, int size);
 void		print_tab(char **tab);
 void		print_echo(char	**cmd);
 
-void		convert_env(t_data *data, t_env *loc_env, char **command);
+void		convert_env(t_data *data, t_env *loc_env);
 char		**ft_arr_dup(t_data *data, char **arr);
 void		display_cmdtable(t_cmdtable *table);
 
