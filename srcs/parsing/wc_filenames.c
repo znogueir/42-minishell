@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:00:34 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:03:57 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:38:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**get_file_names(t_data *data)
 	nbr_of_files = get_nbrof_files();
 	if (nbr_of_files == -1)
 		return (NULL);
-	file_names = ft_malloc(NULL, data, sizeof(char *) * (nbr_of_files + 1), 6);
+	file_names = ft_malloc(NULL, data, sizeof(char *) * (nbr_of_files + 1));
 	cwd = opendir(".");
 	if (!cwd)
 		return (NULL);

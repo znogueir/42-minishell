@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:21:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:37:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_execute(t_data *data, char **command)
 	{
 		g_exit = exec_builtin(command, data);
 		// ft_exit_fork(data, command, g_exit);
-		ft_malloc(NULL, data, -777, 0);
+		ft_malloc(NULL, data, -777);
 	}
 	convert_env(data, data->loc_env);
 	update_env(data->char_env, data);
@@ -33,12 +33,12 @@ void	ft_execute(t_data *data, char **command)
 	{
 		g_exit = ft_command_not_found(validcmd);
 		// ft_exit_fork(data, command, g_exit);
-		ft_malloc(NULL, data, -777, 0);
+		ft_malloc(NULL, data, -777);
 	}
 	execve(validcmd, command, data->char_env);
 	ft_free(validcmd);
 	// ft_exit_fork(data, command, g_exit);
-	ft_malloc(NULL, data, -777, 0);
+	ft_malloc(NULL, data, -777);
 }
 
 void	ft_open_redirs(t_data *data, t_cmdtable *table)
@@ -64,7 +64,7 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	data->pid = fork();
 	if (data->pid == -1)
 		return (ft_putstr_fd("problem with fork()\n", 2), \
-		ft_malloc(NULL, data, -777, 0), 1);
+		ft_malloc(NULL, data, -777), 1);
 	table->pid = data->pid;
 	signal(SIGINT, sig_in_fork);
 	signal(SIGQUIT, sig_in_fork);
@@ -75,7 +75,7 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 		if (cmd)
 			ft_execute(data, cmd);
 		// ft_exit_fork(data, cmd, g_exit);
-		ft_malloc(NULL, data, -777, 0);
+		ft_malloc(NULL, data, -777);
 	}
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
@@ -101,7 +101,7 @@ int	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 {
 	if (pipe(data->pipe) == -1)
 		return (ft_putstr_fd("problem with pipe()\n", 2), \
-		ft_malloc(NULL, data, -777, 0), 1);
+		ft_malloc(NULL, data, -777), 1);
 	data->open_pipe = 1;
 	if (cmd && cmd[0] && is_builtin(cmd) && !data->cmdtable->next)
 		ft_execute_alone(data, table, cmd);

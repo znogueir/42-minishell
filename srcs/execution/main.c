@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:30:11 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:37:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_data	ft_init(char **env)
 	data.hdoc_write = 0;
 	data.insave = dup(0);
 	data.outsave = dup(1);
-	data.wc = ft_malloc(NULL, &data, sizeof(t_wildcards), 1);
+	data.wc = ft_malloc(NULL, &data, sizeof(t_wildcards));
 	data.wc->wc_bin = NULL;
 	set_env(env, &data);
 	return (data);
@@ -89,7 +89,7 @@ int	launch_normal(int ac, char **av, char **env)
 		ft_free(data.line);
 	}
 	// free_all(&data);
-	ft_malloc(NULL, &data, -777, 0);
+	ft_malloc(NULL, &data, -777);
 	return (g_exit);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 22:35:15 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:22:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:37:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*get_valid_path(t_data *data, char **prog)
 	ft_free(cmdpath);
 	g_exit = ext;
 	// ft_exit_fork(data, prog, ext);
-	ft_malloc(NULL, data, -777, 0);
+	ft_malloc(NULL, data, -777);
 	return (NULL);
 }
 

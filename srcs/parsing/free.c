@@ -6,11 +6,16 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:23:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:40:20 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_free(void *ptr)
+{
+	ft_malloc(ptr, 0, 0);
+}
 
 void	free_split(char	**tab)
 {
@@ -19,7 +24,6 @@ void	free_split(char	**tab)
 	i = 0;
 	while (tab && tab[i])
 	{
-		// printf("tab: %s\n", tab[i]);
 		ft_free(tab[i]);
 		i++;
 	}

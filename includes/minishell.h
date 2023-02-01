@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:27:23 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:36:57 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,6 @@ void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);
 
-void		*ft_malloc(void *free, t_data *data, long long int size, int type);
+void		*ft_malloc(void *free, t_data *data, long long int size);
 
 #endif

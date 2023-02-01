@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:03:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:38:03 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	convert_env(t_data *data, t_env *loc_env)
 		i++;
 		tmp = tmp->next;
 	}
-	data->char_env = ft_malloc(NULL, data, sizeof(char *) * (i + 1), 6);
+	data->char_env = ft_malloc(NULL, data, sizeof(char *) * (i + 1));
 	if (!data->char_env)
 	{
 		ft_putstr_fd("\n\nwhat\n\n", 2);
 		// free_split(command);
-		ft_malloc(NULL, data, -777, 0);
+		ft_malloc(NULL, data, -777);
 	}
 	i = 0;
 	while (loc_env)
@@ -89,7 +89,7 @@ char	**ft_arr_dup(t_data *data, char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	copy = ft_malloc(NULL, data, sizeof(char *) * (count + 1), 6);
+	copy = ft_malloc(NULL, data, sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		copy[i] = ft_strdup(data, arr[i]);

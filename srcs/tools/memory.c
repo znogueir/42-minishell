@@ -6,16 +6,11 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:31:49 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:40:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free(void *ptr)
-{
-	ft_malloc(ptr, 0, 0, 0);
-}
 
 void	ft_free_one(t_mem *mem, void *thing)
 {
@@ -74,7 +69,7 @@ t_mem	*mem_addback(t_mem **mem, t_mem *new)
 	return (*mem);
 }
 
-t_mem	*mem_new(size_t size, int type)
+t_mem	*mem_new(size_t size)
 {
 	t_mem	*new;
 	char	*err;
@@ -83,7 +78,6 @@ t_mem	*mem_new(size_t size, int type)
 	new = malloc(sizeof(t_mem));
 	if (!new)
 		return (NULL);
-	new->type = type;
 	new->ptr = malloc(size);//break_malloc(size);
 	if (!new->ptr)
 	{
@@ -97,26 +91,16 @@ t_mem	*mem_new(size_t size, int type)
 	return (new);
 }
 
-void	*ft_malloc(void *free, t_data *data, long long int size, int type)
+void	*ft_malloc(void *free, t_data *data, long long int size)
 {
 	static t_mem	*mem = NULL;
 	t_mem			*new;
 
 	if (free)
-	{
-		ft_free_one(mem, free);
-		return (NULL);
-	}
+		return (ft_free_one(mem, free), NULL);
 	if (size == EXIT_FREE || size == FREE_ALL)
 		ft_liberate(data, mem, size);
-	// if (type == 0)
-	// {
-	// 	thing = malloc(size);
-	// 	if (!thing)
-	// 		ft_liberate(data, mem, size);
-	// 	return (thing);
-	// }
-	new = mem_new(size, type);
+	new = mem_new(size);
 	if (!new)
 		ft_liberate(data, mem, size);
 	mem = mem_addback(&mem, new);

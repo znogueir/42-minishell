@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 22:29:05 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:24:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:38:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_stradd_char(t_data *data, char *str, char c)
 	char	*new_str;
 
 	i = 0;
-	new_str = ft_malloc(NULL, data, sizeof(char) * (ft_strlen(str) + 2), 1);
+	new_str = ft_malloc(NULL, data, sizeof(char) * (ft_strlen(str) + 2));
 	while (str && str[i])
 	{
 		new_str[i] = str[i];
@@ -40,7 +40,7 @@ char	*ft_add_excode(t_data *data, char *str, int *p_i)
 	i = 0;
 	excode = ft_itoa(data, g_exit);
 	new_str = ft_malloc(NULL, data, sizeof(char) * \
-	(ft_strlen(str) + ft_strlen(excode) + 1), 1);
+	(ft_strlen(str) + ft_strlen(excode) + 1));
 	while (str && str[i])
 	{
 		new_str[i] = str[i];

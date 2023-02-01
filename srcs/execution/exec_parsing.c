@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:50:19 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:03:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:37:38 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_make_cmd_array(t_data *data, t_cmdtable *table, t_cmdline *cmdline)
 		table->cmd = NULL;
 		return ;
 	}
-	table->cmd = ft_malloc(NULL, data, sizeof(char *) * (count + 1), 6);
+	table->cmd = ft_malloc(NULL, data, sizeof(char *) * (count + 1));
 	while (cmdline && i < count)
 	{
 		if (!cmdline->content)
