@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:38:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:51:15 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,6 @@ void	convert_env(t_data *data, t_env *loc_env)
 		tmp = tmp->next;
 	}
 	data->char_env = ft_malloc(NULL, data, sizeof(char *) * (i + 1));
-	if (!data->char_env)
-	{
-		ft_putstr_fd("\n\nwhat\n\n", 2);
-		// free_split(command);
-		ft_malloc(NULL, data, -777);
-	}
 	i = 0;
 	while (loc_env)
 	{

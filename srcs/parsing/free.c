@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:40:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:42:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 void	ft_free(void *ptr)
 {
 	ft_malloc(ptr, 0, 0);
+}
+
+void	ft_quit(t_data *data)
+{
+	ft_malloc(NULL, data, EXIT_FREE);
+}
+
+void	free_all(t_data *data)
+{
+	ft_malloc(NULL, data, FREE_ALL);
+}
+
+void	ft_close(int *fd)
+{
+	if (*fd > 2)
+	{
+		close(*fd);
+		*fd = -2;
+	}
 }
 
 void	free_split(char	**tab)
@@ -29,45 +48,3 @@ void	free_split(char	**tab)
 	}
 	ft_free(tab);
 }
-
-// void	free_all(t_data *data)
-// {
-// 	// ft_ft_free(data->line);
-// 	// free_cmd(data->cmd);
-// 	// ft_ft_free(data->wc);
-// 	free_split(data->char_env);
-// 	// free_env(data->loc_env);
-// 	free_split(data->paths);
-// 	if (data->cmdtable)
-// 		free_table(data, data->cmdtable);
-// 	// ft_ft_free(data);
-// }
-
-// void	ft_exit_fork(t_data *data, char **command, int ext)
-// {
-// 	ft_close_fds(data, NULL, NULL);
-// 	close(data->insave);
-// 	close(data->outsave);
-// 	free_table(data, data->cmdtable);
-// 	free_all(data);
-// 	free_split(command);
-// 	exit(ext);
-// }
-
-// void	ft_malloc_exit(void *extra, t_data *data)
-// {
-// 	// ft_putstr_fd("\nmallocd ur mom\n\n", 2);
-// 	// ft_free(extra);
-// 	// free_all(data);
-// 	exit(258);
-// }
-
-// void	*ft_mallocator(void	*extra, t_data *data, int size)
-// {
-// 	void	*thing;
-
-// 	thing = break_malloc(size);
-// 	if (!thing)
-// 		ft_malloc_exit(extra, data);
-// 	return (thing);
-// }

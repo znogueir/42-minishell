@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:37:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 00:22:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	launch_normal(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	data = ft_init(env);
 	while (g_exit != 256)
 	{
+		data = ft_init(env);
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		//rl_outstream = stderr;
@@ -71,8 +71,9 @@ int	launch_normal(int ac, char **av, char **env)
 		add_history(data.line);
 		if (check_errors(data.line))
 		{
-			reset_cmd(&data);
+			// reset_cmd(&data);
 			ft_free(data.line);
+			free_all(&data);
 			continue ;
 		}
 		ft_lexer(&data);
@@ -85,11 +86,11 @@ int	launch_normal(int ac, char **av, char **env)
 		}
 		else
 			g_exit = exit_status;
-		reset_cmd(&data);
+		// reset_cmd(&data);
 		ft_free(data.line);
+		free_all(&data);
 	}
-	// free_all(&data);
-	ft_malloc(NULL, &data, -777);
+	ft_quit(&data);
 	return (g_exit);
 }
 
@@ -117,7 +118,7 @@ int	ft_launch_minishell(char *line, char **env)
 			g_exit = exit_status;
 	}
 	reset_cmd(&data);
-	// free_all(&data);
+	free_all(&data);
 	return (g_exit);
 }
 

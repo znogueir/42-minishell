@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:40:47 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:53:27 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_free_one(t_mem *mem, void *thing)
 	ft_putstr_fd("not freeing\n", 2);
 }
 
-void	ft_liberate(t_data *data, t_mem *mem, int type)
+void	*ft_liberate(t_data *data, t_mem *mem, int type)
 {
 	t_mem	*prev;
 
@@ -35,10 +35,9 @@ void	ft_liberate(t_data *data, t_mem *mem, int type)
 	{
 		ft_close_fds(data, NULL, NULL);
 		free_table(data, data->cmdtable);
-		if (data->insave && data->insave != 0 && data->insave != -1)
-			close(data->insave);
-		if (data->outsave && data->outsave != 1 && data->outsave != -1)
-			close(data->outsave);
+		ft_close(&data->insave);
+		ft_close(&data->outsave);
+		ft_free(data->line);
 	}
 	while (mem)
 	{
@@ -54,6 +53,7 @@ void	ft_liberate(t_data *data, t_mem *mem, int type)
 	printf("end\n");
 	if (type == EXIT_FREE)
 		exit(g_exit);
+	return (NULL);
 }
 
 t_mem	*mem_addback(t_mem **mem, t_mem *new)
@@ -99,7 +99,7 @@ void	*ft_malloc(void *free, t_data *data, long long int size)
 	if (free)
 		return (ft_free_one(mem, free), NULL);
 	if (size == EXIT_FREE || size == FREE_ALL)
-		ft_liberate(data, mem, size);
+		return (mem = ft_liberate(data, mem, size), NULL);
 	new = mem_new(size);
 	if (!new)
 		ft_liberate(data, mem, size);

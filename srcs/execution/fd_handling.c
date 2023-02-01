@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_handling.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/27 15:10:53 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/01 22:47:05 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	ft_close_pipes(t_data *data)
 	if (data->open_pipe)
 	{
 		if (data->pipe[0] != -1)
-			close(data->pipe[0]);
+			ft_close(&data->pipe[0]);
 		if (data->pipe[1] != -1)
-			close(data->pipe[1]);
+			ft_close(&data->pipe[1]);
 	}
 	data->open_pipe = 0;
 }
@@ -63,13 +63,13 @@ void	ft_close_fds(t_data *data, t_filelist *in, t_filelist *out)
 		while (in)
 		{
 			if (in->fd > 2)
-				close(in->fd);
+				ft_close(&in->fd);
 			in = in->next;
 		}
 		while (out)
 		{
 			if (out->fd > 2)
-				close(out->fd);
+				ft_close(&out->fd);
 			out = out->next;
 		}
 		if (tab)

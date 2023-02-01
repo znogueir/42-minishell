@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:33:02 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 22:47:14 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	handle_sig_heredocs(int sig)
 	{
 		fd = open("/dev/null", O_RDONLY);
 		dup2(fd, STDIN_FILENO);
-		close(fd);
+		ft_close(&fd);
 		ft_putstr_fd("\n", 1);
 		g_exit = 257;
 	}
@@ -49,7 +49,7 @@ void	handle_sig_heredocs(int sig)
 // printf("\nchild\n");
 // fd = open("/dev/null", O_RDONLY);
 // dup2(fd, 0);
-// close(fd);
+// ft_close(&fd);
 // write(0, "\0", 1);
 
 // int	error_here_doc(t_exec *exec, int stdin_fd)
@@ -58,7 +58,7 @@ void	handle_sig_heredocs(int sig)
 // 	{
 // 		// heredoc_rm(exec->tok_lst);
 // 		dup2(stdin_fd, 0);
-// 		close(stdin_fd);
+// 		ft_close(&stdin_fd);
 // 		g_exit = 130;
 // 		return (1);
 // 	}

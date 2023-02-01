@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:37:28 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 22:47:04 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	signal(SIGQUIT, sig_in_fork);
 	if (data->pid == 0)
 	{
-		close(data->pipe[0]);
+		ft_close(&data->pipe[0]);
 		ft_open_redirs(data, table);
 		if (cmd)
 			ft_execute(data, cmd);
@@ -109,7 +109,7 @@ int	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	{
 		ft_execute_pipes(data, table, cmd);
 	}
-	close(data->pipe[1]);
+	ft_close(&data->pipe[1]);
 	dup2(data->pipe[0], 0);
 	// free_split(cmd);
 	return (0);

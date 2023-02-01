@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 20:21:51 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 22:47:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 		{
 			g_exit = 130;
 			ft_free(*str);
-			close(fd);
+			ft_close(&fd);
 			dup2(insave, 0);
-			close(insave);
+			ft_close(&insave);
 			return (0);
 		}
 		if (!*str || !ft_strcmp(limiter, *str))
@@ -36,7 +36,7 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 		ft_putstr_fd("\n", fd);
 		ft_free(*str);
 	}
-	close(insave);
+	ft_close(&insave);
 	return (1);
 }
 
@@ -72,7 +72,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	if (!str)
 		here_doc_error(limiter);
 	ft_free(str);
-	close(fd);
+	ft_close(&fd);
 	return (1);
 }
 
