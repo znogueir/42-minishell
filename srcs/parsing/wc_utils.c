@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:04:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:24:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:24:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
 	if (matching)
 	{
 		tmp = p_cmd->next;
-		// free(p_cmd->content);
+		ft_free(p_cmd->content);
 		p_cmd->content = ft_strdup(data, matching->content);
 		if (matching->next)
 		{
@@ -37,10 +37,10 @@ t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
 			ret = get_last_cmd(matching);
 			ret->next = tmp;
 		}
-		// free(matching->content);
-		// free(matching);
+		ft_free(matching->content);
+		ft_free(matching);
 	}
-	// free(data->wc->wc_bin);
+	ft_free(data->wc->wc_bin);
 	data->wc->wc_bin = NULL;
 	return (ret);
 }
@@ -79,7 +79,7 @@ int	is_wildcard(t_data *data)
 			return (1);
 		i++;
 	}
-	// free(data->wc->wc_bin);
+	ft_free(data->wc->wc_bin);
 	data->wc->wc_bin = NULL;
 	return (0);
 }

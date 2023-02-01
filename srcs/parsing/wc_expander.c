@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:20 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:24:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 		p_env = p_env->next;
 	if (p_env)
 		new_word = ft_strjoin(data, new_word, p_env->content);
-	// free(search_for);
+	ft_free(search_for);
 	return (new_word);
 }
 
@@ -57,22 +57,19 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 	while (file_names && file_names[i])
 	{
 		while (file_names[i] && (*str)[0] != '.' && file_names[i][0] == '.')
-			i++;
-			// free(file_names[i++]);
+			ft_free(file_names[i++]);
 		while (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/' && \
 		!is_dir(file_names[i]))
-			i++;
-			// free(file_names[i++]);
+			ft_free(file_names[i++]);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
 			file_names[i] = ft_stradd_char(data, file_names[i], '/');
 		data->wc->file_name = file_names[i];
 		if (file_names[i] && check_filename2(data, *str, 1))
 			ft_cmdadd_back(&matching, ft_cmdnew(data, ft_strdup(data, file_names[i])));
 		if (file_names[i])
-			i++;
-			// free(file_names[i++]);
+			ft_free(file_names[i++]);
 	}
-	return (/*free(file_names), */finish_wc(data, matching, p_cmd));
+	return (ft_free(file_names), finish_wc(data, matching, p_cmd));
 }
 
 char	small_expand(t_data *data, char **new_word, char *str, int *i)
@@ -150,13 +147,13 @@ int	ft_expander(t_data *data)
 			if (!better_strncmp(p_cmd->content, "\"\"", 2) || \
 			!better_strncmp(p_cmd->content, "\'\'", 2))
 			{
-				// free(p_cmd->content);
+				ft_free(p_cmd->content);
 				p_cmd->content = ft_strdup(data, "");
 			}
 			else
 			{
 				new_word = big_expand(data, new_word, p_cmd->content);
-				// free(p_cmd->content);
+				ft_free(p_cmd->content);
 				p_cmd->content = new_word;
 				p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
 			}

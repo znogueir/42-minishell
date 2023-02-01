@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:48:23 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:18:49 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:04:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(t_data *data, const char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen(s) + 1;
-	result = ft_malloc(data, sizeof(char) * len);
+	result = ft_malloc(NULL, data, sizeof(char) * len, 1);
 	if (!result)
 		return (0);
 	i = 0;

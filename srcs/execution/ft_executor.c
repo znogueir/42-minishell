@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 22:45:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:29:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ int	ft_executor(t_data *data, char **env)
 	free_table(data, data->cmdtable);
 	return (0);
 }
+
+// char *string = malloc(10000), *ptr = string;
+// while (read(fd, string, 1) > 0 && *ptr != '\n')
+// 	*ptr++;
+// if (ptr > string)
+// 	return (ptr = 0, string);
+// else
+// 	return (free(string), NULL);
+
+// return ((ptr > string) ? (ptr = 0, string) : (free(string), NULL));
 
 //echo banana < in | ls < bingf | < bing
 //<< EOF << banana >out1(nopermissions) ls -la <in <<yo <jfksj

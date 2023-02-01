@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 22:29:05 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:22:51 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:24:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_stradd_char(t_data *data, char *str, char c)
 	char	*new_str;
 
 	i = 0;
-	new_str = ft_malloc(data, sizeof(char) * (ft_strlen(str) + 2));
+	new_str = ft_malloc(NULL, data, sizeof(char) * (ft_strlen(str) + 2), 1);
 	while (str && str[i])
 	{
 		new_str[i] = str[i];
@@ -26,7 +26,7 @@ char	*ft_stradd_char(t_data *data, char *str, char c)
 	}
 	new_str[i] = c;
 	new_str[i + 1] = '\0';
-	// free(str);
+	ft_free(str);
 	return (new_str);
 }
 
@@ -39,8 +39,8 @@ char	*ft_add_excode(t_data *data, char *str, int *p_i)
 
 	i = 0;
 	excode = ft_itoa(data, g_exit);
-	new_str = ft_malloc(data, sizeof(char) * \
-	(ft_strlen(str) + ft_strlen(excode) + 1));
+	new_str = ft_malloc(NULL, data, sizeof(char) * \
+	(ft_strlen(str) + ft_strlen(excode) + 1), 1);
 	while (str && str[i])
 	{
 		new_str[i] = str[i];
@@ -50,8 +50,8 @@ char	*ft_add_excode(t_data *data, char *str, int *p_i)
 	while (excode[j] != '\0')
 		new_str[i++] = excode[j++];
 	new_str[i] = '\0';
-	// free(str);
-	// free(excode);
+	ft_free(str);
+	ft_free(excode);
 	(*p_i) += 2;
 	return (new_str);
 }

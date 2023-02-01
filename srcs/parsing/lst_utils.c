@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:33:03 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 18:32:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:24:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop)
 	{
 		save = lst->next->next;
 		lst->next = save;
-		// free(topop->content);
-		// free(topop);
+		ft_free(topop->content);
+		ft_free(topop);
 	}
 	return (save);
 }

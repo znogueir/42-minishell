@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 20:13:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 17:36:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:03:54 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmdline	*ft_cmdnew(t_data *data, void *content)
 {
 	t_cmdline	*cell;
 
-	cell = ft_malloc(data, sizeof(*cell));
+	cell = ft_malloc(NULL, data, sizeof(*cell), 3);
 	if (!cell)
 		return (NULL);
 	cell->content = content;
@@ -29,7 +29,7 @@ t_env	*ft_envnew(t_data *data, char *name, char *content, int is_env)
 {
 	t_env	*cell;
 
-	cell = ft_malloc(data, sizeof(*cell));
+	cell = ft_malloc(NULL, data, sizeof(*cell), 4);
 	if (!cell)
 		return (NULL);
 	cell->env = is_env;
@@ -43,7 +43,7 @@ t_cmdtable	*ft_tablenew(t_data *data)
 {
 	t_cmdtable	*cell;
 
-	cell = ft_malloc(data, sizeof(*cell));
+	cell = ft_malloc(NULL, data, sizeof(*cell), 2);
 	if (!cell)
 		return (NULL);
 	cell->infile = NULL;
@@ -59,7 +59,7 @@ t_filelist	*ft_filenew(t_data *data, int fd, char *filename, int type, int order
 {
 	t_filelist	*cell;
 
-	cell = ft_malloc(data, sizeof(*cell));
+	cell = ft_malloc(NULL, data, sizeof(*cell), 5);
 	if (!cell)
 		return (NULL);
 	cell->fd = fd;

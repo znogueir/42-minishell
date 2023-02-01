@@ -6,19 +6,19 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 22:47:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:30:11 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 576;
-int	cur_breakpoint = 0;
+int	break_malloc_at = 5760;
+int	cur_breakpoint = 100000;
 
 void	reset_cmd(t_data *data)
 {
-	// free_cmd(data->cmd);
+	free_cmd(data->cmd);
 	data->cmd = NULL;
 }
 
@@ -41,7 +41,7 @@ t_data	ft_init(char **env)
 	data.hdoc_write = 0;
 	data.insave = dup(0);
 	data.outsave = dup(1);
-	data.wc = ft_malloc(&data, sizeof(t_wildcards));
+	data.wc = ft_malloc(NULL, &data, sizeof(t_wildcards), 1);
 	data.wc->wc_bin = NULL;
 	set_env(env, &data);
 	return (data);
@@ -72,7 +72,7 @@ int	launch_normal(int ac, char **av, char **env)
 		if (check_errors(data.line))
 		{
 			reset_cmd(&data);
-			// free(data->line);
+			ft_free(data.line);
 			continue ;
 		}
 		ft_lexer(&data);
@@ -86,10 +86,10 @@ int	launch_normal(int ac, char **av, char **env)
 		else
 			g_exit = exit_status;
 		reset_cmd(&data);
-		// free(data->line);
+		ft_free(data.line);
 	}
 	// free_all(&data);
-	ft_malloc(&data, -777);
+	ft_malloc(NULL, &data, -777, 0);
 	return (g_exit);
 }
 
@@ -164,7 +164,7 @@ int	main(int argc, char **argv, char **env)
 // 		if (check_errors(data->line))
 // 		{
 // 			// reset_cmd(data);
-// 			// free(data->line);
+// 			// ft_free(data->line);
 // 			// continue ;
 // 			break ;
 // 		}
@@ -178,7 +178,7 @@ int	main(int argc, char **argv, char **env)
 // 			ft_executor(data, env);
 // 		}
 // 		reset_cmd(data);
-// 		free(data->line);
+// 		ft_free(data->line);
 // 	}
 // 	//ft_putstr_fd("exit", 1);
 // 	free_all(data);

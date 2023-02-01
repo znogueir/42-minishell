@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 22:20:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:27:23 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ extern	int	cur_breakpoint;
 # define SPE_CHARS "|<> \t\n"
 # define OPS "#|<>\n"
 # define WH_SPC " \t"
+
+/*----------------------------------------------------------------------------*/
+/*									  Memory								  */
+/*----------------------------------------------------------------------------*/
+# define EXIT_FREE -777
+# define FREE_ALL -666
+// # define FREE_ONE -555
 
 /*----------------------------------------------------------------------------*/
 /*									  Tokens								  */
@@ -86,7 +93,7 @@ extern	int	cur_breakpoint;
 /*----------------------------------------------------------------------------*/
 
 //	free
-void		ft_free(void *thingy);
+void		ft_free(void *thing);
 void		free_all(t_data *data);
 void		free_split(char **tab);
 void		reset_cmd(t_data *data);
@@ -225,6 +232,6 @@ void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);
 
-void		*ft_malloc(t_data *data, long long int size);
+void		*ft_malloc(void *free, t_data *data, long long int size, int type);
 
 #endif

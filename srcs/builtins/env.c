@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 22:17:26 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:21:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	split_env(t_data *data, char **name, char **content, char *env)
 	while (env[j] != '=')
 		j++;
 	*name = ft_substr(data, env, 0, j);
+	// printf("name: %s\n", *name);
 	*content = ft_substr(data, env, j + 1, ft_strlen(env + j + 1));
 }
 
@@ -66,7 +67,7 @@ void	update_env(char	**env, t_data *data)
 	i = 0;
 	name = NULL;
 	content = NULL;
-	// free_split(data->paths);
+	free_split(data->paths);
 	data->paths = NULL;
 	while (env && env[i])
 	{
@@ -74,8 +75,8 @@ void	update_env(char	**env, t_data *data)
 		if (!better_strncmp(name, "PATH", ft_strlen("PATH")))
 			data->paths = ft_split(data, content, ":");
 		i++;
-		// free(name);
-		// free(content);
+		ft_free(name);
+		ft_free(content);
 	}
 }
 
@@ -95,7 +96,7 @@ void	set_env(char **env, t_data *data)
 		if (!better_strncmp(name, "SHLVL", ft_strlen("SHLVL")))
 		{
 			tmp = ft_itoa(data, ft_atoi(content) + 1);
-			// free(content);
+			ft_free(content);
 			content = tmp;
 		}
 		else if (!better_strncmp(name, "PATH", ft_strlen("PATH")))

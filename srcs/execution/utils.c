@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 22:19:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:03:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ void	convert_env(t_data *data, t_env *loc_env)
 		i++;
 		tmp = tmp->next;
 	}
-	data->char_env = ft_malloc(data, sizeof(char *) * (i + 1));
+	data->char_env = ft_malloc(NULL, data, sizeof(char *) * (i + 1), 6);
 	if (!data->char_env)
 	{
 		ft_putstr_fd("\n\nwhat\n\n", 2);
 		// free_split(command);
-		ft_malloc(data, -777);
+		ft_malloc(NULL, data, -777, 0);
 	}
 	i = 0;
 	while (loc_env)
 	{
-		data->char_env[i++] = ft_strjoin(data, ft_strjoin(data, ft_strdup(data, loc_env->name), \
-		"="), loc_env->content);
+		data->char_env[i++] = ft_strjoin(data, ft_strjoin(data, \
+		ft_strdup(data, loc_env->name), "="), loc_env->content);
 		loc_env = loc_env->next;
 	}
 	data->char_env[i] = NULL;
@@ -89,7 +89,7 @@ char	**ft_arr_dup(t_data *data, char **arr)
 		return (NULL);
 	while (arr[count])
 		count++;
-	copy = ft_malloc(data, sizeof(char *) * (count + 1));
+	copy = ft_malloc(NULL, data, sizeof(char *) * (count + 1), 6);
 	while (i < count)
 	{
 		copy[i] = ft_strdup(data, arr[i]);

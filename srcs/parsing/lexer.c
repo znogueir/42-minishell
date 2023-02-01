@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:27:54 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 17:56:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:03:45 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*malloc_token(t_data *data, char *str, int size)
 	int		i;
 
 	i = 0;
-	token = ft_malloc(data, sizeof(char) * (size + 1));
+	token = ft_malloc(NULL, data, sizeof(char) * (size + 1), 1);
 	if (!token)
 		return (NULL);
 	while (i < size)

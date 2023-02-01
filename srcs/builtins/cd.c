@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:49 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:20:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_cd_expand(t_data *data, char **cmd, char **path)
 		if (*path == NULL)
 			return (write(2, "minishell: cd: OLDPWD not set\n", 30), -1);
 		if (*path[0] == '\0')
-			return (printf("\n"), -1);//free(*path), -1);
+			return (printf("\n"), ft_free(*path), -1);
 		return (2);
 	}
 	return (0);
@@ -86,10 +86,10 @@ int	parse_cd(t_data *data, char **cmd)
 	if (!cd_expand)
 		path = ft_strdup(data, cmd[1]);
 	if (chdir(path) != 0)
-		return (/*free(path), */perror("minishell: cd"), 1);
+		return (ft_free(path), perror("minishell: cd"), 1);
 	if (cd_expand == 2)
 		printf("%s\n", path);
-	return (/*free(path), */0);
+	return (ft_free(path), 0);
 }
 
 int	ft_cd(t_data *data, char **cmd)
@@ -110,8 +110,8 @@ int	ft_cd(t_data *data, char **cmd)
 	env_pwd = get_pointer_env(data, "PWD");
 	env_oldpwd = get_pointer_env(data, "OLDPWD");
 	save_pwd = ft_strdup(data, env_pwd->content);
-	// free(env_pwd->content);
-	// free(env_oldpwd->content);
+	ft_free(env_pwd->content);
+	ft_free(env_oldpwd->content);
 	env_pwd->content = cd;
 	env_oldpwd->content = save_pwd;
 	return (0);
