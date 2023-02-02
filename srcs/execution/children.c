@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/02 18:58:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:49:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 	data->pid = fork();
 	if (data->pid == -1)
 		return (ft_putstr_fd("problem with fork()\n", 2), \
-		ft_malloc(NULL, data, -777), 1);
+		ft_quit(data), 1);
 	table->pid = data->pid;
 	signal(SIGINT, sig_in_fork);
 	signal(SIGQUIT, sig_in_fork);
@@ -73,7 +73,7 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 			ft_execute(data, cmd);
 		ft_malloc(NULL, data, -777);
 	}
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }

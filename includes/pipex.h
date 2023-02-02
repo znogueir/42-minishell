@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:23:51 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 21:29:31 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:52:43 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@
 
 //finish
 void	ft_error(char *extra);
-// void	ft_exit_msg(char *msg);
-// void	ft_exit_fork(t_data *data, char **command, int ext);
-//void	close_free(t_pipex *pipex);
 void	ft_close_fds(t_data *data, t_filelist *in, t_filelist *out);
-//void	ft_free_arr(char **cmd);
-//void	ft_end(t_pipex *pipex);
 
 //children
 int		ft_pipe(t_data *data, t_cmdtable *table, char **cmd);

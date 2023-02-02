@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 19:02:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:11:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 			file_names[i] = ft_stradd_char(data, file_names[i], '/');
 		data->wc->file_name = file_names[i];
 		if (file_names[i] && check_filename2(data, *str, 1))
-			ft_cmdadd_back(&matching, ft_cmdnew(data, ft_strdup(data, file_names[i])));
-		if (file_names[i])
-			ft_free(file_names[i++]);
+			ft_cmdadd_back(&matching, ft_cmdnew(data, \
+			ft_strdup(data, file_names[i])));
+		i++;
 	}
 	return (ft_free(file_names), finish_wc(data, matching, p_cmd));
 }
@@ -103,18 +103,9 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 			new_word = ft_add_excode(data, new_word, &i);
 		else if (str[i] == '$' && (is_alphanum(str[i + 1]) || \
 		str[i + 1] == '_') && end == 34)
-		{
-			i++;
-			new_word = replace_var(data, new_word, str + i);
-			while (is_alphanum(str[i]) || str[i] == '_')
-				i++;
-		}
+			i = dollar_mini_expand(data, &str, &new_word, i);
 		else
-		{
-			if (str[i] == '*')
-				data->wc->wc_bin = ft_stradd_char(data, data->wc->wc_bin, '0');
-			new_word = ft_stradd_char(data, new_word, str[i++]);
-		}
+			i = wc_mini_expand(data, &new_word, &str, i);
 	}
 	if (!str[i])
 		return (new_word);
@@ -139,12 +130,7 @@ int	ft_expander(t_data *data)
 				p_cmd->content = ft_strdup(data, "");
 			}
 			else
-			{
-				new_word = big_expand(data, new_word, p_cmd->content);
-				ft_free(p_cmd->content);
-				p_cmd->content = new_word;
-				p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
-			}
+				fill_new_word(data, &new_word, p_cmd);
 		}
 		p_cmd = p_cmd->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 19:13:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:07:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		write_error(char *error_msg, char *token);
 int			ft_expander(t_data *data);
 char		*ft_stradd_char(t_data *data, char *str, char c);
 char		*ft_add_excode(t_data *data, char *str, int *p_i);
+char		*replace_var(t_data *data, char *new_word, char *str);
 
 //	list functs
 void		print_list(t_cmdline *cmd);
@@ -196,9 +197,15 @@ int			is_dir(char *name);
 int			is_wildcard(t_data *data);
 int			check_filename(char *file_name, char *str, char *wc, int start);
 int			check_filename2(t_data *data, char *str, int start);
+int			dollar_mini_expand(t_data *data, char **str, \
+char **new_word, int i);
+int			wc_mini_expand(t_data *data, char **new_word, char **str, int i);
 char		**get_file_names(t_data *data);
+char		*big_expand(t_data *data, char *new_word, char *str);
 void		init_wildcards(t_data *data, char *pattern);
+void		fill_new_word(t_data *data, char **new_word, t_cmdline *p_cmd);
 t_cmdline	*get_last_cmd(t_cmdline *files);
+t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);
 
 //	open_close

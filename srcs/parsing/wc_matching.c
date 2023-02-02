@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wc_matching.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:10:29 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/14 23:10:31 by znogueir         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:34:36 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	finish_checking(t_data *data, char **pattern, int *start)
 	{
 		data->wc->wc_bin = data->wc->wc_bin_save;
 		*pattern = data->wc->pattern_save;
+		printf("[%s]\n", data->wc->pattern_save);
 		data->wc->streak = 0;
 	}
 }

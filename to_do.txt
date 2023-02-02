@@ -38,10 +38,14 @@ _D_O_N_E_
   bonus : add wildcards ? (only in the current working directory so 
   should be pretty easy EASY ? LOL)
 
+- [DONE]
+  !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
+
+- [DONE]
+  heredoc ctrl-D exits the heredoc when pressed twice while writing a 
+  line but it shouldn't exit the heredoc;
 
 _T_O_D_O_
-- [TODO]
-  !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
 
 - [TODO]
   maybe rewrite the execution: 
@@ -54,14 +58,10 @@ _T_O_D_O_
 - [TODO]
   open __TMP for heredocs ???;
 
-- [TODO]
+- [TODO but fuck it]
   heredoc limiter : 
   do not expand env vars ($xxx) -> skip the node ?; (not that important)
   also do not expand wildcards (*, ?) or the tild
-
-- [TODO]
-  heredoc ctrl-D exits the heredoc when pressed twice while writing a 
-  line but it shouldn't exit the heredoc;
 
 - [TODO]
   wildcards : 
