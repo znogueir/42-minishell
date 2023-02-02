@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 20:11:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:11:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,12 @@ int	ft_expander(t_data *data)
 				p_cmd->content = ft_strdup(data, "");
 			}
 			else
+			{
+				if (p_cmd->content[0] == '~' && (!p_cmd->content[1] || \
+				p_cmd->content[1] == '/'))
+					printf("expand tilde\n");
 				fill_new_word(data, &new_word, p_cmd);
+			}
 		}
 		p_cmd = p_cmd->next;
 	}
