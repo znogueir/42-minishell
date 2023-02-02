@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 23:50:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:13:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include "structures.h"
 # include "pipex.h"
 
-extern	int	g_exit;
-extern	int	break_malloc_at;
-extern	int	cur_breakpoint;
+extern int	g_exit;
+extern int	break_malloc_at;
+extern int	cur_breakpoint;
 
 /*----------------------------------------------------------------------------*/
 /*									Operations								  */
@@ -137,7 +137,7 @@ t_cmdline	*ft_cmdpop(t_cmdline **cmdline, t_cmdline *topop);
 t_cmdtable	*ft_tablenew(t_data *data);
 t_cmdtable	*get_last(t_cmdtable *table);
 t_filelist	*file_get_last(t_filelist *filelist);
-t_filelist	*ft_filenew(t_data *data, int fd, char *filename, int type, int order);
+t_filelist	*ft_filenew(t_data *data, int fd, char *filename, int type);
 // t_process	*ft_pidnew(int pid);
 
 //	builtins
@@ -202,10 +202,10 @@ t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);
 
 //	open_close
-int			ft_infile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order);
-int			ft_outfile_open(t_data *data, t_cmdtable *table, t_cmdline *line, int settings, \
-			int order);
-int			ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order, \
+int			ft_infile_open(t_data *data, t_cmdtable *table, t_cmdline *line);
+int			ft_outfile_open(t_data *data, t_cmdtable *table, \
+			t_cmdline *line, int settings);
+int			ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, \
 			int count);
 int			ft_here_doc_write(t_data *data, char *limiter, int count);
 int			ft_here_doc(t_data *data, t_cmdline *cmdline);
@@ -229,7 +229,8 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(t_data *data, const char *s);
 char		*ft_strjoin(t_data *data, char const *s1, const char *s2);
 size_t		ft_strlen(const char *s);
-char		*ft_substr(t_data *data, char const *s, unsigned int start, size_t len);
+char		*ft_substr(t_data *data, char const *s, \
+			unsigned int start, size_t len);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:29:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/18 15:33:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:01:04 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,3 @@ void	ft_fileadd_back(t_filelist **lst, t_filelist *new)
 	else if (lst)
 		*lst = new;
 }
-
-// void	ft_pidadd_back(t_process **lst, int pid)
-// {
-// 	t_process	*p;
-// 	t_process	*new;
-//
-// 	new = ft_mallocator(NULL, data, sizeof(*new));
-// 	if (!new)
-// 		return ;
-// 	new->pid = pid;
-// 	new->next = NULL;
-// 	if (lst && *lst)
-// 	{
-// 		p = *lst;
-// 		while (p->next)
-// 			p = p->next;
-// 		p->next = new;
-// 	}
-// 	else if (lst)
-// 		*lst = new;
-// }

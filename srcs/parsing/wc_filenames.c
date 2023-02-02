@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 22:00:34 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:38:38 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:08:56 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	**alpha_sort(char **str)
 	return (str);
 }
 
-char	**fill_names(t_data *data, DIR *cwd, struct dirent *dir_content, char **file_names)
+char	**fill_names(t_data *data, DIR *cwd,
+	struct dirent *dir_content, char **file_names)
 {
 	int	i;
 

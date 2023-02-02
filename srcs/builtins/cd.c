@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:49 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:20:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:55:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ int	check_cd_expand(t_data *data, char **cmd, char **path)
 			return (write(2, "minishell: cd: HOME not set\n", 29), -1);
 		return (1);
 	}
-	// else if (cmd[1][0] == '~')
-	// {
-	// 	*path = get_env_content(data, "HOME");
-	// 	if (!(*path))
-	// 		return (write(2, "minishell: cd: HOME not set\n", 29), -1);
-	// 	*path = ft_strjoin(*path, cmd[1] + 1);
-	// 	return (1);
-	// }
 	else if (cmd[1][0] == '-' && !cmd[1][1])
 	{
 		*path = get_env_content(data, "OLDPWD");

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 23:39:07 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:22:41 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ int	ft_pipex(t_data *data)
 		ft_close_pipes(data);
 	}
 	ft_wait(data);
-	ft_close_fds(data, NULL, NULL);//in, out);
+	ft_close_fds(data, NULL, NULL);
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	// ft_close(&data->insave);
-	// ft_close(&data->outsave);
 	return (1);
 }
 

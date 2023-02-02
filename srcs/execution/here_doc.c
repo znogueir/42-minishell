@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 22:47:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:12:27 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	return (1);
 }
 
-int	ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order, int count)
+int	ft_here_doc_open(t_data *data,
+	t_cmdtable *table, t_cmdline *line, int count)
 {
 	int		fd;
 	char	*tmp;
@@ -88,8 +89,7 @@ int	ft_here_doc_open(t_data *data, t_cmdtable *table, t_cmdline *line, int order
 	fd = open(filename, O_RDONLY);
 	ft_free(tmp);
 	ft_fileadd_back(&table->infile, \
-	ft_filenew(NULL, fd, filename, H_DOC, order));
-	//add data to ft_filenew
+	ft_filenew(data, fd, filename, H_DOC));
 	if (fd == -1)
 		return (0);
 	return (1);

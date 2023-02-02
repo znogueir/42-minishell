@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:38:18 by yridgway          #+#    #+#             */
-/*   Updated: 2023/01/30 19:10:55 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:58:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,3 @@ void	ft_error(char *extra)
 	}
 	write(2, "\n", 1);
 }
-
-// void	ft_exit_msg(char *msg)
-// {
-// 	ft_putstr_fd(msg, 2);
-// 	write(2, "\n", 1);
-// 	exit(1);
-// }

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 22:47:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:58:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	ft_execute(t_data *data, char **command)
 	if (command[0] && is_builtin(command))
 	{
 		g_exit = exec_builtin(command, data);
-		// ft_exit_fork(data, command, g_exit);
-		ft_malloc(NULL, data, -777);
+		ft_quit(data);
 	}
 	convert_env(data, data->loc_env);
 	update_env(data->char_env, data);
@@ -32,13 +31,11 @@ void	ft_execute(t_data *data, char **command)
 	if (validcmd == NULL)
 	{
 		g_exit = ft_command_not_found(validcmd);
-		// ft_exit_fork(data, command, g_exit);
-		ft_malloc(NULL, data, -777);
+		ft_quit(data);
 	}
 	execve(validcmd, command, data->char_env);
 	ft_free(validcmd);
-	// ft_exit_fork(data, command, g_exit);
-	ft_malloc(NULL, data, -777);
+	ft_quit(data);
 }
 
 void	ft_open_redirs(t_data *data, t_cmdtable *table)
@@ -74,7 +71,6 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 		ft_open_redirs(data, table);
 		if (cmd)
 			ft_execute(data, cmd);
-		// ft_exit_fork(data, cmd, g_exit);
 		ft_malloc(NULL, data, -777);
 	}
 	signal(SIGINT, handle_sigint);
@@ -111,6 +107,6 @@ int	ft_pipe(t_data *data, t_cmdtable *table, char **cmd)
 	}
 	ft_close(&data->pipe[1]);
 	dup2(data->pipe[0], 0);
-	// free_split(cmd);
+	free_split(cmd);
 	return (0);
 }

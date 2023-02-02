@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:07 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 23:38:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:55:47 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ too many arguments\n", 2), 1);
 	}
 	dup2(data->insave, 0);
 	dup2(data->outsave, 1);
-	//ft_exit_fork(data, cmd, g_exit);
 	ft_quit(data);
 	return (g_exit);
 }
-// check for long long int overflows 
-//-> minishell: exit: "nbr": numeric argument required;

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:57 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:21:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:55:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	split_env(t_data *data, char **name, char **content, char *env)
 	while (env[j] != '=')
 		j++;
 	*name = ft_substr(data, env, 0, j);
-	// printf("name: %s\n", *name);
 	*content = ft_substr(data, env, j + 1, ft_strlen(env + j + 1));
 }
 

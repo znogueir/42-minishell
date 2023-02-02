@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/01 23:53:27 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:04:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_free_one(t_mem *mem, void *thing)
 		}
 		mem = mem->next;
 	}
-	ft_putstr_fd("not freeing\n", 2);
 }
 
 void	*ft_liberate(t_data *data, t_mem *mem, int type)
@@ -50,7 +49,6 @@ void	*ft_liberate(t_data *data, t_mem *mem, int type)
 		mem = mem->next;
 		free(prev);
 	}
-	printf("end\n");
 	if (type == EXIT_FREE)
 		exit(g_exit);
 	return (NULL);

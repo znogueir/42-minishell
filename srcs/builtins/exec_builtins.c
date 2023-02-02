@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:12:32 by znogueir          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:16 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:55:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,3 @@ void	print_tab(char **tab)
 		i++;
 	}
 }
-
-// void	execute_builtins(char **command, t_data *data)
-// {
-// 	print_tab(command);
-// 	free_split(command);
-// 	exit(0);
-// }

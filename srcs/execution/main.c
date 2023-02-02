@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 00:22:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:23:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ t_data	ft_init(char **env)
 {
 	t_data	data;
 
-	// data = malloc(sizeof(t_data));
-	// if (!data)
-	// 	exit(1);
 	data.quote = 0;
 	data.line = NULL;
 	data.loc_env = NULL;
@@ -71,7 +68,6 @@ int	launch_normal(int ac, char **av, char **env)
 		add_history(data.line);
 		if (check_errors(data.line))
 		{
-			// reset_cmd(&data);
 			ft_free(data.line);
 			free_all(&data);
 			continue ;
@@ -81,12 +77,10 @@ int	launch_normal(int ac, char **av, char **env)
 		if (!exit_status)
 		{
 			ft_expander(&data);
-			// print_list(data->cmd);
 			ft_executor(&data, env);
 		}
 		else
 			g_exit = exit_status;
-		// reset_cmd(&data);
 		ft_free(data.line);
 		free_all(&data);
 	}
@@ -111,7 +105,6 @@ int	ft_launch_minishell(char *line, char **env)
 		if (!exit_status)
 		{
 			ft_expander(&data);
-			// print_list(data->cmd);
 			ft_executor(&data, env);
 		}
 		else
@@ -138,50 +131,3 @@ int	main(int argc, char **argv, char **env)
 		launch_normal(argc, argv, env);
 	exit(g_exit);
 }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	t_data		*data;
-// 	// char		*temp;
-
-// 	(void)ac;
-// 	(void)av;
-// 	// printf("av: %s\n", av[1]);
-// 	data = ft_init(env);
-// 	while (1)
-// 	{
-// 		// temp = readline(NULL);
-// 		// if (temp && temp[0] == '\0')
-// 		// 	exit(0);
-// 		// data->line = get_next_line(0);
-// 		signal(SIGINT, handle_sigint);
-// 		signal(SIGQUIT, SIG_IGN);
-// 		rl_outstream = stderr;
-// 		data->line = readline(PROMPT);
-// 		if (!data->line)
-// 			break ;
-// 		add_history(data->line);
-// 		//printf("data->line: %s\n", data->line);
-// 		if (check_errors(data->line))
-// 		{
-// 			// reset_cmd(data);
-// 			// ft_free(data->line);
-// 			// continue ;
-// 			break ;
-// 		}
-// 			// ft_exit_fork(data, NULL, 0);
-// 		ft_lexer(data);
-// 		if (!ft_parser(data))
-// 		{
-// 			// print_list(data->cmd);
-// 			ft_expander(data);
-// 			// print_list(data->cmd);
-// 			ft_executor(data, env);
-// 		}
-// 		reset_cmd(data);
-// 		ft_free(data->line);
-// 	}
-// 	//ft_putstr_fd("exit", 1);
-// 	free_all(data);
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:23:15 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:21:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:08:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int	ft_export(t_data *data, char *name, char *content, int append)
 	if (!content)
 		return (ft_envadd_back(&(data->loc_env), \
 		ft_envnew(data, name, content, 0)), 0);
-	return (ft_envadd_back(&(data->loc_env), ft_envnew(data, name, content, 1)), 1);
+	return (ft_envadd_back(&(data->loc_env), \
+	ft_envnew(data, name, content, 1)), 1);
 }
