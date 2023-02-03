@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 19:23:55 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:28:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,51 +44,32 @@ t_data	ft_init(char **env)
 	return (data);
 }
 
-int	launch_normal(int ac, char **av, char **env)
+int	launch_normal(char **env)
 {
 	t_data		data;
 	int			exit_status;
 
-	(void)ac;
-	(void)av;
 	data = ft_init(env);
 	while (g_exit != 256)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
+		clean_memory(&data);
 		//rl_outstream = stderr;
-		if (g_exit == 256)
-			break ;
 		data.line = readline(PROMPT);
 		if (!data.line)
-		{
-			ft_putstr_fd("exit\n", 2);
-			break ;
-		}
+			return (ft_putstr_fd("exit\n", 2), ft_quit(&data), 0);
 		add_history(data.line);
 		if (check_errors(data.line))
-		{
-			ft_free(data.line);
-			// data.line = NULL;
-			reset_cmd(&data);
-			// free_all(&data);
 			continue ;
-		}
 		ft_lexer(&data);
 		exit_status = ft_parser(&data);
 		if (!exit_status)
-		{
-			ft_expander(&data);
 			ft_executor(&data, env);
-		}
 		else
 			g_exit = exit_status;
-		ft_free(data.line);
-		reset_cmd(&data);
 	}
-	// free_all(&data);
-	ft_quit(&data);
-	return (g_exit);
+	return (ft_quit(&data), g_exit);
 }
 
 int	ft_launch_minishell(char *line, char **env)
@@ -106,15 +87,12 @@ int	ft_launch_minishell(char *line, char **env)
 		ft_lexer(&data);
 		exit_status = ft_parser(&data);
 		if (!exit_status)
-		{
-			ft_expander(&data);
 			ft_executor(&data, env);
-		}
 		else
 			g_exit = exit_status;
 	}
 	reset_cmd(&data);
-	free_all(&data);
+	// free_all(&data);
 	return (g_exit);
 }
 
@@ -131,6 +109,6 @@ int	main(int argc, char **argv, char **env)
 			ft_launch_minishell(cmds[i++], env);
 	}
 	else
-		launch_normal(argc, argv, env);
+		launch_normal(env);
 	exit(g_exit);
 }

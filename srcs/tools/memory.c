@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/02 19:04:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:29:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,32 @@ void	ft_free_one(t_mem *mem, void *thing)
 			return ;
 		}
 		mem = mem->next;
+	}
+}
+
+void	mem_clean(t_data *data, t_mem *mem)
+{
+	t_mem	*prev;
+	t_mem	*after;
+
+	free_cmd(data->cmd);
+	data->cmd = NULL;
+	ft_free(data->line);
+	data->line = NULL;
+	prev = mem;
+	mem = mem->next;
+	after = mem->next;
+	while (mem && mem->next)
+	{
+		if (!mem->ptr)
+		{
+			free(mem);
+			mem = after;
+			prev->next = after;
+		}
+		prev = mem;
+		mem = mem->next;
+		after = mem->next;
 	}
 }
 
@@ -89,15 +115,30 @@ t_mem	*mem_new(size_t size)
 	return (new);
 }
 
+void	ft_print_mem(t_mem *mem)
+{
+	int	i = 0;
+	while (mem)
+	{
+		i++;
+		mem = mem->next;
+	}
+	printf("%d\n", i);
+}
+
 void	*ft_malloc(void *free, t_data *data, long long int size)
 {
 	static t_mem	*mem = NULL;
 	t_mem			*new;
 
+	if (size == -5)
+		return (ft_print_mem(mem), NULL);
 	if (free)
 		return (ft_free_one(mem, free), NULL);
-	if (size == EXIT_FREE || size == FREE_ALL)
+	if (size == EXIT_FREE)
 		return (mem = ft_liberate(data, mem, size), NULL);
+	if (size == FREE_ALL)
+		return (mem_clean(data, mem), NULL);
 	new = mem_new(size);
 	if (!new)
 		ft_liberate(data, mem, size);

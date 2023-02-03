@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 23:42:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:43:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_quit(t_data *data)
 	ft_malloc(NULL, data, EXIT_FREE);
 }
 
-void	free_all(t_data *data)
+void	clean_memory(t_data *data)
 {
 	ft_malloc(NULL, data, FREE_ALL);
 }

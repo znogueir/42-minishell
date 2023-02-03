@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 20:07:35 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:55:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ extern int	cur_breakpoint;
 
 //	free
 void		ft_free(void *thing);
-void		free_all(t_data *data);
+// void		free_all(t_data *data);
+void		clean_memory(t_data *data);
 void		ft_close(int *fd);
 void		ft_quit(t_data *data);
 // void		free_all(t_data *data);
