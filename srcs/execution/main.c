@@ -51,9 +51,9 @@ int	launch_normal(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	data = ft_init(env);
 	while (g_exit != 256)
 	{
-		data = ft_init(env);
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		//rl_outstream = stderr;
@@ -69,7 +69,9 @@ int	launch_normal(int ac, char **av, char **env)
 		if (check_errors(data.line))
 		{
 			ft_free(data.line);
-			free_all(&data);
+			// data.line = NULL;
+			reset_cmd(&data);
+			// free_all(&data);
 			continue ;
 		}
 		ft_lexer(&data);
@@ -82,8 +84,9 @@ int	launch_normal(int ac, char **av, char **env)
 		else
 			g_exit = exit_status;
 		ft_free(data.line);
-		free_all(&data);
+		reset_cmd(&data);
 	}
+	// free_all(&data);
 	ft_quit(&data);
 	return (g_exit);
 }

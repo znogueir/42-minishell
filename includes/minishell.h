@@ -171,10 +171,10 @@ char		**ft_arr_dup(t_data *data, char **arr);
 void		display_cmdtable(t_cmdtable *table);
 
 //	signals
-void		signal_handler(void);
+// void		signal_handler(void);
 void		sig_in_fork(int sig);
 void		handle_sigint(int sig);
-void		handle_signals_v2(int sig);
+// void		handle_signals_v2(int sig);
 void		handle_sig_heredocs(int sig);
 
 //	miscellaneous

@@ -14,7 +14,7 @@
 
 int	check_unset_identifier(char *cmd)
 {
-	if (cmd && cmd[0] && cmd[0] == '-')
+	if (cmd && cmd[0] && cmd[1] && cmd[0] == '-')
 	{
 		g_exit = 2;
 		return (ft_putstr_fd("minishell: unset: invalid option\n", 2), 1);
@@ -29,9 +29,10 @@ int	ft_unset(t_data *data, char **cmd)
 	int		i;
 
 	i = 0;
+	prev = NULL;
 	if (check_unset_identifier(cmd[1]))
 		return (2);
-	while (cmd[++i])
+	while (cmd[++i] && data->loc_env)
 	{
 		cur = data->loc_env;
 		while (cur && better_strncmp(cur->name, cmd[i], ft_strlen(cmd[i])))
@@ -39,13 +40,13 @@ int	ft_unset(t_data *data, char **cmd)
 			prev = cur;
 			cur = cur->next;
 		}
-		if (cur)
-		{
+		if (!prev)
+			data->loc_env = data->loc_env->next;
+		else
 			prev->next = cur->next;
-			ft_free(cur->name);
-			ft_free(cur->content);
-			ft_free(cur);
-		}
+		ft_free(cur->name);
+		ft_free(cur->content);
+		ft_free(cur);
 	}
 	return (0);
 }
