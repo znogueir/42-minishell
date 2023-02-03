@@ -21,6 +21,6 @@ int	ft_pwd(void)
 	if (cd == NULL)
 		return (perror("pwd"), 1);
 	printf("%s\n", cd);
-	ft_free(cd);
+	free(cd);
 	return (0);
 }
