@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:22:49 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/02 18:55:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:29:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	ft_cd(t_data *data, char **cmd)
 	if (parse_cd(data, cmd))
 		return (1);
 	cd = getcwd(cd, 100);
+	ft_add_to_mem(data, cd);
 	if (cd == NULL)
 		return (perror("cd"), 1);
 	env_pwd = get_pointer_env(data, "PWD");

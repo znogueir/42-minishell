@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/02 19:04:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:42:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ void	ft_free_one(t_mem *mem, void *thing)
 			mem->ptr = NULL;
 			return ;
 		}
+		mem = mem->next;
+	}
+}
+
+void	mem_clean(t_data *data, t_mem *mem)
+{
+	t_mem	*prev;
+	t_mem	*after;
+
+	free_cmd(data->cmd);
+	data->cmd = NULL;
+	ft_free(data->line);
+	data->line = NULL;
+	prev = mem;
+	mem = mem->next;
+	while (mem && mem->next)
+	{
+		after = mem->next;
+		if (!mem->ptr)
+		{
+			free(mem);
+			mem = after;
+			prev->next = after;
+		}
+		prev = mem;
 		mem = mem->next;
 	}
 }
@@ -67,7 +92,7 @@ t_mem	*mem_addback(t_mem **mem, t_mem *new)
 	return (*mem);
 }
 
-t_mem	*mem_new(size_t size)
+t_mem	*mem_new(size_t size, void *thing)
 {
 	t_mem	*new;
 	char	*err;
@@ -76,7 +101,10 @@ t_mem	*mem_new(size_t size)
 	new = malloc(sizeof(t_mem));
 	if (!new)
 		return (NULL);
-	new->ptr = malloc(size);//break_malloc(size);
+	if (thing)
+		new->ptr = thing;
+	else
+		new->ptr = malloc(size);//break_malloc(size);
 	if (!new->ptr)
 	{
 		ft_putstr_fd(err, 2);
@@ -89,16 +117,39 @@ t_mem	*mem_new(size_t size)
 	return (new);
 }
 
+// void	ft_print_mem(t_mem *mem)
+// {
+// 	int	i = 0;
+// 	while (mem)
+// 	{
+// 		i++;
+// 		mem = mem->next;
+// 	}
+// 	printf("%d\n", i);
+// }
+
+t_mem	*ft_add_mem(void *thing, t_mem *mem)
+{
+	t_mem	*new;
+
+	new = mem_new(0, thing);
+	return (mem_addback(&mem, new));
+}
+
 void	*ft_malloc(void *free, t_data *data, long long int size)
 {
 	static t_mem	*mem = NULL;
 	t_mem			*new;
 
+	if (free && size == ADD_TO_MEM)
+		return (mem = ft_add_mem(free, mem), NULL);
 	if (free)
 		return (ft_free_one(mem, free), NULL);
-	if (size == EXIT_FREE || size == FREE_ALL)
+	if (size == EXIT_FREE)
 		return (mem = ft_liberate(data, mem, size), NULL);
-	new = mem_new(size);
+	if (size == FREE_ALL)
+		return (mem_clean(data, mem), NULL);
+	new = mem_new(size, NULL);
 	if (!new)
 		ft_liberate(data, mem, size);
 	mem = mem_addback(&mem, new);

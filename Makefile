@@ -1,4 +1,4 @@
-CC		= gcc
+CC		= cc
 FLAGS	= -Wall -Wextra -Werror -g3
 INCFLAGS= -lreadline
 NAME	= minishell
@@ -118,7 +118,7 @@ fclean:clean
 
 run: $(NAME)
 	clear
-	valgrind  --exit-on-first-error=no --suppressions=readline.supp --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
+	valgrind  --trace-children=yes --exit-on-first-error=no --suppressions=readline.supp --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
 
 re: fclean all
 
