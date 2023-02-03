@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/03 20:27:19 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:42:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	mem_clean(t_data *data, t_mem *mem)
 	data->line = NULL;
 	prev = mem;
 	mem = mem->next;
-	after = mem->next;
 	while (mem && mem->next)
 	{
+		after = mem->next;
 		if (!mem->ptr)
 		{
 			free(mem);
@@ -48,7 +48,6 @@ void	mem_clean(t_data *data, t_mem *mem)
 		}
 		prev = mem;
 		mem = mem->next;
-		after = mem->next;
 	}
 }
 
