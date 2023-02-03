@@ -55,6 +55,8 @@ typedef struct s_mem
 
 typedef struct s_wildcards
 {
+	int		begin;
+	int		end;
 	int		streak;
 	char	*wc_bin;
 	char	*pattern;
@@ -62,6 +64,7 @@ typedef struct s_wildcards
 	char	*wc_bin_head;
 	char	*wc_bin_save;
 	char	*pattern_save;
+	char	**strs_to_find;
 }			t_wildcards;
 
 typedef struct s_data

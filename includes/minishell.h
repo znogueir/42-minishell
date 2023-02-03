@@ -197,6 +197,7 @@ int			is_dir(char *name);
 int			is_wildcard(t_data *data);
 int			check_filename(char *file_name, char *str, char *wc, int start);
 int			check_filename2(t_data *data, char *str, int start);
+int			check_filename3(t_data *data, char *pattern, int start);
 int			dollar_mini_expand(t_data *data, char **str, \
 char **new_word, int i);
 int			wc_mini_expand(t_data *data, char **new_word, char **str, int i);
@@ -239,6 +240,7 @@ size_t		ft_strlen(const char *s);
 char		*ft_substr(t_data *data, char const *s, \
 			unsigned int start, size_t len);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strnstr(const char *big, const char *little, size_t len);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);

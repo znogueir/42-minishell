@@ -59,7 +59,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		printf("%s\n", tab[i]);
+		printf("[%s]\n", tab[i]);
 		i++;
 	}
 }

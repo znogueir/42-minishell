@@ -25,6 +25,7 @@ PARSE	= wc_expander.c \
 		wc_filenames.c \
 		wc_utils.c \
 		wc_matching.c \
+		wc_matching_v2.c \
 		free.c \
 		free_2.c \
 		lexer.c \
@@ -69,6 +70,7 @@ TOOL	= ft_atoi.c \
 		ft_strdup.c \
 		ft_strjoin.c \
 		ft_strlen.c \
+		ft_strnstr.c \
 		ft_substr.c \
 		ft_strncmp.c \
 		ft_putnbr_fd.c \
