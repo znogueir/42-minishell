@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/03 18:43:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:24:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	ft_quit(t_data *data)
 void	clean_memory(t_data *data)
 {
 	ft_malloc(NULL, data, FREE_ALL);
+}
+
+void	ft_add_to_mem(t_data *data, void *thing)
+{
+	ft_malloc(thing, data, ADD_TO_MEM);
 }
 
 void	ft_close(int *fd)

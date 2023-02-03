@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/03 18:55:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:24:54 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ extern int	cur_breakpoint;
 /*----------------------------------------------------------------------------*/
 # define EXIT_FREE -777
 # define FREE_ALL -666
+# define ADD_TO_MEM -555
 // # define FREE_ONE -555
 
 /*----------------------------------------------------------------------------*/
@@ -95,6 +96,7 @@ extern int	cur_breakpoint;
 //	free
 void		ft_free(void *thing);
 // void		free_all(t_data *data);
+void		ft_add_to_mem(t_data *data, void *thing);
 void		clean_memory(t_data *data);
 void		ft_close(int *fd);
 void		ft_quit(t_data *data);
