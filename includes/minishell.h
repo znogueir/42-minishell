@@ -204,7 +204,7 @@ char **new_word, int i);
 int			wc_mini_expand(t_data *data, char **new_word, char **str, int i);
 char		**get_file_names(t_data *data);
 char		*big_expand(t_data *data, char *new_word, char *str);
-void		init_wildcards(t_data *data, char *pattern);
+void		mini_wc_exp(char **file_names, char *str, int *i);
 void		fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd);
 t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd);

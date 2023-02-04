@@ -40,16 +40,3 @@ void	ft_close(int *fd)
 		*fd = -2;
 	}
 }
-
-void	free_split(char	**tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-	{
-		ft_free(tab[i]);
-		i++;
-	}
-	ft_free(tab);
-}

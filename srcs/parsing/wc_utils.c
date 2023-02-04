@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void	init_wildcards(t_data *data, char *pattern)
+void	mini_wc_exp(char **file_names, char *str, int *i)
 {
-	(void)pattern;
-	// data->wc->streak = 0;
-	// data->wc->pattern_save = pattern;
-	data->wc->wc_bin_head = data->wc->wc_bin;
-	// data->wc->wc_bin_save = data->wc->wc_bin;
+	while (file_names[*i] && str[0] != '.' && file_names[*i][0] == '.')
+		ft_free(file_names[(*i)++]);
+	while (file_names[*i] && str[ft_strlen(str) - 1] == '/' && \
+	!is_dir(file_names[*i]))
+		ft_free(file_names[(*i)++]);
 }
 
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)

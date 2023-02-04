@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+void	free_split(char	**tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab && tab[i])
+	{
+		ft_free(tab[i]);
+		i++;
+	}
+	ft_free(tab);
+}
+
 void	free_cmd(t_cmdline *cmd)
 {
 	t_cmdline	*prev;

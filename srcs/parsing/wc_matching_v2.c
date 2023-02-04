@@ -113,11 +113,11 @@ int	str_match(t_data *data, char **strs_to_find, int size)
 
 int	check_filename3(t_data *data, char *pattern)
 {
+	int		ret;
 	int		size;
 	char	**strs_to_find;
 
 	data->wc->pattern = pattern;
-	// data->wc->pattern_head = pattern;
 	size = get_pattern_nbr(data, pattern);
 	if (!size)
 		return (1);
@@ -128,7 +128,7 @@ int	check_filename3(t_data *data, char *pattern)
 	data->wc->wc_bin[ft_strlen(data->wc->wc_bin) - 1] == '0'));
 	data->wc->wc_bin_head = data->wc->wc_bin;
 	strs_to_find = fill_strs(data, size);
-	// free_split(strs_to_find);
+	ret = str_match(data, strs_to_find, size);
 	data->wc->wc_bin = data->wc->wc_bin_head;
-	return (str_match(data, strs_to_find, size));
+	return (free_split(strs_to_find), ret);
 }
