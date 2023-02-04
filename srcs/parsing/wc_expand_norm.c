@@ -60,13 +60,13 @@ void	replace_tilde(t_data *data, t_cmdline *p_cmd)
 	}
 }
 
-void	fill_new_word(t_data *data, char **new_word, t_cmdline *p_cmd)
+void	fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd)
 {
-	if (p_cmd->content[0] == '~' && (!p_cmd->content[1] || \
-	p_cmd->content[1] == '/'))
-		replace_tilde(data, p_cmd);
-	*new_word = big_expand(data, *new_word, p_cmd->content);
-	ft_free(p_cmd->content);
-	p_cmd->content = *new_word;
-	p_cmd = expand_wc(data, &p_cmd->content, p_cmd);
+	if ((*p_cmd)->content[0] == '~' && (!(*p_cmd)->content[1] || \
+	(*p_cmd)->content[1] == '/'))
+		replace_tilde(data, *p_cmd);
+	*new_word = big_expand(data, *new_word, (*p_cmd)->content);
+	ft_free((*p_cmd)->content);
+	(*p_cmd)->content = *new_word;
+	(*p_cmd) = expand_wc(data, &(*p_cmd)->content, (*p_cmd));
 }

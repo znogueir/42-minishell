@@ -12,7 +12,24 @@
 
 #include "minishell.h"
 
-int	get_size(t_data *data, char *pattern)
+int	consume_stars(t_data *data, char **pattern)
+{
+	while (**pattern == '*' && *data->wc->wc_bin == '1')
+	{
+		(*pattern)++;
+		(data->wc->wc_bin)++;
+	}
+	if (!**pattern)
+	{
+		data->wc->wc_bin = data->wc->wc_bin_head;
+		return (1);
+	}
+	data->wc->pattern_save = *pattern;
+	data->wc->wc_bin_save = data->wc->wc_bin;
+	return (0);
+}
+
+int	get_pattern_nbr(t_data *data, char *pattern)
 {
 	int		size;
 	char	*wc_bin;
@@ -31,9 +48,9 @@ int	get_size(t_data *data, char *pattern)
 		size++;
 		while (*pattern)
 		{
-			if (*pattern == '*' && *wc_bin)
+			if (*pattern == '*' && *wc_bin == '1')
 				break ;
-			else if (*pattern == '*' && !*wc_bin)
+			else if (*pattern == '*' && *wc_bin == '0')
 				wc_bin++;
 			pattern++;
 		}
@@ -43,19 +60,6 @@ int	get_size(t_data *data, char *pattern)
 
 // void	mini_fill(t_data *data, char **pattern, int *i, int *j)
 // {
-// 	while (**pattern)
-// 	{
-// 		if (!*pattern[*j] || ((*pattern)[*j] == '*' && *data->wc->wc_bin))
-// 		{
-// 			data->wc->strs_to_find[(*i)++] = ft_substr(data, *pattern, 0, *j);
-// 			*pattern += *j;
-// 			*j = 0;
-// 			break ;
-// 		}
-// 		else if ((*pattern)[*j] && (*pattern)[*j] == '*' && !*data->wc->wc_bin)
-// 			data->wc->wc_bin++;
-// 		(*j)++;
-// 	}
 // }
 
 char	**fill_strs(t_data *data, char *pattern, int size)
@@ -76,14 +80,15 @@ char	**fill_strs(t_data *data, char *pattern, int size)
 		}
 		while (*pattern)
 		{
-			if (!pattern[j] || (pattern[j] == '*' && *data->wc->wc_bin))
+			if (!pattern[j] || (pattern[j] == '*' && *data->wc->wc_bin == '1'))
 			{
 				strs_to_find[i++] = ft_substr(data, pattern, 0, j);
 				pattern += j;
 				j = 0;
 				break ;
 			}
-			else if (pattern[j] && pattern[j] == '*' && !*data->wc->wc_bin)
+			else if (pattern[j] && pattern[j] == '*' && \
+			*data->wc->wc_bin == '0')
 				data->wc->wc_bin++;
 			j++;
 		}
@@ -126,7 +131,9 @@ int	check_filename3(t_data *data, char *pattern, int start)
 	char	**strs_to_find;
 
 	(void)start;
-	size = get_size(data, pattern);
+	size = get_pattern_nbr(data, pattern);
+	if (!size)
+		return (1);
 	data->wc->begin = (pattern[0] != '*' || (pattern[0] == '*' && \
 	!data->wc->wc_bin[0]));
 	data->wc->end = (pattern[ft_strlen(pattern) - 1] != '*' || \

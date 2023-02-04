@@ -24,7 +24,6 @@ PARSE	= wc_expander.c \
 		wc_expand_norm.c \
 		wc_filenames.c \
 		wc_utils.c \
-		wc_matching.c \
 		wc_matching_v2.c \
 		free.c \
 		free_2.c \
@@ -118,7 +117,7 @@ fclean:clean
 
 run: $(NAME)
 	clear
-	valgrind  --trace-children=yes --exit-on-first-error=no --suppressions=readline.supp --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
+	valgrind  --trace-children=no --exit-on-first-error=no --suppressions=readline.supp --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
 
 re: fclean all
 
