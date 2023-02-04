@@ -14,10 +14,11 @@
 
 void	init_wildcards(t_data *data, char *pattern)
 {
-	data->wc->streak = 0;
-	data->wc->pattern_save = pattern;
+	(void)pattern;
+	// data->wc->streak = 0;
+	// data->wc->pattern_save = pattern;
 	data->wc->wc_bin_head = data->wc->wc_bin;
-	data->wc->wc_bin_save = data->wc->wc_bin;
+	// data->wc->wc_bin_save = data->wc->wc_bin;
 }
 
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)

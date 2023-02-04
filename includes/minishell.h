@@ -198,8 +198,7 @@ void		display_cmdtable(t_cmdtable *table);
 //	wildcards
 int			is_dir(char *name);
 int			is_wildcard(t_data *data);
-// int			check_filename(char *file_name, char *str, char *wc, int start);
-int			check_filename3(t_data *data, char *pattern, int start);
+int			check_filename3(t_data *data, char *pattern);
 int			dollar_mini_expand(t_data *data, char **str, \
 char **new_word, int i);
 int			wc_mini_expand(t_data *data, char **new_word, char **str, int i);

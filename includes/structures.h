@@ -57,14 +57,15 @@ typedef struct s_wildcards
 {
 	int		begin;
 	int		end;
-	int		streak;
+	// int		streak;
 	char	*wc_bin;
 	char	*pattern;
 	char	*file_name;
+	// char	*pattern_head;
 	char	*wc_bin_head;
-	char	*wc_bin_save;
-	char	*pattern_save;
-	char	**strs_to_find;
+	// char	*wc_bin_save;
+	// char	*pattern_save;
+	// char	**strs_to_find;
 }			t_wildcards;
 
 typedef struct s_data
