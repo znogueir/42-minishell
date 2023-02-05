@@ -57,15 +57,10 @@ typedef struct s_wildcards
 {
 	int		begin;
 	int		end;
-	// int		streak;
 	char	*wc_bin;
 	char	*pattern;
 	char	*file_name;
-	// char	*pattern_head;
 	char	*wc_bin_head;
-	// char	*wc_bin_save;
-	// char	*pattern_save;
-	// char	**strs_to_find;
 }			t_wildcards;
 
 typedef struct s_data
@@ -86,7 +81,7 @@ typedef struct s_data
 	int			hdoc_open;
 	int			hdoc_write;
 	int			order;
-	t_wildcards	*wc;
+	t_wildcards	wc;
 }				t_data;
 
 #endif

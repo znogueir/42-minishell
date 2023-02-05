@@ -38,8 +38,7 @@ t_data	ft_init(char **env)
 	data.hdoc_write = 0;
 	data.insave = dup(0);
 	data.outsave = dup(1);
-	data.wc = ft_malloc(NULL, &data, sizeof(t_wildcards));
-	data.wc->wc_bin = NULL;
+	data.wc.wc_bin = NULL;
 	set_env(env, &data);
 	return (data);
 }

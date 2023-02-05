@@ -41,8 +41,8 @@ t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_cmd)
 		ft_free(matching->content);
 		ft_free(matching);
 	}
-	ft_free(data->wc->wc_bin);
-	data->wc->wc_bin = NULL;
+	ft_free(data->wc.wc_bin);
+	data->wc.wc_bin = NULL;
 	return (ret);
 }
 
@@ -74,13 +74,13 @@ int	is_wildcard(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->wc->wc_bin && data->wc->wc_bin[i])
+	while (data->wc.wc_bin && data->wc.wc_bin[i])
 	{
-		if (data->wc->wc_bin[i] == '1')
+		if (data->wc.wc_bin[i] == '1')
 			return (1);
 		i++;
 	}
-	ft_free(data->wc->wc_bin);
-	data->wc->wc_bin = NULL;
+	ft_free(data->wc.wc_bin);
+	data->wc.wc_bin = NULL;
 	return (0);
 }

@@ -47,7 +47,7 @@ t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd)
 		mini_wc_exp(file_names, *str, &i);
 		if (file_names[i] && (*str)[ft_strlen(*str) - 1] == '/')
 			file_names[i] = ft_stradd_char(data, file_names[i], '/');
-		data->wc->file_name = file_names[i];
+		data->wc.file_name = file_names[i];
 		if (file_names[i] && check_filename3(data, *str))
 			ft_cmdadd_back(&matching, ft_cmdnew(data, \
 			ft_strdup(data, file_names[i])));
@@ -78,7 +78,7 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 		else
 		{
 			if (str[*i] == '*')
-				data->wc->wc_bin = ft_stradd_char(data, data->wc->wc_bin, '1');
+				data->wc.wc_bin = ft_stradd_char(data, data->wc.wc_bin, '1');
 			*new_word = ft_stradd_char(data, *new_word, str[(*i)++]);
 		}
 	}

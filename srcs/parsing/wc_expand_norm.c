@@ -24,7 +24,7 @@ int	dollar_mini_expand(t_data *data, char **str, char **new_word, int i)
 int	wc_mini_expand(t_data *data, char **new_word, char **str, int i)
 {
 	if ((*str)[i] == '*')
-		data->wc->wc_bin = ft_stradd_char(data, data->wc->wc_bin, '0');
+		data->wc.wc_bin = ft_stradd_char(data, data->wc.wc_bin, '0');
 	*new_word = ft_stradd_char(data, *new_word, (*str)[i++]);
 	return (i);
 }
