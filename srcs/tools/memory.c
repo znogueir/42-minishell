@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 01:41:17 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/06 01:52:07 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ t_mem	*mem_new(size_t size, void *thing)
 	char	*err;
 
 	err = "Error: malloc failed\n";
-	new = malloc(sizeof(t_mem));
+	new = break_malloc(sizeof(t_mem));//malloc(sizeof(t_mem));
 	if (!new)
 		return (ft_putstr_fd(err, 2), g_exit = 254, NULL);
 	if (thing)
 		new->ptr = thing;
 	else
-		new->ptr = break_malloc(size);
+		new->ptr = break_malloc(size);//malloc(size);
 	if (!new->ptr)
 	{
 		ft_putstr_fd(err, 2);

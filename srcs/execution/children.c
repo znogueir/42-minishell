@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:39 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/02 20:49:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:50:49 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_execute(t_data *data, char **command)
 		validcmd = get_valid_cmd(data, command, &g_exit);
 	if (validcmd == NULL)
 	{
+		if (command && command[0] && command[0][0])
+			validcmd = command[0];
 		g_exit = ft_command_not_found(validcmd);
 		ft_quit(data);
 	}

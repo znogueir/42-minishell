@@ -6,12 +6,11 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 01:36:18 by ionorb            #+#    #+#             */
-/*   Updated: 2023/02/06 01:36:57 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/06 01:52:44 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 // void	ft_print_mem(t_mem *mem)
 // {

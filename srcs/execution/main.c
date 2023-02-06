@@ -6,14 +6,14 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/06 01:41:23 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/06 01:43:45 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 260;
+int	break_malloc_at = 1460;
 int	cur_breakpoint = 0;
 
 void	reset_cmd(t_data *data)
