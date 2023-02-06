@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/03 20:42:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:39:25 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free_one(t_mem *mem, void *thing)
-{
-	while (mem)
-	{
-		if (mem->ptr == thing)
-		{
-			free(mem->ptr);
-			mem->ptr = NULL;
-			return ;
-		}
-		mem = mem->next;
-	}
-}
-
-void	mem_clean(t_data *data, t_mem *mem)
-{
-	t_mem	*prev;
-	t_mem	*after;
-
-	free_cmd(data->cmd);
-	data->cmd = NULL;
-	ft_free(data->line);
-	data->line = NULL;
-	prev = mem;
-	mem = mem->next;
-	while (mem && mem->next)
-	{
-		after = mem->next;
-		if (!mem->ptr)
-		{
-			free(mem);
-			mem = after;
-			prev->next = after;
-		}
-		prev = mem;
-		mem = mem->next;
-	}
-}
 
 void	*ft_liberate(t_data *data, t_mem *mem, int type)
 {
@@ -79,14 +40,16 @@ void	*ft_liberate(t_data *data, t_mem *mem, int type)
 	return (NULL);
 }
 
-t_mem	*mem_addback(t_mem **mem, t_mem *new)
+t_mem	*mem_addback(t_data *data, t_mem **mem, t_mem *new)
 {
 	t_mem	*tmp;
 
 	tmp = *mem;
+	if (!new)
+		return (ft_liberate(data, *mem, -777), NULL);
 	if (!tmp)
 		return (mem = &new, *mem);
-	while (tmp->next)
+	while (tmp && tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 	return (*mem);
@@ -100,11 +63,11 @@ t_mem	*mem_new(size_t size, void *thing)
 	err = "Error: malloc failed\n";
 	new = malloc(sizeof(t_mem));
 	if (!new)
-		return (NULL);
+		return (ft_putstr_fd(err, 2), g_exit = 256, NULL);
 	if (thing)
 		new->ptr = thing;
 	else
-		new->ptr = malloc(size);//break_malloc(size);
+		new->ptr = break_malloc(size);
 	if (!new->ptr)
 	{
 		ft_putstr_fd(err, 2);
@@ -117,32 +80,13 @@ t_mem	*mem_new(size_t size, void *thing)
 	return (new);
 }
 
-// void	ft_print_mem(t_mem *mem)
-// {
-// 	int	i = 0;
-// 	while (mem)
-// 	{
-// 		i++;
-// 		mem = mem->next;
-// 	}
-// 	printf("%d\n", i);
-// }
-
-t_mem	*ft_add_mem(void *thing, t_mem *mem)
-{
-	t_mem	*new;
-
-	new = mem_new(0, thing);
-	return (mem_addback(&mem, new));
-}
-
 void	*ft_malloc(void *free, t_data *data, long long int size)
 {
 	static t_mem	*mem = NULL;
 	t_mem			*new;
 
 	if (free && size == ADD_TO_MEM)
-		return (mem = ft_add_mem(free, mem), NULL);
+		return (mem = mem_addback(data, &mem, mem_new(0, free)));
 	if (free)
 		return (ft_free_one(mem, free), NULL);
 	if (size == EXIT_FREE)
@@ -151,7 +95,7 @@ void	*ft_malloc(void *free, t_data *data, long long int size)
 		return (mem_clean(data, mem), NULL);
 	new = mem_new(size, NULL);
 	if (!new)
-		ft_liberate(data, mem, size);
-	mem = mem_addback(&mem, new);
+		ft_liberate(data, mem, -777);
+	mem = mem_addback(data, &mem, new);
 	return (new->ptr);
 }

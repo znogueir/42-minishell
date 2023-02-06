@@ -79,7 +79,8 @@ TOOL	= ft_atoi.c \
 		ft_putnbr_fd.c \
 		ft_isalpha.c \
 		ft_toupper.c \
-		memory.c
+		memory.c \
+		memory_utils.c
 
 MANDS		= $(addprefix $(MAND_PATH), $(MAND))
 BONES		= $(addprefix $(BONE_PATH), $(BONE))
