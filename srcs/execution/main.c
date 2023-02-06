@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/03 19:28:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:43:45 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit = 0;
-int	break_malloc_at = 5760;
-int	cur_breakpoint = 100000;
+int	break_malloc_at = 1460;
+int	cur_breakpoint = 0;
 
 void	reset_cmd(t_data *data)
 {
@@ -49,7 +49,7 @@ int	launch_normal(char **env)
 	int			exit_status;
 
 	data = ft_init(env);
-	while (g_exit != 256)
+	while (g_exit != 254)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
@@ -71,43 +71,47 @@ int	launch_normal(char **env)
 	return (ft_quit(&data), g_exit);
 }
 
-int	ft_launch_minishell(char *line, char **env)
-{
-	t_data		data;
-	int			exit_status;
+// int	ft_launch_minishell(char *line, char **env)
+// {
+// 	t_data		data;
+// 	int			exit_status;
 
-	data = ft_init(env);
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	data.line = ft_strdup(&data, line);
-	add_history(data.line);
-	if (!check_errors(data.line))
-	{
-		ft_lexer(&data);
-		exit_status = ft_parser(&data);
-		if (!exit_status)
-			ft_executor(&data, env);
-		else
-			g_exit = exit_status;
-	}
-	reset_cmd(&data);
-	// free_all(&data);
-	return (g_exit);
+// 	data = ft_init(env);
+// 	signal(SIGINT, handle_sigint);
+// 	signal(SIGQUIT, SIG_IGN);
+// 	data.line = ft_strdup(&data, line);
+// 	add_history(data.line);
+// 	if (!check_errors(data.line))
+// 	{
+// 		ft_lexer(&data);
+// 		exit_status = ft_parser(&data);
+// 		if (!exit_status)
+// 			ft_executor(&data, env);
+// 		else
+// 			g_exit = exit_status;
+// 	}
+// 	reset_cmd(&data);
+// 	return (g_exit);
+// }
+
+int	main(int ac, char **av, char **env)
+{
+	return ((void)ac, (void)av, launch_normal(env));
 }
 
-int	main(int argc, char **argv, char **env)
-{
-	char	**cmds;
-	int		i;
+// int	main(int argc, char **argv, char **env)
+// {
+// 	char	**cmds;
+// 	int		i;
 
-	i = 0;
-	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		cmds = ft_split(NULL, argv[2], ";");
-		while (cmds[i])
-			ft_launch_minishell(cmds[i++], env);
-	}
-	else
-		launch_normal(env);
-	exit(g_exit);
-}
+// 	i = 0;
+// 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
+// 	{
+// 		cmds = ft_split(NULL, argv[2], ";");
+// 		while (cmds[i])
+// 			ft_launch_minishell(cmds[i++], env);
+// 	}
+// 	else
+// 		launch_normal(env);
+// 	exit(g_exit);
+// }

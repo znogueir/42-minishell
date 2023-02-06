@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/03 20:24:54 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:39:01 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,5 +247,7 @@ int			ft_toupper(int c);
 int			ft_isalpha(int c);
 
 void		*ft_malloc(void *free, t_data *data, long long int size);
+void		mem_clean(t_data *data, t_mem *mem);
+void		ft_free_one(t_mem *mem, void *thing);
 
 #endif
