@@ -36,14 +36,22 @@ _D_O_N_E_
 
 - [DONE]
   bonus : add wildcards ? (only in the current working directory so 
-  should be pretty easy EASY ? LOL)
+  should be pretty easy EASY ? LOL);
 
 - [DONE]
   !!! >>>>>>>> protect every malloc <<<<<<<< !!!;
 
+- [DONE (except for sending only wc but it's fine)]
+  wildcards : 
+  change structure from * to not malloc'd (no init necessary) 
+  + dont send data->wc, only wc [DONE (except for sending only wc but it's fine)];
+
 - [DONE]
   heredoc ctrl-D exits the heredoc when pressed twice while writing a 
   line but it shouldn't exit the heredoc;
+
+- [DONE]
+  expand the tilde symbol (make sure it isnt included in the heredocs);
 
 _T_O_D_O_
 
@@ -55,18 +63,10 @@ _T_O_D_O_
   check : "./minishell < /dev/random" 
   (cd into trashbin before cause it creates a lot of weird files); 
 
-- [TODO]
+- [TODO (nvm actually)]
   open __TMP for heredocs ???;
 
 - [TODO but fuck it]
   heredoc limiter : 
   do not expand env vars ($xxx) -> skip the node ?; (not that important)
   also do not expand wildcards (*, ?) or the tild
-
-- [TODO]
-  wildcards : 
-  change structure from * to not malloc'd (no init necessary) 
-  + dont send data->wc, only wc;
-
-- [TODO]
-  expand the tild symbol (make sure it isnt included in the heredocs)

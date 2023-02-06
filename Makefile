@@ -2,6 +2,7 @@ CC		= cc
 FLAGS	= -Wall -Wextra -Werror -g3
 INCFLAGS= -lreadline
 NAME	= minishell
+# BONUS	= bonus
 
 # LIBFT_PATH	= libft/
 # LIBFT			= $(LIBFT_PATH)libft.a
@@ -17,14 +18,11 @@ BUILT_PATH		= $(SRC_PATH)builtins/
 EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
 TOOLS_PATH		= $(SRC_PATH)tools/
+# BONUS_PATH		=
 INC_PATH		= includes/
 INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
-PARSE	= wc_expander.c \
-		wc_expand_norm.c \
-		wc_filenames.c \
-		wc_utils.c \
-		wc_matching_v2.c \
+PARSE	= expander.c \
 		free.c \
 		free_2.c \
 		lexer.c \
@@ -76,6 +74,22 @@ TOOL	= ft_atoi.c \
 		ft_isalpha.c \
 		ft_toupper.c \
 		memory.c 
+
+# BONUS_PARSE	= wc_expander.c \
+# 		wc_expand_norm.c \
+# 		wc_filenames.c \
+# 		wc_utils.c \
+# 		wc_matching_v2.c \
+# 		free.c \
+# 		free_2.c \
+# 		lexer.c \
+# 		lst_new.c \
+# 		lst_addback.c \
+# 		lst_utils.c \
+# 		misc.c \
+# 		parser.c \
+# 		token_types.c \
+# 		str_add.c
 
 PARSES		= $(addprefix $(PARSE_PATH), $(PARSE))
 BUILTINS	= $(addprefix $(BUILT_PATH), $(BUILTIN))
