@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 20:03:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/06 20:21:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 	{
 		ft_putstr_fd("minishell: problem opening heredoc\n", 2);
 		return (fd);
-	}
+	}	
 	signal(SIGINT, handle_sig_heredocs);
 	if (!here_doc_loop(data, fd, &str, limiter))
 		return (0);
@@ -107,6 +107,14 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 			h_doc = \
 			ft_here_doc_write(data, cmdline->next->content, data->hdoc_write++);
 		cmdline = cmdline->next;
+	}
+	if (g_exit == 130)
+	{
+		printf("hdocs: %d\n", data->hdoc_write);
+		h_doc = 0;
+		while (h_doc < data->hdoc_write)
+			unlink(ft_strjoin(data, ".temp_heredoc_", ft_itoa(data, h_doc++)));
+		h_doc = 0;
 	}
 	return (h_doc);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/06 01:39:01 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/06 20:11:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ char		*convert_type(int type);
 //	executor
 int			make_cmdtable(t_data *data);
 int			ft_executor(t_data *data, char **env);
-void		display_cmdtable(t_cmdtable *table);
+// void		display_cmdtable(t_cmdtable *table);
 
 //	wildcards
 int			is_dir(char *name);
