@@ -19,9 +19,9 @@ void	print_echo(char **cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		printf("%s", cmd[i]);
+		ft_putstr_fd(cmd[i], 1);
 		if (cmd[i + 1])
-			printf(" ");
+			ft_putchar_fd(' ', 1);
 		i++;
 	}
 }
@@ -33,7 +33,7 @@ int	ft_echo(char **cmd, int newline)
 
 	j = 1;
 	if (!cmd[j])
-		return (printf("\n"), 0);
+		return (ft_putchar_fd('\n', 1), 0);
 	while (cmd[j] && cmd[j][0] == '-')
 	{
 		i = 1;
@@ -48,7 +48,7 @@ int	ft_echo(char **cmd, int newline)
 	if (newline)
 	{
 		print_echo(cmd + j);
-		return (printf("\n"), 0);
+		return (ft_putchar_fd('\n', 1), 0);
 	}
 	return (print_echo(cmd + j), 0);
 }

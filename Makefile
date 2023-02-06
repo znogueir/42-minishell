@@ -24,11 +24,11 @@ INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 MAND	= expander.c \
 		expand_utils.c
 
-BONE	= wc_expander.c \
-		wc_expand_norm.c \
-		wc_filenames.c \
-		wc_matching_v2.c \
-		wc_utils.c
+BONE	= expander_bonus.c \
+		expand_norm_bonus.c \
+		filenames_bonus.c \
+		matching_v2_bonus.c \
+		utils_bonus.c
 
 PARSE	= free.c \
 		free_2.c \
