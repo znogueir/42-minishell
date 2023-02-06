@@ -18,11 +18,11 @@ BUILT_PATH		= $(SRC_PATH)builtins/
 EXEC_PATH		= $(SRC_PATH)execution/
 PARSE_PATH		= $(SRC_PATH)parsing/
 TOOLS_PATH		= $(SRC_PATH)tools/
-# BONUS_PATH		=
 INC_PATH		= includes/
 INC_FILES		= $(INC_PATH)pipex.h $(INC_PATH)minishell.h $(INC_PATH)structures.h
 
-MAND	= expander.c
+MAND	= expander.c \
+		expand_utils.c
 
 BONE	= wc_expander.c \
 		wc_expand_norm.c \

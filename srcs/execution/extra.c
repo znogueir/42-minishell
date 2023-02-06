@@ -22,16 +22,16 @@ void	*break_malloc(int size)
 	return (malloc(size));
 }
 
-void	print_list(t_cmdline *cmd)
-{
-	if (cmd)
-		printf("\n");
-	while (cmd)
-	{
-		printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
-		printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
-		cmd = cmd->next;
-	}
-	if (cmd)
-		printf("\n");
-}
+// void	print_list(t_cmdline *cmd)
+// {
+// 	if (cmd)
+// 		printf("\n");
+// 	while (cmd)
+// 	{
+// 		printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
+// 		printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
+// 		cmd = cmd->next;
+// 	}
+// 	if (cmd)
+// 		printf("\n");
+// }

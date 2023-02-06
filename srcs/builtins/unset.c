@@ -22,6 +22,13 @@ int	check_unset_identifier(char *cmd)
 	return (0);
 }
 
+void	free_cur(t_env *cur)
+{
+	ft_free(cur->name);
+	ft_free(cur->content);
+	ft_free(cur);
+}
+
 int	ft_unset(t_data *data, char **cmd)
 {
 	t_env	*cur;
@@ -29,11 +36,11 @@ int	ft_unset(t_data *data, char **cmd)
 	int		i;
 
 	i = 0;
-	prev = NULL;
 	if (check_unset_identifier(cmd[1]))
 		return (2);
 	while (cmd[++i] && data->loc_env)
 	{
+		prev = NULL;
 		cur = data->loc_env;
 		while (cur && better_strncmp(cur->name, cmd[i], ft_strlen(cmd[i])))
 		{
@@ -42,11 +49,10 @@ int	ft_unset(t_data *data, char **cmd)
 		}
 		if (!prev)
 			data->loc_env = data->loc_env->next;
-		else
+		else if (cur)
 			prev->next = cur->next;
-		ft_free(cur->name);
-		ft_free(cur->content);
-		ft_free(cur);
+		if (cur)
+			free_cur(cur);
 	}
 	return (0);
 }

@@ -31,23 +31,23 @@ int	find_token_type(char *token)
 	return (0);
 }
 
-char	*convert_type(int type)
-{
-	if (type == 0)
-		return (CYAN"WORD"RES_COL);
-	else if (type == 1)
-		return (PURPLE"PIPE"RES_COL);
-	else if (type == 2)
-		return (RED"LESS"RES_COL);
-	else if (type == 3)
-		return (YELLOW"GREAT"RES_COL);
-	else if (type == 4)
-		return (BLUE"H_DOC"RES_COL);
-	else if (type == 5)
-		return (PINK"APPEND"RES_COL);
-	else if (type == 6)
-		return (ORANGE"LESSGREAT"RES_COL);
-	else if (type == 7)
-		return (GREEN"NEWLINES"RES_COL);
-	return ("NDEF");
-}
+// char	*convert_type(int type)
+// {
+// 	if (type == 0)
+// 		return (CYAN"WORD"RES_COL);
+// 	else if (type == 1)
+// 		return (PURPLE"PIPE"RES_COL);
+// 	else if (type == 2)
+// 		return (RED"LESS"RES_COL);
+// 	else if (type == 3)
+// 		return (YELLOW"GREAT"RES_COL);
+// 	else if (type == 4)
+// 		return (BLUE"H_DOC"RES_COL);
+// 	else if (type == 5)
+// 		return (PINK"APPEND"RES_COL);
+// 	else if (type == 6)
+// 		return (ORANGE"LESSGREAT"RES_COL);
+// 	else if (type == 7)
+// 		return (GREEN"NEWLINES"RES_COL);
+// 	return ("NDEF");
+// }

@@ -31,14 +31,6 @@ extern int	cur_breakpoint;
 /*									Operations								  */
 /*----------------------------------------------------------------------------*/
 
-// operators :
-// |  &  <  >  (  )  $  `  "  '  <newline>
-// *   ?   [   #   ˜   =   %
-// white space : <space> <tab>
-
-// deprec_operators:
-// \  ;
-
 # define SPE_CHARS "|<> \t\n"
 # define OPS "#|<>\n"
 # define WH_SPC " \t"
@@ -66,21 +58,21 @@ extern int	cur_breakpoint;
 /*----------------------------------------------------------------------------*/
 /*									 Colors									  */
 /*----------------------------------------------------------------------------*/
-# define RED "\e[38;5;1;1m"
-# define BLUE "\e[38;5;27;1m"
-# define CYAN "\e[38;5;51;1m"
-# define GREEN "\e[38;5;46;1m"
-# define PINK "\e[38;5;201;1m"
-# define PURPLE "\e[38;5;93;1m"
-# define ORANGE "\e[38;5;208;1m"
-# define YELLOW "\e[38;5;226;1m"
-# define RES_COL "\e[0m"
+// # define RED "\e[38;5;1;1m"
+// # define BLUE "\e[38;5;27;1m"
+// # define CYAN "\e[38;5;51;1m"
+// # define GREEN "\e[38;5;46;1m"
+// # define PINK "\e[38;5;201;1m"
+// # define PURPLE "\e[38;5;93;1m"
+// # define ORANGE "\e[38;5;208;1m"
+// # define YELLOW "\e[38;5;226;1m"
+// # define RES_COL "\e[0m"
 
 /*----------------------------------------------------------------------------*/
 /*									 Prompts								  */
 /*----------------------------------------------------------------------------*/
+
 # define ERR_PRE "\e[38;5;1;1mx\e[0m minishell: syntax error"
-//# define PROMPT	"\001\e[38;5;46;1m$>\e[0m\002 "
 # define PROMPT	"minishell$> "
 
 /*----------------------------------------------------------------------------*/

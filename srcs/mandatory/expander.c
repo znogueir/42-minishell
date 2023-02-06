@@ -105,11 +105,7 @@ int	ft_expander(t_data *data)
 				p_cmd->content = ft_strdup(data, "");
 			}
 			else
-			{
-				new_word = big_expand(data, new_word, p_cmd->content);
-				ft_free(p_cmd->content);
-				p_cmd->content = new_word;
-			}
+				fill_new_word(data, &new_word, &p_cmd);
 		}
 		p_cmd = p_cmd->next;
 	}
