@@ -24,8 +24,9 @@
 # include "pipex.h"
 
 extern int	g_exit;
-extern int	break_malloc_at;
-extern int	cur_breakpoint;
+
+// extern int	break_malloc_at;
+// extern int	cur_breakpoint;
 
 /*----------------------------------------------------------------------------*/
 /*									Operations								  */

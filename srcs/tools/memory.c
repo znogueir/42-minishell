@@ -61,13 +61,13 @@ t_mem	*mem_new(size_t size, void *thing)
 	char	*err;
 
 	err = "Error: malloc failed\n";
-	new = break_malloc(sizeof(t_mem));//malloc(sizeof(t_mem));
+	new = malloc(sizeof(t_mem));
 	if (!new)
 		return (ft_putstr_fd(err, 2), g_exit = 254, NULL);
 	if (thing)
 		new->ptr = thing;
 	else
-		new->ptr = break_malloc(size);//malloc(size);
+		new->ptr = malloc(size);
 	if (!new->ptr)
 	{
 		ft_putstr_fd(err, 2);

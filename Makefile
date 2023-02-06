@@ -2,6 +2,7 @@ CC		= cc
 FLAGS	= -Wall -Wextra -Werror -g3
 INCFLAGS= -lreadline
 NAME	= minishell
+BONUS_NAME	= bonus
 
 OBJ_PATH		= objs/
 MAND_OBJ_PATH	= objs/mandatory/
@@ -131,13 +132,13 @@ $(NAME): $(MANDATORY_PATHS) $(MANDATORY_OBJECTS)
 	$(CC) $(FLAGS) $(MANDATORY_OBJECTS) $(INCFLAGS) -o $(NAME)
 
 bonus: $(BONUS_PATHS) $(BONUS_OBJECTS)
-	$(CC) $(FLAGS) $(BONUS_OBJECTS) $(INCFLAGS) -o $(NAME)
+	$(CC) $(FLAGS) $(BONUS_OBJECTS) $(INCFLAGS) -o $(BONUS_NAME)
 
 clean:
 	rm -rf $(OBJ_PATH)
 
 fclean:clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 bonus_run: bonus
 	clear

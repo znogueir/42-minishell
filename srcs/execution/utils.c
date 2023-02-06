@@ -12,41 +12,41 @@
 
 #include "minishell.h"
 
-void	display_cmdtable(t_cmdtable *table)
-{
-	int			i;
-	t_filelist	*infile;
-	t_filelist	*outfile;
+// void	display_cmdtable(t_cmdtable *table)
+// {
+// 	int			i;
+// 	t_filelist	*infile;
+// 	t_filelist	*outfile;
 
-	while (table)
-	{
-		printf("\n");
-		infile = table->infile;
-		outfile = table->outfile;
-		i = 0;
-		printf("\tinfile: ");
-		while (table && infile)
-		{
-			printf("[%d] %s, ", infile->fd, infile->filename);
-			infile = infile->next;
-		}
-		printf("\n\toutfile: ");
-		while (table && outfile)
-		{
-			printf("[%d] %s, ", outfile->fd, outfile->filename);
-			outfile = outfile->next;
-		}
-		if (table->cmd)
-			printf("\n\tcmd: ");
-		else
-			printf("\n\tcmd: NULL");
-		while (table->cmd && table->cmd[i])
-			printf("%s ", table->cmd[i++]);
-		printf("\n\tstatus: %d\n", table->status);
-		table = table->next;
-		printf("\n");
-	}
-}
+// 	while (table)
+// 	{
+// 		printf("\n");
+// 		infile = table->infile;
+// 		outfile = table->outfile;
+// 		i = 0;
+// 		printf("\tinfile: ");
+// 		while (table && infile)
+// 		{
+// 			printf("[%d] %s, ", infile->fd, infile->filename);
+// 			infile = infile->next;
+// 		}
+// 		printf("\n\toutfile: ");
+// 		while (table && outfile)
+// 		{
+// 			printf("[%d] %s, ", outfile->fd, outfile->filename);
+// 			outfile = outfile->next;
+// 		}
+// 		if (table->cmd)
+// 			printf("\n\tcmd: ");
+// 		else
+// 			printf("\n\tcmd: NULL");
+// 		while (table->cmd && table->cmd[i])
+// 			printf("%s ", table->cmd[i++]);
+// 		printf("\n\tstatus: %d\n", table->status);
+// 		table = table->next;
+// 		printf("\n");
+// 	}
+// }
 
 void	convert_env(t_data *data, t_env *loc_env)
 {
