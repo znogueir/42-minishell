@@ -6,7 +6,7 @@
 /*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/06 01:31:39 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/06 01:41:23 by ionorb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	launch_normal(char **env)
 	int			exit_status;
 
 	data = ft_init(env);
-	while (g_exit != 256)
+	while (g_exit != 254)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
