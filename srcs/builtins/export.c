@@ -36,7 +36,6 @@ void	sort_export(t_data *data)
 			p_env = p_env->next;
 		}
 		env_min = next_min;
-		// if (env_min)
 		print_export(env_min->name, env_min->content);
 	}
 }

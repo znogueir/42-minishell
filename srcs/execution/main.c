@@ -77,47 +77,47 @@ int	launch_normal(char **env)
 	return (ft_quit(&data), g_exit);
 }
 
-int	ft_launch_minishell(char *line, char **env)
-{
-	t_data		data;
-	int			exit_status;
-
-	data = ft_init(env);
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	data.line = ft_strdup(&data, line);
-	add_history(data.line);
-	if (!check_errors(data.line))
-	{
-		ft_lexer(&data);
-		exit_status = ft_parser(&data);
-		if (!exit_status)
-			ft_executor(&data, env);
-		else
-			g_exit = exit_status;
-	}
-	reset_cmd(&data);
-	return (g_exit);
-}
-
-// int	main(int ac, char **av, char **env)
+// int	ft_launch_minishell(char *line, char **env)
 // {
-// 	return ((void)ac, (void)av, launch_normal(env));
+// 	t_data		data;
+// 	int			exit_status;
+
+// 	data = ft_init(env);
+// 	signal(SIGINT, handle_sigint);
+// 	signal(SIGQUIT, SIG_IGN);
+// 	data.line = ft_strdup(&data, line);
+// 	add_history(data.line);
+// 	if (!check_errors(data.line))
+// 	{
+// 		ft_lexer(&data);
+// 		exit_status = ft_parser(&data);
+// 		if (!exit_status)
+// 			ft_executor(&data, env);
+// 		else
+// 			g_exit = exit_status;
+// 	}
+// 	reset_cmd(&data);
+// 	return (g_exit);
 // }
 
-int	main(int argc, char **argv, char **env)
+int	main(int ac, char **av, char **env)
 {
-	char	**cmds;
-	int		i;
-
-	i = 0;
-	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
-	{
-		cmds = ft_split(NULL, argv[2], ";");
-		while (cmds[i])
-			ft_launch_minishell(cmds[i++], env);
-	}
-	else
-		launch_normal(env);
-	exit(g_exit);
+	return ((void)ac, (void)av, launch_normal(env));
 }
+
+// int	main(int argc, char **argv, char **env)
+// {
+// 	char	**cmds;
+// 	int		i;
+
+// 	i = 0;
+// 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
+// 	{
+// 		cmds = ft_split(NULL, argv[2], ";");
+// 		while (cmds[i])
+// 			ft_launch_minishell(cmds[i++], env);
+// 	}
+// 	else
+// 		launch_normal(env);
+// 	exit(g_exit);
+// }

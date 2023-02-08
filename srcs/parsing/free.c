@@ -19,11 +19,21 @@ void	ft_free(void *ptr)
 
 void	ft_quit(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (!unlink(ft_strjoin(data, "/tmp/.temp_heredoc_", ft_itoa(data, i))))
+		i++;
 	ft_malloc(NULL, data, EXIT_FREE);
 }
 
 void	clean_memory(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (!unlink(ft_strjoin(data, "/tmp/.temp_heredoc_", ft_itoa(data, i))))
+		i++;
 	ft_malloc(NULL, data, FREE_ALL);
 }
 
