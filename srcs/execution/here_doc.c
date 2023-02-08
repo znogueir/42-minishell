@@ -101,7 +101,8 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	int	h_doc;
 
 	h_doc = 1;
-	while (h_doc > -1 && cmdline && g_exit != 130)
+
+	while (h_doc > 0 && cmdline)
 	{
 		if (cmdline->type == H_DOC)
 			h_doc = \
