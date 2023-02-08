@@ -49,7 +49,8 @@ void	mem_clean(t_data *data, t_mem *mem)
 	ft_free(data->line);
 	data->line = NULL;
 	prev = mem;
-	mem = mem->next;
+	if (mem)
+		mem = mem->next;
 	while (mem && mem->next)
 	{
 		after = mem->next;

@@ -25,6 +25,8 @@ int	get_env_len(t_env **p_env, t_env **env_min)
 	int	env_len;
 
 	env_len = 0;
+	if (!*p_env)
+		return (0);
 	while (*p_env)
 	{
 		if (ft_strcmp((*env_min)->name, (*p_env)->name) > 0)

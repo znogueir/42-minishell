@@ -21,6 +21,7 @@ int	here_doc_loop(t_data *data, int fd, char **str, char *limiter)
 	while (1)
 	{
 		*str = readline("heredoc> ");
+		ft_add_to_mem(data, *str);
 		if (g_exit == 257)
 		{
 			g_exit = 130;
@@ -57,7 +58,7 @@ int	ft_here_doc_write(t_data *data, char *limiter, int count)
 
 	(void)data;
 	temp = ft_itoa(data, count);
-	filename = ft_strjoin(data, ft_strdup(data, ".temp_heredoc_"), temp);
+	filename = ft_strjoin(data, ft_strdup(data, "/tmp/.temp_heredoc_"), temp);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	ft_free(filename);
 	ft_free(temp);
@@ -85,7 +86,7 @@ int	ft_here_doc_open(t_data *data,
 
 	(void)line;
 	tmp = ft_itoa(data, count);
-	filename = ft_strjoin(data, ft_strdup(data, ".temp_heredoc_"), tmp);
+	filename = ft_strjoin(data, ft_strdup(data, "/tmp/.temp_heredoc_"), tmp);
 	fd = open(filename, O_RDONLY);
 	ft_free(tmp);
 	ft_fileadd_back(&table->infile, \
@@ -100,21 +101,12 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	int	h_doc;
 
 	h_doc = 1;
-	g_exit = 0;
 	while (h_doc > -1 && cmdline && g_exit != 130)
 	{
 		if (cmdline->type == H_DOC)
 			h_doc = \
 			ft_here_doc_write(data, cmdline->next->content, data->hdoc_write++);
 		cmdline = cmdline->next;
-	}
-	if (g_exit == 130)
-	{
-		printf("hdocs: %d\n", data->hdoc_write);
-		h_doc = 0;
-		while (h_doc < data->hdoc_write)
-			unlink(ft_strjoin(data, ".temp_heredoc_", ft_itoa(data, h_doc++)));
-		h_doc = 0;
 	}
 	return (h_doc);
 }

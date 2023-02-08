@@ -75,8 +75,6 @@ int	ft_execute_pipes(t_data *data, t_cmdtable *table, char **cmd)
 			ft_execute(data, cmd);
 		ft_malloc(NULL, data, -777);
 	}
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
 

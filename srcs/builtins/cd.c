@@ -97,9 +97,9 @@ int	ft_cd(t_data *data, char **cmd)
 	if (parse_cd(data, cmd))
 		return (1);
 	cd = getcwd(cd, 100);
-	ft_add_to_mem(data, cd);
 	if (cd == NULL)
 		return (perror("cd"), 1);
+	ft_add_to_mem(data, cd);
 	env_pwd = get_pointer_env(data, "PWD");
 	env_oldpwd = get_pointer_env(data, "OLDPWD");
 	save_pwd = ft_strdup(data, env_pwd->content);

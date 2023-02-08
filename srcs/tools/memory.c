@@ -63,7 +63,7 @@ t_mem	*mem_new(size_t size, void *thing)
 	err = "Error: malloc failed\n";
 	new = malloc(sizeof(t_mem));
 	if (!new)
-		return (ft_putstr_fd(err, 2), g_exit = 254, NULL);
+		return (ft_putstr_fd(err, 2), g_exit = 1, NULL);
 	if (thing)
 		new->ptr = thing;
 	else
@@ -71,7 +71,7 @@ t_mem	*mem_new(size_t size, void *thing)
 	if (!new->ptr)
 	{
 		ft_putstr_fd(err, 2);
-		g_exit = 254;
+		g_exit = 1;
 		free(new);
 		new = NULL;
 		return (NULL);
@@ -85,8 +85,12 @@ void	*ft_malloc(void *free, t_data *data, long long int size)
 	static t_mem	*mem = NULL;
 	t_mem			*new;
 
-	if (free && size == ADD_TO_MEM)
+	if (size == ADD_TO_MEM)
+	{
+		if (!free)
+			return (NULL);
 		return (mem = mem_addback(data, &mem, mem_new(0, free)));
+	}
 	if (free)
 		return (ft_free_one(mem, free), NULL);
 	if (size == EXIT_FREE)

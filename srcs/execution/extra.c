@@ -14,13 +14,14 @@
 
 // printf("breakpoint: %d, cur_breakpoint: %d\n",
 	// break_malloc_at, cur_breakpoint);
-void	*break_malloc(int size)
-{
-	cur_breakpoint++;
-	if (break_malloc_at == cur_breakpoint)
-		return (NULL);
-	return (malloc(size));
-}
+
+// void	*break_malloc(int size)
+// {
+// 	cur_breakpoint++;
+// 	if (break_malloc_at == cur_breakpoint)
+// 		return (NULL);
+// 	return (malloc(size));
+// }
 
 // void	print_list(t_cmdline *cmd)
 // {

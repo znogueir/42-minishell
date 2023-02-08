@@ -29,14 +29,16 @@ t_data	ft_init(char **env)
 
 	data.quote = 0;
 	data.line = NULL;
+	data.paths = NULL;
+	data.char_env = NULL;
 	data.loc_env = NULL;
 	data.cmd = NULL;
 	data.cmdtable = NULL;
 	data.filelist = NULL;
-	data.char_env = NULL;
 	data.open_pipe = 0;
 	data.hdoc_open = 0;
 	data.hdoc_write = 0;
+	data.order = 0;
 	data.insave = dup(0);
 	data.outsave = dup(1);
 	data.wc.wc_bin = NULL;
@@ -53,7 +55,7 @@ int	launch_normal(char **env)
 	int			exit_status;
 
 	data = ft_init(env);
-	while (g_exit != 254)
+	while (1)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);

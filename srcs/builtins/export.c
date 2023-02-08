@@ -22,7 +22,7 @@ void	sort_export(t_data *data)
 	p_env = data->loc_env;
 	env_min = p_env;
 	env_len = get_env_len(&p_env, &env_min);
-	while (--env_len)
+	while (--env_len > 0)
 	{
 		p_env = data->loc_env;
 		while (p_env && ft_strcmp(env_min->name, p_env->name) >= 0)
@@ -36,6 +36,7 @@ void	sort_export(t_data *data)
 			p_env = p_env->next;
 		}
 		env_min = next_min;
+		// if (env_min)
 		print_export(env_min->name, env_min->content);
 	}
 }

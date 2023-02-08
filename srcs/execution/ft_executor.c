@@ -29,8 +29,6 @@ void	ft_wait(t_data *data)
 				ft_putstr_fd("Quit (core dumped)\n", 1);
 			if (WIFEXITED(status))
 				g_exit = WEXITSTATUS(status);
-			if (g_exit == 258)
-				printf("yo mama so fat she cant be malloc'd");
 		}
 		table = table->next;
 	}
@@ -68,10 +66,7 @@ int	ft_executor(t_data *data, char **env)
 	ft_expander(data);
 	data->cmdtable = NULL;
 	if (make_cmdtable(data))
-	{
-		display_cmdtable(data->cmdtable);
 		return (free_table(data, data->cmdtable), 1);
-	}
 	ft_pipex(data);
 	free_table(data, data->cmdtable);
 	return (0);
