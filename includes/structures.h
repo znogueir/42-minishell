@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:38:49 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/02 19:14:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:56:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_data
 	int			hdoc_open;
 	int			hdoc_write;
 	int			order;
+	int			expand;
 	t_wildcards	wc;
 }				t_data;
 

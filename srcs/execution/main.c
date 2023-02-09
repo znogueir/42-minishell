@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:10:24 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/09 04:12:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:04:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,51 +49,6 @@ t_data	ft_init(char **env)
 //	for tester
 //	rl_outstream = stderr;
 
-void	expand_list(t_data *data, t_cmdline **cmd, char **split)
-{
-	int			i;
-	t_cmdline	*new;
-
-	i = 0;
-	// new = ft_cmdnew(data, split[i++]);
-	// (*cmd)->next = new;
-	// *cmd = (*cmd)->next;
-	ft_free((*cmd)->content);
-	(*cmd)->content = split[i++];
-	while (split[i])
-	{
-		new = ft_cmdnew(data, split[i]);
-		(*cmd)->next = new;
-		*cmd = (*cmd)->next;
-		i++;
-	}
-}
-
-void	split_expand(t_data *data)
-{
-	t_cmdline	*cmd;
-	char		**split;
-	int			i;
-
-	i = 0;
-	cmd = data->cmd;
-	split = NULL;
-	while (cmd)
-	{
-		i = 0;
-		if (split)
-			ft_free(split);
-		split = ft_split_expand(data, cmd->content, ' ');
-		// while (split[i])
-		// {
-		// 	printf("split[%d]: %s\n", i, split[i]);
-		// 	i++;
-		// }
-		expand_list(data, &cmd, split);
-		cmd = cmd->next;
-	}
-}
-
 int	launch_normal(char **env)
 {
 	t_data		data;
@@ -115,15 +70,7 @@ int	launch_normal(char **env)
 		ft_lexer(&data);
 		exit_status = ft_parser(&data);
 		if (!exit_status)
-		{
-			ft_expander(&data, 1);
-			print_list(data.cmd);
-			split_expand(&data);
-			print_list(data.cmd);
-			ft_expander(&data, 0);
-			print_list(data.cmd);
 			ft_executor(&data, env);
-		}
 		else
 			g_exit = exit_status;
 	}

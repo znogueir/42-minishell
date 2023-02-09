@@ -6,11 +6,48 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:04:33 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/09 02:46:33 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:59:15 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	expand_list(t_data *data, t_cmdline **cmd, char **split)
+{
+	int			i;
+	t_cmdline	*new;
+
+	i = 0;
+	ft_free((*cmd)->content);
+	(*cmd)->content = split[i++];
+	while (split[i])
+	{
+		new = ft_cmdnew(data, split[i]);
+		(*cmd)->next = new;
+		*cmd = (*cmd)->next;
+		i++;
+	}
+}
+
+void	split_expand(t_data *data)
+{
+	t_cmdline	*cmd;
+	char		**split;
+	int			i;
+
+	i = 0;
+	cmd = data->cmd;
+	split = NULL;
+	while (cmd)
+	{
+		i = 0;
+		if (split)
+			ft_free(split);
+		split = ft_split_expand(data, cmd->content, ' ');
+		expand_list(data, &cmd, split);
+		cmd = cmd->next;
+	}
+}
 
 t_env	*get_env_var(t_env *loc_env, char *name)
 {
@@ -43,12 +80,13 @@ void	replace_tilde(t_data *data, t_cmdline *p_cmd)
 	}
 }
 
-void	fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd, int expand)
+void	fill_new_word(t_data *data, char **new_word, \
+t_cmdline **p_cmd)
 {
 	if ((*p_cmd)->content[0] == '~' && (!(*p_cmd)->content[1] || \
 	(*p_cmd)->content[1] == '/'))
 		replace_tilde(data, *p_cmd);
-	*new_word = big_expand(data, *new_word, (*p_cmd)->content, expand);
+	*new_word = big_expand(data, *new_word, (*p_cmd)->content);
 	ft_free((*p_cmd)->content);
 	(*p_cmd)->content = *new_word;
 }

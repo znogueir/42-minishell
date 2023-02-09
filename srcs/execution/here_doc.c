@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:53:01 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 20:21:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:04:07 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	ft_here_doc(t_data *data, t_cmdline *cmdline)
 	int	h_doc;
 
 	h_doc = 1;
-
 	while (h_doc > 0 && cmdline)
 	{
 		if (cmdline->type == H_DOC)
