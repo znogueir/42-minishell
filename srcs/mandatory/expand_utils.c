@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:04:33 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 20:04:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:46:33 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	replace_tilde(t_data *data, t_cmdline *p_cmd)
 	}
 }
 
-void	fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd)
+void	fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd, int expand)
 {
 	if ((*p_cmd)->content[0] == '~' && (!(*p_cmd)->content[1] || \
 	(*p_cmd)->content[1] == '/'))
 		replace_tilde(data, *p_cmd);
-	*new_word = big_expand(data, *new_word, (*p_cmd)->content);
+	*new_word = big_expand(data, *new_word, (*p_cmd)->content, expand);
 	ft_free((*p_cmd)->content);
 	(*p_cmd)->content = *new_word;
 }

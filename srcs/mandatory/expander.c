@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:23:06 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/01 20:22:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:53:16 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ char	*replace_var(t_data *data, char *new_word, char *str)
 	return (new_word);
 }
 
-char	small_expand(t_data *data, char **new_word, char *str, int *i)
+char	small_expand(t_data *data, char **new_word, char *str, int *i, int expand)
 {
 	char	end;
 
 	end = 0;
 	while (str[*i])
 	{
-		if (str[*i] == '$' && str[*i + 1] == '?')
+		if (expand && str[*i] == '$' && str[*i + 1] == '?')
 			*new_word = ft_add_excode(data, *new_word, i);
-		else if (str[*i] == '$' && (str[*i + 1] == 34 || str[*i + 1] == 39))
+		else if (expand && str[*i] == '$' && (str[*i + 1] == 34 || str[*i + 1] == 39))
 			(*i)++;
-		else if (str[*i] == '$' && (is_alphanum(str[*i + 1]) || \
+		else if (expand && str[*i] == '$' && (is_alphanum(str[*i + 1]) || \
 		str[*i + 1] == '_'))
 		{
 			(*i)++;
@@ -50,7 +50,7 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 			while (is_alphanum(str[*i]) || str[*i] == '_')
 				(*i)++;
 		}
-		else if (str[*i] == 34 || str[*i] == 39)
+		else if ((!expand && str[*i] == 34) || str[*i] == 39)
 			return (str[(*i)++]);
 		else
 			*new_word = ft_stradd_char(data, *new_word, str[(*i)++]);
@@ -58,7 +58,7 @@ char	small_expand(t_data *data, char **new_word, char *str, int *i)
 	return (end);
 }
 
-char	*big_expand(t_data *data, char *new_word, char *str)
+char	*big_expand(t_data *data, char *new_word, char *str, int expand)
 {
 	int		i;
 	char	end;
@@ -66,12 +66,12 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	i = 0;
 	if (!str)
 		return (NULL);
-	end = small_expand(data, &new_word, str, &i);
+	end = small_expand(data, &new_word, str, &i, expand);
 	while (str[i] && str[i] != end)
 	{
-		if (str[i] == '$' && str[i + 1] == '?' && end == 34)
+		if (expand && str[i] == '$' && str[i + 1] == '?' && end == 34)
 			new_word = ft_add_excode(data, new_word, &i);
-		else if (str[i] == '$' && (is_alphanum(str[i + 1]) || \
+		else if (expand && str[i] == '$' && (is_alphanum(str[i + 1]) || \
 		str[i + 1] == '_') && end == 34)
 		{
 			i++;
@@ -84,10 +84,10 @@ char	*big_expand(t_data *data, char *new_word, char *str)
 	}
 	if (!str[i])
 		return (new_word);
-	return (big_expand(data, new_word, str + i + 1));
+	return (big_expand(data, new_word, str + i + 1, expand));
 }
 
-int	ft_expander(t_data *data)
+int	ft_expander(t_data *data, int expand)
 {
 	char		*new_word;
 	t_cmdline	*p_cmd;
@@ -105,7 +105,7 @@ int	ft_expander(t_data *data)
 				p_cmd->content = ft_strdup(data, "");
 			}
 			else
-				fill_new_word(data, &new_word, &p_cmd);
+				fill_new_word(data, &new_word, &p_cmd, expand);
 		}
 		p_cmd = p_cmd->next;
 	}

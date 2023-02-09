@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:17:38 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/06 20:11:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:18:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ extern int	g_exit;
 /*----------------------------------------------------------------------------*/
 /*									 Colors									  */
 /*----------------------------------------------------------------------------*/
-// # define RED "\e[38;5;1;1m"
-// # define BLUE "\e[38;5;27;1m"
-// # define CYAN "\e[38;5;51;1m"
-// # define GREEN "\e[38;5;46;1m"
-// # define PINK "\e[38;5;201;1m"
-// # define PURPLE "\e[38;5;93;1m"
-// # define ORANGE "\e[38;5;208;1m"
-// # define YELLOW "\e[38;5;226;1m"
-// # define RES_COL "\e[0m"
+# define RED "\e[38;5;1;1m"
+# define BLUE "\e[38;5;27;1m"
+# define CYAN "\e[38;5;51;1m"
+# define GREEN "\e[38;5;46;1m"
+# define PINK "\e[38;5;201;1m"
+# define PURPLE "\e[38;5;93;1m"
+# define ORANGE "\e[38;5;208;1m"
+# define YELLOW "\e[38;5;226;1m"
+# define RES_COL "\e[0m"
 
 /*----------------------------------------------------------------------------*/
 /*									 Prompts								  */
@@ -116,7 +116,7 @@ int			ft_parser(t_data *data);
 void		write_error(char *error_msg, char *token);
 
 //	expander
-int			ft_expander(t_data *data);
+int			ft_expander(t_data *data, int expand);
 char		*ft_stradd_char(t_data *data, char *str, char c);
 char		*ft_add_excode(t_data *data, char *str, int *p_i);
 char		*replace_var(t_data *data, char *new_word, char *str);
@@ -196,9 +196,9 @@ int			dollar_mini_expand(t_data *data, char **str, \
 char **new_word, int i);
 int			wc_mini_expand(t_data *data, char **new_word, char **str, int i);
 char		**get_file_names(t_data *data);
-char		*big_expand(t_data *data, char *new_word, char *str);
+char		*big_expand(t_data *data, char *new_word, char *str, int expand);
 void		mini_wc_exp(char **file_names, char *str, int *i);
-void		fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd);
+void		fill_new_word(t_data *data, char **new_word, t_cmdline **p_cmd, int expand);
 t_cmdline	*get_last_cmd(t_cmdline *files);
 t_cmdline	*expand_wc(t_data *data, char **str, t_cmdline *p_cmd);
 t_cmdline	*finish_wc(t_data *data, t_cmdline *matching, t_cmdline *p_prev);
@@ -238,6 +238,7 @@ char		*ft_strnstr(const char *big, const char *little, size_t len);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);
+char		**ft_split_expand(t_data *data, char const *s, char c);
 
 void		*ft_malloc(void *free, t_data *data, long long int size);
 void		mem_clean(t_data *data, t_mem *mem);

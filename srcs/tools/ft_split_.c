@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_expand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 22:47:16 by znogueir          #+#    #+#             */
-/*   Updated: 2023/02/09 03:37:36 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:36:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_word(t_data *data, char const *substr, char *sep)
 	return (word);
 }
 
-char	**ft_split(t_data *data, char const *s, char *sep)
+char	**ft_split_expand(t_data *data, char const *s, char *sep)
 {
 	int		i;
 	int		j;
@@ -82,7 +82,10 @@ char	**ft_split(t_data *data, char const *s, char *sep)
 			j++;
 		}
 		while (s[i] && !ft_strchr(sep, s[i]))
+		{
+			if ()
 			i++;
+		}
 	}
 	result[j] = 0;
 	return (result);

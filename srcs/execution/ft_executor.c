@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:46:37 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 20:13:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:31:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	ft_pipex(t_data *data)
 int	ft_executor(t_data *data, char **env)
 {
 	(void)env;
-	ft_expander(data);
 	data->cmdtable = NULL;
 	if (make_cmdtable(data))
 		return (free_table(data, data->cmdtable), 1);

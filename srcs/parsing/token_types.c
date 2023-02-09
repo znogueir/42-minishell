@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:16:09 by znogueir          #+#    #+#             */
-/*   Updated: 2022/12/15 18:42:58 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:04:39 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@ int	find_token_type(char *token)
 	return (0);
 }
 
-// char	*convert_type(int type)
-// {
-// 	if (type == 0)
-// 		return (CYAN"WORD"RES_COL);
-// 	else if (type == 1)
-// 		return (PURPLE"PIPE"RES_COL);
-// 	else if (type == 2)
-// 		return (RED"LESS"RES_COL);
-// 	else if (type == 3)
-// 		return (YELLOW"GREAT"RES_COL);
-// 	else if (type == 4)
-// 		return (BLUE"H_DOC"RES_COL);
-// 	else if (type == 5)
-// 		return (PINK"APPEND"RES_COL);
-// 	else if (type == 6)
-// 		return (ORANGE"LESSGREAT"RES_COL);
-// 	else if (type == 7)
-// 		return (GREEN"NEWLINES"RES_COL);
-// 	return ("NDEF");
-// }
+char	*convert_type(int type)
+{
+	if (type == 0)
+		return (CYAN"WORD"RES_COL);
+	else if (type == 1)
+		return (PURPLE"PIPE"RES_COL);
+	else if (type == 2)
+		return (RED"LESS"RES_COL);
+	else if (type == 3)
+		return (YELLOW"GREAT"RES_COL);
+	else if (type == 4)
+		return (BLUE"H_DOC"RES_COL);
+	else if (type == 5)
+		return (PINK"APPEND"RES_COL);
+	else if (type == 6)
+		return (ORANGE"LESSGREAT"RES_COL);
+	else if (type == 7)
+		return (GREEN"NEWLINES"RES_COL);
+	return ("NDEF");
+}

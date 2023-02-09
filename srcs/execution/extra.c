@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:25:40 by ionorb            #+#    #+#             */
-/*   Updated: 2023/02/06 01:21:03 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/09 04:04:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 // 	return (malloc(size));
 // }
 
-// void	print_list(t_cmdline *cmd)
-// {
-// 	if (cmd)
-// 		printf("\n");
-// 	while (cmd)
-// 	{
-// 		printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
-// 		printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
-// 		cmd = cmd->next;
-// 	}
-// 	if (cmd)
-// 		printf("\n");
-// }
+void	print_list(t_cmdline *cmd)
+{
+	if (cmd)
+		printf("\n");
+	while (cmd)
+	{
+		printf("\t{%s%s%s}", ORANGE, cmd->content, RES_COL);
+		printf(" - type : %s\n" RES_COL, convert_type(cmd->type));
+		cmd = cmd->next;
+	}
+	if (cmd)
+		printf("\n");
+}
