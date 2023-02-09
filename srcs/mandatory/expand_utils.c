@@ -6,7 +6,7 @@
 /*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:04:33 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/09 04:59:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:45:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void	expand_list(t_data *data, t_cmdline **cmd, char **split)
 	t_cmdline	*new;
 
 	i = 0;
-	ft_free((*cmd)->content);
-	(*cmd)->content = split[i++];
-	while (split[i])
+	if (cmd && *cmd && split && split[i])
+	{
+		ft_free((*cmd)->content);
+		(*cmd)->content = split[i++];
+	}
+	while (cmd && *cmd && split && split[i])
 	{
 		new = ft_cmdnew(data, split[i]);
 		(*cmd)->next = new;

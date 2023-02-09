@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ionorb <ionorb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yridgway <yridgway@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:34:04 by yridgway          #+#    #+#             */
-/*   Updated: 2023/02/06 01:52:07 by ionorb           ###   ########.fr       */
+/*   Updated: 2023/02/09 23:42:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ void	*ft_liberate(t_data *data, t_mem *mem, int type)
 {
 	t_mem	*prev;
 
-	if (data)
-	{
-		ft_close_fds(data, NULL, NULL);
-		free_table(data, data->cmdtable);
-		ft_close(&data->insave);
-		ft_close(&data->outsave);
-		ft_free(data->line);
-	}
+	if (type == EXIT_FREE)
+		rl_clear_history();
+	ft_close_fds(data, NULL, NULL);
+	free_table(data, data->cmdtable);
+	ft_close(&data->insave);
+	ft_close(&data->outsave);
+	ft_free(data->line);
 	while (mem)
 	{
 		if (mem->ptr)

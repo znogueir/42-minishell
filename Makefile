@@ -1,5 +1,5 @@
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS	= -Wall -Wextra -Werror -g3 #-fsanitize=address
 INCFLAGS= -lreadline
 NAME	= minishell
 BONUS_NAME	= bonus
@@ -147,7 +147,7 @@ bonus_run: bonus
 
 run: $(NAME)
 	clear
-	valgrind --trace-children=no --exit-on-first-error=no --suppressions=readline.supp --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
+	valgrind --xtree-memory=full --trace-children=no --exit-on-first-error=no --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./minishell
 
 re: fclean all
 
