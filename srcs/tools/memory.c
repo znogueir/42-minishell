@@ -16,13 +16,14 @@ void	*ft_liberate(t_data *data, t_mem *mem, int type)
 {
 	t_mem	*prev;
 
+	if (type == EXIT_FREE)
+		rl_clear_history();
 	if (data)
 	{
 		ft_close_fds(data, NULL, NULL);
 		free_table(data, data->cmdtable);
 		ft_close(&data->insave);
 		ft_close(&data->outsave);
-		ft_free(data->line);
 	}
 	while (mem)
 	{

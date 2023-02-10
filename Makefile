@@ -1,5 +1,5 @@
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS	= -Wall -Wextra -Werror #-g3 #-fsanitize=address
 INCFLAGS= -lreadline
 NAME	= minishell
 BONUS_NAME	= bonus
