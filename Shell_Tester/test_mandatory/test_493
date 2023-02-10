@@ -1,2 +1,0 @@
-echo $?
-whereis grep > Docs/bonjour

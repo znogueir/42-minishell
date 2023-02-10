@@ -1,2 +1,0 @@
-echo $?
-prout hola > bonjour
