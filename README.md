@@ -30,6 +30,6 @@ Concept(s) learned :
 - processes (child & parent relation)
 - how a posix shell works
 - signals and signal propagation
-- advanced strings parsing
+- advanced string parsing
 - error handling
 - memory management
